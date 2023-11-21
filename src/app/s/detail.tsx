@@ -15,7 +15,7 @@ export function Detail({ row }: DetailProps) {
 						<tr key={index}>
 							<th className="w-2/5 p-1 pr-4 text-right font-medium">{field.name}</th>
 							<td>
-								<FieldValue field={field} value={getValue(row, field)} />
+								<FieldValue field={field} row={row} />
 							</td>
 						</tr>
 					))
