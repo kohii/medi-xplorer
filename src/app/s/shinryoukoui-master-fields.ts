@@ -2345,13 +2345,13 @@ export const shinryokouiMasterFields = [
 	{
 		seq: 87,
 		name: "変更年月日",
-		mode: "numeric",
+		mode: "date",
 		description: `当該診療行為の情報に変更等が生じた場合、適用となる日付を西暦年「４桁」、月「２桁」及び日「２桁」の８桁で表す。`,
 	},
 	{
 		seq: 88,
 		name: "廃止年月日",
-		mode: "numeric",
+		mode: "date",
 		description: `当該診療行為の使用が可能な最終日付を西暦年「４桁」、月「２桁」及び日「２桁」の８桁で表す。
 	なお、廃止した診療行為コード以外は「９９９９９９９
 	９」を設定する。`,

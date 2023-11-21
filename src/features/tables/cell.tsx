@@ -14,7 +14,7 @@ export function Cell({ data, columnIndex, rowIndex, style }: GridChildComponentP
 
 	return (
 		<div style={style} className={`
-		border-b border-gray-400 py-1 px-2
+		border-b border-gray-400 py-1 px-1
 		text-ellipsis overflow-hidden text-sm leading-[1.1rem]
 		${field.style?.wrap ? '' : 'whitespace-nowrap flex items-center'}
 		`}

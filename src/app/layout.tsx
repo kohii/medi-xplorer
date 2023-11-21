@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full font-sans">
-      <body className={inter.className + " h-full bg-gray-100 leading-tight"}>
+      <body className={inter.className + " h-full bg-white leading-tight"}>
         <Providers>
           {children}
         </Providers>

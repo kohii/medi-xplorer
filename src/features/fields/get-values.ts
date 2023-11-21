@@ -3,7 +3,7 @@ import { Field } from "./types";
 export function getValue(
 	row: string[],
 	field: Field,
-): string | undefined {
+): string {
 	return row[field.seq - 1];
 }
 
