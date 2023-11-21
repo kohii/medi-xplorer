@@ -122,7 +122,7 @@ export const DataTable = React.memo(function DataTable({
 					{virtualRows.map(virtualRow => {
 						const row = rows[virtualRow.index] as Row<string[]>
 						return (
-							<tr key={row.id} onClick={() => onRowClick?.(data[virtualRow.index])} className='cursor-pointer hover:bg-slate-50'>
+							<tr key={row.id} onClick={() => onRowClick?.(rows[virtualRow.index].original)} className='cursor-pointer hover:bg-slate-50'>
 								{row.getVisibleCells().map((cell, cellIndex) => {
 									return (
 										<td key={cell.id} className={`p-1 h-10 ${cellIndex === 0 ? 'pl-2' : ''}`}>
