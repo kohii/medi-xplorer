@@ -13,6 +13,7 @@ import {
 } from '@tanstack/react-table'
 import { useVirtual } from '@tanstack/react-virtual';
 import React from 'react';
+import { BreakLine } from '@/components/break-line';
 
 export type DataTableProps = {
 	data: string[][];
@@ -34,8 +35,9 @@ export const DataTable = React.memo(function DataTable({
 	const columns = React.useMemo<ColumnDef<string[]>[]>(
 		() => {
 			return fields.map((field, index) => ({
+				id: field.seq.toString(),
 				accessorFn: row => row[field.seq - 1],
-				header: field.name,
+				header: () => <BreakLine value={field.name.replace('/', '/\n')} />,
 				size: getColumnWidth(index),
 			}))
 		},
@@ -84,29 +86,27 @@ export const DataTable = React.memo(function DataTable({
 										key={header.id}
 										colSpan={header.colSpan}
 										style={{ width: header.getSize() }}
-										className={`text-left ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-1' : ''}`}
+										className={`text-left text-sm px-1 py-2 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-2' : ''}`}
 									>
-										<div className='border-b px-1 py-2'>
-											{header.isPlaceholder ? null : (
-												<div
-													{...{
-														className: header.column.getCanSort()
-															? 'cursor-pointer select-none'
-															: '',
-														onClick: header.column.getToggleSortingHandler(),
-													}}
-												>
-													{flexRender(
-														header.column.columnDef.header,
-														header.getContext()
-													)}
-													{{
-														asc: ' 🔼',
-														desc: ' 🔽',
-													}[header.column.getIsSorted() as string] ?? null}
-												</div>
-											)}
-										</div>
+										{header.isPlaceholder ? null : (
+											<div
+												{...{
+													className: header.column.getCanSort()
+														? 'cursor-pointer select-none'
+														: '',
+													onClick: header.column.getToggleSortingHandler(),
+												}}
+											>
+												{flexRender(
+													header.column.columnDef.header,
+													header.getContext()
+												)}
+												{{
+													asc: ' 🔼',
+													desc: ' 🔽',
+												}[header.column.getIsSorted() as string] ?? null}
+											</div>
+										)}
 									</th>
 								)
 							})}

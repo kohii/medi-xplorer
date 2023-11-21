@@ -108,7 +108,7 @@ export default function Page() {
 					}
 				</div>
 			</div>
-			{selectedCode && <Drawer onClose={select}>
+			{selectedCode && !isLoading && <Drawer onClose={select}>
 				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} /> : <div className="flex items-center justify-center h-full">
 					No data found for code {selectedCode}
 				</div>}
