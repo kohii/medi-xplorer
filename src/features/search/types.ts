@@ -1,53 +1,38 @@
-export type FieldKey = string | number; // name or seq
+export type FieldKey = string; // name or seq
 
-export type ComparisonOperator =
-	/** equals */
-	"=" |
-	/** not equals */
-	"!=" |
-	/** greater than */
-	">" |
-
-	/** less than */
-	"<" |
-	/** greater than or equal */
-	">=" |
-	/** less than or equal */
-	"<=" |
-	/** contains */
+export type Operator =
+	/** contains (values separated by comma) */
 	":" |
-	/** not contains */
-	"!:";
-export type LogicalOperator = 'AND' | 'OR' | 'NOT';
-export type Operator = LogicalOperator | ComparisonOperator;
+	/** greater than */
+	":>" |
+	/** less than */
+	":<" |
+	/** greater than or equal */
+	":>=" |
+	/** less than or equal */
+	":<=";
 
-export type FilterItem = {
-	operator: ComparisonOperator;
-	field: FieldKey;
+export type FieldFilterItem = {
+	operator: Operator;
+	fieldKey: FieldKey;
 	value: string;
+	negative: boolean;
 };
 
-export type FilterExpression = {
-	operator: 'AND' | 'OR';
-	items: FilterExpression[];
-} | {
-	operator: 'NOT';
-	item: FilterExpression;
-} | FilterItem;
+export type KeywordFilterItem = {
+	value: string;
+	negative: boolean;
+};
 
-export type FilterExpressionTree = FilterExpression[];
+export type FilterItem = FieldFilterItem | KeywordFilterItem;
+export type FilterExpression = FilterItem[];
 
 /**
- * - Space may be used to separate tokens, but is not required.
- * - Operators defined in {@link ComparisonOperator} are supported.
- * - AND, OR, NOT are supported.
- * - Parentheses are supported.
- *
  * @example
  * ```
- * 診療行為コード=100000000
- * 診療行為コード !="100000000"
- * "告示等識別区分（１）"!=1 AND (入外適用区分=1 OR 入外適用区分=2)
+ * 診療行為コード:100000000 // 診療行為コードが100000000のもの
+ * 診療行為コード:100000000,100000001 // 診療行為コードが100000000または100000001のもの
+ * 初診 -入外適用区分:2 // 「初診」を含み、入外適用区分が2のもの
  * ```
  */
 export type FilterExpressionText = string;

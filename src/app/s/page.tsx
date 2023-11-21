@@ -11,12 +11,16 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { get } from "http";
 import { getValue } from "@/features/fields/get-values";
 import { Loading } from "@/components/loading";
-import { toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/kana";
+import { toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/text";
 import { Drawer } from "@/components/drawer";
 import { Detail } from "./detail";
 
 import { useSearchParams } from 'next/navigation'
 import { useRouterFn } from "@/hooks/use-router-fn";
+import { normalize, parse } from "path";
+import { parseQuery } from "@/features/search/parse-query";
+import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
+import { filterShinryoukouiRow, filterShinryoukouiRows } from "@/features/search/filter-rows";
 
 const fields: Field[] = getFields([
 	'診療行為コード',
@@ -29,11 +33,18 @@ export default function Page() {
 
 	const [searchText, setSearchText] = useState("");
 	const deboucedSearchText = useDebounce(searchText, 500);
+	const filterExpression = useMemo(() => {
+		const r = parseQuery(deboucedSearchText);
+		if (r.kind === 'ERROR') {
+			return r;
+		}
+		return normalizeFilterExpression(r.value);
+	}, [deboucedSearchText]);
 
 	const selectedCode = searchParams.get("code");
 
 	const select = useCallback((row?: string[]) => {
-		const code = row ? getValue(row, getField("診療行為コード")) : undefined;
+		const code = row ? getValue(row, getField("診療行為コード")!) : undefined;
 		if (code) {
 			router.push('/s' + '?code=' + code)
 		} else {
@@ -54,28 +65,23 @@ export default function Page() {
 		if (!data) {
 			return map;
 		}
+		const codeField = getField("診療行為コード")!;
 		for (let row of data) {
-			const code = getValue(row, getField("診療行為コード"));
+			const code = getValue(row, codeField);
 			map.set(code, row);
 		}
 		return map;
 	}, [data]);
 
 	const filteredData = useMemo(() => {
-		const trimmedSearchText = deboucedSearchText.trim();
-		if (!trimmedSearchText || !data) {
-			return data;
+		if (!data) {
+			return undefined;
 		}
-
-		const kanaSearchText = toHalfWidthKatakana(toKatakana(toHalfWidth(trimmedSearchText)))
-
-		return data.filter(row => {
-			const code = getValue(row, getField("診療行為コード"));
-			const name = getValue(row, getField("診療行為省略名称/省略漢字名称"));
-			const kana = getValue(row, getField("診療行為省略名称/省略カナ名称"));
-			return code.startsWith(trimmedSearchText) || name.includes(trimmedSearchText) || kana.includes(kanaSearchText);
-		});
-	}, [data, deboucedSearchText]);
+		if (filterExpression.kind === 'ERROR') {
+			return undefined;
+		}
+		return filterShinryoukouiRows(data, filterExpression.value);
+	}, [data, filterExpression]);
 
 	return (
 		<div className="relative h-full">
@@ -88,6 +94,7 @@ export default function Page() {
 					style={{ gridRow: 1 }}>
 					<div>
 						<TextInput value={searchText} onChange={setSearchText} placeholder="診療行為コードまたは名称を検索" autoFocus />
+						{filterExpression.kind === 'ERROR' && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
 					</div>
 					{filteredData && <div className="text-sm text-gray-500 mt-2">
 						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}

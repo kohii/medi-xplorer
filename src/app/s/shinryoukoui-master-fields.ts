@@ -3310,14 +3310,23 @@ const nameToField = new Map<FieldName, Field>(
 	shinryokouiMasterFields.map(field => [field.name, field])
 );
 
-export function getField(name: FieldName): Field {
-	const f = nameToField.get(name);
-	if (!f) {
-		throw new Error(`Field ${name} not found`);
-	}
-	return f;
+const seqToField: Field[] = [];
+for (const field of shinryokouiMasterFields) {
+	seqToField[field.seq] = field;
+}
+
+export function getField(name: FieldName): Field | undefined {
+	return nameToField.get(name);
+}
+
+export function getFieldBySeq(seq: number): Field | undefined {
+	return seqToField[seq];
 }
 
 export function getFields(names: FieldName[]): Field[] {
-	return names.map(name => getField(name));
+	return names.map(name => {
+		const f = getField(name);
+		if (!f) throw new Error(`Field ${name} not found`);
+		return f;
+	});
 }

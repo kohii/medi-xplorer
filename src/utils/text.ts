@@ -33,3 +33,7 @@ export function toHalfWidth(s: string): string {
 export function toHalfWidthKatakana(s: string): string {
 	return s.replace(/[ァ-ン]/g, c => KANA_MAP[c] || c);
 }
+
+export function isNumeric(s: string): boolean {
+	return s.match(/^\d+$/) != null;
+}
