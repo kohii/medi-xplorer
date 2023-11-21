@@ -23,18 +23,31 @@ export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem)
 	if ('field' in item) {
 		const value = getValue(row, item.field);
 		if (value == null) return false;
+		if (item.operator == ":") return item.listValue.includes(value);
 
-		switch (item.operator) {
-			case ':':
-				return item.listValue.includes(value);
-			case ':>':
-				return value > item.value;
-			case ':<':
-				return value < item.value;
-			case ':>=':
-				return value >= item.value;
-			case ':<=':
-				return value <= item.value;
+		const numValue = item.field.mode === 'numeric' ? +value : null;
+		if (numValue != null && item.numValue != null) {
+			switch (item.operator) {
+				case ':>':
+					return numValue > item.numValue;
+				case ':<':
+					return numValue < item.numValue;
+				case ':>=':
+					return numValue >= item.numValue;
+				case ':<=':
+					return numValue <= item.numValue;
+			}
+		} else {
+			switch (item.operator) {
+				case ':>':
+					return value > item.value;
+				case ':<':
+					return value < item.value;
+				case ':>=':
+					return value >= item.value;
+				case ':<=':
+					return value <= item.value;
+			}
 		}
 	} else {
 		if (isNumeric(item.kanaValue) && getValue(row, codeField).startsWith(item.kanaValue)) {

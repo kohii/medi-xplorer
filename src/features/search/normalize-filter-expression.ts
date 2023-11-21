@@ -6,6 +6,7 @@ import { FieldFilterItem, KeywordFilterItem, FilterExpression, ParseResult } fro
 type NormalizedFieldFilterItem = FieldFilterItem & {
 	field: Field;
 	listValue: string[];
+	numValue: number | null;
 }
 
 export type NormalizedKeywordFilterItem = KeywordFilterItem & {
@@ -30,6 +31,7 @@ export function normalizeFilterExpression(
 			result.push({
 				field,
 				listValue: item.value.split(','),
+				numValue: isNumeric(item.value) ? +item.value : null,
 				...item,
 			});
 		} else {
