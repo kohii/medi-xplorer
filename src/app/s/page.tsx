@@ -6,7 +6,7 @@ import { getField, getFields } from "./shinryoukoui-master-fields";
 import { DataTable } from "@/features/tables/data-table";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { TextInput } from "@/components/text-input";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { get } from "http";
 import { getValue } from "@/features/fields/get-values";
@@ -15,6 +15,8 @@ import { toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/kana";
 import { Drawer } from "@/components/drawer";
 import { Detail } from "./detail";
 
+import { useSearchParams } from 'next/navigation'
+import { useRouterFn } from "@/hooks/use-router-fn";
 
 const fields: Field[] = getFields([
 	'診療行為コード',
@@ -22,10 +24,22 @@ const fields: Field[] = getFields([
 ]);
 
 export default function Page() {
+	const searchParams = useSearchParams()
+	const router = useRouterFn()
+
 	const [searchText, setSearchText] = useState("");
 	const deboucedSearchText = useDebounce(searchText, 500);
 
-	const [selectedRow, setSelectedRow] = useState<string[] | undefined>(undefined);
+	const selectedCode = searchParams.get("code");
+
+	const select = useCallback((row?: string[]) => {
+		const code = row ? getValue(row, getField("診療行為コード")) : undefined;
+		if (code) {
+			router.push('/s' + '?code=' + code)
+		} else {
+			router.push('/s')
+		}
+	}, [router]);
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["s"],
@@ -34,6 +48,18 @@ export default function Page() {
 	if (error) {
 		throw error;
 	}
+
+	const codeToRow = useMemo(() => {
+		const map = new Map<string, string[]>();
+		if (!data) {
+			return map;
+		}
+		for (let row of data) {
+			const code = getValue(row, getField("診療行為コード"));
+			map.set(code, row);
+		}
+		return map;
+	}, [data]);
 
 	const filteredData = useMemo(() => {
 		const trimmedSearchText = deboucedSearchText.trim();
@@ -63,6 +89,9 @@ export default function Page() {
 					<div>
 						<TextInput value={searchText} onChange={setSearchText} placeholder="診療行為コードまたは名称を検索" autoFocus />
 					</div>
+					{filteredData && <div className="text-sm text-gray-500 mt-2">
+						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
+					</div>}
 				</div>
 				<div style={{ gridRow: 2 }}>
 					{
@@ -74,13 +103,15 @@ export default function Page() {
 								data={filteredData}
 								fields={fields}
 								height="100%"
-								onRowClick={setSelectedRow}
+								onRowClick={select}
 							/>
 					}
 				</div>
 			</div>
-			{selectedRow && <Drawer onClose={() => setSelectedRow(undefined)}>
-				<Detail row={selectedRow} />
+			{selectedCode && <Drawer onClose={select}>
+				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} /> : <div className="flex items-center justify-center h-full">
+					No data found for code {selectedCode}
+				</div>}
 			</Drawer>}
 		</div>
 	)

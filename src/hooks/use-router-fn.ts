@@ -1,0 +1,16 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+
+export const useRouterFn = (): Pick<AppRouterInstance, "push" | "replace"> => {
+	const router = useRouter();
+	const routerRef = useRef(router);
+	routerRef.current = router;
+
+	const [{ push, replace }] = useState<Pick<AppRouterInstance, "push" | "replace">>({
+		push: (path) => routerRef.current.push(path),
+		replace: (path) => routerRef.current.replace(path),
+	});
+
+	return { push, replace };
+};
