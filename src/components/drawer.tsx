@@ -8,7 +8,7 @@ type DrawerProps = {
 export function Drawer({ children, onClose }: DrawerProps) {
 	return (
 		<div
-			className=" grid fixed overflow-hidden z-50 right-0 top-0 bg-white h-screen max-w-full w-[880px] shadow-xl"
+			className=" grid fixed overflow-hidden z-50 right-0 top-0 bg-white h-screen max-w-full w-[1000px] shadow-2xl"
 			style={{
 				gridTemplateRows: "56px minmax(0, 1fr)",
 			}}

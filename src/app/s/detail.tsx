@@ -1,5 +1,6 @@
 import { FieldValue } from "@/features/fields/field-value";
 import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
+import { getValue } from "@/features/fields/get-values";
 
 type DetailProps = {
 	row: string[];
@@ -12,9 +13,9 @@ export function Detail({ row }: DetailProps) {
 				{
 					shinryokouiMasterFields.map((field, index) => (
 						<tr key={index}>
-							<th className="w-1/3 p-1 pr-4 text-right">{field.name}</th>
+							<th className="w-2/5 p-1 pr-4 text-right font-medium">{field.name}</th>
 							<td>
-								<FieldValue field={field} value={row[index]} />
+								<FieldValue field={field} value={getValue(row, field)} />
 							</td>
 						</tr>
 					))
