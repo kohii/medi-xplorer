@@ -13,7 +13,7 @@ export function Detail({ row }: DetailProps) {
 				{
 					shinryokouiMasterFields.map((field, index) => (
 						<tr key={index}>
-							<th className="w-2/5 p-1 pr-4 text-right font-medium">{field.name}</th>
+							<th className="w-2/5 py-1 px-4 pr-4 text-left font-medium">{field.seq}. {field.name}</th>
 							<td>
 								<FieldValue field={field} row={row} />
 							</td>
