@@ -15,38 +15,40 @@ import { useVirtual } from '@tanstack/react-virtual';
 import React from 'react';
 import { BreakLine } from '@/components/break-line';
 
+export type DataTableColumn = {
+	name: string;
+	width?: number;
+	value: (row: string[]) => React.ReactNode;
+};
+
 export type DataTableProps = {
 	data: string[][];
-	fields: Field[];
+	columns: DataTableColumn[];
 	height: number | string;
 	onRowClick?: (row: string[]) => void;
 };
 
 export const DataTable = React.memo(function DataTable({
 	data,
-	fields,
+	columns,
 	height,
 	onRowClick,
 }: DataTableProps) {
-	const getColumnWidth = useCallback((index: number) => {
-		const field = fields[index];
-		return field.style?.width || 80;
-	}, [fields]);
-	const columns = React.useMemo<ColumnDef<string[]>[]>(
+	const columnDefs = React.useMemo<ColumnDef<string[]>[]>(
 		() => {
-			return fields.map((field, index) => ({
-				id: field.seq.toString(),
-				accessorFn: row => row[field.seq - 1],
-				header: () => <BreakLine value={field.name.replace('/', '/\n')} />,
-				size: getColumnWidth(index),
+			return columns.map((col) => ({
+				id: col.name,
+				accessorFn: row => col.value(row),
+				header: () => <BreakLine value={col.name.replace('/', '/\n')} />,
+				size: col.width,
 			}))
 		},
-		[fields, getColumnWidth]
+		[columns]
 	)
 
 	const table = useReactTable({
 		data,
-		columns,
+		columns: columnDefs,
 		// state: {
 		// 	sorting,
 		// },
@@ -85,7 +87,8 @@ export const DataTable = React.memo(function DataTable({
 									<th
 										key={header.id}
 										colSpan={header.colSpan}
-										style={{ width: header.getSize() }}
+										// style={{ width: header.getSize() }}
+										style={{ width: header.column.columnDef.size }}
 										className={`text-left text-sm px-1 py-2 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-2' : ''}`}
 									>
 										{header.isPlaceholder ? null : (

@@ -3,54 +3,86 @@ import { useQuery } from "@tanstack/react-query";
 import { getMasterData } from "./get-master-data";
 import { Field } from "@/features/fields/types";
 import { getField, getFields } from "./shinryoukoui-master-fields";
-import { DataTable } from "@/features/tables/data-table";
-import AutoSizer from "react-virtualized-auto-sizer";
+import { DataTable, DataTableColumn } from "@/features/tables/data-table";
 import { TextInput } from "@/components/text-input";
 import React, { useCallback, useMemo, useState } from "react";
-import { useDebounce } from "@/hooks/use-debounce";
-import { get } from "http";
 import { getValue } from "@/features/fields/get-values";
 import { Loading } from "@/components/loading";
-import { toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/text";
 import { Drawer } from "@/components/drawer";
 import { Detail } from "./detail";
 
 import { useSearchParams } from 'next/navigation'
-import { useRouterFn } from "@/hooks/use-router-fn";
-import { normalize, parse } from "path";
 import { parseQuery } from "@/features/search/parse-query";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
-import { filterShinryoukouiRow, filterShinryoukouiRows } from "@/features/search/filter-rows";
+import { filterShinryoukouiRows } from "@/features/search/filter-rows";
+import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
+import { useSetSearchParams } from "@/hooks/use-set-search-params";
+import { useStateFromProp } from "@/hooks/use-state-from-props";
+import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
+import { formatDate } from "@/utils/format-data";
 
 const fields: Field[] = getFields([
 	'診療行為コード',
 	'診療行為省略名称/省略漢字名称',
+	'新又は現点数/新又は現点数'
 ]);
+
+const columns: DataTableColumn[] = [{
+	name: '診療行為コード',
+	value: row => getValue(row, getField('診療行為コード')!),
+	width: 120,
+}, {
+	name: '診療行為名称',
+	value: row => getValue(row, getField('診療行為省略名称/省略漢字名称')!),
+}, {
+	name: '区分番号',
+	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
+}, {
+	name: '点数',
+	value: row => getValue(row, getField('新又は現点数/新又は現点数')!),
+}, {
+	name: '変更日',
+	value: row => formatDate(getValue(row, getField('変更年月日')!)),
+	width: 108,
+}]
 
 export default function Page() {
 	const searchParams = useSearchParams()
-	const router = useRouterFn()
+	const setSearchParams = useSetSearchParams();
 
-	const [searchText, setSearchText] = useState("");
-	const deboucedSearchText = useDebounce(searchText, 500);
+	const query = searchParams.get("q") ?? "";
+	const selectedCode = searchParams.get("code");
+
+	const [queryInputValue, setQueryInputValue] = useStateFromProp(query);
+
+	const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
+
+	const updateQuery = useCallback((value: string) => {
+		setSearchParams({
+			q: value || undefined,
+		})
+	}, [setSearchParams]);
+
+	const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			updateQuery(queryInputValue)
+		}
+	}, [queryInputValue, updateQuery]);
+
 	const filterExpression = useMemo(() => {
-		const r = parseQuery(deboucedSearchText);
+		const r = parseQuery(query);
 		if (r.kind === 'ERROR') {
 			return r;
 		}
 		return normalizeFilterExpression(r.value);
-	}, [deboucedSearchText]);
-
-	const selectedCode = searchParams.get("code");
+	}, [query]);
 
 	const select = useCallback((row?: string[]) => {
 		const code = row ? getValue(row, getField("診療行為コード")!) : undefined;
-		if (code) {
-			router.push('/s' + '?code=' + code)
-		} else {
-			router.push('/s')
-		}
-	}, [router]);
+		setSearchParams({
+			code,
+		})
+	}, [setSearchParams]);
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["s"],
@@ -93,8 +125,22 @@ export default function Page() {
 					className="p-2"
 					style={{ gridRow: 1 }}>
 					<div>
-						<TextInput value={searchText} onChange={setSearchText} placeholder="診療行為コードまたは名称を検索" autoFocus />
+						<TextInput
+							value={queryInputValue}
+							onChange={setQueryInputValue}
+							onKeyDown={handleKeyDown}
+							placeholder="検索"
+							autoFocus
+						/>
 						{filterExpression.kind === 'ERROR' && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
+					</div>
+					<div className="mt-1">
+						<a href="" className="text-sm text-blue-500" onClick={e => {
+							e.preventDefault();
+							setAdvancedSearchOpen(true);
+						}}>
+							詳細検索
+						</a>
 					</div>
 					{filteredData && <div className="text-sm text-gray-500 mt-2">
 						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
@@ -108,7 +154,7 @@ export default function Page() {
 								Downloading...
 							</div> : <DataTable
 								data={filteredData}
-								fields={fields}
+								columns={columns}
 								height="100%"
 								onRowClick={select}
 							/>
@@ -120,6 +166,7 @@ export default function Page() {
 					No data found for code {selectedCode}
 				</div>}
 			</Drawer>}
+			{advancedSearchOpen && <AdvancedSearchFormModal query={queryInputValue} onChange={updateQuery} onClose={() => setAdvancedSearchOpen(false)} />}
 		</div>
 	)
 }
