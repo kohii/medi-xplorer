@@ -18,8 +18,10 @@
     "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-select": "^5.8.0",
     "react-virtualized-auto-sizer": "^1.0.20",
-    "react-window": "^1.8.9"
+    "react-window": "^1.8.9",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.9",

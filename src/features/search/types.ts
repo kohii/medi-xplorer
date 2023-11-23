@@ -20,6 +20,7 @@ export type FieldFilterItem = {
 };
 
 export type KeywordFilterItem = {
+	operator?: undefined;
 	value: string;
 	negative: boolean;
 };

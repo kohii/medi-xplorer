@@ -37,3 +37,7 @@ export function toHalfWidthKatakana(s: string): string {
 export function isNumeric(s: string): boolean {
 	return s.match(/^\d+$/) != null;
 }
+
+export function splitByWhitespace(s: string): string[] {
+	return s.split(/\s+/).filter(s => s !== "");
+}

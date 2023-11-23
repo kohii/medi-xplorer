@@ -36,7 +36,8 @@ export function normalizeFilterExpression(
 			});
 		} else {
 			result.push({
-				kanaValue: toHalfWidthKatakana(toKatakana(toHalfWidth(item.value))),
+				// text to search in 省略カナ名称
+				kanaValue: toHalfWidthKatakana(toKatakana(toHalfWidth(item.value))).toUpperCase(),
 				...item,
 			});
 		}
