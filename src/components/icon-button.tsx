@@ -1,3 +1,5 @@
+import { twMerge } from 'tailwind-merge'
+
 type IconButtonProps = {
 	icon: React.ReactNode;
 	label: string;
@@ -13,7 +15,7 @@ export function IconButton({
 }: IconButtonProps) {
 	return (
 		<button
-			className={`p-1 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none ${className ?? ""}`}
+			className={twMerge('p-1 rounded-full hover:bg-gray-100 focus:bg-gray-100 focus:outline-none', className)}
 			onClick={onClick}
 		>
 			<span className="sr-only">{label}</span>

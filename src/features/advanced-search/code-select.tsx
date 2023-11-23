@@ -1,0 +1,28 @@
+import { FilterableSelect } from "@/components/filterable-select";
+import { Field } from "../fields/types"
+import { useMemo } from "react";
+
+type CodeSelectProps = {
+	codes: NonNullable<Field['codes']>;
+	value: string;
+	onChange: (value: string) => void;
+}
+
+export function CodeSelect({
+	codes,
+	value,
+	onChange,
+}: CodeSelectProps) {
+	const options = useMemo(() => {
+		return codes.map(code => ({
+			label: `${code.code}: ${code.name}`,
+			value: code.code,
+		}));
+	}, [codes]);
+	return <FilterableSelect
+		options={options}
+		value={value || null}
+		onChange={onChange}
+		clearable
+	/>;
+}
