@@ -7,10 +7,10 @@ export const useRouterFn = (): Pick<AppRouterInstance, "push" | "replace"> => {
 	const routerRef = useRef(router);
 	routerRef.current = router;
 
-	const [{ push, replace }] = useState<Pick<AppRouterInstance, "push" | "replace">>({
+	const [routerMethods] = useState<Pick<AppRouterInstance, "push" | "replace">>({
 		push: (path) => routerRef.current.push(path),
 		replace: (path) => routerRef.current.replace(path),
 	});
 
-	return { push, replace };
+	return routerMethods;
 };
