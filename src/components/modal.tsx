@@ -1,3 +1,6 @@
+import { IconButton } from "./icon-button";
+import { CloseIcon } from "./icons/close-icon";
+
 type ModalProps = {
 	title: string;
 	children: React.ReactNode;
@@ -26,17 +29,7 @@ export function Modal({
 					<h3 className="text-xl font-medium text-gray-900">
 						{title}
 					</h3>
-					<button
-						type="button"
-						className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-						data-modal-hide="default-modal"
-						onClick={onClose}
-					>
-						<svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-							<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-						</svg>
-						<span className="sr-only">Close modal</span>
-					</button>
+					<IconButton onClick={onClose} icon={<CloseIcon className="h-6 w-6" />} label="Close" />
 				</div>
 				<div className="p-4 space-y-4">
 					{children}
