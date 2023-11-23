@@ -107,6 +107,18 @@ describe('parseQuery', () => {
 			]
 		});
 	});
+	test('key:value（値が空文字列）', () => {
+		const result = parseQuery('foo:');
+		expect(result).toEqual({
+			kind: 'SUCCESS',
+			value: [{
+				fieldKey: 'foo',
+				operator: ':',
+				value: '',
+				negative: false
+			}]
+		});
+	});
 	test('key:>value', () => {
 		const result = parseQuery('foo:>bar');
 		expect(result).toEqual({

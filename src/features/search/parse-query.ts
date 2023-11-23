@@ -1,3 +1,4 @@
+import { splitByWhitespace } from "@/utils/text";
 import { FilterExpression, FilterExpressionText, Operator, ParseResult } from "./types";
 
 export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpression> {
@@ -6,14 +7,14 @@ export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpres
 		return { kind: "SUCCESS", value: [] };
 	}
 
-	const items = text.split(/\s+/).filter(Boolean); // スペースで分割
+	const items = splitByWhitespace(text);
 	const expression: FilterExpression = [];
 
 	for (const item of items) {
 		const negative = item.startsWith('-');
 		const adjustedItem = negative ? item.substring(1) : item;
 
-		const fieldMatch = adjustedItem.match(/([^:]+)(:>=?|:<=?|:)(.+)/);
+		const fieldMatch = adjustedItem.match(/([^:]+)(:>=?|:<=?|:)(.*)/);
 		if (fieldMatch) {
 			const [_, fieldKey, operator, value] = fieldMatch;
 			expression.push({
