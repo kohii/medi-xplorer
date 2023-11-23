@@ -28,7 +28,7 @@ const nameField = getField("診療行為省略名称/省略漢字名称")!;
 const columns: DataTableColumn[] = [{
 	name: '診療行為コード',
 	value: row => getValue(row, codeField),
-	width: 120,
+	width: 124,
 }, {
 	name: '診療行為名称',
 	value: row => getValue(row, getField('診療行為省略名称/省略漢字名称')!),
@@ -122,7 +122,7 @@ export default function Page() {
 	return (
 		<div className="relative h-full">
 			<div className="h-full grid" style={{
-				gridTemplateRows: "136px minmax(0, 1fr)",
+				gridTemplateRows: "140px minmax(0, 1fr)",
 			}}
 			>
 				<div
@@ -154,11 +154,11 @@ export default function Page() {
 							</div>
 						</div>
 					</div>
-					{filteredData && <div className="text-sm text-gray-500 p-2">
+					{filteredData && <div className="text-sm text-gray-500 p-2 px-4">
 						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
 					</div>}
 				</div>
-				<div style={{ gridRow: 2 }}>
+				<div style={{ gridRow: 2 }} className="px-2">
 					{
 						isLoading || !filteredData ?
 							<div className="flex items-center justify-center gap-2 mt-16">
