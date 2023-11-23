@@ -15,6 +15,7 @@ import { useVirtual } from '@tanstack/react-virtual';
 import React from 'react';
 import { BreakLine } from '@/components/break-line';
 
+
 export type DataTableColumn = {
 	name: string;
 	width?: number;
@@ -26,6 +27,7 @@ export type DataTableProps = {
 	columns: DataTableColumn[];
 	height: number | string;
 	onRowClick?: (row: string[]) => void;
+	isSelected?: (row: string[]) => boolean;
 };
 
 export const DataTable = React.memo(function DataTable({
@@ -33,6 +35,7 @@ export const DataTable = React.memo(function DataTable({
 	columns,
 	height,
 	onRowClick,
+	isSelected,
 }: DataTableProps) {
 	const columnDefs = React.useMemo<ColumnDef<string[]>[]>(
 		() => {
@@ -125,7 +128,11 @@ export const DataTable = React.memo(function DataTable({
 					{virtualRows.map(virtualRow => {
 						const row = rows[virtualRow.index] as Row<string[]>
 						return (
-							<tr key={row.id} onClick={() => onRowClick?.(rows[virtualRow.index].original)} className='cursor-pointer hover:bg-slate-50'>
+							<tr
+								key={row.id}
+								onClick={() => onRowClick?.(rows[virtualRow.index].original)}
+								className={`cursor-pointer hover:bg-slate-50 ${isSelected?.(rows[virtualRow.index].original) ? "bg-blue-100 hover:bg-slate-200" : ""}`}
+							>
 								{row.getVisibleCells().map((cell, cellIndex) => {
 									return (
 										<td key={cell.id} className={`p-1 h-10 ${cellIndex === 0 ? 'pl-2' : ''}`}>

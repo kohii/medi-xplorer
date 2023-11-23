@@ -16,20 +16,17 @@ import { parseQuery } from "@/features/search/parse-query";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
-import { useSetSearchParams } from "@/hooks/use-set-search-params";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 import { formatDate } from "@/utils/format-data";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 
-const fields: Field[] = getFields([
-	'診療行為コード',
-	'診療行為省略名称/省略漢字名称',
-	'新又は現点数/新又は現点数'
-]);
+const codeField = getField("診療行為コード")!;
 
 const columns: DataTableColumn[] = [{
 	name: '診療行為コード',
-	value: row => getValue(row, getField('診療行為コード')!),
+	value: row => getValue(row, codeField),
 	width: 120,
 }, {
 	name: '診療行為名称',
@@ -48,26 +45,32 @@ const columns: DataTableColumn[] = [{
 
 export default function Page() {
 	const searchParams = useSearchParams()
-	const setSearchParams = useSetSearchParams();
+	const updateSearchParams = useUpdateSearchParams();
 
 	const query = searchParams.get("q") ?? "";
 	const selectedCode = searchParams.get("code");
 
-	const [queryInputValue, setQueryInputValue] = useStateFromProp(query);
+	const [queryInputValue, _setQueryInputValue] = useStateFromProp(query);
 
 	const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
 
 	const updateQuery = useCallback((value: string) => {
-		setSearchParams({
+		updateSearchParams({
 			q: value || undefined,
-		})
-	}, [setSearchParams]);
+		});
+	}, [updateSearchParams]);
 
-	const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter") {
-			updateQuery(queryInputValue)
-		}
-	}, [queryInputValue, updateQuery]);
+	const applyCurrentQuery = useDebouncedCallback(
+		() => {
+			updateQuery(queryInputValue);
+		},
+		500,
+		[queryInputValue, updateQuery],
+	);
+	const setQueryInputValue = useCallback((value: string) => {
+		_setQueryInputValue(value);
+		applyCurrentQuery();
+	}, [_setQueryInputValue, applyCurrentQuery]);
 
 	const filterExpression = useMemo(() => {
 		const r = parseQuery(query);
@@ -79,10 +82,10 @@ export default function Page() {
 
 	const select = useCallback((row?: string[]) => {
 		const code = row ? getValue(row, getField("診療行為コード")!) : undefined;
-		setSearchParams({
+		updateSearchParams({
 			code,
 		})
-	}, [setSearchParams]);
+	}, [updateSearchParams]);
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["s"],
@@ -128,7 +131,6 @@ export default function Page() {
 						<TextInput
 							value={queryInputValue}
 							onChange={setQueryInputValue}
-							onKeyDown={handleKeyDown}
 							placeholder="検索"
 							autoFocus
 						/>
@@ -157,6 +159,7 @@ export default function Page() {
 								columns={columns}
 								height="100%"
 								onRowClick={select}
+								isSelected={(row) => Boolean(selectedCode) && getValue(row, codeField) === selectedCode}
 							/>
 					}
 				</div>
