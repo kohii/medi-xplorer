@@ -14,6 +14,7 @@ import {
 import { useVirtual } from '@tanstack/react-virtual';
 import React from 'react';
 import { BreakLine } from '@/components/break-line';
+import { twMerge } from 'tailwind-merge'
 
 
 export type DataTableColumn = {
@@ -131,7 +132,7 @@ export const DataTable = React.memo(function DataTable({
 							<tr
 								key={row.id}
 								onClick={() => onRowClick?.(rows[virtualRow.index].original)}
-								className={`cursor-pointer hover:bg-slate-50 ${isSelected?.(rows[virtualRow.index].original) ? "bg-blue-100 hover:bg-slate-200" : ""}`}
+								className={twMerge("cursor-pointer hover:bg-slate-50", isSelected?.(rows[virtualRow.index].original) ? "bg-blue-100 hover:bg-slate-200" : "")}
 							>
 								{row.getVisibleCells().map((cell, cellIndex) => {
 									return (
