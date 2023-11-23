@@ -93,7 +93,7 @@ export const DataTable = React.memo(function DataTable({
 										colSpan={header.colSpan}
 										// style={{ width: header.getSize() }}
 										style={{ width: header.column.columnDef.size }}
-										className={`text-left text-sm px-1 py-2 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-2' : ''}`}
+										className={`text-left text-sm px-1 pt-2 pb-3 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-2' : ''}`}
 									>
 										{header.isPlaceholder ? null : (
 											<div
