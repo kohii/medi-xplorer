@@ -21,10 +21,6 @@ export type Field = Readonly<{
 			value: readonly string[];
 		}>
 	}[];
-	style?: {
-		width?: number,
-		wrap?: boolean,
-	}
 }>;
 
 export type FieldGroup = Readonly<{

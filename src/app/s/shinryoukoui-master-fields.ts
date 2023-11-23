@@ -155,22 +155,31 @@ export const shinryokouiMasterFields = [
 			{ code: '9', name: '廃止' },
 		],
 	}, {
+		seq: 2,
+		name: 'マスター種別',
+		mode: 'alphanumeric',
+		description: ` 「Ｓ」を設定する。
+		（医科診療行為マスターであることを表す。）`,
+	}, {
 		seq: 3,
 		name: '診療行為コード',
 		mode: 'numeric',
 		description: '1桁目: 診療行為コードを表す「１」を設定する。\n2桁目以降: 診療行為ごとに重複しない番号を設定する。',
-		style: {
-			width: 96,
-		}
+	}, {
+		seq: 4,
+		name: '診療行為省略名称/省略漢字有効桁数',
+		mode: 'numeric',
+		description: '項番５「省略漢字名称」の文字数を表す。',
 	}, {
 		seq: 5,
 		name: '診療行為省略名称/省略漢字名称',
 		mode: 'text',
 		description: '漢字：３２文字',
-		style: {
-			width: 256,
-			wrap: true,
-		}
+	}, {
+		seq: 6,
+		name: '診療行為省略名称/省略カナ有効桁数',
+		mode: 'numeric',
+		description: '項番７「省略カナ名称」の文字数を表す。',
 	}, {
 		seq: 7,
 		name: '診療行為省略名称/省略カナ名称',
@@ -184,6 +193,12 @@ export const shinryokouiMasterFields = [
 数量データの記録が不要な診療行為は、「０」を設定する。
 
 データ規格コードの単位コードは「別紙４－１」のとおりである。`
+	}, {
+		seq: 9,
+		name: 'データ規格名/漢字有効桁数',
+		mode: 'numeric',
+		description: `項番１０「漢字名称」の文字数を表す。
+		未使用の場合：「０」を設定する。`,
 	}, {
 		seq: 10,
 		name: 'データ規格名/漢字名称',
