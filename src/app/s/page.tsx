@@ -23,6 +23,7 @@ import { formatDate } from "@/utils/format-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 
 const codeField = getField("診療行為コード")!;
+const nameField = getField("診療行為省略名称/省略漢字名称")!;
 
 const columns: DataTableColumn[] = [{
 	name: '診療行為コード',
@@ -121,30 +122,39 @@ export default function Page() {
 	return (
 		<div className="relative h-full">
 			<div className="h-full grid" style={{
-				gridTemplateRows: "100px minmax(0, 1fr)",
+				gridTemplateRows: "136px minmax(0, 1fr)",
 			}}
 			>
 				<div
-					className="p-2"
 					style={{ gridRow: 1 }}>
-					<div>
-						<TextInput
-							value={queryInputValue}
-							onChange={setQueryInputValue}
-							placeholder="検索"
-							autoFocus
-						/>
-						{filterExpression.kind === 'ERROR' && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
+					<div className="p-2 border-b border-gray-300 flex items-center gap-2">
+						<div className="p-2 mr-2 text-6xl">
+							👨‍⚕️
+						</div>
+						<div className="flex-1">
+							<div className="mb-2 text-sm">
+								MediXplorer / 診療行為マスター
+							</div>
+							<div>
+								<TextInput
+									value={queryInputValue}
+									onChange={setQueryInputValue}
+									placeholder="検索"
+									autoFocus
+								/>
+								{filterExpression.kind === 'ERROR' && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
+							</div>
+							<div className="mt-1">
+								<a href="" className="text-sm text-blue-500" onClick={e => {
+									e.preventDefault();
+									setAdvancedSearchOpen(true);
+								}}>
+									詳細検索
+								</a>
+							</div>
+						</div>
 					</div>
-					<div className="mt-1">
-						<a href="" className="text-sm text-blue-500" onClick={e => {
-							e.preventDefault();
-							setAdvancedSearchOpen(true);
-						}}>
-							詳細検索
-						</a>
-					</div>
-					{filteredData && <div className="text-sm text-gray-500 mt-2">
+					{filteredData && <div className="text-sm text-gray-500 p-2">
 						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
 					</div>}
 				</div>
@@ -164,7 +174,7 @@ export default function Page() {
 					}
 				</div>
 			</div>
-			{selectedCode && !isLoading && <Drawer onClose={select}>
+			{selectedCode && !isLoading && <Drawer title={codeToRow.has(selectedCode) ? getValue(codeToRow.get(selectedCode)!, nameField) : ""} onClose={select}>
 				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} /> : <div className="flex items-center justify-center h-full">
 					No data found for code {selectedCode}
 				</div>}
