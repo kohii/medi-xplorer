@@ -15,7 +15,7 @@ export function IconButton({
 }: IconButtonProps) {
 	return (
 		<button
-			className={twMerge('p-1 rounded-full hover:bg-gray-100 focus:bg-gray-100 focus:outline-none', className)}
+			className={twMerge('p-2 rounded-full hover:bg-gray-100 focus:bg-gray-100 focus:outline-none', className)}
 			onClick={onClick}
 		>
 			<span className="sr-only">{label}</span>
