@@ -1,10 +1,12 @@
-import { FieldName } from "@/app/s/shinryoukoui-master-fields";
+import { FieldName, getField } from "@/app/s/shinryoukoui-master-fields";
 import { FieldFilterItem } from "../search/types";
 import { FieldSelect } from "./field-select";
 import { TextInput } from "@/components/text-input";
 import { FilterableSelect } from "@/components/filterable-select";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { IconButton } from "@/components/icon-button";
+import { CodeSelect } from "./code-select";
+import React, { useEffect, useMemo } from "react";
 
 export const advancedSearchItemOperators = [
 	'が次のいずれかに一致する',
@@ -26,6 +28,7 @@ export type AdvancedSearchItem = {
 	field: FieldName;
 	operator: AdvancedSearchItemOperator;
 	value: string;
+	restValues?: string[];
 };
 
 type AdvancedSearchItemFormProps = {
@@ -39,7 +42,36 @@ export function AdvancedSearchItemForm({
 	onChange,
 	onDelete,
 }: AdvancedSearchItemFormProps) {
-	return <div className="flex items-center gap-1">
+	const field = getField(item.field)!;
+	const values = useMemo(() => item.restValues ? [item.value, ...item.restValues] : [item.value], [item]);
+	const takesMultipleValues = item.operator === 'が次のいずれかに一致する' || item.operator === 'が次のいずれでもない';
+
+	useEffect(() => {
+		if (!takesMultipleValues) return;
+
+		const lastValue = values[values.length - 1];
+		if (lastValue) {
+			onChange({
+				...item,
+				restValues: [...values.slice(1), ''],
+			});
+		} else if (values.length > 1 && !values[values.length - 2]) {
+			onChange({
+				...item,
+				restValues: values.slice(1, values.length - 1),
+			});
+		}
+	}, [item, onChange, takesMultipleValues, values]);
+
+	const handleValueChange = (value: string, index: number) => {
+		onChange({
+			...item,
+			value: index === 0 ? value : values[0],
+			restValues: index === 0 ? values.slice(1) : [...values.slice(1, index), value, ...values.slice(index + 1)],
+		});
+	}
+
+	return <div className="flex items-start gap-1">
 		<div className="flex-grow basis-1">
 			<FieldSelect
 				value={item.field}
@@ -61,17 +93,26 @@ export function AdvancedSearchItemForm({
 			/>
 		</div>
 
-		<div className="flex-grow basis-1">
-			<TextInput
-				value={item.value}
-				onChange={value => onChange({
-					...item,
-					value,
-				})}
-				placeholder={item.operator === 'が次のいずれかに一致する' ? '値を入力 (カンマまたは空白区切りで複数入力可)' : '値を入力'}
-			/>
+		<div className="flex-grow basis-1 flex flex-col gap-2">
+			{
+				values.map((value, index) => (
+					<React.Fragment key={index}>
+						{!field.codes ? <TextInput
+							value={value}
+							onChange={value => handleValueChange(value, index)}
+							placeholder={index === 0 ? "値を入力..." : "値を追加..."}
+						/> : <CodeSelect
+							codes={field.codes}
+							value={value}
+							onChange={value => handleValueChange(value, index)}
+						/>}
+					</React.Fragment>
+				))
+			}
 		</div>
 
-		<IconButton icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
+
+		<IconButton className="p-2" icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
 	</div>
 }
+

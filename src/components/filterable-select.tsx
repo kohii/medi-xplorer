@@ -2,15 +2,23 @@ import { useMemo, useState } from "react";
 import ReactSelect from 'react-select';
 import { twMerge } from 'tailwind-merge';
 
-type FilterableSelectProps<ValueType> = {
-	value: ValueType | null;
+type FilterableSelectProps<ValueType extends string | null, Nullable extends boolean = false> = {
+	value: ValueType;
 	options: { label: string; value: ValueType }[];
 	onChange: (value: ValueType) => void;
 	placeholder?: string;
 	className?: string;
+	clearable?: boolean;
 };
 
-export function FilterableSelect<ValueType extends string | number>({ value, options, onChange, placeholder, className }: FilterableSelectProps<ValueType>) {
+export function FilterableSelect<ValueType extends string | null>({
+	value,
+	options,
+	onChange,
+	placeholder,
+	className,
+	clearable,
+}: FilterableSelectProps<ValueType>) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const onMenuOpen = () => setIsMenuOpen(true);
 	const onMenuClose = () => setIsMenuOpen(false);
@@ -38,9 +46,10 @@ export function FilterableSelect<ValueType extends string | number>({ value, opt
 			onMenuOpen={onMenuOpen}
 			onMenuClose={onMenuClose}
 			options={options}
-			onChange={(option) => option && onChange(option.value)}
+			onChange={(option) => onChange(option?.value ?? null as any)}
 			value={selectedOption}
-			placeholder={placeholder}
+			placeholder={placeholder ?? "選択"}
+			isClearable={clearable}
 		/>
 	);
 }

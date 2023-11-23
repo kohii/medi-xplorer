@@ -3,7 +3,7 @@ import { FieldName } from "../../app/s/shinryoukoui-master-fields";
 import { FieldSelect } from "./field-select";
 import { TextInput } from "@/components/text-input";
 import { FormLabel } from "@/components/form-label";
-import { AdvancedSearchItemForm } from "./advanced-search-item-form";
+import { AdvancedSearchItem, AdvancedSearchItemForm } from "./advanced-search-item-form";
 
 export const advancedSearchOperatorOptions = [{
 	label: 'が次のいずれかに一致する',
@@ -33,12 +33,6 @@ export const advancedSearchOperatorOptions = [{
 
 
 type OperatorLabel = typeof advancedSearchOperatorOptions[number]['label'];
-
-export type AdvancedSearchItem = {
-	field: FieldName;
-	operator: OperatorLabel;
-	value: string;
-};
 
 export type AdvancedSearchParams = {
 	keyword: string;

@@ -1,9 +1,9 @@
 import { Modal } from "@/components/modal";
-import { AdvancedSearchForm, AdvancedSearchItem, AdvancedSearchParams, advancedSearchOperatorOptions } from "./advanced-search-form";
+import { AdvancedSearchForm, AdvancedSearchParams, advancedSearchOperatorOptions } from "./advanced-search-form";
 import { useMemo, useState } from "react";
 import { parseQuery } from "../search/parse-query";
 import { FieldFilterItem, FilterItem } from "../search/types";
-import { AdvancedSearchItemOperator } from "./advanced-search-item-form";
+import { AdvancedSearchItem, AdvancedSearchItemOperator } from "./advanced-search-item-form";
 import { FieldName, getField, getFieldBySeq } from "@/app/s/shinryoukoui-master-fields";
 import { splitByWhitespace } from "@/utils/text";
 import { stringifyQuery } from "../search/stringify-query";
@@ -97,55 +97,59 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 	const field = getField(filterItem.fieldKey as FieldName) ?? getFieldBySeq(+filterItem.fieldKey)
 	if (!field) return undefined;
 
+	const [value, ...restValues] = filterItem.operator === ':' ? filterItem.value.split(',').filter(Boolean) : [filterItem.value];
+
 	return {
 		field: field.name as FieldName,
 		operator,
-		value: filterItem.value,
+		value,
+		restValues,
 	}
 }
 
 function convertAdvancedSearchItemToFilterItem(item: AdvancedSearchItem): FieldFilterItem {
+	const values = (item.restValues ? [item.value, ...item.restValues] : [item.value]).map(value => value.trim()).filter(Boolean);
 	switch (item.operator) {
 		case 'が次のいずれかに一致する':
 			return {
 				fieldKey: item.field,
 				operator: ':',
-				value: splitByWhitespace(item.value).join(','),
+				value: values.join(','),
 				negative: false,
 			} as const;
 		case 'が次のいずれでもない':
 			return {
 				fieldKey: item.field,
 				operator: ':',
-				value: splitByWhitespace(item.value).join(','),
+				value: values.join(','),
 				negative: true,
 			} as const;
 		case 'が次より大きい':
 			return {
 				fieldKey: item.field,
 				operator: ':>',
-				value: item.value,
+				value: item.value.trim(),
 				negative: false,
 			} as const;
 		case 'が次以上':
 			return {
 				fieldKey: item.field,
 				operator: ':>=',
-				value: item.value,
+				value: item.value.trim(),
 				negative: false,
 			} as const;
 		case 'が次より小さい':
 			return {
 				fieldKey: item.field,
 				operator: ':<',
-				value: item.value,
+				value: item.value.trim(),
 				negative: false,
 			} as const;
 		case 'が次以下':
 			return {
 				fieldKey: item.field,
 				operator: ':<=',
-				value: item.value,
+				value: item.value.trim(),
 				negative: false,
 			} as const;
 	}
