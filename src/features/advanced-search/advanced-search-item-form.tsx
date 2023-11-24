@@ -104,7 +104,7 @@ export function AdvancedSearchItemForm({
 						/> : <CodeSelect
 							codes={field.codes}
 							value={value}
-							onChange={value => handleValueChange(value, index)}
+							onChange={value => handleValueChange(value ?? "", index)}
 						/>}
 					</React.Fragment>
 				))

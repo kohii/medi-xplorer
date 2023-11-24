@@ -5,7 +5,7 @@ import { useMemo } from "react";
 type CodeSelectProps = {
 	codes: NonNullable<Field['codes']>;
 	value: string;
-	onChange: (value: string) => void;
+	onChange: (value: string | null) => void;
 }
 
 export function CodeSelect({
@@ -20,9 +20,10 @@ export function CodeSelect({
 		}));
 	}, [codes]);
 	return <FilterableSelect
+		isNullable
+		clearable
 		options={options}
 		value={value || null}
 		onChange={onChange}
-		clearable
 	/>;
 }

@@ -2,23 +2,25 @@ import { useMemo, useState } from "react";
 import ReactSelect from 'react-select';
 import { twMerge } from 'tailwind-merge';
 
-type FilterableSelectProps<ValueType extends string | null, Nullable extends boolean = false> = {
-	value: ValueType;
+// FilterableSelectProps 型を条件付き型に変更
+type FilterableSelectProps<ValueType extends string, IsNullable extends boolean> = {
+	value: IsNullable extends true ? ValueType | null : ValueType;
 	options: { label: string; value: ValueType }[];
-	onChange: (value: ValueType) => void;
+	onChange: (value: IsNullable extends true ? ValueType | null : ValueType) => void;
 	placeholder?: string;
 	className?: string;
 	clearable?: boolean;
+	isNullable?: IsNullable;
 };
 
-export function FilterableSelect<ValueType extends string | null>({
+export function FilterableSelect<ValueType extends string, IsNullable extends boolean = false>({
 	value,
 	options,
 	onChange,
 	placeholder,
 	className,
 	clearable,
-}: FilterableSelectProps<ValueType>) {
+}: FilterableSelectProps<ValueType, IsNullable>) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const onMenuOpen = () => setIsMenuOpen(true);
 	const onMenuClose = () => setIsMenuOpen(false);

@@ -2,11 +2,12 @@ import { FieldName, shinryokouiMasterFields } from '@/app/s/shinryoukoui-master-
 import { FilterableSelect } from '@/components/filterable-select';
 import React from 'react';
 
-type Props = {
-	value: FieldName | null;
-	onChange: (value: FieldName) => void;
+type Props<IsNullable extends boolean> = {
+	value: IsNullable extends true ? FieldName | null : FieldName;
+	onChange: (value: IsNullable extends true ? FieldName | null : FieldName) => void;
 	placeholder?: string;
 	className?: string;
+	isNullable?: IsNullable;
 }
 
 const options = shinryokouiMasterFields.map(field => ({
@@ -14,12 +15,19 @@ const options = shinryokouiMasterFields.map(field => ({
 	value: field.name,
 }));
 
-export function FieldSelect({ value, onChange, placeholder, className }: Props) {
+export function FieldSelect<IsNullable extends boolean = false>({
+	value,
+	onChange,
+	placeholder,
+	className,
+	isNullable
+}: Props<IsNullable>) {
 	return (<FilterableSelect
 		options={options}
 		onChange={onChange}
 		value={value}
 		placeholder={placeholder}
 		className={className}
+		isNullable={isNullable}
 	/>);
 }

@@ -46,7 +46,8 @@ export type AdvancedSearchFormProps = {
 };
 
 export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps) {
-	const onSelect = (field: FieldName) => {
+	const onSelect = (field: FieldName | null) => {
+		if (!field) return;
 		onChange({
 			...value,
 			items: [
@@ -88,7 +89,7 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
 						}}
 					/>
 				))}
-				<FieldSelect onChange={onSelect} value={null} placeholder="検索する項目を追加..." />
+				<FieldSelect onChange={onSelect} value={null} placeholder="検索する項目を追加..." isNullable />
 			</div>
 		</div>
 	</div>);
