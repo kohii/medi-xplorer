@@ -24,6 +24,7 @@ import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { alphabetToNumber } from "@/utils/text";
+import { getKubunBangouColor } from "./shinryoukoui-master-utils";
 
 const codeField = getField("診療行為コード")!;
 const nameField = getField("診療行為省略名称/省略漢字名称")!;
@@ -33,7 +34,7 @@ const columns: DataTableColumn[] = [{
 	name: '区分番号',
 	value: row => {
 		const v = shinryoukouiMasterVirtualFields.区分番号.value(row);
-		return v === "-" ? "-" : <ColorChip color={getNthColorChipColor(alphabetToNumber(v[0]))}>{v}</ColorChip>
+		return v === "-" ? "-" : <ColorChip color={getKubunBangouColor(v)}>{v}</ColorChip>
 	},
 	width: 88,
 }, {

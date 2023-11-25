@@ -6,9 +6,10 @@ import { SectionHeading } from "../../app/s/section-heading";
 import { Field } from "@/features/fields/types";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 import { ChuukasanList } from "./chuukasan-list";
-import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
+import { formatCodeValue, getKubunBangouColor } from "@/app/s/shinryoukoui-master-utils";
 import { Toggle } from "@/components/toggle";
 import { useState } from "react";
+import { ColorChip } from "@/components/color-chip";
 
 const FIELDS = {
 	"診療行為省略名称/省略漢字名称": getField('診療行為省略名称/省略漢字名称')!,
@@ -23,11 +24,16 @@ export type DetailBasicTabProps = {
 
 export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 	const [chuukasanListOpen, setChuukasanListOpen] = useState(false);
+	const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
 	return (
 		<>
 			<section className="mb-4">
-				<div className="text-sm">{getValue(row, getField("診療行為コード")!)}</div>
-				<div className="text-lg">{getValue(row, FIELDS["基本漢字名称"])}</div>
+				{kubunBangou !== "-" && <ColorChip color={getKubunBangouColor(kubunBangou)} className="mb-2">{kubunBangou}</ColorChip>}
+				<div>
+					<span className="text-gray-500">{getValue(row, getField("診療行為コード")!)}</span>
+					<span className="text-gray-300 text-lg"> | </span>
+					<span className="text-lg">{getValue(row, FIELDS["基本漢字名称"])}</span>
+				</div>
 				{getValue(row, FIELDS["基本漢字名称"]) !== getValue(row, FIELDS["診療行為省略名称/省略漢字名称"]) &&
 					<div className="text-sm my-1 text-gray-500">
 						略称: {getValue(row, FIELDS["診療行為省略名称/省略漢字名称"])}

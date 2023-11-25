@@ -1,7 +1,8 @@
+import { getNthColorChipColor } from "@/components/color-chip";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
-import { trimDecimalZero } from "@/utils/text"
+import { alphabetToNumber, trimDecimalZero } from "@/utils/text"
 
 export function formatPoint(
 	pointType: string,
@@ -31,4 +32,9 @@ export function formatCodeValue(row: string[], field: Field) {
 	const value = getValue(row, field);
 	const label = getCodeLabel(value, field, true);
 	return value + ": " + label;
+}
+
+export function getKubunBangouColor(value: string) {
+	const v = value.substring(0, 1);
+	return getNthColorChipColor(alphabetToNumber(v));
 }
