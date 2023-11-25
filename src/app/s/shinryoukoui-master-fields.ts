@@ -257,13 +257,16 @@ export const shinryokouiMasterFields = [
 ０：「１」及び「２」以２：入院外レセプトに限り記録可能な診療行為`,
 		codes: [{
 			code: '0',
-			name: '「１」及び「２」以外の診療行為'
+			name: '「１」及び「２」以外の診療行為',
+			alias: '共通',
 		}, {
 			code: '1',
-			name: '入院レセプトに限り記録可能な診療行為'
+			name: '入院レセプトに限り記録可能な診療行為',
+			alias: '入院',
 		}, {
 			code: '2',
-			name: '入院外レセプトに限り記録可能な診療行為'
+			name: '入院外レセプトに限り記録可能な診療行為',
+			alias: '入院外',
 		}]
 	}, {
 		seq: 14,
@@ -398,16 +401,20 @@ export const shinryokouiMasterFields = [
 ４：短期滞在手術等基本料３`,
 		codes: [{
 			code: '0',
-			name: '「１」から「４」以外の診療行為'
+			name: '「１」から「４」以外の診療行為',
+			alias: '共通',
 		}, {
 			code: '1',
-			name: '病院に限り適用される診療行為'
+			name: '病院に限り適用される診療行為',
+			alias: '病院',
 		}, {
 			code: '2',
-			name: '診療所に限り適用される診療行為'
+			name: '診療所に限り適用される診療行為',
+			alias: '診療所',
 		}, {
 			code: '4',
-			name: '短期滞在手術等基本料３'
+			name: '短期滞在手術等基本料３',
+			alias: '短手3',
 		}]
 	}, {
 		seq: 20,
@@ -2030,6 +2037,7 @@ export const shinryokouiMasterFields = [
 			{
 				code: "1",
 				name: "基本項目（告示）",
+				alias: "基本項目",
 			},
 			{
 				code: "3",
@@ -2038,6 +2046,7 @@ export const shinryokouiMasterFields = [
 			{
 				code: "5",
 				name: "準用項目（通知）",
+				alias: "準用項目",
 			},
 			{
 				code: "7",

@@ -1,6 +1,7 @@
 import { VirtualField } from "@/features/fields/virtual-field";
 import { getField } from "./shinryoukoui-master-fields";
 import { getValue } from "@/features/fields/get-values";
+import { formatPoint } from "./shinryoukoui-master-utils";
 
 const fields = {
 	"コード表用番号（アルファベット部）": getField("コード表用番号（アルファベット部）")!,
@@ -21,5 +22,23 @@ export const shinryoukouiMasterVirtualFields = {
 			const edaban = getValue(row, fields["コード表用番号（アルファベット部を除く）/枝番"]);
 			return `${alphabet}${kubun}-${edaban}`;
 		}
+	},
+	"新又は現点数": {
+		name: "新又は現点数",
+		value(row: string[]) {
+			return formatPoint(
+				getValue(row, getField('新又は現点数/点数識別')!),
+				getValue(row, getField('新又は現点数/新又は現点数')!),
+			);
+		},
+	},
+	"旧点数": {
+		name: "旧点数",
+		value(row: string[]) {
+			return formatPoint(
+				getValue(row, getField('旧点数/点数識別')!),
+				getValue(row, getField('旧点数/旧点数')!),
+			);
+		},
 	},
 } satisfies Record<string, VirtualField>;

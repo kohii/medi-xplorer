@@ -41,3 +41,21 @@ export function isNumeric(s: string): boolean {
 export function splitByWhitespace(s: string): string[] {
 	return s.split(/\s+/).filter(s => s !== "");
 }
+
+/** 
+ * 小数点以下の0を削除
+ * @example
+ * ```
+ * trimDecimalZero("1.00") // => "1"
+ * trimDecimalZero("1.10") // => "1.1"
+ * ```
+ */
+export function trimDecimalZero(s: string): string {
+	if (s.endsWith('.00')) {
+		return s.substring(0, s.length - 3);
+	}
+	if (s.endsWith('0')) {
+		return s.substring(0, s.length - 1);
+	}
+	return s;
+}

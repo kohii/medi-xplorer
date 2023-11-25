@@ -19,7 +19,9 @@ export type Field = Readonly<{
 			seq: number;
 			/** 値 */
 			value: readonly string[];
-		}>
+		}>;
+		/** 簡潔さ重視の独自に定義した名称 */
+		alias?: string;
 	}[];
 }>;
 

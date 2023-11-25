@@ -132,7 +132,10 @@ export const DataTable = React.memo(function DataTable({
 							>
 								{row.getVisibleCells().map((cell, cellIndex) => {
 									return (
-										<td key={cell.id} className={`p-1 h-10 ${cellIndex === 0 ? 'pl-2' : ''}`}>
+										<td key={cell.id} className={twMerge(
+											'p-1 h-10',
+											cellIndex === 0 ? 'pl-2 rounded-l' : ''
+										)}>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()

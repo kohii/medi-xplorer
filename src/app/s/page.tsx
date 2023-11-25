@@ -21,6 +21,7 @@ import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 import { formatDate } from "@/utils/format-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import { formatPoint } from "./shinryoukoui-master-utils";
 
 const codeField = getField("診療行為コード")!;
 const nameField = getField("診療行為省略名称/省略漢字名称")!;
@@ -37,7 +38,10 @@ const columns: DataTableColumn[] = [{
 	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
 }, {
 	name: '点数',
-	value: row => getValue(row, getField('新又は現点数/新又は現点数')!),
+	value: row => formatPoint(
+		getValue(row, getField('新又は現点数/点数識別')!),
+		getValue(row, getField('新又は現点数/新又は現点数')!),
+	),
 }, {
 	name: '変更日',
 	value: row => formatDate(getValue(row, getField('変更年月日')!)),
@@ -175,7 +179,7 @@ export default function Page() {
 				</div>
 			</div>
 			{selectedCode && !isLoading && <Drawer title={codeToRow.has(selectedCode) ? getValue(codeToRow.get(selectedCode)!, nameField) : ""} onClose={select}>
-				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} /> : <div className="flex items-center justify-center h-full">
+				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} rows={data!} /> : <div className="flex items-center justify-center h-full">
 					No data found for code {selectedCode}
 				</div>}
 			</Drawer>}
