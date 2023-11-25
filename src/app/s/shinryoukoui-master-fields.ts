@@ -262,11 +262,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: '1',
 			name: '入院レセプトに限り記録可能な診療行為',
-			alias: '入院',
+			alias: '入院のみ',
 		}, {
 			code: '2',
 			name: '入院外レセプトに限り記録可能な診療行為',
-			alias: '入院外',
+			alias: '入院外のみ',
 		}]
 	}, {
 		seq: 14,
@@ -278,13 +278,16 @@ export const shinryokouiMasterFields = [
 ２：後期高齢者医療に限り適用される診療行為`,
 		codes: [{
 			code: '0',
-			name: '「１」及び「２」以外の診療行為'
+			name: '「１」及び「２」以外の診療行為',
+			alias: '共通',
 		}, {
 			code: '1',
-			name: '医療保険に限り適用される診療行為'
+			name: '医療保険に限り適用される診療行為',
+			alias: '医療保険のみ',
 		}, {
 			code: '2',
-			name: '後期高齢者医療に限り適用される診療行為'
+			name: '後期高齢者医療に限り適用される診療行為',
+			alias: '後期高齢者医療のみ',
 		}],
 	},
 	{
@@ -406,11 +409,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: '1',
 			name: '病院に限り適用される診療行為',
-			alias: '病院',
+			alias: '病院のみ',
 		}, {
 			code: '2',
 			name: '診療所に限り適用される診療行為',
-			alias: '診療所',
+			alias: '診療所のみ',
 		}, {
 			code: '4',
 			name: '短期滞在手術等基本料３',

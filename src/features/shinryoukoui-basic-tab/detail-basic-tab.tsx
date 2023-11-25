@@ -11,12 +11,6 @@ import { Toggle } from "@/components/toggle";
 import { useState } from "react";
 import { ColorChip } from "@/components/color-chip";
 
-const FIELDS = {
-	"診療行為省略名称/省略漢字名称": getField('診療行為省略名称/省略漢字名称')!,
-	"基本漢字名称": getField('基本漢字名称')!,
-	"入外適用区分": getField('入外適用区分')!,
-} as const;
-
 export type DetailBasicTabProps = {
 	row: string[];
 	rows: string[][];
@@ -32,11 +26,11 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<div>
 					<span className="text-gray-500">{getValue(row, getField("診療行為コード")!)}</span>
 					<span className="text-gray-300 text-lg"> | </span>
-					<span className="text-lg">{getValue(row, FIELDS["基本漢字名称"])}</span>
+					<span className="text-lg">{getValue(row, getField('基本漢字名称')!)}</span>
 				</div>
-				{getValue(row, FIELDS["基本漢字名称"]) !== getValue(row, FIELDS["診療行為省略名称/省略漢字名称"]) &&
+				{getValue(row, getField('基本漢字名称')!) !== getValue(row, getField('診療行為省略名称/省略漢字名称')!) &&
 					<div className="text-sm my-1 text-gray-500">
-						略称: {getValue(row, FIELDS["診療行為省略名称/省略漢字名称"])}
+						略称: {getValue(row, getField('診療行為省略名称/省略漢字名称')!)}
 					</div>
 				}
 			</section>
@@ -51,13 +45,18 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			</section>
 			<section>
 				<SectionHeading>算定可能な状況</SectionHeading>
-				<SplitChip label="入外適用区分" className="mr-1">
-					{formatCodeValue(row, FIELDS["入外適用区分"])}
-				</SplitChip>
-				<SplitChip label="病院・診療所区分">
-					{formatCodeValue(row, getField("病院・診療所区分")!)}
-				</SplitChip>
-			</section>
+				<div className="flex items-center gap-1">
+					<SplitChip label="入外適用区分">
+						{formatCodeValue(row, getField("入外適用区分")!)}
+					</SplitChip>
+					<SplitChip label="病院・診療所区分">
+						{formatCodeValue(row, getField("病院・診療所区分")!)}
+					</SplitChip>
+					<SplitChip label="後期高齢者医療適用区分">
+						{formatCodeValue(row, getField("後期高齢者医療適用区分")!)}
+					</SplitChip>
+				</div>
+			</section >
 			{getValue(row, getField("注加算/注加算コード")!) !== "0" && <section>
 				<SectionHeading>注加算</SectionHeading>
 				<SplitChip label="注加算コード" className="mr-1">
@@ -80,7 +79,8 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						/>
 					</div>}
 				</Toggle>
-			</section>}
+			</section>
+			}
 			<section>
 				<SectionHeading>点数</SectionHeading>
 				<SplitChip label="点数" className="mr-1">
