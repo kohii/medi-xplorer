@@ -107,6 +107,15 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					{getValue(row, getField("データ規格コード")!) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称")!)})`}
 				</SplitChip>
 			</section>
+			{getValue(row, getField("検査等実施判断区分")!) !== "0" && <section>
+				<SectionHeading>検査等実施判断</SectionHeading>
+				<SplitChip label="検査等実施判断区分" className="mr-1">
+					{formatCodeValue(row, getField("検査等実施判断区分")!)}
+				</SplitChip>
+				<SplitChip label="検査等実施判断グループ区分">
+					{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
+				</SplitChip>
+			</section>}
 		</>
 	)
 }
