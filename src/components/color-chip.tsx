@@ -9,6 +9,12 @@ const COLOR_CHIP_COLORS = [
 	"indigo",
 	"purple",
 	"pink",
+	"stone",
+	"cyan",
+	"lime",
+	"violet",
+	"slate",
+	"amber",
 ] as const;
 
 export function getNthColorChipColor(n: number) {

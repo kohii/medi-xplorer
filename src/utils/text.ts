@@ -59,3 +59,15 @@ export function trimDecimalZero(s: string): string {
 	}
 	return s;
 }
+
+/** 
+ * アルファベットを数値に変換
+ * @example
+ * ```
+ * alphabetToNumber("A") // => 0
+ * alphabetToNumber("B") // => 1
+ * ```
+ */
+export function alphabetToNumber(s: string): number {
+	return s.charCodeAt(0) - 65;
+}

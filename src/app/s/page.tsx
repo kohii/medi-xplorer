@@ -23,6 +23,7 @@ import { formatDate } from "@/utils/format-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { alphabetToNumber } from "@/utils/text";
 
 const codeField = getField("診療行為コード")!;
 const nameField = getField("診療行為省略名称/省略漢字名称")!;
@@ -30,7 +31,10 @@ const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
 
 const columns: DataTableColumn[] = [{
 	name: '区分番号',
-	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
+	value: row => {
+		const v = shinryoukouiMasterVirtualFields.区分番号.value(row);
+		return v === "-" ? "-" : <ColorChip color={getNthColorChipColor(alphabetToNumber(v[0]))}>{v}</ColorChip>
+	},
 	width: 88,
 }, {
 	name: '診療行為コード',
@@ -46,7 +50,7 @@ const columns: DataTableColumn[] = [{
 		const label = getCodeLabel(value, kokujiShikibetsuField, true);
 		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>
 	},
-	width: 120,
+	width: 128,
 }, {
 	name: '点数',
 	value: row => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
