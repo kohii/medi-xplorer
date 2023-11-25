@@ -38,7 +38,7 @@ export const DataTable = React.memo(function DataTable({
 		() => {
 			return columns.map((col) => ({
 				id: col.name,
-				accessorFn: row => col.value(row),
+				cell: (info) => col.value(info.row.original),
 				header: () => <BreakLine value={col.name.replace('/', '/\n')} />,
 				size: col.width,
 			}))

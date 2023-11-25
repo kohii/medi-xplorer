@@ -21,31 +21,40 @@ import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 import { formatDate } from "@/utils/format-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
-import { formatPoint } from "./shinryoukoui-master-utils";
+import { getCodeLabel } from "@/features/fields/get-code-label";
+import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 
 const codeField = getField("診療行為コード")!;
 const nameField = getField("診療行為省略名称/省略漢字名称")!;
+const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
 
 const columns: DataTableColumn[] = [{
+	name: '区分番号',
+	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
+	width: 88,
+}, {
 	name: '診療行為コード',
 	value: row => getValue(row, codeField),
-	width: 124,
+	width: 120,
 }, {
 	name: '診療行為名称',
 	value: row => getValue(row, getField('診療行為省略名称/省略漢字名称')!),
 }, {
-	name: '区分番号',
-	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
+	name: '告示等識別区分',
+	value: row => {
+		const value = getValue(row, kokujiShikibetsuField);
+		const label = getCodeLabel(value, kokujiShikibetsuField, true);
+		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>
+	},
+	width: 120,
 }, {
 	name: '点数',
-	value: row => formatPoint(
-		getValue(row, getField('新又は現点数/点数識別')!),
-		getValue(row, getField('新又は現点数/新又は現点数')!),
-	),
+	value: row => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
+	width: 112,
 }, {
 	name: '変更日',
 	value: row => formatDate(getValue(row, getField('変更年月日')!)),
-	width: 108,
+	width: 112,
 }]
 
 export default function Page() {
