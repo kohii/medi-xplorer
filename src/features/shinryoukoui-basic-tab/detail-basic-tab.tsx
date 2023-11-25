@@ -6,7 +6,7 @@ import { SectionHeading } from "../../app/s/section-heading";
 import { Field } from "@/features/fields/types";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 import { ChuukasanList } from "./chuukasan-list";
-import { formatCodeValue, getKubunBangouColor } from "@/app/s/shinryoukoui-master-utils";
+import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
 import { Toggle } from "@/components/toggle";
 import { useState } from "react";
 import { ColorChip } from "@/components/color-chip";
@@ -92,10 +92,25 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			</section>
 			<section>
 				<SectionHeading>記録</SectionHeading>
+				<SplitChip label="点数欄集計先識別（入院外）" className="mr-1">
+					{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
+						getValue(row, getField("点数欄集計先識別（入院外）")!)
+					))}
+				</SplitChip>
+				<SplitChip label="点数欄集計先識別（入院）">
+					{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
+						getValue(row, getField("点数欄集計先識別（入院）")!)
+					))}
+				</SplitChip>
+				<br />
 				<SplitChip label="数量データの記録" className="mr-1">
 					{getValue(row, getField("データ規格コード")!) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称")!)})`}
 				</SplitChip>
 			</section>
 		</>
 	)
+}
+
+function emptyToHyphen(value: string | undefined): string {
+	return value ? value : "-";
 }
