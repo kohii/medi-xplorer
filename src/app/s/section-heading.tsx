@@ -8,7 +8,7 @@ type SectionHeadingProps = {
 
 export function SectionHeading({ children, className }: SectionHeadingProps) {
 	return (
-		<h4 className={twMerge("text-md font-medium text-gray-500 tracking-wider mt-3 mb-1", className)}>
+		<h4 className={twMerge("text-lg font-medium text-slate-600 tracking-wider mt-4 mb-2", className)}>
 			{children}
 		</h4>
 	);
