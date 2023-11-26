@@ -3,19 +3,24 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
 
+import { AppIcon } from "@/components/app-icon";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { Drawer } from "@/components/drawer";
+import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
 import { TextInput } from "@/components/text-input";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
+import { AdvancedSearchAnchor } from "@/features/search/advanced-search-anchor";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
+import { SearchInput } from "@/features/search/search-input";
 import { DataTable, DataTableColumn } from "@/features/tables/data-table";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import { useRouterFn } from "@/hooks/use-router-fn";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
@@ -64,32 +69,24 @@ const columns: DataTableColumn[] = [{
 
 export default function Page() {
 	const searchParams = useSearchParams();
+	const { push } = useRouterFn();
 	const updateSearchParams = useUpdateSearchParams();
 
 	const query = searchParams.get("q") ?? "";
 	const selectedCode = searchParams.get("code");
 
-	const [queryInputValue, _setQueryInputValue] = useStateFromProp(query);
+	const [searchInputValue, setSearchInputValue] = useStateFromProp(query);
 
 	const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
 
-	const updateQuery = useCallback((value: string) => {
-		updateSearchParams({
-			q: value || undefined,
-		});
-	}, [updateSearchParams]);
+	const search = useCallback((value: string) => {
+		push(`/s?q=${encodeURIComponent(value)}`);
+	}, [push]);
 
-	const applyCurrentQuery = useDebouncedCallback(
-		() => {
-			updateQuery(queryInputValue);
-		},
-		500,
-		[queryInputValue, updateQuery],
+	const handleSubmitSearch = useCallback(
+		() => search(searchInputValue),
+		[searchInputValue, search],
 	);
-	const setQueryInputValue = useCallback((value: string) => {
-		_setQueryInputValue(value);
-		applyCurrentQuery();
-	}, [_setQueryInputValue, applyCurrentQuery]);
 
 	const filterExpression = useMemo(() => {
 		const r = parseQuery(query);
@@ -140,35 +137,32 @@ export default function Page() {
 	return (
 		<div className="relative h-full">
 			<div className="h-full grid" style={{
-				gridTemplateRows: "140px minmax(0, 1fr)",
+				gridTemplateRows: "124px minmax(0, 1fr)",
 			}}
 			>
 				<div
 					style={{ gridRow: 1 }}>
-					<div className="p-2 border-b border-gray-300 flex items-center gap-2">
-						<div className="p-2 mr-2 text-6xl">
-							👨‍⚕️
-						</div>
-						<div className="flex-1">
-							<div className="mb-2 text-sm">
-								MediXplorer / 診療行為マスター
+					<div className="p-2 pt-3 border-b border-gray-300 flex items-start gap-3">
+						<Link href="/">
+							<div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
+								<AppIcon size="small" />
+								MediXplorer
 							</div>
+						</Link>
+						<div className="flex-1">
 							<div>
-								<TextInput
-									value={queryInputValue}
-									onChange={setQueryInputValue}
-									placeholder="検索"
-									autoFocus
+								<SearchInput
+									value={searchInputValue}
+									onChange={setSearchInputValue}
+									onSubmit={handleSubmitSearch}
 								/>
 								{filterExpression.kind === "ERROR" && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
 							</div>
-							<div className="mt-1">
-								<a href="" className="text-sm text-blue-500" onClick={e => {
-									e.preventDefault();
-									setAdvancedSearchOpen(true);
-								}}>
-									詳細検索
-								</a>
+							<div className="mt-2 flex justify-between items-center">
+								<AdvancedSearchAnchor initialQuery={searchInputValue} />
+								<div className="text-sm text-gray-500">
+									マスター更新日: 2023年11月1日
+								</div>
 							</div>
 						</div>
 					</div>
@@ -197,7 +191,7 @@ export default function Page() {
 					No data found for code {selectedCode}
 				</div>}
 			</Drawer>)}
-			{advancedSearchOpen && <AdvancedSearchFormModal query={queryInputValue} onChange={updateQuery} onClose={() => setAdvancedSearchOpen(false)} />}
+			{advancedSearchOpen && <AdvancedSearchFormModal query={searchInputValue} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
 		</div>
 	);
 }
