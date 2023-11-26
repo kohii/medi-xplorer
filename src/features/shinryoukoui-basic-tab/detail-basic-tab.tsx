@@ -1,15 +1,17 @@
-import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "../../app/s/shinryoukoui-master-fields";
 import { SplitChip } from "@/components/split-chip";
 import { SectionHeading } from "../../app/s/section-heading";
-import { Field } from "@/features/fields/types";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 import { ChuukasanList } from "./chuukasan-list";
 import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
 import { Toggle } from "@/components/toggle";
 import { useState } from "react";
 import { ColorChip } from "@/components/color-chip";
+import { stringifyQuery } from "../search/stringify-query";
+import { Link } from "@/components/link";
+import { ShinryoukouiList } from "./shinryoukoui-list";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -24,12 +26,12 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			<section className="mb-4">
 				{kubunBangou !== "-" && <ColorChip color={getKubunBangouColor(kubunBangou)} className="mb-2">{kubunBangou}</ColorChip>}
 				<div>
-					<span className="text-gray-500">{getValue(row, getField("診療行為コード")!)}</span>
-					<span className="text-gray-300 text-lg"> | </span>
+					<span className="text-slate-500">{getValue(row, getField("診療行為コード")!)}</span>
+					<span className="text-slate-300 text-lg"> | </span>
 					<span className="text-lg">{getValue(row, getField('基本漢字名称')!)}</span>
 				</div>
 				{getValue(row, getField('基本漢字名称')!) !== getValue(row, getField('診療行為省略名称/省略漢字名称')!) &&
-					<div className="text-sm my-1 text-gray-500">
+					<div className="text-sm my-1 text-slate-500">
 						略称: {getValue(row, getField('診療行為省略名称/省略漢字名称')!)}
 					</div>
 				}
@@ -70,15 +72,14 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					className="my-1"
 					open={chuukasanListOpen}
 					onToggle={setChuukasanListOpen}
-				>
-					{chuukasanListOpen && <div className="p-2">
-						<ChuukasanList
-							rows={rows}
-							chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
-							shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
-						/>
-					</div>}
-				</Toggle>
+				/>
+				{chuukasanListOpen && <div className="p-2">
+					<ChuukasanList
+						rows={rows}
+						chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
+						shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
+					/>
+				</div>}
 			</section>
 			}
 			<section>
@@ -115,6 +116,40 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<SplitChip label="検査等実施判断グループ区分">
 					{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
 				</SplitChip>
+				{getValue(row, getField("検査等実施判断区分")!) === "2" && <div className="mt-1">
+					<Link href={`s?q=` + encodeURIComponent(stringifyQuery([{
+						fieldKey: "検査等実施判断区分",
+						operator: ":",
+						value: "1",
+						negative: false,
+					}, {
+						fieldKey: "検査等実施判断グループ区分",
+						operator: ":",
+						value: getValue(row, getField("検査等実施判断グループ区分")!),
+						negative: false,
+					}]))}
+						className="text-blue-600"
+					>
+						対応する検査等の実施料
+					</Link>
+				</div>}
+				{getValue(row, getField("検査等実施判断区分")!) === "1" && (
+					<>
+						<div className="mt-2 mb-1 font-medium text-slate-500">
+							対応する判断料・診断料
+						</div>
+						<ShinryoukouiList rows={rows} filter={[{
+							fieldKey: "検査等実施判断区分",
+							operator: ":",
+							value: "2",
+							negative: false,
+						}, {
+							fieldKey: "検査等実施判断グループ区分",
+							operator: ":",
+							value: getValue(row, getField("検査等実施判断グループ区分")!),
+							negative: false,
+						}]} />
+					</>)}
 			</section>}
 		</>
 	)
@@ -123,3 +158,4 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 function emptyToHyphen(value: string | undefined): string {
 	return value ? value : "-";
 }
+

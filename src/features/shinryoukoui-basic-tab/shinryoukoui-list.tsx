@@ -1,36 +1,31 @@
-import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { getValue } from "../fields/get-values";
 import { useMemo } from "react";
-import { getCodeLabel } from "../fields/get-code-label";
+import { filterShinryoukouiRows } from "../search/filter-rows";
+import { FilterExpression } from "../search/types";
+import { stringifyQuery } from "../search/stringify-query";
+import { normalizeFilterExpression } from "../search/normalize-filter-expression";
+import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import Link from "next/link";
+import { getCodeLabel } from "../fields/get-code-label";
+import { getValue } from "../fields/get-values";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
+import { shinryoukouiMasterVirtualFields } from "@/app/s/shinryoukoui-master-virtual-field";
 
-export type ChuukasanListProps = {
+type ShinryoukouiListProps = {
 	rows: string[][];
-	chuukasanCode: string;
-	shinryoukouiCodeToHighlight?: string;
+	filter: FilterExpression
 };
 
-const chuukasanCodeField = getField("注加算/注加算コード")!;
-const chuukasanSeqField = getField("注加算/注加算通番")!;
-const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
-
-export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanListProps) {
+export function ShinryoukouiList({
+	rows,
+	filter,
+}: ShinryoukouiListProps) {
 	const matchedRows = useMemo(() => {
-		const filtered = rows.filter(row => {
-			return getValue(row, chuukasanCodeField) === chuukasanCode;
-		});
-		filtered.sort((a, b) => {
-			const seq1 = +getValue(a, chuukasanSeqField);
-			const seq2 = +getValue(b, chuukasanSeqField);
-			if (seq1 === seq2) {
-				return +getValue(a, kokujiShikibetsuField) - +getValue(b, kokujiShikibetsuField);
-			}
-			return seq1 - seq2;
-		});
-		return filtered;
-	}, [rows, chuukasanCode]);
+		const normalizedFilter = normalizeFilterExpression(filter);
+		if (normalizedFilter.kind === "ERROR") return [];
+		return filterShinryoukouiRows(rows, normalizedFilter.value);
+	}, [filter, rows]);
 
 	const updateSearchParams = useUpdateSearchParams();
 
@@ -46,17 +41,15 @@ export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight
 				<tr className="bg-slate-100">
 					<th className="text-left p-2 py-1.5">診療行為コード</th>
 					<th className="text-left p-2 py-1.5">名称</th>
-					<th className="text-left p-2 py-1.5">注加算通番</th>
 					<th className="text-left p-2 py-1.5">告示等識別区分</th>
+					<th className="text-left p-2 py-1.5">点数</th>
 				</tr>
 			</thead>
 			<tbody>
 				{matchedRows.map((row, index) => {
 					const code = getValue(row, getField("診療行為コード")!);
-					const kokujiShikibetsu = getValue(row, kokujiShikibetsuField);
-					const highlight = code === shinryoukouiCodeToHighlight;
 					return (
-						<tr key={index} className={highlight ? "font-semibold" : ""}>
+						<tr key={index}>
 							<td className="py-1.5 px-2">
 								<Link href={`/s?code=${code}`} onClick={(e) => {
 									e.preventDefault();
@@ -73,11 +66,13 @@ export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight
 									{getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
 								</Link>
 							</td>
-							<td className="py-1.5 px-2">{getValue(row, chuukasanSeqField)}</td>
 							<td className="py-1.5 px-2">
-								<ColorChip color={getNthColorChipColor(+kokujiShikibetsu)} >
-									{getCodeLabel(kokujiShikibetsu, kokujiShikibetsuField, true)}
+								<ColorChip color={getNthColorChipColor(+getValue(row, getField("告示等識別区分（１）")!))} >
+									{formatCodeValue(row, getField("告示等識別区分（１）")!)}
 								</ColorChip>
+							</td>
+							<td className="py-1.5 px-2">
+								{shinryoukouiMasterVirtualFields.新又は現点数.value(row)}
 							</td>
 						</tr>
 					);
