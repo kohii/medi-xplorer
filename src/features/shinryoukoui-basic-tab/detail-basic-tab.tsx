@@ -147,7 +147,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				</HStack>
 				{getValue(row, getField("検査等実施判断区分")!) === "2" && (<UncontrolledToggle
 					label="対応する検査等の実施料..."
-					className="my-1"
+					className="my-2"
 				>
 					{(open) => open && (<ShinryoukouiList rows={rows} filter={[{
 						fieldKey: "検査等実施判断区分",
