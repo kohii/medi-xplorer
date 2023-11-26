@@ -5,6 +5,7 @@ import { getCodeLabel } from "../fields/get-code-label";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import Link from "next/link";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
 
 export type ChuukasanListProps = {
 	rows: string[][];
@@ -76,7 +77,7 @@ export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight
 							<td className="py-1.5 px-2">{getValue(row, chuukasanSeqField)}</td>
 							<td className="py-1.5 px-2">
 								<ColorChip color={getNthColorChipColor(+kokujiShikibetsu)} >
-									{getCodeLabel(kokujiShikibetsu, kokujiShikibetsuField, true)}
+									{formatCodeValue(row, kokujiShikibetsuField)}
 								</ColorChip>
 							</td>
 						</tr>
