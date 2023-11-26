@@ -3,7 +3,7 @@ import { VirtualField } from "@/features/fields/virtual-field";
 import { trimLeadingZero } from "@/utils/text";
 
 import { getField } from "./shinryoukoui-master-fields";
-import { formatPoint } from "./shinryoukoui-master-utils";
+import { formatPoint, getAgeRangeLabel } from "./shinryoukoui-master-utils";
 
 
 const fields = {
@@ -51,34 +51,7 @@ export const shinryoukouiMasterVirtualFields = {
 			const upperAgeField = getField("上下限年齢/上限年齢")!;
 			const lower = getValue(row, lowerAgeField);
 			const upper = getValue(row, upperAgeField);
-
-			if (upper === "00" && lower === "00") {
-				return "-";
-			}
-			const lowerAge = (() => {
-				if (lower === "00") {
-					return "";
-				}
-				const code = lowerAgeField.codes?.find(c => c.code === lower);
-				if (code) {
-					return code.name;
-				}
-
-				return `${trimLeadingZero(lower)}歳以上`;
-			})();
-			const upperAge = (() => {
-				if (upper === "00") {
-					return "";
-				}
-				const code = upperAgeField.codes?.find(c => c.code === upper);
-				if (code) {
-					return code.name;
-				}
-
-				return `${trimLeadingZero(upper)}歳未満`;
-			})();
-
-			return `${lowerAge}〜${upperAge}`;
+			return getAgeRangeLabel(lower, upper);
 		},
 	},
 } satisfies Record<string, VirtualField>;

@@ -2,7 +2,9 @@ import { getNthColorChipColor } from "@/components/color-chip";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
-import { alphabetToNumber, trimDecimalZero } from "@/utils/text";
+import { alphabetToNumber, trimDecimalZero, trimLeadingZero } from "@/utils/text";
+
+import { FieldName, getField } from "./shinryoukoui-master-fields";
 
 export function formatPoint(
 	pointType: string,
@@ -77,4 +79,26 @@ export function getTensuuranShuukeisakiShikibetsuLabel(value: string) {
 		case "975": return "975: 生活療養環境療養（標準負担額）";
 	}
 	return "";
+}
+
+const ageCodeLabels = {
+	"AA": "生後２８日",
+	"AE": "生後９０日",
+	"B3": "３歳に達した日の翌月の１日",
+	"B6": "６歳に達した日の翌月の１日",
+	"MG": "未就学児",
+	"BF": "１５歳に達した日の翌月の１日",
+	"BK": "２０歳に達した日の翌月の１日",
+};
+
+const getAgeCodeLabel = (code: string) => ageCodeLabels[code as keyof typeof ageCodeLabels];
+
+export function getAgeRangeLabel(lower: string, upper: string) {
+	const lowerLabel = lower === "00" ? "" : (getAgeCodeLabel(lower) ?? `${trimLeadingZero(lower)}歳以上`);
+	const upperLabel = upper === "00" ? "" : (getAgeCodeLabel(upper) ?? `${trimLeadingZero(upper)}歳未満`);
+	if (!lowerLabel && !upperLabel) {
+		return "-";
+	}
+
+	return `${lowerLabel}～${upperLabel}`;
 }
