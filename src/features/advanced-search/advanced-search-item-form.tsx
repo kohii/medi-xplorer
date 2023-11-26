@@ -97,7 +97,7 @@ export function AdvancedSearchItemForm({
 			{
 				values.map((value, index) => (
 					<React.Fragment key={index}>
-						{!field.codes ? <TextInput
+						{!field.codes || field.allowFreeValue ? <TextInput
 							value={value}
 							onChange={value => handleValueChange(value, index)}
 							placeholder={index === 0 ? "値を入力..." : "値を追加..."}
@@ -115,4 +115,3 @@ export function AdvancedSearchItemForm({
 		<IconButton className="p-2" icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
 	</div>
 }
-

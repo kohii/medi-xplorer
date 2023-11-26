@@ -23,6 +23,8 @@ export type Field = Readonly<{
 		/** 簡潔さ重視の独自に定義した名称 */
 		alias?: string;
 	}[];
+	/** {@link codes}が指定されていた場合に、そのコード以外の値が入っているかどうか */
+	allowFreeValue?: boolean;
 }>;
 
 export type FieldGroup = Readonly<{

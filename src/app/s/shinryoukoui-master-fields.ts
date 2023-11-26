@@ -847,7 +847,8 @@ export const shinryokouiMasterFields = [
 			{
 				code: "BK",
 				name: "２０歳に達した日の翌月の１日"
-			}]
+			}],
+		allowFreeValue: true,
 	},
 	{
 		seq: 42,
@@ -893,7 +894,8 @@ export const shinryokouiMasterFields = [
 				code: "BK",
 				name: "２０歳に達した日の翌月の１日"
 			}
-		]
+		],
+		allowFreeValue: true,
 	},
 	{
 		seq: 43,
