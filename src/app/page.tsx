@@ -1,6 +1,6 @@
 
 import { AppIcon } from "@/components/app-icon";
-import { AdvancedSearchAnchor } from "@/features/search/advanced-search-anchor";
+import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
 import { SearchInput } from "@/features/search/search-input";
 
 export default function Home() {

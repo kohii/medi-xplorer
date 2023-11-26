@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import { useRouterFn } from "@/hooks/use-router-fn";
 
-import { AdvancedSearchFormModal } from "../advanced-search/advancedj-search-form-modal";
+import { AdvancedSearchFormModal } from "./advancedj-search-form-modal";
 
 type AdvancedSearchLinkProps = {
 	initialQuery?: string;
