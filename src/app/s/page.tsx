@@ -142,7 +142,7 @@ export default function Page() {
 			>
 				<div
 					style={{ gridRow: 1 }}>
-					<div className="p-2 pt-3 border-b border-gray-300 flex items-start gap-3">
+					<div className="p-3 border-b border-gray-300 flex items-start gap-3">
 						<Link href="/">
 							<div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
 								<AppIcon size="small" />
