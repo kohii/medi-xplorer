@@ -2471,7 +2471,8 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
 		seq: 101,
@@ -2491,7 +2492,8 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
 		seq: 102,
@@ -2500,7 +2502,7 @@ export const shinryokouiMasterFields = [
 		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
-		seq: 100,
+		seq: 103,
 		name: "年齢加算②/下限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの下限年齢を表す。
@@ -2517,10 +2519,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 101,
+		seq: 104,
 		name: "年齢加算②/上限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの上限年齢を表す。
@@ -2537,16 +2540,17 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 102,
+		seq: 105,
 		name: "年齢加算②/注加算診療行為コード",
 		mode: "numeric",
 		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
-		seq: 100,
+		seq: 106,
 		name: "年齢加算③/下限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの下限年齢を表す。
@@ -2563,10 +2567,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 101,
+		seq: 107,
 		name: "年齢加算③/上限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの上限年齢を表す。
@@ -2583,16 +2588,17 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 102,
+		seq: 108,
 		name: "年齢加算③/注加算診療行為コード",
 		mode: "numeric",
 		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
-		seq: 100,
+		seq: 109,
 		name: "年齢加算④/下限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの下限年齢を表す。
@@ -2609,10 +2615,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 101,
+		seq: 110,
 		name: "年齢加算④/上限年齢",
 		mode: "alphanumeric",
 		description: `当該診療行為に注加算の算定が可能な場合、記録された注加算診療行為コードの上限年齢を表す。
@@ -2629,10 +2636,11 @@ export const shinryokouiMasterFields = [
 		}, {
 			code: "BK",
 			name: "２０歳に達した日の翌月の１日"
-		}]
+		}],
+		allowFreeValue: true,
 	},
 	{
-		seq: 102,
+		seq: 111,
 		name: "年齢加算④/注加算診療行為コード",
 		mode: "numeric",
 		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",

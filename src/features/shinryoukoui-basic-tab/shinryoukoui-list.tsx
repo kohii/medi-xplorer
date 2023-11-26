@@ -12,10 +12,48 @@ import { filterShinryoukouiRows } from "../search/filter-rows";
 import { normalizeFilterExpression } from "../search/normalize-filter-expression";
 import { FilterExpression } from "../search/types";
 
+import { SimpleTable, SimpleTableColumn } from "./simple-table";
+import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
+
 type ShinryoukouiListProps = {
 	rows: string[][];
 	filter: FilterExpression
 };
+
+const columns: SimpleTableColumn<string[]>[] = [{
+	name: "診療行為コード",
+	render: (row) => {
+		const code = getValue(row, getField("診療行為コード")!);
+		return (
+			<Link href={`/s?code=${code}`} >
+				{code}
+			</Link>
+		);
+	},
+}, {
+	name: "名称",
+	render: (row) => {
+		const code = getValue(row, getField("診療行為コード")!);
+		return (
+			<Link href={`/s?code=${code}`} >
+				{getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
+			</Link>
+		);
+	},
+}, {
+	name: "告示等識別区分",
+	render: (row) => {
+		const value = getValue(row, getField("告示等識別区分（１）")!);
+		return (
+			<ColorChip color={getNthColorChipColor(+value)} >
+				{formatCodeValue(row, getField("告示等識別区分（１）")!)}
+			</ColorChip>
+		);
+	},
+}, {
+	name: "点数",
+	render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
+}];
 
 export function ShinryoukouiList({
 	rows,
@@ -27,57 +65,13 @@ export function ShinryoukouiList({
 		return filterShinryoukouiRows(rows, normalizedFilter.value);
 	}, [filter, rows]);
 
-	const updateSearchParams = useUpdateSearchParams();
-
-	const handleRowClick = (code: string) => {
-		updateSearchParams({
-			code,
-		});
-	};
+	const { selectByRow } = useSelectShinryoukoui();
 
 	return (
-		<table className="w-full text-sm border border-slate-200">
-			<thead>
-				<tr className="bg-slate-100">
-					<th className="text-left p-2 py-1.5">診療行為コード</th>
-					<th className="text-left p-2 py-1.5">名称</th>
-					<th className="text-left p-2 py-1.5">告示等識別区分</th>
-					<th className="text-left p-2 py-1.5">点数</th>
-				</tr>
-			</thead>
-			<tbody>
-				{matchedRows.map((row, index) => {
-					const code = getValue(row, getField("診療行為コード")!);
-					return (
-						<tr key={index}>
-							<td className="py-1.5 px-2">
-								<Link href={`/s?code=${code}`} onClick={(e) => {
-									e.preventDefault();
-									handleRowClick(code);
-								}}>
-									{code}
-								</Link>
-							</td>
-							<td className="py-1.5 px-2">
-								<Link href={`/s?code=${code}`} onClick={(e) => {
-									e.preventDefault();
-									handleRowClick(code);
-								}}>
-									{getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
-								</Link>
-							</td>
-							<td className="py-1.5 px-2">
-								<ColorChip color={getNthColorChipColor(+getValue(row, getField("告示等識別区分（１）")!))} >
-									{formatCodeValue(row, getField("告示等識別区分（１）")!)}
-								</ColorChip>
-							</td>
-							<td className="py-1.5 px-2">
-								{shinryoukouiMasterVirtualFields.新又は現点数.value(row)}
-							</td>
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
+		<SimpleTable
+			data={matchedRows}
+			columns={columns}
+			onRowClick={selectByRow}
+		/>
 	);
 }

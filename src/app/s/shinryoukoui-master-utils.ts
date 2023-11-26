@@ -102,3 +102,34 @@ export function getAgeRangeLabel(lower: string, upper: string) {
 
 	return `${lowerLabel}～${upperLabel}`;
 }
+
+
+export function getAgeAdditionalFeeData(row: string[]): {
+	age: string;
+	code: string;
+}[] {
+	const get = (key: "①" | "②" | "③" | "④") => {
+		const code = getValue(row, getField(`年齢加算${key}/注加算診療行為コード`)!);
+		if (code === "0") {
+			return undefined;
+		}
+		const lower = getValue(row, getField(`年齢加算${key}/下限年齢`)!);
+		const upper = getValue(row, getField(`年齢加算${key}/上限年齢`)!);
+		const age = getAgeRangeLabel(lower, upper);
+		return { age, code };
+	};
+
+	const n1 = get("①");
+	if (!n1) return [];
+
+	const n2 = get("②");
+	if (!n2) return [n1];
+
+	const n3 = get("③");
+	if (!n3) return [n1, n2];
+
+	const n4 = get("④");
+	if (!n4) return [n1, n2, n3];
+
+	return [n1, n2, n3, n4];
+}

@@ -1,4 +1,4 @@
-import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
+import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
 import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { SplitChip } from "@/components/split-chip";
@@ -8,9 +8,11 @@ import { getValue } from "@/features/fields/get-values";
 import { getField } from "../../app/s/shinryoukoui-master-fields";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 
+import { AgeAdditionalFeeTable } from "./age-additional-fee-table";
 import { ChuukasanList } from "./chuukasan-list";
 import { SectionHeading } from "./section-heading";
 import { ShinryoukouiList } from "./shinryoukoui-list";
+import { SubHeading } from "./sub-heading";
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -19,6 +21,7 @@ export type DetailBasicTabProps = {
 
 export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 	const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
+	const ageAdditionalFeeData = getAgeAdditionalFeeData(row);
 	return (
 		<>
 			<section className="mb-4">
@@ -101,25 +104,34 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			{getValue(row, getField("注加算/注加算コード")!) !== "0" && (
 				<section>
 					<SectionHeading>注加算</SectionHeading>
-					<HStack>
-						<SplitChip label="注加算コード">
-							{getValue(row, getField("注加算/注加算コード")!)}
-						</SplitChip>
-						<SplitChip label="注加算通番">
-							{getValue(row, getField("注加算/注加算通番")!)}
-						</SplitChip>
-					</HStack>
-					<UncontrolledToggle
-						label="同じ注加算コードの診療行為..."
-						className="my-1 mt-2"
-					>
-						{(open) => open && (<ChuukasanList
-							rows={rows}
-							chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
-							shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
-						/>)
-						}
-					</UncontrolledToggle>
+					<>
+						<HStack>
+							<SplitChip label="注加算コード">
+								{getValue(row, getField("注加算/注加算コード")!)}
+							</SplitChip>
+							<SplitChip label="注加算通番">
+								{getValue(row, getField("注加算/注加算通番")!)}
+							</SplitChip>
+						</HStack>
+						<UncontrolledToggle
+							label="同じ注加算コードの診療行為..."
+							className="mb-4 mt-2"
+						>
+							{(open) => open && (<ChuukasanList
+								rows={rows}
+								chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
+								shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
+							/>)
+							}
+						</UncontrolledToggle>
+					</>
+				</section>
+			)}
+
+			{ageAdditionalFeeData.length > 0 && (
+				<section>
+					<SectionHeading>年齢加算</SectionHeading	>
+					<AgeAdditionalFeeTable data={ageAdditionalFeeData} originalRows={rows} />
 				</section>
 			)}
 
@@ -152,10 +164,10 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				}
 				{getValue(row, getField("検査等実施判断区分")!) === "1" && (
 					<>
-						<div className="mt-2 m font-medium text-slate-500">
+						<SubHeading>
 							対応する判断料・診断料
-						</div>
-						<div className="py-2">
+						</SubHeading>
+						<div className="pb-2">
 							<ShinryoukouiList rows={rows} filter={[{
 								fieldKey: "検査等実施判断区分",
 								operator: ":",
