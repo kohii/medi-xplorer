@@ -28,7 +28,7 @@ export function SimpleTable<R>({ columns, data, onRowClick }: SimpleTableProps<R
 					return (
 						<tr
 							key={index}
-							className={onRowClick ? "cursor-pointer hover:bg-blue-50" : undefined}
+							className={onRowClick ? "cursor-pointer hover:bg-slate-50" : undefined}
 							onClick={onRowClick ? () => onRowClick(row) : undefined}
 						>
 							{columns.map((column) => (
