@@ -19,7 +19,6 @@ import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
-import { alphabetToNumber } from "@/utils/text";
 
 import { Detail } from "./detail";
 import { getMasterData } from "./get-master-data";

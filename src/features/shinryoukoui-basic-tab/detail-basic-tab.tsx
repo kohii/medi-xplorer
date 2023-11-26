@@ -5,11 +5,11 @@ import { SplitChip } from "@/components/split-chip";
 import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
 
-import { SectionHeading } from "../../app/s/section-heading";
 import { getField } from "../../app/s/shinryoukoui-master-fields";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 
 import { ChuukasanList } from "./chuukasan-list";
+import { SectionHeading } from "./section-heading";
 import { ShinryoukouiList } from "./shinryoukoui-list";
 
 export type DetailBasicTabProps = {
