@@ -1,6 +1,9 @@
+"use client";
+
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
 import { TextInput } from "@/components/text-input";
+import { useRouterFn } from "@/hooks/use-router-fn";
 
 type SearchInputProps = {
 	value?: string;
@@ -9,10 +12,12 @@ type SearchInputProps = {
 };
 
 export function SearchInput({ value, onChange, onSubmit }: SearchInputProps) {
-	const handleSubmit = onSubmit ? (event: React.FormEvent<HTMLFormElement>) => {
+	const { push } = useRouterFn();
+	const handleSubmit = onSubmit ?? ((event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		onSubmit?.();
-	} : undefined;
+		const q = event.currentTarget.q.value;
+		push(`/s?q=${encodeURIComponent(q)}`);
+	});
 
 	return (
 		<form onSubmit={handleSubmit} action="/s">
