@@ -5,37 +5,8 @@ import { TextInput } from "@/components/text-input";
 import { FieldName } from "../../app/s/shinryoukoui-master-fields";
 
 import { AdvancedSearchItem, AdvancedSearchItemForm } from "./advanced-search-item-form";
+import { advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
-
-
-export const advancedSearchOperatorOptions = [{
-	label: "が次のいずれかに一致する",
-	operator: ":",
-	negative: false,
-}, {
-	label: "が次のいずれでもない",
-	operator: ":",
-	negative: true,
-}, {
-	label: "が次より大きい",
-	operator: ">",
-	negative: false,
-}, {
-	label: "が次以上",
-	operator: ">=",
-	negative: false,
-}, {
-	label: "が次より小さい",
-	operator: "<",
-	negative: false,
-}, {
-	label: "が次以下",
-	operator: "<=",
-	negative: false,
-}] as const;
-
-
-type OperatorLabel = typeof advancedSearchOperatorOptions[number]["label"];
 
 export type AdvancedSearchParams = {
 	keyword: string;
@@ -57,7 +28,7 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
 				...value.items,
 				{
 					field,
-					operator: advancedSearchOperatorOptions[0].label,
+					operatorKind: advancedSearchOperatorOptions[0].kind,
 					value: "",
 				},
 			],

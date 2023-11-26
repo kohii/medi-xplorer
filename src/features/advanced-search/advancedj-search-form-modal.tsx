@@ -9,8 +9,9 @@ import { parseQuery } from "../search/parse-query";
 import { stringifyQuery } from "../search/stringify-query";
 import { FieldFilterItem, FilterItem } from "../search/types";
 
-import { AdvancedSearchForm, AdvancedSearchParams, advancedSearchOperatorOptions } from "./advanced-search-form";
-import { AdvancedSearchItem, AdvancedSearchItemOperator } from "./advanced-search-item-form";
+import { AdvancedSearchForm, AdvancedSearchParams } from "./advanced-search-form";
+import { AdvancedSearchItem } from "./advanced-search-item-form";
+import { AdvancedSearchOperatorKind } from "./constants";
 
 
 
@@ -85,22 +86,22 @@ export function AdvancedSearchFormModal({
 }
 
 function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): AdvancedSearchItem | undefined {
-	const operator: AdvancedSearchItemOperator = (() => {
+	const operatorKind: AdvancedSearchOperatorKind = (() => {
 		if (!filterItem.negative) {
 			switch (filterItem.operator) {
-				case ":": return "が次のいずれかに一致する";
-				case ":>": return "が次より大きい";
-				case ":>=": return "が次以上";
-				case ":<": return "が次より小さい";
-				case ":<=": return "が次以下";
+				case ":": return "in";
+				case ":>": return "gt";
+				case ":>=": return "gte";
+				case ":<": return "lt";
+				case ":<=": return "lte";
 			}
 		}
 		switch (filterItem.operator) {
-			case ":": return "が次のいずれでもない";
-			case ":>": return "が次以下";
-			case ":>=": return "が次より小さい";
-			case ":<": return "が次以上";
-			case ":<=": return "が次より大きい";
+			case ":": return "not-in";
+			case ":>": return "lte";
+			case ":>=": return "lt";
+			case ":<": return "gte";
+			case ":<=": return "gt";
 		}
 	})();
 
@@ -111,7 +112,7 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 
 	return {
 		field: field.name as FieldName,
-		operator,
+		operatorKind,
 		value,
 		restValues,
 	};
@@ -119,43 +120,43 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 
 function convertAdvancedSearchItemToFilterItem(item: AdvancedSearchItem): FieldFilterItem {
 	const values = (item.restValues ? [item.value, ...item.restValues] : [item.value]).map(value => value.trim()).filter(Boolean);
-	switch (item.operator) {
-		case "が次のいずれかに一致する":
+	switch (item.operatorKind) {
+		case "in":
 			return {
 				fieldKey: item.field,
 				operator: ":",
 				value: values.join(","),
 				negative: false,
 			} as const;
-		case "が次のいずれでもない":
+		case "not-in":
 			return {
 				fieldKey: item.field,
 				operator: ":",
 				value: values.join(","),
 				negative: true,
 			} as const;
-		case "が次より大きい":
+		case "gt":
 			return {
 				fieldKey: item.field,
 				operator: ":>",
 				value: item.value.trim(),
 				negative: false,
 			} as const;
-		case "が次以上":
+		case "gte":
 			return {
 				fieldKey: item.field,
 				operator: ":>=",
 				value: item.value.trim(),
 				negative: false,
 			} as const;
-		case "が次より小さい":
+		case "lt":
 			return {
 				fieldKey: item.field,
 				operator: ":<",
 				value: item.value.trim(),
 				negative: false,
 			} as const;
-		case "が次以下":
+		case "lte":
 			return {
 				fieldKey: item.field,
 				operator: ":<=",

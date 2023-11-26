@@ -7,27 +7,17 @@ import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
 
 import { CodeSelect } from "./code-select";
+import { AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
 
-export const advancedSearchItemOperators = [
-	"が次のいずれかに一致する",
-	"が次のいずれでもない",
-	"が次より大きい",
-	"が次以上",
-	"が次より小さい",
-	"が次以下",
-] as const;
-
-const operatorOptions = advancedSearchItemOperators.map(label => ({
-	label,
-	value: label,
+const operatorOptions = advancedSearchOperatorOptions.map(option => ({
+	label: option.label,
+	value: option.kind,
 }));
-
-export type AdvancedSearchItemOperator = typeof advancedSearchItemOperators[number];
 
 export type AdvancedSearchItem = {
 	field: FieldName;
-	operator: AdvancedSearchItemOperator;
+	operatorKind: AdvancedSearchOperatorKind;
 	value: string;
 	restValues?: string[];
 };
@@ -45,7 +35,7 @@ export function AdvancedSearchItemForm({
 }: AdvancedSearchItemFormProps) {
 	const field = getField(item.field)!;
 	const values = useMemo(() => item.restValues ? [item.value, ...item.restValues] : [item.value], [item]);
-	const takesMultipleValues = item.operator === "が次のいずれかに一致する" || item.operator === "が次のいずれでもない";
+	const takesMultipleValues = item.operatorKind === "in" || item.operatorKind === "not-in";
 
 	useEffect(() => {
 		if (!takesMultipleValues) return;
@@ -87,10 +77,10 @@ export function AdvancedSearchItemForm({
 			<div className="max-w-l">
 				<FilterableSelect
 					options={operatorOptions}
-					value={item.operator}
-					onChange={operator => onChange({
+					value={item.operatorKind}
+					onChange={operatorKind => onChange({
 						...item,
-						operator,
+						operatorKind,
 					})}
 				/>
 			</div>
