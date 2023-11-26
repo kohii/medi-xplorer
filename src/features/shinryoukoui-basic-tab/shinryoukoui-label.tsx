@@ -18,10 +18,12 @@ export function ShinryoukouiLabel({ row }: ShinryoukouiLabelProps) {
 		});
 	};
 
-	return <Link href={`/s?code=${code}`} onClick={(e) => {
-		e.preventDefault();
-		handleRowClick(code);
-	}}>
-		{code} {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
-	</Link>;
+	return (
+		<Link href={`/s?code=${code}`} onClick={(e) => {
+			e.preventDefault();
+			handleRowClick(code);
+		}}>
+			{code} {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
+		</Link>
+	);
 }

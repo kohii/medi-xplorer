@@ -1,5 +1,4 @@
-import { type } from "os";
-
+import React from "react";
 import { twMerge } from "tailwind-merge";
 
 type SectionHeadingProps = {

@@ -7,11 +7,9 @@ import { shinryoukouiMasterVirtualFields } from "@/app/s/shinryoukoui-master-vir
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
-import { getCodeLabel } from "../fields/get-code-label";
 import { getValue } from "../fields/get-values";
 import { filterShinryoukouiRows } from "../search/filter-rows";
 import { normalizeFilterExpression } from "../search/normalize-filter-expression";
-import { stringifyQuery } from "../search/stringify-query";
 import { FilterExpression } from "../search/types";
 
 type ShinryoukouiListProps = {

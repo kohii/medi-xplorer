@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import ReactSelect from "react-select";
 import { twMerge } from "tailwind-merge";
 
@@ -6,6 +6,7 @@ import { twMerge } from "tailwind-merge";
 type FilterableSelectProps<ValueType extends string, IsNullable extends boolean> = {
 	value: IsNullable extends true ? ValueType | null : ValueType;
 	options: { label: string; value: ValueType }[];
+	// eslint-disable-next-line no-unused-vars
 	onChange: (value: IsNullable extends true ? ValueType | null : ValueType) => void;
 	placeholder?: string;
 	className?: string;
@@ -21,10 +22,6 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
 	className,
 	clearable,
 }: FilterableSelectProps<ValueType, IsNullable>) {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const onMenuOpen = () => setIsMenuOpen(true);
-	const onMenuClose = () => setIsMenuOpen(false);
-
 	const selectedOption = useMemo(() => {
 		if (value === null) {
 			return null;
@@ -45,8 +42,6 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
 					...(state.isFocused ? ["!ring-blue-500 !border-blue-500"] : [])
 				]),
 			}}
-			onMenuOpen={onMenuOpen}
-			onMenuClose={onMenuClose}
 			options={options}
 			onChange={(option) => onChange(option?.value ?? null as any)}
 			value={selectedOption}

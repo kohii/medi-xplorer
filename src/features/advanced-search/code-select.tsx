@@ -21,11 +21,13 @@ export function CodeSelect({
 			value: code.code,
 		}));
 	}, [codes]);
-	return <FilterableSelect
-		isNullable
-		clearable
-		options={options}
-		value={value || null}
-		onChange={onChange}
-	/>;
+	return (
+		<FilterableSelect
+			isNullable
+			clearable
+			options={options}
+			value={value || null}
+			onChange={onChange}
+		/>
+	);
 }

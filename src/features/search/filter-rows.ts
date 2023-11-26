@@ -1,5 +1,5 @@
-import { FieldName, getField } from "@/app/s/shinryoukoui-master-fields";
-import { isNumeric, toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/text";
+import { getField } from "@/app/s/shinryoukoui-master-fields";
+import { isNumeric } from "@/utils/text";
 
 import { getValue } from "../fields/get-values";
 

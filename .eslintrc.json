@@ -20,6 +20,20 @@
         "avoidEscape": true
       }
     ],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "prop": "parens-new-line",
+        "declaration": "ignore",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "ignore",
+        "logical": "parens"
+      }
+    ],
     "import/order": [
       "error",
       {

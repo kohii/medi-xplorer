@@ -1,5 +1,3 @@
-import exp from "constants";
-
 const KANA_MAP: Record<string, string> = {
 	"ガ": "ｶﾞ", "ギ": "ｷﾞ", "グ": "ｸﾞ", "ゲ": "ｹﾞ", "ゴ": "ｺﾞ",
 	"ザ": "ｻﾞ", "ジ": "ｼﾞ", "ズ": "ｽﾞ", "ゼ": "ｾﾞ", "ゾ": "ｿﾞ",
@@ -42,7 +40,7 @@ export function splitByWhitespace(s: string): string[] {
 	return s.split(/\s+/).filter(s => s !== "");
 }
 
-/** 
+/**
  * 小数点以下の0を削除
  * @example
  * ```

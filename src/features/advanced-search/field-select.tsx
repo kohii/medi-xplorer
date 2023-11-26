@@ -23,12 +23,14 @@ export function FieldSelect<IsNullable extends boolean = false>({
 	className,
 	isNullable
 }: Props<IsNullable>) {
-	return (<FilterableSelect
-		options={options}
-		onChange={onChange}
-		value={value}
-		placeholder={placeholder}
-		className={className}
-		isNullable={isNullable}
-	/>);
+	return (
+		<FilterableSelect
+			options={options}
+			onChange={onChange}
+			value={value}
+			placeholder={placeholder}
+			className={className}
+			isNullable={isNullable}
+		/>
+	);
 }

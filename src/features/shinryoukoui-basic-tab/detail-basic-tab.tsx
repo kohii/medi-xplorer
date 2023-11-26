@@ -1,9 +1,8 @@
 import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
 import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
-import { Link } from "@/components/link";
 import { SplitChip } from "@/components/split-chip";
-import { Toggle, UncontrolledToggle } from "@/components/toggle";
+import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
 
 import { SectionHeading } from "../../app/s/section-heading";
@@ -12,7 +11,6 @@ import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master
 
 import { ChuukasanList } from "./chuukasan-list";
 import { ShinryoukouiList } from "./shinryoukoui-list";
-
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -31,9 +29,9 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					<span className="text-lg">{getValue(row, getField("基本漢字名称")!)}</span>
 				</div>
 				{getValue(row, getField("基本漢字名称")!) !== getValue(row, getField("診療行為省略名称/省略漢字名称")!) &&
-					<div className="text-sm my-1 text-slate-500">
+					(<div className="text-sm my-1 text-slate-500">
 						略称: {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
-					</div>
+					</div>)
 				}
 			</section>
 
@@ -115,17 +113,17 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						label="同じ注加算コードの診療行為..."
 						className="my-1 mt-2"
 					>
-						{(open) => open && <ChuukasanList
+						{(open) => open && (<ChuukasanList
 							rows={rows}
 							chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
 							shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
-						/>
+						/>)
 						}
 					</UncontrolledToggle>
 				</section>
 			)}
 
-			{getValue(row, getField("検査等実施判断区分")!) !== "0" && <section>
+			{getValue(row, getField("検査等実施判断区分")!) !== "0" && (<section>
 				<SectionHeading>検査等実施判断</SectionHeading>
 				<HStack>
 					<SplitChip label="検査等実施判断区分">
@@ -135,11 +133,11 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
 					</SplitChip>
 				</HStack>
-				{getValue(row, getField("検査等実施判断区分")!) === "2" && <UncontrolledToggle
+				{getValue(row, getField("検査等実施判断区分")!) === "2" && (<UncontrolledToggle
 					label="対応する検査等の実施料..."
 					className="my-1"
 				>
-					{(open) => open && <ShinryoukouiList rows={rows} filter={[{
+					{(open) => open && (<ShinryoukouiList rows={rows} filter={[{
 						fieldKey: "検査等実施判断区分",
 						operator: ":",
 						value: "1",
@@ -149,8 +147,8 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						operator: ":",
 						value: getValue(row, getField("検査等実施判断グループ区分")!),
 						negative: false,
-					}]} />}
-				</UncontrolledToggle>
+					}]} />)}
+				</UncontrolledToggle>)
 				}
 				{getValue(row, getField("検査等実施判断区分")!) === "1" && (
 					<>
@@ -171,7 +169,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 							}]} />
 						</div>
 					</>)}
-			</section>}
+			</section>)}
 		</>
 	);
 }

@@ -64,36 +64,38 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
 		});
 	};
 
-	return (<div>
-		<FormItem >
-			<FormLabel>検索ワード</FormLabel>
-			<TextInput value={value.keyword} onChange={keyword => onChange({ ...value, keyword })} autoFocus />
-		</FormItem>
-		<FormItem>
-			<FormLabel>除外ワード</FormLabel>
-			<TextInput value={value.exclude} onChange={exclude => onChange({ ...value, exclude })} />
-		</FormItem>
+	return (
 		<div>
-			<FormLabel>検索項目</FormLabel>
-			<div className="flex flex-col gap-2">
-				{value.items.map((item, index) => (
-					<AdvancedSearchItemForm
-						key={index}
-						item={item}
-						onChange={item => {
-							const items = [...value.items];
-							items[index] = item;
-							onChange({ ...value, items });
-						}}
-						onDelete={() => {
-							const items = [...value.items];
-							items.splice(index, 1);
-							onChange({ ...value, items });
-						}}
-					/>
-				))}
-				<FieldSelect onChange={onSelect} value={null} placeholder="検索する項目を追加..." isNullable />
+			<FormItem >
+				<FormLabel>検索ワード</FormLabel>
+				<TextInput value={value.keyword} onChange={keyword => onChange({ ...value, keyword })} autoFocus />
+			</FormItem>
+			<FormItem>
+				<FormLabel>除外ワード</FormLabel>
+				<TextInput value={value.exclude} onChange={exclude => onChange({ ...value, exclude })} />
+			</FormItem>
+			<div>
+				<FormLabel>検索項目</FormLabel>
+				<div className="flex flex-col gap-2">
+					{value.items.map((item, index) => (
+						<AdvancedSearchItemForm
+							key={index}
+							item={item}
+							onChange={item => {
+								const items = [...value.items];
+								items[index] = item;
+								onChange({ ...value, items });
+							}}
+							onDelete={() => {
+								const items = [...value.items];
+								items.splice(index, 1);
+								onChange({ ...value, items });
+							}}
+						/>
+					))}
+					<FieldSelect onChange={onSelect} value={null} placeholder="検索する項目を追加..." isNullable />
+				</div>
 			</div>
 		</div>
-	</div>);
+	);
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { ChevronRightIcon } from "./icons/chevron-right-icon";
@@ -13,7 +13,7 @@ type ToggleProps = {
 export function Toggle({ label, className, open, onToggle }: ToggleProps) {
 	return (
 		<div className={className}>
-			<button className="text-gray-500 hover:text-gray-700 flex items-center gap-1" onClick={() => onToggle(!open)}>
+			<button className="text-gray-500 hover:text-gray-700 flex items-center gap-1" onClick={() => onToggle?.(!open)}>
 				<ChevronRightIcon className={twMerge("h-3 w-3", open ? "transform rotate-90" : "")} />
 				{label}
 			</button>
@@ -27,8 +27,10 @@ type UncontrolledToggleProps = Omit<ToggleProps, "open" | "onToggle"> & {
 
 export function UncontrolledToggle({ label, className, children }: UncontrolledToggleProps) {
 	const [open, setOpen] = useState(false);
-	return <>
-		<Toggle label={label} className={className} open={open} onToggle={setOpen} />
-		{open && <div className="ml-4 my-2">{children(open)}</div>}
-	</>;
+	return (
+		<>
+			<Toggle label={label} className={className} open={open} onToggle={setOpen} />
+			{open && <div className="ml-4 my-2">{children(open)}</div>}
+		</>
+	);
 }

@@ -68,16 +68,20 @@ export function AdvancedSearchFormModal({
 		}
 	};
 
-	return <Modal
-		title="詳細検索"
-		onClose={onClose}
-		onKeyDown={handleKeyDown}
-		footer={<>
-			<Button onClick={handleOk}>検索</Button>
-		</>}
-	>
-		<AdvancedSearchForm value={params} onChange={setParams} />
-	</Modal>;
+	return (
+		<Modal
+			title="詳細検索"
+			onClose={onClose}
+			onKeyDown={handleKeyDown}
+			footer={(
+				<>
+					<Button onClick={handleOk}>検索</Button>
+				</>
+			)}
+		>
+			<AdvancedSearchForm value={params} onChange={setParams} />
+		</Modal>
+	);
 }
 
 function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): AdvancedSearchItem | undefined {

@@ -19,12 +19,14 @@ export function FieldValue({ field, row, raw }: FieldValueProps) {
 	if (field.codes) {
 		const label = getCodeLabel(value, field);
 		if (label) {
-			return <>
-				{value}{" "}
-				<span className="text-gray-400">
-					: {label}
-				</span>
-			</>;
+			return (
+				<>
+					{value}{" "}
+					<span className="text-gray-400">
+						: {label}
+					</span>
+				</>
+			);
 		}
 	}
 

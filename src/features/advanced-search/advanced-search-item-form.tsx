@@ -6,8 +6,6 @@ import { IconButton } from "@/components/icon-button";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
 
-import { FieldFilterItem } from "../search/types";
-
 import { CodeSelect } from "./code-select";
 import { FieldSelect } from "./field-select";
 
@@ -74,47 +72,49 @@ export function AdvancedSearchItemForm({
 		});
 	};
 
-	return <div className="flex items-start gap-1">
-		<div className="flex-grow basis-1">
-			<FieldSelect
-				value={item.field}
-				onChange={field => onChange({
-					...item,
-					field,
-				})}
-			/>
+	return (
+		<div className="flex items-start gap-1">
+			<div className="flex-grow basis-1">
+				<FieldSelect
+					value={item.field}
+					onChange={field => onChange({
+						...item,
+						field,
+					})}
+				/>
+			</div>
+
+			<div className="max-w-l">
+				<FilterableSelect
+					options={operatorOptions}
+					value={item.operator}
+					onChange={operator => onChange({
+						...item,
+						operator,
+					})}
+				/>
+			</div>
+
+			<div className="flex-grow basis-1 flex flex-col gap-2">
+				{
+					values.map((value, index) => (
+						<React.Fragment key={index}>
+							{!field.codes || field.allowFreeValue ? <TextInput
+								value={value}
+								onChange={value => handleValueChange(value, index)}
+								placeholder={index === 0 ? "値を入力..." : "値を追加..."}
+							/> : <CodeSelect
+								codes={field.codes}
+								value={value}
+								onChange={value => handleValueChange(value ?? "", index)}
+							/>}
+						</React.Fragment>
+					))
+				}
+			</div>
+
+
+			<IconButton className="p-2" icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
 		</div>
-
-		<div className="max-w-l">
-			<FilterableSelect
-				options={operatorOptions}
-				value={item.operator}
-				onChange={operator => onChange({
-					...item,
-					operator,
-				})}
-			/>
-		</div>
-
-		<div className="flex-grow basis-1 flex flex-col gap-2">
-			{
-				values.map((value, index) => (
-					<React.Fragment key={index}>
-						{!field.codes || field.allowFreeValue ? <TextInput
-							value={value}
-							onChange={value => handleValueChange(value, index)}
-							placeholder={index === 0 ? "値を入力..." : "値を追加..."}
-						/> : <CodeSelect
-							codes={field.codes}
-							value={value}
-							onChange={value => handleValueChange(value ?? "", index)}
-						/>}
-					</React.Fragment>
-				))
-			}
-		</div>
-
-
-		<IconButton className="p-2" icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
-	</div>;
+	);
 }

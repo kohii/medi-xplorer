@@ -173,9 +173,9 @@ export default function Page() {
 							</div>
 						</div>
 					</div>
-					{filteredData && <div className="text-sm text-gray-500 p-2 px-4">
+					{filteredData && (<div className="text-sm text-gray-500 p-2 px-4">
 						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
-					</div>}
+					</div>)}
 				</div>
 				<div style={{ gridRow: 2 }} className="px-2">
 					{
@@ -193,11 +193,11 @@ export default function Page() {
 					}
 				</div>
 			</div>
-			{selectedCode && !isLoading && <Drawer title={codeToRow.has(selectedCode) ? getValue(codeToRow.get(selectedCode)!, nameField) : ""} onClose={select}>
+			{selectedCode && !isLoading && (<Drawer title={codeToRow.has(selectedCode) ? getValue(codeToRow.get(selectedCode)!, nameField) : ""} onClose={select}>
 				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} rows={data!} /> : <div className="flex items-center justify-center h-full">
 					No data found for code {selectedCode}
 				</div>}
-			</Drawer>}
+			</Drawer>)}
 			{advancedSearchOpen && <AdvancedSearchFormModal query={queryInputValue} onChange={updateQuery} onClose={() => setAdvancedSearchOpen(false)} />}
 		</div>
 	);

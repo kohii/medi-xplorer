@@ -1,13 +1,12 @@
-import NextLink from "next/link";
+import NextLink, { LinkProps as NextLinkProps } from "next/link";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 
 type LinkProps = {
 	children: React.ReactNode;
 	className?: string;
-	href: string;
 	target?: string;
-	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
-};
+} & Pick<NextLinkProps, "href">;
 
 export function Link({ children, className, ...rest }: LinkProps) {
 	return (
