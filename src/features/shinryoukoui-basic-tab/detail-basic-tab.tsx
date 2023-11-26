@@ -33,6 +33,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</div>
 				}
 			</section>
+
 			<section>
 				<SectionHeading>告示等識別区分</SectionHeading>
 				<HStack>
@@ -44,6 +45,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</SplitChip>
 				</HStack>
 			</section>
+
 			<section>
 				<SectionHeading>算定可能な状況</SectionHeading>
 				<HStack>
@@ -61,29 +63,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</SplitChip>
 				</HStack>
 			</section >
-			{getValue(row, getField("注加算/注加算コード")!) !== "0" && <section>
-				<SectionHeading>注加算</SectionHeading>
-				<HStack>
-					<SplitChip label="注加算コード">
-						{getValue(row, getField("注加算/注加算コード")!)}
-					</SplitChip>
-					<SplitChip label="注加算通番">
-						{getValue(row, getField("注加算/注加算通番")!)}
-					</SplitChip>
-				</HStack>
-				<UncontrolledToggle
-					label="同じ注加算コードの診療行為..."
-					className="my-1 mt-2"
-				>
-					{(open) => open && <ChuukasanList
-						rows={rows}
-						chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
-						shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
-					/>
-					}
-				</UncontrolledToggle>
-			</section>
-			}
+
 			<section>
 				<SectionHeading>点数</SectionHeading>
 				<HStack>
@@ -95,6 +75,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</SplitChip>
 				</HStack>
 			</section>
+
 			<section>
 				<SectionHeading>記録</SectionHeading>
 				<HStack>
@@ -103,7 +84,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 							getValue(row, getField("点数欄集計先識別（入院外）")!)
 						))}
 					</SplitChip>
-					<SplitChip label="点数欄集計先識別（入院）">
+					<SplitChip label="点数欄集計先識/別（入院）">
 						{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
 							getValue(row, getField("点数欄集計先識別（入院）")!)
 						))}
@@ -115,6 +96,32 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</SplitChip>
 				</HStack>
 			</section>
+
+			{getValue(row, getField("注加算/注加算コード")!) !== "0" && (
+				<section>
+					<SectionHeading>注加算</SectionHeading>
+					<HStack>
+						<SplitChip label="注加算コード">
+							{getValue(row, getField("注加算/注加算コード")!)}
+						</SplitChip>
+						<SplitChip label="注加算通番">
+							{getValue(row, getField("注加算/注加算通番")!)}
+						</SplitChip>
+					</HStack>
+					<UncontrolledToggle
+						label="同じ注加算コードの診療行為..."
+						className="my-1 mt-2"
+					>
+						{(open) => open && <ChuukasanList
+							rows={rows}
+							chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
+							shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
+						/>
+						}
+					</UncontrolledToggle>
+				</section>
+			)}
+
 			{getValue(row, getField("検査等実施判断区分")!) !== "0" && <section>
 				<SectionHeading>検査等実施判断</SectionHeading>
 				<HStack>
@@ -169,4 +176,3 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 function emptyToHyphen(value: string | undefined): string {
 	return value ? value : "-";
 }
-
