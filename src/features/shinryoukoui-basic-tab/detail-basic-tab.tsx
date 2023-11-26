@@ -5,13 +5,10 @@ import { SectionHeading } from "../../app/s/section-heading";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 import { ChuukasanList } from "./chuukasan-list";
 import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
-import { Toggle } from "@/components/toggle";
-import { useState } from "react";
+import { Toggle, UncontrolledToggle } from "@/components/toggle";
 import { ColorChip } from "@/components/color-chip";
-import { stringifyQuery } from "../search/stringify-query";
 import { Link } from "@/components/link";
 import { ShinryoukouiList } from "./shinryoukoui-list";
-import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -19,7 +16,6 @@ export type DetailBasicTabProps = {
 };
 
 export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
-	const [chuukasanListOpen, setChuukasanListOpen] = useState(false);
 	const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
 	return (
 		<>
@@ -67,19 +63,17 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<SplitChip label="注加算通番">
 					{getValue(row, getField("注加算/注加算通番")!)}
 				</SplitChip>
-				<Toggle
+				<UncontrolledToggle
 					label="同じ注加算コードの診療行為..."
 					className="my-1"
-					open={chuukasanListOpen}
-					onToggle={setChuukasanListOpen}
-				/>
-				{chuukasanListOpen && <div className="p-2">
-					<ChuukasanList
+				>
+					{(open) => open && <ChuukasanList
 						rows={rows}
 						chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
 						shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
 					/>
-				</div>}
+					}
+				</UncontrolledToggle>
 			</section>
 			}
 			<section>
@@ -116,8 +110,11 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<SplitChip label="検査等実施判断グループ区分">
 					{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
 				</SplitChip>
-				{getValue(row, getField("検査等実施判断区分")!) === "2" && <div className="mt-1">
-					<Link href={`s?q=` + encodeURIComponent(stringifyQuery([{
+				{getValue(row, getField("検査等実施判断区分")!) === "2" && <UncontrolledToggle
+					label="対応する検査等の実施料..."
+					className="my-1"
+				>
+					{(open) => open && <ShinryoukouiList rows={rows} filter={[{
 						fieldKey: "検査等実施判断区分",
 						operator: ":",
 						value: "1",
@@ -127,28 +124,27 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						operator: ":",
 						value: getValue(row, getField("検査等実施判断グループ区分")!),
 						negative: false,
-					}]))}
-						className="text-blue-600"
-					>
-						対応する検査等の実施料
-					</Link>
-				</div>}
+					}]} />}
+				</UncontrolledToggle>
+				}
 				{getValue(row, getField("検査等実施判断区分")!) === "1" && (
 					<>
-						<div className="mt-2 mb-1 font-medium text-slate-500">
+						<div className="mt-2 m font-medium text-slate-500">
 							対応する判断料・診断料
 						</div>
-						<ShinryoukouiList rows={rows} filter={[{
-							fieldKey: "検査等実施判断区分",
-							operator: ":",
-							value: "2",
-							negative: false,
-						}, {
-							fieldKey: "検査等実施判断グループ区分",
-							operator: ":",
-							value: getValue(row, getField("検査等実施判断グループ区分")!),
-							negative: false,
-						}]} />
+						<div className="py-2">
+							<ShinryoukouiList rows={rows} filter={[{
+								fieldKey: "検査等実施判断区分",
+								operator: ":",
+								value: "2",
+								negative: false,
+							}, {
+								fieldKey: "検査等実施判断グループ区分",
+								operator: ":",
+								value: getValue(row, getField("検査等実施判断グループ区分")!),
+								negative: false,
+							}]} />
+						</div>
 					</>)}
 			</section>}
 		</>
