@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { FieldName, getField, getFieldBySeq } from "@/app/s/shinryoukoui-master-fields";
 import { Button } from "@/components/button";
@@ -10,8 +10,7 @@ import { stringifyQuery } from "../search/stringify-query";
 import { FieldFilterItem, FilterItem } from "../search/types";
 
 import { AdvancedSearchForm, AdvancedSearchParams } from "./advanced-search-form";
-import { AdvancedSearchItem } from "./advanced-search-item-form";
-import { AdvancedSearchOperatorKind } from "./constants";
+import { AdvancedSearchItem, AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";
 
 
 
@@ -86,10 +85,11 @@ export function AdvancedSearchFormModal({
 }
 
 function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): AdvancedSearchItem | undefined {
+	const [value, ...restValues] = filterItem.operator === ":" ? filterItem.value.split(",").filter(Boolean) : [filterItem.value];
 	const operatorKind: AdvancedSearchOperatorKind = (() => {
 		if (!filterItem.negative) {
 			switch (filterItem.operator) {
-				case ":": return "in";
+				case ":": return restValues.length > 0 ? "in" : "eq";
 				case ":>": return "gt";
 				case ":>=": return "gte";
 				case ":<": return "lt";
@@ -97,7 +97,7 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 			}
 		}
 		switch (filterItem.operator) {
-			case ":": return "not-in";
+			case ":": return restValues.length > 0 ? "not-in" : "not-eq";
 			case ":>": return "lte";
 			case ":>=": return "lt";
 			case ":<": return "gte";
@@ -108,8 +108,6 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 	const field = getField(filterItem.fieldKey as FieldName) ?? getFieldBySeq(+filterItem.fieldKey);
 	if (!field) return undefined;
 
-	const [value, ...restValues] = filterItem.operator === ":" ? filterItem.value.split(",").filter(Boolean) : [filterItem.value];
-
 	return {
 		field: field.name as FieldName,
 		operatorKind,
@@ -119,49 +117,6 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 }
 
 function convertAdvancedSearchItemToFilterItem(item: AdvancedSearchItem): FieldFilterItem {
-	const values = (item.restValues ? [item.value, ...item.restValues] : [item.value]).map(value => value.trim()).filter(Boolean);
-	switch (item.operatorKind) {
-		case "in":
-			return {
-				fieldKey: item.field,
-				operator: ":",
-				value: values.join(","),
-				negative: false,
-			} as const;
-		case "not-in":
-			return {
-				fieldKey: item.field,
-				operator: ":",
-				value: values.join(","),
-				negative: true,
-			} as const;
-		case "gt":
-			return {
-				fieldKey: item.field,
-				operator: ":>",
-				value: item.value.trim(),
-				negative: false,
-			} as const;
-		case "gte":
-			return {
-				fieldKey: item.field,
-				operator: ":>=",
-				value: item.value.trim(),
-				negative: false,
-			} as const;
-		case "lt":
-			return {
-				fieldKey: item.field,
-				operator: ":<",
-				value: item.value.trim(),
-				negative: false,
-			} as const;
-		case "lte":
-			return {
-				fieldKey: item.field,
-				operator: ":<=",
-				value: item.value.trim(),
-				negative: false,
-			} as const;
-	}
+	const option = advancedSearchOperatorOptions.find(option => option.kind === item.operatorKind)!;
+	return option.toFieldFilterItem(item);
 }

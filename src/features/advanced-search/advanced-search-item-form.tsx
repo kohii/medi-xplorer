@@ -7,7 +7,7 @@ import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
 
 import { CodeSelect } from "./code-select";
-import { AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";
+import { AdvancedSearchItem, AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
 
 const operatorOptions = advancedSearchOperatorOptions.map(option => ({
@@ -15,12 +15,6 @@ const operatorOptions = advancedSearchOperatorOptions.map(option => ({
 	value: option.kind,
 }));
 
-export type AdvancedSearchItem = {
-	field: FieldName;
-	operatorKind: AdvancedSearchOperatorKind;
-	value: string;
-	restValues?: string[];
-};
 
 type AdvancedSearchItemFormProps = {
 	item: AdvancedSearchItem;
