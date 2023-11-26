@@ -1,69 +1,70 @@
-'use client';
+"use client";
 import { useQuery } from "@tanstack/react-query";
-import { getMasterData } from "./get-master-data";
-import { Field } from "@/features/fields/types";
-import { getField, getFields } from "./shinryoukoui-master-fields";
-import { DataTable, DataTableColumn } from "@/features/tables/data-table";
-import { TextInput } from "@/components/text-input";
+import { useSearchParams } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
-import { getValue } from "@/features/fields/get-values";
-import { Loading } from "@/components/loading";
-import { Drawer } from "@/components/drawer";
-import { Detail } from "./detail";
 
-import { useSearchParams } from 'next/navigation'
-import { parseQuery } from "@/features/search/parse-query";
-import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
-import { filterShinryoukouiRows } from "@/features/search/filter-rows";
-import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
-import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
-import { useStateFromProp } from "@/hooks/use-state-from-props";
-import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
-import { formatDate } from "@/utils/format-data";
-import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
-import { getCodeLabel } from "@/features/fields/get-code-label";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { Drawer } from "@/components/drawer";
+import { Loading } from "@/components/loading";
+import { TextInput } from "@/components/text-input";
+import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
+import { getCodeLabel } from "@/features/fields/get-code-label";
+import { getValue } from "@/features/fields/get-values";
+import { Field } from "@/features/fields/types";
+import { filterShinryoukouiRows } from "@/features/search/filter-rows";
+import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
+import { parseQuery } from "@/features/search/parse-query";
+import { DataTable, DataTableColumn } from "@/features/tables/data-table";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import { useStateFromProp } from "@/hooks/use-state-from-props";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { formatDate } from "@/utils/format-data";
 import { alphabetToNumber } from "@/utils/text";
+
+import { Detail } from "./detail";
+import { getMasterData } from "./get-master-data";
+import { getField, getFields } from "./shinryoukoui-master-fields";
 import { getKubunBangouColor } from "./shinryoukoui-master-utils";
+import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 
 const codeField = getField("診療行為コード")!;
 const nameField = getField("診療行為省略名称/省略漢字名称")!;
 const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
 
 const columns: DataTableColumn[] = [{
-	name: '区分番号',
+	name: "区分番号",
 	value: row => {
 		const v = shinryoukouiMasterVirtualFields.区分番号.value(row);
-		return v === "-" ? "-" : <ColorChip color={getKubunBangouColor(v)}>{v}</ColorChip>
+		return v === "-" ? "-" : <ColorChip color={getKubunBangouColor(v)}>{v}</ColorChip>;
 	},
 	width: 88,
 }, {
-	name: '診療行為コード',
+	name: "診療行為コード",
 	value: row => getValue(row, codeField),
 	width: 120,
 }, {
-	name: '診療行為名称',
-	value: row => getValue(row, getField('診療行為省略名称/省略漢字名称')!),
+	name: "診療行為名称",
+	value: row => getValue(row, getField("診療行為省略名称/省略漢字名称")!),
 }, {
-	name: '告示等識別区分',
+	name: "告示等識別区分",
 	value: row => {
 		const value = getValue(row, kokujiShikibetsuField);
 		const label = getCodeLabel(value, kokujiShikibetsuField, true);
-		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>
+		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>;
 	},
 	width: 128,
 }, {
-	name: '点数',
+	name: "点数",
 	value: row => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
 	width: 112,
 }, {
-	name: '変更日',
-	value: row => formatDate(getValue(row, getField('変更年月日')!)),
+	name: "変更日",
+	value: row => formatDate(getValue(row, getField("変更年月日")!)),
 	width: 112,
-}]
+}];
 
 export default function Page() {
-	const searchParams = useSearchParams()
+	const searchParams = useSearchParams();
 	const updateSearchParams = useUpdateSearchParams();
 
 	const query = searchParams.get("q") ?? "";
@@ -93,7 +94,7 @@ export default function Page() {
 
 	const filterExpression = useMemo(() => {
 		const r = parseQuery(query);
-		if (r.kind === 'ERROR') {
+		if (r.kind === "ERROR") {
 			return r;
 		}
 		return normalizeFilterExpression(r.value);
@@ -103,13 +104,13 @@ export default function Page() {
 		const code = row ? getValue(row, getField("診療行為コード")!) : undefined;
 		updateSearchParams({
 			code,
-		})
+		});
 	}, [updateSearchParams]);
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["s"],
 		queryFn: getMasterData,
-	})
+	});
 	if (error) {
 		throw error;
 	}
@@ -131,7 +132,7 @@ export default function Page() {
 		if (!data) {
 			return undefined;
 		}
-		if (filterExpression.kind === 'ERROR') {
+		if (filterExpression.kind === "ERROR") {
 			return undefined;
 		}
 		return filterShinryoukouiRows(data, filterExpression.value);
@@ -160,7 +161,7 @@ export default function Page() {
 									placeholder="検索"
 									autoFocus
 								/>
-								{filterExpression.kind === 'ERROR' && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
+								{filterExpression.kind === "ERROR" && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
 							</div>
 							<div className="mt-1">
 								<a href="" className="text-sm text-blue-500" onClick={e => {
@@ -199,5 +200,5 @@ export default function Page() {
 			</Drawer>}
 			{advancedSearchOpen && <AdvancedSearchFormModal query={queryInputValue} onChange={updateQuery} onClose={() => setAdvancedSearchOpen(false)} />}
 		</div>
-	)
+	);
 }

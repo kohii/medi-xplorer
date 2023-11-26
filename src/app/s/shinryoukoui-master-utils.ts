@@ -2,7 +2,7 @@ import { getNthColorChipColor } from "@/components/color-chip";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
-import { alphabetToNumber, trimDecimalZero } from "@/utils/text"
+import { alphabetToNumber, trimDecimalZero } from "@/utils/text";
 
 export function formatPoint(
 	pointType: string,

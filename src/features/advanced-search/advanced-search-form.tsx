@@ -1,38 +1,41 @@
 import { FormItem } from "@/components/form-item";
-import { FieldName } from "../../app/s/shinryoukoui-master-fields";
-import { FieldSelect } from "./field-select";
-import { TextInput } from "@/components/text-input";
 import { FormLabel } from "@/components/form-label";
+import { TextInput } from "@/components/text-input";
+
+import { FieldName } from "../../app/s/shinryoukoui-master-fields";
+
 import { AdvancedSearchItem, AdvancedSearchItemForm } from "./advanced-search-item-form";
+import { FieldSelect } from "./field-select";
+
 
 export const advancedSearchOperatorOptions = [{
-	label: 'が次のいずれかに一致する',
-	operator: ':',
+	label: "が次のいずれかに一致する",
+	operator: ":",
 	negative: false,
 }, {
-	label: 'が次のいずれでもない',
-	operator: ':',
+	label: "が次のいずれでもない",
+	operator: ":",
 	negative: true,
 }, {
-	label: 'が次より大きい',
-	operator: '>',
+	label: "が次より大きい",
+	operator: ">",
 	negative: false,
 }, {
-	label: 'が次以上',
-	operator: '>=',
+	label: "が次以上",
+	operator: ">=",
 	negative: false,
 }, {
-	label: 'が次より小さい',
-	operator: '<',
+	label: "が次より小さい",
+	operator: "<",
 	negative: false,
 }, {
-	label: 'が次以下',
-	operator: '<=',
+	label: "が次以下",
+	operator: "<=",
 	negative: false,
 }] as const;
 
 
-type OperatorLabel = typeof advancedSearchOperatorOptions[number]['label'];
+type OperatorLabel = typeof advancedSearchOperatorOptions[number]["label"];
 
 export type AdvancedSearchParams = {
 	keyword: string;
@@ -55,11 +58,11 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
 				{
 					field,
 					operator: advancedSearchOperatorOptions[0].label,
-					value: '',
+					value: "",
 				},
 			],
 		});
-	}
+	};
 
 	return (<div>
 		<FormItem >

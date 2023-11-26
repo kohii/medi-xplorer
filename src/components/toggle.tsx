@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronRightIcon } from "./icons/chevron-right-icon";
 import { twMerge } from "tailwind-merge";
+
+import { ChevronRightIcon } from "./icons/chevron-right-icon";
 
 type ToggleProps = {
 	label: string;
@@ -29,5 +30,5 @@ export function UncontrolledToggle({ label, className, children }: UncontrolledT
 	return <>
 		<Toggle label={label} className={className} open={open} onToggle={setOpen} />
 		{open && <div className="ml-4 my-2">{children(open)}</div>}
-	</>
+	</>;
 }

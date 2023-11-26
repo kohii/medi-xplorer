@@ -1,6 +1,8 @@
-import { isNumeric, toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/text";
-import { getValue } from "../fields/get-values";
 import { FieldName, getField } from "@/app/s/shinryoukoui-master-fields";
+import { isNumeric, toHalfWidth, toHalfWidthKatakana, toKatakana } from "@/utils/text";
+
+import { getValue } from "../fields/get-values";
+
 import { NormalizedFilterExpression, NormalizedFilterItem } from "./normalize-filter-expression";
 
 const codeField = getField("診療行為コード")!;
@@ -20,32 +22,32 @@ export function filterShinryoukouiRows(rows: string[][], expression: NormalizedF
 }
 
 export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem): boolean {
-	if ('field' in item) {
+	if ("field" in item) {
 		const value = getValue(row, item.field);
 		if (value == null) return false;
 		if (item.operator == ":") return item.listValue.includes(value);
 
-		const numValue = item.field.mode === 'numeric' ? +value : null;
+		const numValue = item.field.mode === "numeric" ? +value : null;
 		if (numValue != null && item.numValue != null) {
 			switch (item.operator) {
-				case ':>':
+				case ":>":
 					return numValue > item.numValue;
-				case ':<':
+				case ":<":
 					return numValue < item.numValue;
-				case ':>=':
+				case ":>=":
 					return numValue >= item.numValue;
-				case ':<=':
+				case ":<=":
 					return numValue <= item.numValue;
 			}
 		} else {
 			switch (item.operator) {
-				case ':>':
+				case ":>":
 					return value > item.value;
-				case ':<':
+				case ":<":
 					return value < item.value;
-				case ':>=':
+				case ":>=":
 					return value >= item.value;
-				case ':<=':
+				case ":<=":
 					return value <= item.value;
 			}
 		}

@@ -1,9 +1,11 @@
-import { FilterableSelect } from "@/components/filterable-select";
-import { Field } from "../fields/types"
 import { useMemo } from "react";
 
+import { FilterableSelect } from "@/components/filterable-select";
+
+import { Field } from "../fields/types";
+
 type CodeSelectProps = {
-	codes: NonNullable<Field['codes']>;
+	codes: NonNullable<Field["codes"]>;
 	value: string;
 	onChange: (value: string | null) => void;
 }

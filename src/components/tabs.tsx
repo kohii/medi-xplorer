@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { useCallback } from "react";
+import { twMerge } from "tailwind-merge";
 
 export type TabsProps<T extends string = string> = {
 	value: T;
@@ -40,5 +40,5 @@ export function Tabs<T extends string = string>({
 				</ul>
 			</div>
 		</>
-	)
+	);
 }

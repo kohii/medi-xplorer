@@ -1,5 +1,5 @@
-import NextLink from 'next/link';
-import { twMerge } from 'tailwind-merge';
+import NextLink from "next/link";
+import { twMerge } from "tailwind-merge";
 
 type LinkProps = {
 	children: React.ReactNode;

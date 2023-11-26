@@ -1,6 +1,7 @@
-import { FieldName, shinryokouiMasterFields } from '@/app/s/shinryoukoui-master-fields';
-import { FilterableSelect } from '@/components/filterable-select';
-import React from 'react';
+import React from "react";
+
+import { FieldName, shinryokouiMasterFields } from "@/app/s/shinryoukoui-master-fields";
+import { FilterableSelect } from "@/components/filterable-select";
 
 type Props<IsNullable extends boolean> = {
 	value: IsNullable extends true ? FieldName | null : FieldName;

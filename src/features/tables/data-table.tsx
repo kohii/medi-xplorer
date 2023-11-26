@@ -6,11 +6,12 @@ import {
 	Row,
 	SortingState,
 	useReactTable,
-} from '@tanstack/react-table'
-import { useVirtual } from '@tanstack/react-virtual';
-import React from 'react';
-import { BreakLine } from '@/components/break-line';
-import { twMerge } from 'tailwind-merge'
+} from "@tanstack/react-table";
+import { useVirtual } from "@tanstack/react-virtual";
+import React from "react";
+import { twMerge } from "tailwind-merge";
+
+import { BreakLine } from "@/components/break-line";
 
 
 export type DataTableColumn = {
@@ -40,12 +41,12 @@ export const DataTable = React.memo(function DataTable({
 				id: col.name,
 				accessorFn: row => col.value(row),
 				cell: (info) => col.value(info.row.original),
-				header: () => <BreakLine value={col.name.replace('/', '/\n')} />,
+				header: () => <BreakLine value={col.name.replace("/", "/\n")} />,
 				size: col.width,
-			}))
+			}));
 		},
 		[columns]
-	)
+	);
 
 	const table = useReactTable({
 		data,
@@ -57,19 +58,19 @@ export const DataTable = React.memo(function DataTable({
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true,
-	})
+	});
 
-	const tableContainerRef = React.useRef<HTMLDivElement>(null)
-	const { rows } = table.getRowModel()
+	const tableContainerRef = React.useRef<HTMLDivElement>(null);
+	const { rows } = table.getRowModel();
 	const rowVirtualizer = useVirtual({
 		parentRef: tableContainerRef,
 		size: rows.length,
 		overscan: 10,
-	})
+	});
 
-	const { virtualItems: virtualRows, totalSize } = rowVirtualizer
+	const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
 
-	const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+	const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
 	const paddingBottom =
 		virtualRows.length > 0
 			? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
@@ -90,14 +91,14 @@ export const DataTable = React.memo(function DataTable({
 										colSpan={header.colSpan}
 										// style={{ width: header.getSize() }}
 										style={{ width: header.column.columnDef.size }}
-										className={`text-left text-sm px-1 pt-2 pb-3 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? 'pl-2' : ''}`}
+										className={`text-left text-sm px-1 pt-2 pb-3 h-10 ${headerGroupIndex === 0 && headerIndex === 0 ? "pl-2" : ""}`}
 									>
 										{header.isPlaceholder ? null : (
 											<div
 												{...{
 													className: header.column.getCanSort()
-														? 'cursor-pointer select-none'
-														: '',
+														? "cursor-pointer select-none"
+														: "",
 													onClick: header.column.getToggleSortingHandler(),
 												}}
 											>
@@ -106,13 +107,13 @@ export const DataTable = React.memo(function DataTable({
 													header.getContext()
 												)}
 												{{
-													asc: ' 🔼',
-													desc: ' 🔽',
+													asc: " 🔼",
+													desc: " 🔽",
 												}[header.column.getIsSorted() as string] ?? null}
 											</div>
 										)}
 									</th>
-								)
+								);
 							})}
 						</tr>
 					))}
@@ -124,7 +125,7 @@ export const DataTable = React.memo(function DataTable({
 						</tr>
 					)}
 					{virtualRows.map(virtualRow => {
-						const row = rows[virtualRow.index] as Row<string[]>
+						const row = rows[virtualRow.index] as Row<string[]>;
 						return (
 							<tr
 								key={row.id}
@@ -134,18 +135,18 @@ export const DataTable = React.memo(function DataTable({
 								{row.getVisibleCells().map((cell, cellIndex) => {
 									return (
 										<td key={cell.id} className={twMerge(
-											'p-1 h-10',
-											cellIndex === 0 ? 'pl-2 rounded-l' : ''
+											"p-1 h-10",
+											cellIndex === 0 ? "pl-2 rounded-l" : ""
 										)}>
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()
 											)}
 										</td>
-									)
+									);
 								})}
 							</tr>
-						)
+						);
 					})}
 					{paddingBottom > 0 && (
 						<tr>
@@ -155,5 +156,5 @@ export const DataTable = React.memo(function DataTable({
 				</tbody>
 			</table>
 		</div>
-	)
+	);
 });

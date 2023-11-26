@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
-import Link from "next/link";
+
 import { getValue } from "../fields/get-values";
 
 type ShinryoukouiLabelProps = {
@@ -14,12 +16,12 @@ export function ShinryoukouiLabel({ row }: ShinryoukouiLabelProps) {
 		updateSearchParams({
 			code,
 		});
-	}
+	};
 
 	return <Link href={`/s?code=${code}`} onClick={(e) => {
 		e.preventDefault();
 		handleRowClick(code);
 	}}>
 		{code} {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
-	</Link>
+	</Link>;
 }

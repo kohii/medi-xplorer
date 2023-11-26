@@ -4,53 +4,53 @@ import { Field, FieldGroup } from "@/features/fields/types";
 
 const fieldGroups = [
 	{
-		name: '診療行為省略名称',
-		description: '出力紙レセプト等に出力する名称（省略名称）を設定する。',
+		name: "診療行為省略名称",
+		description: "出力紙レセプト等に出力する名称（省略名称）を設定する。",
 	},
 	{
-		name: 'データ規格名',
+		name: "データ規格名",
 		description: `データ規格コードの名称（単位）を設定する。
 		データ規格コードの名称は「別紙４－１」のとおりであ
 		る。`,
 	},
 	{
-		name: '新又は現点数',
+		name: "新又は現点数",
 	},
 	{
-		name: 'きざみ値',
+		name: "きざみ値",
 	},
 	{
-		name: '上限回数',
+		name: "上限回数",
 	},
 	{
-		name: '注加算',
+		name: "注加算",
 	},
 	{
-		name: '上下限年齢',
+		name: "上下限年齢",
 	},
 	{
-		name: '基準適合識別',
+		name: "基準適合識別",
 	},
 	{
-		name: '旧点数'
+		name: "旧点数"
 	},
 	{
-		name: '施設基準①～⑩',
-		description: '施設基準を要する診療行為に、先頭から最大１０項目まで施設基準コードを設定する。'
+		name: "施設基準①～⑩",
+		description: "施設基準を要する診療行為に、先頭から最大１０項目まで施設基準コードを設定する。"
 	},
 	{
-		name: 'コード表用番号（アルファベット部を除く）',
+		name: "コード表用番号（アルファベット部を除く）",
 		description: `医科点数表の章、部、区分番号（アルファベット部は除く。）及び項番に基づき設定する。
 
 		コード表用番号の設定は「別紙７－１２」のとおりである。`,
 	},
 	{
-		name: '告示・通知関連番号（アルファベット部を除く）',
+		name: "告示・通知関連番号（アルファベット部を除く）",
 		description: `医科点数表に規定する診療行為を準用する場合、準用元の項番９０から９４の「コード表用番号（アルファベット部は除く。）」を設定する。
 		準用項目以外の場合：未使用`,
 	},
 	{
-		name: '年齢加算①',
+		name: "年齢加算①",
 		description: `当該診療行為に算定可能な年齢に関する注加算の診療行為コードを表し、最大４つまでの年齢範囲を設定する。
 
 		数字２桁以外の設定値は、以下を用いる。
@@ -70,7 +70,7 @@ const fieldGroups = [
 		注加算診療行為コード②：「１６０１８６０７０ 乳幼児加算（心カテ）（左心）（３歳未満）」`,
 	},
 	{
-		name: '年齢加算②',
+		name: "年齢加算②",
 		description: `当該診療行為に算定可能な年齢に関する注加算の診療行為コードを表し、最大４つまでの年齢範囲を設定する。
 
 		数字２桁以外の設定値は、以下を用いる。
@@ -90,7 +90,7 @@ const fieldGroups = [
 		注加算診療行為コード②：「１６０１８６０７０ 乳幼児加算（心カテ）（左心）（３歳未満）」`,
 	},
 	{
-		name: '年齢加算③',
+		name: "年齢加算③",
 		description: `当該診療行為に算定可能な年齢に関する注加算の診療行為コードを表し、最大４つまでの年齢範囲を設定する。
 
 		数字２桁以外の設定値は、以下を用いる。
@@ -110,7 +110,7 @@ const fieldGroups = [
 		注加算診療行為コード②：「１６０１８６０７０ 乳幼児加算（心カテ）（左心）（３歳未満）」`,
 	},
 	{
-		name: '年齢加算④',
+		name: "年齢加算④",
 		description: `当該診療行為に算定可能な年齢に関する注加算の診療行為コードを表し、最大４つまでの年齢範囲を設定する。
 
 		数字２桁以外の設定値は、以下を用いる。
@@ -130,13 +130,13 @@ const fieldGroups = [
 		注加算診療行為コード②：「１６０１８６０７０ 乳幼児加算（心カテ）（左心）（３歳未満）」`,
 	}
 ] as const satisfies readonly FieldGroup[];
-type FieldGroupName = typeof fieldGroups[number]['name'];
+type FieldGroupName = typeof fieldGroups[number]["name"];
 
 export const shinryokouiMasterFields = [
 	{
 		seq: 1,
-		name: '変更区分',
-		mode: 'numeric',
+		name: "変更区分",
+		mode: "numeric",
 		description: `レコードの異動状況を表す。
 
 	０：前マスターの内容と同じであることを表す。
@@ -148,67 +148,67 @@ export const shinryokouiMasterFields = [
 	「９：廃止」は、当該コードが使用できなくなったことを表す。
 	次回のマスター更新時に、当該コードを削除する`,
 		codes: [
-			{ code: '0', name: '変更なし' },
-			{ code: '1', name: '抹消' },
-			{ code: '3', name: '新規' },
-			{ code: '5', name: '変更' },
-			{ code: '9', name: '廃止' },
+			{ code: "0", name: "変更なし" },
+			{ code: "1", name: "抹消" },
+			{ code: "3", name: "新規" },
+			{ code: "5", name: "変更" },
+			{ code: "9", name: "廃止" },
 		],
 	}, {
 		seq: 2,
-		name: 'マスター種別',
-		mode: 'alphanumeric',
+		name: "マスター種別",
+		mode: "alphanumeric",
 		description: ` 「Ｓ」を設定する。
 		（医科診療行為マスターであることを表す。）`,
 	}, {
 		seq: 3,
-		name: '診療行為コード',
-		mode: 'numeric',
-		description: '1桁目: 診療行為コードを表す「１」を設定する。\n2桁目以降: 診療行為ごとに重複しない番号を設定する。',
+		name: "診療行為コード",
+		mode: "numeric",
+		description: "1桁目: 診療行為コードを表す「１」を設定する。\n2桁目以降: 診療行為ごとに重複しない番号を設定する。",
 	}, {
 		seq: 4,
-		name: '診療行為省略名称/省略漢字有効桁数',
-		mode: 'numeric',
-		description: '項番５「省略漢字名称」の文字数を表す。',
+		name: "診療行為省略名称/省略漢字有効桁数",
+		mode: "numeric",
+		description: "項番５「省略漢字名称」の文字数を表す。",
 	}, {
 		seq: 5,
-		name: '診療行為省略名称/省略漢字名称',
-		mode: 'text',
-		description: '漢字：３２文字',
+		name: "診療行為省略名称/省略漢字名称",
+		mode: "text",
+		description: "漢字：３２文字",
 	}, {
 		seq: 6,
-		name: '診療行為省略名称/省略カナ有効桁数',
-		mode: 'numeric',
-		description: '項番７「省略カナ名称」の文字数を表す。',
+		name: "診療行為省略名称/省略カナ有効桁数",
+		mode: "numeric",
+		description: "項番７「省略カナ名称」の文字数を表す。",
 	}, {
 		seq: 7,
-		name: '診療行為省略名称/省略カナ名称',
-		mode: 'text',
-		description: '半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。'
+		name: "診療行為省略名称/省略カナ名称",
+		mode: "text",
+		description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。"
 	}, {
 		seq: 8,
-		name: 'データ規格コード',
-		mode: 'numeric',
+		name: "データ規格コード",
+		mode: "numeric",
 		description: `記録条件仕様に規定する診療行為レコードの「数量データ」欄に（以下、「数量データ」という。）記録が必要な診療行為の算定単位を表す。
 数量データの記録が不要な診療行為は、「０」を設定する。
 
 データ規格コードの単位コードは「別紙４－１」のとおりである。`
 	}, {
 		seq: 9,
-		name: 'データ規格名/漢字有効桁数',
-		mode: 'numeric',
+		name: "データ規格名/漢字有効桁数",
+		mode: "numeric",
 		description: `項番１０「漢字名称」の文字数を表す。
 		未使用の場合：「０」を設定する。`,
 	}, {
 		seq: 10,
-		name: 'データ規格名/漢字名称',
-		mode: 'text',
+		name: "データ規格名/漢字名称",
+		mode: "text",
 		description: `漢字：６文字
 			未使用の場合：省略`,
 	}, {
 		seq: 11,
-		name: '新又は現点数/点数識別',
-		mode: 'numeric',
+		name: "新又は現点数/点数識別",
+		mode: "numeric",
 		description: `項番１２「新又は現点数」に設定した点数等の種別を表す。
 １：金額
 ３：点数（プラス）
@@ -219,87 +219,87 @@ export const shinryokouiMasterFields = [
 ８：点数（マイナス）
 点数識別の詳細は「別紙７－１」のとおりである。`,
 		codes: [{
-			code: '1',
-			name: '金額'
+			code: "1",
+			name: "金額"
 		}, {
-			code: '3',
-			name: '点数（プラス）'
+			code: "3",
+			name: "点数（プラス）"
 		}, {
-			code: '4',
-			name: '購入価格（点数）'
+			code: "4",
+			name: "購入価格（点数）"
 		}, {
-			code: '5',
-			name: '％加算'
+			code: "5",
+			name: "％加算"
 		}, {
-			code: '6',
-			name: '％減算'
+			code: "6",
+			name: "％減算"
 		}, {
-			code: '7',
-			name: '減点診療行為'
+			code: "7",
+			name: "減点診療行為"
 		}, {
-			code: '8',
-			name: '点数（マイナス）'
+			code: "8",
+			name: "点数（マイナス）"
 		}]
 	}, {
 		seq: 12,
-		name: '新又は現点数/新又は現点数',
-		mode: 'numeric',
-		description: `整数部「７桁」、小数点「１桁」及び小数部「２桁」の組み合わせで設定する。`
+		name: "新又は現点数/新又は現点数",
+		mode: "numeric",
+		description: "整数部「７桁」、小数点「１桁」及び小数部「２桁」の組み合わせで設定する。"
 	},
 	{
 		seq: 13,
-		name: '入外適用区分',
-		mode: 'numeric',
+		name: "入外適用区分",
+		mode: "numeric",
 		description: `当該診療行為を記録可能なレセプトの種別（入院又は入院
 外）を表す。
 ０：「１」及び「２」以外の診療行為
 ０：「１」及び「２」以１：入院レセプトに限り記録可能な診療行為
 ０：「１」及び「２」以２：入院外レセプトに限り記録可能な診療行為`,
 		codes: [{
-			code: '0',
-			name: '「１」及び「２」以外の診療行為',
-			alias: '共通',
+			code: "0",
+			name: "「１」及び「２」以外の診療行為",
+			alias: "共通",
 		}, {
-			code: '1',
-			name: '入院レセプトに限り記録可能な診療行為',
-			alias: '入院のみ',
+			code: "1",
+			name: "入院レセプトに限り記録可能な診療行為",
+			alias: "入院のみ",
 		}, {
-			code: '2',
-			name: '入院外レセプトに限り記録可能な診療行為',
-			alias: '入院外のみ',
+			code: "2",
+			name: "入院外レセプトに限り記録可能な診療行為",
+			alias: "入院外のみ",
 		}]
 	}, {
 		seq: 14,
-		name: '後期高齢者医療適用区分',
-		mode: 'numeric',
+		name: "後期高齢者医療適用区分",
+		mode: "numeric",
 		description: `当該診療行為の保険適用区分（医療保険又は後期高齢者医療）を表す。
 ０：「１」及び「２」以外の診療行為
 １：医療保険に限り適用される診療行為
 ２：後期高齢者医療に限り適用される診療行為`,
 		codes: [{
-			code: '0',
-			name: '「１」及び「２」以外の診療行為',
-			alias: '共通',
+			code: "0",
+			name: "「１」及び「２」以外の診療行為",
+			alias: "共通",
 		}, {
-			code: '1',
-			name: '医療保険に限り適用される診療行為',
-			alias: '医療保険のみ',
+			code: "1",
+			name: "医療保険に限り適用される診療行為",
+			alias: "医療保険のみ",
 		}, {
-			code: '2',
-			name: '後期高齢者医療に限り適用される診療行為',
-			alias: '後期高齢者医療のみ',
+			code: "2",
+			name: "後期高齢者医療に限り適用される診療行為",
+			alias: "後期高齢者医療のみ",
 		}],
 	},
 	{
 		seq: 15,
-		name: '点数欄集計先識別（入院外）',
-		mode: 'numeric',
-		description: `入院外レセプトの点数欄に集計する診療行為の集計先を表し、入院外レセプトに使用する診療行為以外は「０」を設定する。点数欄集計先コードは「別紙７－２」のとおりである。`
+		name: "点数欄集計先識別（入院外）",
+		mode: "numeric",
+		description: "入院外レセプトの点数欄に集計する診療行為の集計先を表し、入院外レセプトに使用する診療行為以外は「０」を設定する。点数欄集計先コードは「別紙７－２」のとおりである。"
 	},
 	{
 		seq: 16,
-		name: '包括対象検査',
-		mode: 'numeric',
+		name: "包括対象検査",
+		mode: "numeric",
 		description: `検査の項目数に応じて点数を算定する包括対象の診療行為であるか否かを表す。
 ０：「１」から「１４」以外の診療行為
 １：血液化学検査の包括項目
@@ -317,55 +317,55 @@ export const shinryokouiMasterFields = [
 １５：悪性腫瘍遺伝子検査（血液・血漿）（ＲＯＳ１融合遺伝子検査、ＡＬＫ融合遺伝子検査、ＥＧＦＲ遺伝子検査（血漿））
 １６：悪性腫瘍遺伝子検査（血液・血漿）（ＭＥＴｅｘ１４遺伝子検査、ＮＴＲＫ融合遺伝子検査）`,
 		codes: [{
-			code: '0',
-			name: '「１」から「１４」以外の診療行為'
+			code: "0",
+			name: "「１」から「１４」以外の診療行為"
 		}, {
-			code: '1',
-			name: '血液化学検査の包括項目'
+			code: "1",
+			name: "血液化学検査の包括項目"
 		}, {
-			code: '2',
-			name: '内分泌学的検査の包括項目',
+			code: "2",
+			name: "内分泌学的検査の包括項目",
 		}, {
-			code: '3',
-			name: '肝炎ウイルス関連検査の包括項目'
+			code: "3",
+			name: "肝炎ウイルス関連検査の包括項目"
 		}, {
-			code: '5',
-			name: '腫瘍マーカーの包括項目'
+			code: "5",
+			name: "腫瘍マーカーの包括項目"
 		}, {
-			code: '6',
-			name: '出血・凝固検査の包括項目'
+			code: "6",
+			name: "出血・凝固検査の包括項目"
 		}, {
-			code: '7',
-			name: '自己抗体検査の包括項目'
+			code: "7",
+			name: "自己抗体検査の包括項目"
 		}, {
-			code: '8',
-			name: '内分泌負荷試験の包括項目'
+			code: "8",
+			name: "内分泌負荷試験の包括項目"
 		}, {
-			code: '9',
-			name: '感染症免疫学的検査のうち、ウイルス抗体価（定性・半定量・定量）'
+			code: "9",
+			name: "感染症免疫学的検査のうち、ウイルス抗体価（定性・半定量・定量）"
 		}, {
-			code: '10',
-			name: '感染症免疫学的検査のうち、グロブリンクラス別ウイルス抗体価'
+			code: "10",
+			name: "感染症免疫学的検査のうち、グロブリンクラス別ウイルス抗体価"
 		}, {
-			code: '11',
-			name: '血漿蛋白免疫学的検査のうち、特異的ＩｇＥ半定量・定量'
+			code: "11",
+			name: "血漿蛋白免疫学的検査のうち、特異的ＩｇＥ半定量・定量"
 		}, {
-			code: '13',
-			name: '悪性腫瘍遺伝子検査（処理が容易なもの）'
+			code: "13",
+			name: "悪性腫瘍遺伝子検査（処理が容易なもの）"
 		}, {
-			code: '14',
-			name: '悪性腫瘍遺伝子検査（処理が複雑なもの）'
+			code: "14",
+			name: "悪性腫瘍遺伝子検査（処理が複雑なもの）"
 		}, {
-			code: '15',
-			name: '悪性腫瘍遺伝子検査（血液・血漿）（ＲＯＳ１融合遺伝子検'
+			code: "15",
+			name: "悪性腫瘍遺伝子検査（血液・血漿）（ＲＯＳ１融合遺伝子検"
 		}, {
-			code: '16',
-			name: '悪性腫瘍遺伝子検査（血液・血漿）（ＭＥＴｅｘ１４遺伝子検'
+			code: "16",
+			name: "悪性腫瘍遺伝子検査（血液・血漿）（ＭＥＴｅｘ１４遺伝子検"
 		}]
 	}, {
 		seq: 18,
-		name: 'ＤＰＣ適用区分',
-		mode: 'numeric',
+		name: "ＤＰＣ適用区分",
+		mode: "numeric",
 		description: `診断群分類（ＤＰＣ）点数表に規定する点数に含まれる診療行為であるか否かを表す。
 ０：診断群分類（ＤＰＣ）点数表に規定する点数に含まれる診療行為（包括評価対象）
 １：ＤＰＣレセプトの出来高部分で算定可能な診療行為
@@ -374,55 +374,55 @@ export const shinryokouiMasterFields = [
 ４：ＤＰＣ専用（専門病院が使用する診療行為）
 ９：診断群分類（ＤＰＣ）点数表の適用外となる診療行為（包括評価対象外）`,
 		codes: [{
-			code: '0',
-			name: '診断群分類（ＤＰＣ）点数表に規定する点数に含まれる診療行為（包括評価対象）'
+			code: "0",
+			name: "診断群分類（ＤＰＣ）点数表に規定する点数に含まれる診療行為（包括評価対象）"
 		}, {
-			code: '1',
-			name: 'ＤＰＣレセプトの出来高部分で算定可能な診療行為'
+			code: "1",
+			name: "ＤＰＣレセプトの出来高部分で算定可能な診療行為"
 		}, {
-			code: '2',
-			name: 'ＤＰＣ専用（特定機能病院が使用する診療行為）'
+			code: "2",
+			name: "ＤＰＣ専用（特定機能病院が使用する診療行為）"
 		}, {
-			code: '3',
-			name: 'ＤＰＣ専用（「２」及び「４」以外の診療行為）'
+			code: "3",
+			name: "ＤＰＣ専用（「２」及び「４」以外の診療行為）"
 		}, {
-			code: '4',
-			name: 'ＤＰＣ専用（専門病院が使用する診療行為）'
+			code: "4",
+			name: "ＤＰＣ専用（専門病院が使用する診療行為）"
 		}, {
-			code: '9',
-			name: '診断群分類（ＤＰＣ）点数表の適用外となる診療行為（包括評価対象外）'
+			code: "9",
+			name: "診断群分類（ＤＰＣ）点数表の適用外となる診療行為（包括評価対象外）"
 		}]
 	},
 	{
 		seq: 19,
-		name: '病院・診療所区分',
-		mode: 'numeric',
+		name: "病院・診療所区分",
+		mode: "numeric",
 		description: `当該診療行為の適用範囲が病院又は診療所であるか否か、また、ＤＰＣ対象病院に適用されない診療行為かを表す。
 ０：「１」から「４」以外の診療行為
 １：病院に限り適用される診療行為
 ２：診療所に限り適用される診療行為
 ４：短期滞在手術等基本料３`,
 		codes: [{
-			code: '0',
-			name: '「１」から「４」以外の診療行為',
-			alias: '共通',
+			code: "0",
+			name: "「１」から「４」以外の診療行為",
+			alias: "共通",
 		}, {
-			code: '1',
-			name: '病院に限り適用される診療行為',
-			alias: '病院のみ',
+			code: "1",
+			name: "病院に限り適用される診療行為",
+			alias: "病院のみ",
 		}, {
-			code: '2',
-			name: '診療所に限り適用される診療行為',
-			alias: '診療所のみ',
+			code: "2",
+			name: "診療所に限り適用される診療行為",
+			alias: "診療所のみ",
 		}, {
-			code: '4',
-			name: '短期滞在手術等基本料３',
-			alias: '短手3',
+			code: "4",
+			name: "短期滞在手術等基本料３",
+			alias: "短手3",
 		}]
 	}, {
 		seq: 20,
-		name: '画像等手術支援加算',
-		mode: 'numeric',
+		name: "画像等手術支援加算",
+		mode: "numeric",
 		description: `画像等手術支援加算を算定可能な診療行為であるか否かを表す。
 ＜基本項目、合成項目、準用項目＞
 ０：「１」から「６」以外の診療行為
@@ -685,13 +685,13 @@ export const shinryokouiMasterFields = [
 		seq: 33,
 		name: "きざみ値/きざみ値",
 		mode: "numeric",
-		description: `項番３４「きざみ点数」を適用する数量データの単位を表す。`,
+		description: "項番３４「きざみ点数」を適用する数量データの単位を表す。",
 	},
 	{
 		seq: 34,
 		name: "きざみ値/きざみ点数",
 		mode: "numeric",
-		description: `整数部「７桁」、小数点「１桁」及び小数部「２桁」の組み合わせで設定する。`,
+		description: "整数部「７桁」、小数点「１桁」及び小数部「２桁」の組み合わせで設定する。",
 	},
 	{
 		seq: 35,
@@ -770,7 +770,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する通則加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -778,7 +778,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する通則加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -786,7 +786,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する注加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -794,7 +794,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する通則加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -802,7 +802,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する通則加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -810,7 +810,7 @@ export const shinryokouiMasterFields = [
 				name: "年齢に関する注加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -933,7 +933,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」から「７」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -941,7 +941,7 @@ export const shinryokouiMasterFields = [
 				name: "時間外加算等を算定可能な診療行為（「合成項目」を含む。）",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -949,7 +949,7 @@ export const shinryokouiMasterFields = [
 				name: "初診料の休日加算に係る診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -957,7 +957,7 @@ export const shinryokouiMasterFields = [
 				name: "深夜加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -965,7 +965,7 @@ export const shinryokouiMasterFields = [
 				name: "時間外特例加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -973,7 +973,7 @@ export const shinryokouiMasterFields = [
 				name: "夜間・早朝加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -981,7 +981,7 @@ export const shinryokouiMasterFields = [
 				name: "夜間加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -989,7 +989,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」から「９」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -997,7 +997,7 @@ export const shinryokouiMasterFields = [
 				name: "時間外加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1005,7 +1005,7 @@ export const shinryokouiMasterFields = [
 				name: "休日加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1013,7 +1013,7 @@ export const shinryokouiMasterFields = [
 				name: "初診料の休日加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1021,7 +1021,7 @@ export const shinryokouiMasterFields = [
 				name: "深夜加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1029,7 +1029,7 @@ export const shinryokouiMasterFields = [
 				name: "時間外特例加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1037,7 +1037,7 @@ export const shinryokouiMasterFields = [
 				name: "夜間・早朝加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1045,7 +1045,7 @@ export const shinryokouiMasterFields = [
 				name: "夜間加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1053,7 +1053,7 @@ export const shinryokouiMasterFields = [
 				name: "時間外、深夜、時間外特例加算（手術又は１，０００ 点以上の処置）（注加算又は通則加算）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1061,7 +1061,7 @@ export const shinryokouiMasterFields = [
 				name: "休日加算（手術又は１，０００点以上の処置）（注加算又は通則加算）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1126,7 +1126,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」から「５」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1134,7 +1134,7 @@ export const shinryokouiMasterFields = [
 				name: "３歳未満乳幼児加算（処置）（１１０点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1142,7 +1142,7 @@ export const shinryokouiMasterFields = [
 				name: "３歳未満乳幼児加算（処置）（５５点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1150,7 +1150,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（１１０点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1158,7 +1158,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（８３点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1166,7 +1166,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（５５点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1174,7 +1174,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」から「５」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1182,7 +1182,7 @@ export const shinryokouiMasterFields = [
 				name: "３歳未満乳幼児加算（処置）（１１０点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1190,7 +1190,7 @@ export const shinryokouiMasterFields = [
 				name: "３歳未満乳幼児加算（処置）（５５点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1198,7 +1198,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（１１０点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1206,7 +1206,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（８３点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1214,7 +1214,7 @@ export const shinryokouiMasterFields = [
 				name: "６歳未満乳幼児加算（処置）（５５点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1241,7 +1241,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1249,7 +1249,7 @@ export const shinryokouiMasterFields = [
 				name: "極低出生体重児加算（手術）（４００％）又は新生児加算（手術）（３００％）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1257,7 +1257,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1265,7 +1265,7 @@ export const shinryokouiMasterFields = [
 				name: "極低出生体重児加算（手術）（４００％）又は新生児加算（手術）（３００％）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1510,7 +1510,7 @@ export const shinryokouiMasterFields = [
 				name: "逓減計算の対象とならない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1518,7 +1518,7 @@ export const shinryokouiMasterFields = [
 				name: "逓減計算の対象となる診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1526,7 +1526,7 @@ export const shinryokouiMasterFields = [
 				name: "逓減コード以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1534,7 +1534,7 @@ export const shinryokouiMasterFields = [
 				name: "逓減コード自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1562,7 +1562,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1570,7 +1570,7 @@ export const shinryokouiMasterFields = [
 				name: "脊髄誘発電位測定等加算（１ 脳、脊椎、脊髄、大動脈瘤又は食道の手術に用いた場合）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1578,7 +1578,7 @@ export const shinryokouiMasterFields = [
 				name: "脊髄誘発電位測定等加算（２ 甲状腺又は副甲状腺の手術に用いた場合）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1586,7 +1586,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1594,7 +1594,7 @@ export const shinryokouiMasterFields = [
 				name: "脊髄誘発電位測定等加算（１ 脳、脊椎、脊髄、大動脈瘤又は食道の手術に用いた場合）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1602,7 +1602,7 @@ export const shinryokouiMasterFields = [
 				name: "脊髄誘発電位測定等加算（２ 甲状腺又は副甲状腺の手術に用いた場合）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1628,7 +1628,7 @@ export const shinryokouiMasterFields = [
 				name: "頸部郭清術併施加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1636,7 +1636,7 @@ export const shinryokouiMasterFields = [
 				name: "頸部郭清術併施加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1644,7 +1644,7 @@ export const shinryokouiMasterFields = [
 				name: "頸部郭清術併施加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1652,7 +1652,7 @@ export const shinryokouiMasterFields = [
 				name: "頸部郭清術併施加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1680,7 +1680,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算又は自動縫合器加算（左心耳閉鎖用クリップ使用）を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1688,7 +1688,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1696,7 +1696,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算（左心耳閉鎖用クリップ使用）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1704,7 +1704,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算又は自動縫合器加算（左心耳閉鎖用クリップ使用）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1712,7 +1712,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算又は自動縫合器加算（左心耳閉鎖用クリップ使用）以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1720,7 +1720,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1728,7 +1728,7 @@ export const shinryokouiMasterFields = [
 				name: "自動縫合器加算（左心耳閉鎖用クリップ使用）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1754,7 +1754,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1762,7 +1762,7 @@ export const shinryokouiMasterFields = [
 				name: "外来管理加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1770,7 +1770,7 @@ export const shinryokouiMasterFields = [
 				name: "外来管理加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			}]
 	},
@@ -1935,7 +1935,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波内視鏡加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1943,7 +1943,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波内視鏡加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -1951,7 +1951,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波内視鏡加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -1959,7 +1959,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波内視鏡加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -1967,7 +1967,7 @@ export const shinryokouiMasterFields = [
 		seq: 65,
 		name: "予備",
 		mode: "numeric",
-		description: `未使用：「０」を設定する。`,
+		description: "未使用：「０」を設定する。",
 	},
 	{
 		seq: 66,
@@ -1999,7 +1999,7 @@ export const shinryokouiMasterFields = [
 				name: "自動吻合器加算（５，５００点）を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2007,7 +2007,7 @@ export const shinryokouiMasterFields = [
 				name: "自動吻合器加算（５，５００点）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2015,7 +2015,7 @@ export const shinryokouiMasterFields = [
 				name: "自動吻合器加算（５，５００点）以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2023,7 +2023,7 @@ export const shinryokouiMasterFields = [
 				name: "自動吻合器加算（５，５００点）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2289,7 +2289,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波凝固切開装置等加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2297,7 +2297,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波凝固切開装置等加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2305,7 +2305,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波凝固切開装置等加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2313,7 +2313,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波凝固切開装置等加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2377,7 +2377,7 @@ export const shinryokouiMasterFields = [
 		seq: 87,
 		name: "変更年月日",
 		mode: "date",
-		description: `当該診療行為の情報に変更等が生じた場合、適用となる日付を西暦年「４桁」、月「２桁」及び日「２桁」の８桁で表す。`,
+		description: "当該診療行為の情報に変更等が生じた場合、適用となる日付を西暦年「４桁」、月「２桁」及び日「２桁」の８桁で表す。",
 	},
 	{
 		seq: 88,
@@ -2391,67 +2391,67 @@ export const shinryokouiMasterFields = [
 		seq: 89,
 		name: "公表順序番号",
 		mode: "numeric",
-		description: `項番９０から９４の「コード表用番号」による順序番号を設定する。`,
+		description: "項番９０から９４の「コード表用番号」による順序番号を設定する。",
 	},
 	{
 		seq: 90,
 		name: "コード表用番号（アルファベット部を除く）/章",
 		mode: "numeric",
-		description: ``,
+		description: "",
 	},
 	{
 		seq: 91,
 		name: "コード表用番号（アルファベット部を除く）/部",
 		mode: "numeric",
-		description: ``,
+		description: "",
 	},
 	{
 		seq: 92,
 		name: "コード表用番号（アルファベット部を除く）/区分番号",
 		mode: "numeric",
-		description: ``,
+		description: "",
 	},
 	{
 		seq: 93,
 		name: "コード表用番号（アルファベット部を除く）/枝番",
 		mode: "numeric",
-		description: ``,
+		description: "",
 	},
 	{
 		seq: 94,
 		name: "コード表用番号（アルファベット部を除く）/項番",
 		mode: "numeric",
-		description: ``,
+		description: "",
 	},
 	{
 		seq: 95,
 		name: "告示・通知関連番号（アルファベット部を除く）/章",
 		mode: "numeric",
-		description: `未使用の場合：「０」を設定する。`,
+		description: "未使用の場合：「０」を設定する。",
 	},
 	{
 		seq: 96,
 		name: "告示・通知関連番号（アルファベット部を除く）/部",
 		mode: "numeric",
-		description: `未使用の場合：「００」を設定する。`,
+		description: "未使用の場合：「００」を設定する。",
 	},
 	{
 		seq: 97,
 		name: "告示・通知関連番号（アルファベット部を除く）/区分番号",
 		mode: "numeric",
-		description: `未使用の場合：「０００」を設定する。`,
+		description: "未使用の場合：「０００」を設定する。",
 	},
 	{
 		seq: 98,
 		name: "告示・通知関連番号（アルファベット部を除く）/枝番",
 		mode: "numeric",
-		description: `未使用の場合：「００」を設定する。`,
+		description: "未使用の場合：「００」を設定する。",
 	},
 	{
 		seq: 99,
 		name: "告示・通知関連番号（アルファベット部を除く）/項番",
 		mode: "numeric",
-		description: `未使用の場合：「００」を設定する。`,
+		description: "未使用の場合：「００」を設定する。",
 	},
 	{
 		seq: 100,
@@ -2497,7 +2497,7 @@ export const shinryokouiMasterFields = [
 		seq: 102,
 		name: "年齢加算①/注加算診療行為コード",
 		mode: "numeric",
-		description: `年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。`,
+		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
 		seq: 100,
@@ -2543,7 +2543,7 @@ export const shinryokouiMasterFields = [
 		seq: 102,
 		name: "年齢加算②/注加算診療行為コード",
 		mode: "numeric",
-		description: `年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。`,
+		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
 		seq: 100,
@@ -2589,7 +2589,7 @@ export const shinryokouiMasterFields = [
 		seq: 102,
 		name: "年齢加算③/注加算診療行為コード",
 		mode: "numeric",
-		description: `年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。`,
+		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
 		seq: 100,
@@ -2635,13 +2635,13 @@ export const shinryokouiMasterFields = [
 		seq: 102,
 		name: "年齢加算④/注加算診療行為コード",
 		mode: "numeric",
-		description: `年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。`,
+		description: "年齢に関する注加算の診療行為コードを記録する。未使用の場合：「０」を設定する。",
 	},
 	{
 		seq: 112,
 		name: "異動関連",
 		mode: "numeric",
-		description: `診療報酬改定等において、診療行為の統合又は細分化等があった場合、従前の診療行為コードを設定する。`,
+		description: "診療報酬改定等において、診療行為の統合又は細分化等があった場合、従前の診療行為コードを設定する。",
 	},
 	{
 		seq: 113,
@@ -2672,7 +2672,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用内視鏡加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2680,7 +2680,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用内視鏡加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2688,7 +2688,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用内視鏡加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2696,7 +2696,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用内視鏡加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2722,7 +2722,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用骨軟部組織切除機器加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2730,7 +2730,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用骨軟部組織切除機器加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2738,7 +2738,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用骨軟部組織切除機器加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2746,7 +2746,7 @@ export const shinryokouiMasterFields = [
 				name: "副鼻腔手術用骨軟部組織切除機器加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2772,7 +2772,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2780,7 +2780,7 @@ export const shinryokouiMasterFields = [
 				name: "長時間麻酔管理加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2788,7 +2788,7 @@ export const shinryokouiMasterFields = [
 				name: "Ｌ００８に掲げるマスク又は気管内挿管による閉鎖循環式全身麻酔の実施時間が８時間を超え、長時間麻酔管理加算を算定する場合に実施している必要がある手術",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2796,7 +2796,7 @@ export const shinryokouiMasterFields = [
 				name: "長時間麻酔管理加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2804,7 +2804,7 @@ export const shinryokouiMasterFields = [
 				name: "長時間麻酔管理加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2837,7 +2837,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2845,7 +2845,7 @@ export const shinryokouiMasterFields = [
 				name: "非侵襲的血行動態モニタリング加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2853,7 +2853,7 @@ export const shinryokouiMasterFields = [
 				name: "非侵襲的血行動態モニタリング加算を算定する場合に実施している必要がある手術",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2861,7 +2861,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「３」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2869,7 +2869,7 @@ export const shinryokouiMasterFields = [
 				name: "非侵襲的血行動態モニタリング加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2877,7 +2877,7 @@ export const shinryokouiMasterFields = [
 				name: "術中脳灌流モニタリング加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2900,7 +2900,7 @@ export const shinryokouiMasterFields = [
 				name: "凍結保存同種組織加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2908,7 +2908,7 @@ export const shinryokouiMasterFields = [
 				name: "凍結保存同種組織加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2916,7 +2916,7 @@ export const shinryokouiMasterFields = [
 				name: "凍結保存同種組織加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2924,7 +2924,7 @@ export const shinryokouiMasterFields = [
 				name: "凍結保存同種組織加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2947,7 +2947,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2955,7 +2955,7 @@ export const shinryokouiMasterFields = [
 				name: "悪性腫瘍病理組織標本加算を算定する場合に実施している必要がある診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -2963,7 +2963,7 @@ export const shinryokouiMasterFields = [
 				name: "悪性腫瘍病理組織標本加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -2971,7 +2971,7 @@ export const shinryokouiMasterFields = [
 				name: "悪性腫瘍病理組織標本加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -2994,7 +2994,7 @@ export const shinryokouiMasterFields = [
 				name: "創外固定器加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3002,7 +3002,7 @@ export const shinryokouiMasterFields = [
 				name: "創外固定器加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3010,7 +3010,7 @@ export const shinryokouiMasterFields = [
 				name: "創外固定器加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3018,7 +3018,7 @@ export const shinryokouiMasterFields = [
 				name: "創外固定器加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -3041,7 +3041,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波切削機器加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3049,7 +3049,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波切削機器加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3057,7 +3057,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波切削機器加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3065,7 +3065,7 @@ export const shinryokouiMasterFields = [
 				name: "超音波切削機器加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -3127,7 +3127,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」及び「２」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3135,7 +3135,7 @@ export const shinryokouiMasterFields = [
 				name: "外来感染対策向上加算等（医学管理料等）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3143,7 +3143,7 @@ export const shinryokouiMasterFields = [
 				name: "外来感染対策向上加算等（在宅医療）を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3151,7 +3151,7 @@ export const shinryokouiMasterFields = [
 				name: "「１」から「６」以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3159,7 +3159,7 @@ export const shinryokouiMasterFields = [
 				name: "外来感染対策向上加算（医学管理料等）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3167,7 +3167,7 @@ export const shinryokouiMasterFields = [
 				name: "連携強化加算（医学管理料等）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3175,7 +3175,7 @@ export const shinryokouiMasterFields = [
 				name: "サーベイランス強化加算（医学管理料等）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3183,7 +3183,7 @@ export const shinryokouiMasterFields = [
 				name: "外来感染対策向上加算（在宅医療）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3191,7 +3191,7 @@ export const shinryokouiMasterFields = [
 				name: "連携強化加算（在宅医療）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3199,7 +3199,7 @@ export const shinryokouiMasterFields = [
 				name: "サーベイランス強化加算（在宅医療）自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -3220,7 +3220,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科乳幼児処置加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3228,7 +3228,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科乳幼児処置加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3236,7 +3236,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科乳幼児処置加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3244,7 +3244,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科乳幼児処置加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -3267,7 +3267,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科小児抗菌薬適正使用支援加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3275,7 +3275,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科小児抗菌薬適正使用支援加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3283,7 +3283,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科小児抗菌薬適正使用支援加算以外の診療行為",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			},
 			{
@@ -3291,7 +3291,7 @@ export const shinryokouiMasterFields = [
 				name: "耳鼻咽喉科小児抗菌薬適正使用支援加算自体",
 				condition: {
 					seq: 68,
-					value: ['7', '9']
+					value: ["7", "9"]
 				}
 			}]
 	},
@@ -3311,7 +3311,7 @@ export const shinryokouiMasterFields = [
 				name: "切開創局所陰圧閉鎖処置機器加算を算定できない診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3319,7 +3319,7 @@ export const shinryokouiMasterFields = [
 				name: "切開創局所陰圧閉鎖処置機器加算を算定可能な診療行為",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			},
 			{
@@ -3327,7 +3327,7 @@ export const shinryokouiMasterFields = [
 				name: "切開創局所陰圧閉鎖処置機器加算自体",
 				condition: {
 					seq: 68,
-					value: ['1', '3', '5']
+					value: ["1", "3", "5"]
 				}
 			}]
 	}
@@ -3335,7 +3335,7 @@ export const shinryokouiMasterFields = [
 
 type ShinryokouiMasterFields = typeof shinryokouiMasterFields;
 
-export type FieldName = ShinryokouiMasterFields[number]['name'];
+export type FieldName = ShinryokouiMasterFields[number]["name"];
 
 const nameToField = new Map<FieldName, Field>(
 	shinryokouiMasterFields.map(field => [field.name, field])

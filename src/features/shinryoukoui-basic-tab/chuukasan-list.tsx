@@ -1,11 +1,13 @@
-import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { getValue } from "../fields/get-values";
-import { useMemo } from "react";
-import { getCodeLabel } from "../fields/get-code-label";
-import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import Link from "next/link";
-import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { useMemo } from "react";
+
+import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
+import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+
+import { getValue } from "../fields/get-values";
+
 
 export type ChuukasanListProps = {
 	rows: string[][];
@@ -39,7 +41,7 @@ export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight
 		updateSearchParams({
 			code,
 		});
-	}
+	};
 
 	return (
 		<table className="w-full text-sm border border-slate-200">
@@ -85,5 +87,5 @@ export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight
 				})}
 			</tbody>
 		</table>
-	)
+	);
 }

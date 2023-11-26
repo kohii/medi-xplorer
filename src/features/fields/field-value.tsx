@@ -1,7 +1,8 @@
+import { formatDate } from "@/utils/format-data";
+
 import { getCodeLabel } from "./get-code-label";
 import { getValue } from "./get-values";
 import { Field } from "./types";
-import { formatDate } from "@/utils/format-data";
 
 type FieldValueProps = {
 	field: Field;
@@ -11,7 +12,7 @@ type FieldValueProps = {
 
 export function FieldValue({ field, row, raw }: FieldValueProps) {
 	const value = getValue(row, field);
-	if (!raw && field.mode === 'date') {
+	if (!raw && field.mode === "date") {
 		return formatDate(value);
 	}
 
@@ -23,7 +24,7 @@ export function FieldValue({ field, row, raw }: FieldValueProps) {
 				<span className="text-gray-400">
 					: {label}
 				</span>
-			</>
+			</>;
 		}
 	}
 

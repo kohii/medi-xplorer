@@ -6,7 +6,7 @@ export type Field = Readonly<{
 	/** 内容 */
 	description: string;
 	/** モード */
-	mode: 'numeric' | 'text' | 'date' | 'alphanumeric';
+	mode: "numeric" | "text" | "date" | "alphanumeric";
 	/** コード定義 */
 	codes?: readonly {
 		/** コード */

@@ -1,15 +1,18 @@
-import { getValue } from "@/features/fields/get-values";
-import { getField } from "../../app/s/shinryoukoui-master-fields";
-import { SplitChip } from "@/components/split-chip";
-import { SectionHeading } from "../../app/s/section-heading";
-import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
-import { ChuukasanList } from "./chuukasan-list";
 import { formatCodeValue, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
-import { Toggle, UncontrolledToggle } from "@/components/toggle";
 import { ColorChip } from "@/components/color-chip";
-import { Link } from "@/components/link";
-import { ShinryoukouiList } from "./shinryoukoui-list";
 import { HStack } from "@/components/h-stack";
+import { Link } from "@/components/link";
+import { SplitChip } from "@/components/split-chip";
+import { Toggle, UncontrolledToggle } from "@/components/toggle";
+import { getValue } from "@/features/fields/get-values";
+
+import { SectionHeading } from "../../app/s/section-heading";
+import { getField } from "../../app/s/shinryoukoui-master-fields";
+import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
+
+import { ChuukasanList } from "./chuukasan-list";
+import { ShinryoukouiList } from "./shinryoukoui-list";
+
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -25,11 +28,11 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<div>
 					<span className="text-slate-500">{getValue(row, getField("診療行為コード")!)}</span>
 					<span className="text-slate-300 text-lg"> | </span>
-					<span className="text-lg">{getValue(row, getField('基本漢字名称')!)}</span>
+					<span className="text-lg">{getValue(row, getField("基本漢字名称")!)}</span>
 				</div>
-				{getValue(row, getField('基本漢字名称')!) !== getValue(row, getField('診療行為省略名称/省略漢字名称')!) &&
+				{getValue(row, getField("基本漢字名称")!) !== getValue(row, getField("診療行為省略名称/省略漢字名称")!) &&
 					<div className="text-sm my-1 text-slate-500">
-						略称: {getValue(row, getField('診療行為省略名称/省略漢字名称')!)}
+						略称: {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
 					</div>
 				}
 			</section>
@@ -170,7 +173,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					</>)}
 			</section>}
 		</>
-	)
+	);
 }
 
 function emptyToHyphen(value: string | undefined): string {

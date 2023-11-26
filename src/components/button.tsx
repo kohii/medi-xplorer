@@ -14,5 +14,5 @@ export function Button({
 		onClick={onClick}
 	>
 		{children}
-	</button>
+	</button>;
 }

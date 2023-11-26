@@ -17,5 +17,5 @@ export function OperatorSelect({ value, onChange, }: OperatorSelectProps) {
 			<option value="<">次より小さい</option>
 			<option value="<=">次以下</option>
 		</select>
-	)
+	);
 }

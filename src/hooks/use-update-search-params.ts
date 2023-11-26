@@ -1,4 +1,5 @@
 import { useCallback, useRef } from "react";
+
 import { useRouterFn } from "./use-router-fn";
 
 export function useUpdateSearchParams() {

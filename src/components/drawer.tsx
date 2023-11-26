@@ -1,4 +1,5 @@
 import { on } from "events";
+
 import { IconButton } from "./icon-button";
 import { CloseIcon } from "./icons/close-icon";
 import { VSplit, VSplitItem } from "./v-split";

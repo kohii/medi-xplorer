@@ -51,10 +51,10 @@ export function splitByWhitespace(s: string): string[] {
  * ```
  */
 export function trimDecimalZero(s: string): string {
-	if (s.endsWith('.00')) {
+	if (s.endsWith(".00")) {
 		return s.substring(0, s.length - 3);
 	}
-	if (s.endsWith('0')) {
+	if (s.endsWith("0")) {
 		return s.substring(0, s.length - 1);
 	}
 	return s;

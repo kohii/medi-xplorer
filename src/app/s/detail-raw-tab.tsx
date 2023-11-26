@@ -1,4 +1,5 @@
 import { FieldValue } from "@/features/fields/field-value";
+
 import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
 
 type DetailRawTabProps = {

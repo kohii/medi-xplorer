@@ -1,16 +1,18 @@
-import { useMemo } from "react";
-import { filterShinryoukouiRows } from "../search/filter-rows";
-import { FilterExpression } from "../search/types";
-import { stringifyQuery } from "../search/stringify-query";
-import { normalizeFilterExpression } from "../search/normalize-filter-expression";
-import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import Link from "next/link";
-import { getCodeLabel } from "../fields/get-code-label";
-import { getValue } from "../fields/get-values";
-import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { useMemo } from "react";
+
+import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "@/app/s/shinryoukoui-master-virtual-field";
+import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+
+import { getCodeLabel } from "../fields/get-code-label";
+import { getValue } from "../fields/get-values";
+import { filterShinryoukouiRows } from "../search/filter-rows";
+import { normalizeFilterExpression } from "../search/normalize-filter-expression";
+import { stringifyQuery } from "../search/stringify-query";
+import { FilterExpression } from "../search/types";
 
 type ShinryoukouiListProps = {
 	rows: string[][];
@@ -33,7 +35,7 @@ export function ShinryoukouiList({
 		updateSearchParams({
 			code,
 		});
-	}
+	};
 
 	return (
 		<table className="w-full text-sm border border-slate-200">
@@ -79,5 +81,5 @@ export function ShinryoukouiList({
 				})}
 			</tbody>
 		</table>
-	)
+	);
 }

@@ -1,11 +1,14 @@
-import { FieldValue } from "@/features/fields/field-value";
-import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
-import { getValue } from "@/features/fields/get-values";
-import { Tabs } from "@/components/tabs";
 import { useState } from "react";
+
+import { Tabs } from "@/components/tabs";
 import { VSplit, VSplitItem } from "@/components/v-split";
-import { DetailRawTab } from "./detail-raw-tab";
+import { FieldValue } from "@/features/fields/field-value";
+import { getValue } from "@/features/fields/get-values";
+
 import { DetailBasicTab } from "../../features/shinryoukoui-basic-tab/detail-basic-tab";
+
+import { DetailRawTab } from "./detail-raw-tab";
+import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
 
 const tabs = [{
 	label: "詳細",
@@ -13,7 +16,7 @@ const tabs = [{
 }, {
 	label: "Raw",
 	value: "raw",
-}]
+}];
 
 type DetailProps = {
 	row: string[];
