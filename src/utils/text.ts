@@ -60,7 +60,11 @@ export function trimDecimalZero(s: string): string {
 	return s;
 }
 
-/** 
+export function trimLeadingZero(s: string): string {
+	return s.replace(/^0+/, "");
+}
+
+/**
  * アルファベットを数値に変換
  * @example
  * ```

@@ -9,6 +9,7 @@ import { Toggle, UncontrolledToggle } from "@/components/toggle";
 import { ColorChip } from "@/components/color-chip";
 import { Link } from "@/components/link";
 import { ShinryoukouiList } from "./shinryoukoui-list";
+import { HStack } from "@/components/h-stack";
 
 export type DetailBasicTabProps = {
 	row: string[];
@@ -34,16 +35,18 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			</section>
 			<section>
 				<SectionHeading>告示等識別区分</SectionHeading>
-				<SplitChip label="(1)" className="mr-1" >
-					{formatCodeValue(row, getField("告示等識別区分（１）")!)}
-				</SplitChip>
-				<SplitChip label="(2)" >
-					{formatCodeValue(row, getField("告示等識別区分（２）")!)}
-				</SplitChip>
+				<HStack>
+					<SplitChip label="(1)">
+						{formatCodeValue(row, getField("告示等識別区分（１）")!)}
+					</SplitChip>
+					<SplitChip label="(2)">
+						{formatCodeValue(row, getField("告示等識別区分（２）")!)}
+					</SplitChip>
+				</HStack>
 			</section>
 			<section>
 				<SectionHeading>算定可能な状況</SectionHeading>
-				<div className="flex items-center gap-1">
+				<HStack>
 					<SplitChip label="入外適用区分">
 						{formatCodeValue(row, getField("入外適用区分")!)}
 					</SplitChip>
@@ -53,19 +56,24 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					<SplitChip label="後期高齢者医療適用区分">
 						{formatCodeValue(row, getField("後期高齢者医療適用区分")!)}
 					</SplitChip>
-				</div>
+					<SplitChip label="上下限年齢">
+						{shinryoukouiMasterVirtualFields.上下限年齢.value(row)}
+					</SplitChip>
+				</HStack>
 			</section >
 			{getValue(row, getField("注加算/注加算コード")!) !== "0" && <section>
 				<SectionHeading>注加算</SectionHeading>
-				<SplitChip label="注加算コード" className="mr-1">
-					{getValue(row, getField("注加算/注加算コード")!)}
-				</SplitChip>
-				<SplitChip label="注加算通番">
-					{getValue(row, getField("注加算/注加算通番")!)}
-				</SplitChip>
+				<HStack>
+					<SplitChip label="注加算コード">
+						{getValue(row, getField("注加算/注加算コード")!)}
+					</SplitChip>
+					<SplitChip label="注加算通番">
+						{getValue(row, getField("注加算/注加算通番")!)}
+					</SplitChip>
+				</HStack>
 				<UncontrolledToggle
 					label="同じ注加算コードの診療行為..."
-					className="my-1"
+					className="my-1 mt-2"
 				>
 					{(open) => open && <ChuukasanList
 						rows={rows}
@@ -78,38 +86,45 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			}
 			<section>
 				<SectionHeading>点数</SectionHeading>
-				<SplitChip label="点数" className="mr-1">
-					{shinryoukouiMasterVirtualFields.新又は現点数.value(row)}
-				</SplitChip>
-				<SplitChip label="旧点数">
-					{shinryoukouiMasterVirtualFields.旧点数.value(row)}
-				</SplitChip>
+				<HStack>
+					<SplitChip label="点数">
+						{shinryoukouiMasterVirtualFields.新又は現点数.value(row)}
+					</SplitChip>
+					<SplitChip label="旧点数">
+						{shinryoukouiMasterVirtualFields.旧点数.value(row)}
+					</SplitChip>
+				</HStack>
 			</section>
 			<section>
 				<SectionHeading>記録</SectionHeading>
-				<SplitChip label="点数欄集計先識別（入院外）" className="mr-1">
-					{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-						getValue(row, getField("点数欄集計先識別（入院外）")!)
-					))}
-				</SplitChip>
-				<SplitChip label="点数欄集計先識別（入院）">
-					{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-						getValue(row, getField("点数欄集計先識別（入院）")!)
-					))}
-				</SplitChip>
-				<br />
-				<SplitChip label="数量データの記録" className="mr-1">
-					{getValue(row, getField("データ規格コード")!) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称")!)})`}
-				</SplitChip>
+				<HStack>
+					<SplitChip label="点数欄集計先識別（入院外）">
+						{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
+							getValue(row, getField("点数欄集計先識別（入院外）")!)
+						))}
+					</SplitChip>
+					<SplitChip label="点数欄集計先識別（入院）">
+						{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
+							getValue(row, getField("点数欄集計先識別（入院）")!)
+						))}
+					</SplitChip>
+				</HStack>
+				<HStack className="mt-1">
+					<SplitChip label="数量データの記録">
+						{getValue(row, getField("データ規格コード")!) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称")!)})`}
+					</SplitChip>
+				</HStack>
 			</section>
 			{getValue(row, getField("検査等実施判断区分")!) !== "0" && <section>
 				<SectionHeading>検査等実施判断</SectionHeading>
-				<SplitChip label="検査等実施判断区分" className="mr-1">
-					{formatCodeValue(row, getField("検査等実施判断区分")!)}
-				</SplitChip>
-				<SplitChip label="検査等実施判断グループ区分">
-					{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
-				</SplitChip>
+				<HStack>
+					<SplitChip label="検査等実施判断区分">
+						{formatCodeValue(row, getField("検査等実施判断区分")!)}
+					</SplitChip>
+					<SplitChip label="検査等実施判断グループ区分">
+						{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
+					</SplitChip>
+				</HStack>
 				{getValue(row, getField("検査等実施判断区分")!) === "2" && <UncontrolledToggle
 					label="対応する検査等の実施料..."
 					className="my-1"

@@ -2,6 +2,7 @@ import { VirtualField } from "@/features/fields/virtual-field";
 import { getField } from "./shinryoukoui-master-fields";
 import { getValue } from "@/features/fields/get-values";
 import { formatPoint } from "./shinryoukoui-master-utils";
+import { trimLeadingZero } from "@/utils/text";
 
 const fields = {
 	"コード表用番号（アルファベット部）": getField("コード表用番号（アルファベット部）")!,
@@ -39,6 +40,43 @@ export const shinryoukouiMasterVirtualFields = {
 				getValue(row, getField('旧点数/点数識別')!),
 				getValue(row, getField('旧点数/旧点数')!),
 			);
+		},
+	},
+	"上下限年齢": {
+		name: "上下限年齢",
+		value(row: string[]) {
+			const lowerAgeField = getField('上下限年齢/下限年齢')!;
+			const upperAgeField = getField('上下限年齢/上限年齢')!;
+			const lower = getValue(row, lowerAgeField);
+			const upper = getValue(row, upperAgeField);
+
+			if (upper === "00" && lower === "00") {
+				return "-";
+			}
+			const lowerAge = (() => {
+				if (lower === "00") {
+					return "";
+				}
+				const code = lowerAgeField.codes?.find(c => c.code === lower);
+				if (code) {
+					return code.name;
+				}
+
+				return `${trimLeadingZero(lower)}歳以上`;
+			})();
+			const upperAge = (() => {
+				if (upper === "00") {
+					return "";
+				}
+				const code = upperAgeField.codes?.find(c => c.code === upper);
+				if (code) {
+					return code.name;
+				}
+
+				return `${trimLeadingZero(upper)}歳未満`;
+			})();
+
+			return `${lowerAge}〜${upperAge}`;
 		},
 	},
 } satisfies Record<string, VirtualField>;
