@@ -1,5 +1,5 @@
 import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
-import { ColorChip } from "@/components/color-chip";
+import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { SplitChip } from "@/components/split-chip";
 import { UncontrolledToggle } from "@/components/toggle";
@@ -10,6 +10,7 @@ import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master
 
 import { AgeAdditionalFeeTable } from "./age-additional-fee-table";
 import { ChuukasanTable } from "./chuukasan-table";
+import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { SectionHeading } from "./section-heading";
 import { ShinryoukouiTable } from "./shinryoukoui-table";
 import { SubHeading } from "./sub-heading";
@@ -25,7 +26,10 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 	return (
 		<>
 			<section className="mb-4">
-				{kubunBangou !== "-" && <ColorChip color={getKubunBangouColor(kubunBangou)} className="mb-2">{kubunBangou}</ColorChip>}
+				<HStack className="mb-2 gap-2">
+					{kubunBangou !== "-" && <ColorChip color={getKubunBangouColor(kubunBangou)} >{kubunBangou}</ColorChip>}
+					<KokujiShikibetsu1Chip row={row} />
+				</HStack>
 				<div>
 					<span className="text-slate-500">{getValue(row, getField("診療行為コード")!)}</span>
 					<span className="text-slate-300 text-lg"> | </span>
