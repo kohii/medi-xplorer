@@ -9,9 +9,9 @@ import { getField } from "../../app/s/shinryoukoui-master-fields";
 import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 
 import { AgeAdditionalFeeTable } from "./age-additional-fee-table";
-import { ChuukasanList } from "./chuukasan-list";
+import { ChuukasanTable } from "./chuukasan-table";
 import { SectionHeading } from "./section-heading";
-import { ShinryoukouiList } from "./shinryoukoui-list";
+import { ShinryoukouiTable } from "./shinryoukoui-table";
 import { SubHeading } from "./sub-heading";
 
 export type DetailBasicTabProps = {
@@ -117,7 +117,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 							label="同じ注加算コードの診療行為..."
 							className="mb-4 mt-2"
 						>
-							{(open) => open && (<ChuukasanList
+							{(open) => open && (<ChuukasanTable
 								rows={rows}
 								chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
 								shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
@@ -149,7 +149,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					label="対応する検査等の実施料..."
 					className="my-2"
 				>
-					{(open) => open && (<ShinryoukouiList rows={rows} filter={[{
+					{(open) => open && (<ShinryoukouiTable rows={rows} filter={[{
 						fieldKey: "検査等実施判断区分",
 						operator: ":",
 						value: "1",
@@ -168,7 +168,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 							対応する判断料・診断料
 						</SubHeading>
 						<div className="pb-2">
-							<ShinryoukouiList rows={rows} filter={[{
+							<ShinryoukouiTable rows={rows} filter={[{
 								fieldKey: "検査等実施判断区分",
 								operator: ":",
 								value: "2",

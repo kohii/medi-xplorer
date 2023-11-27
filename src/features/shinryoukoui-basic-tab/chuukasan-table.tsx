@@ -9,7 +9,7 @@ import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { getValue } from "../fields/get-values";
 
 
-export type ChuukasanListProps = {
+export type ChuukasanTableProps = {
 	rows: string[][];
 	chuukasanCode: string;
 	shinryoukouiCodeToHighlight?: string;
@@ -19,7 +19,7 @@ const chuukasanCodeField = getField("注加算/注加算コード")!;
 const chuukasanSeqField = getField("注加算/注加算通番")!;
 const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
 
-export function ChuukasanList({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanListProps) {
+export function ChuukasanTable({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanTableProps) {
 	const matchedRows = useMemo(() => {
 		const filtered = rows.filter(row => {
 			return getValue(row, chuukasanCodeField) === chuukasanCode;

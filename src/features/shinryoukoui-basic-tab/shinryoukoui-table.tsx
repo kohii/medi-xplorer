@@ -15,7 +15,7 @@ import { FilterExpression } from "../search/types";
 import { SimpleTable, SimpleTableColumn } from "./simple-table";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
-type ShinryoukouiListProps = {
+type ShinryoukouiTableProps = {
 	rows: string[][];
 	filter: FilterExpression
 };
@@ -55,10 +55,10 @@ const columns: SimpleTableColumn<string[]>[] = [{
 	render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
 }];
 
-export function ShinryoukouiList({
+export function ShinryoukouiTable({
 	rows,
 	filter,
-}: ShinryoukouiListProps) {
+}: ShinryoukouiTableProps) {
 	const matchedRows = useMemo(() => {
 		const normalizedFilter = normalizeFilterExpression(filter);
 		if (normalizedFilter.kind === "ERROR") return [];
