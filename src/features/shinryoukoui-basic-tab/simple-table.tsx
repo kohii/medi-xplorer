@@ -9,9 +9,10 @@ export type SimpleTableProps<R> = {
 	columns: SimpleTableColumn<R>[];
 	data: R[];
 	onRowClick?: (item: R) => void;
+	rowClassName?: (item: R) => string;
 };
 
-export function SimpleTable<R>({ columns, data, onRowClick }: SimpleTableProps<R>) {
+export function SimpleTable<R>({ columns, data, onRowClick, rowClassName }: SimpleTableProps<R>) {
 	return (
 		<table className="w-full text-sm border border-slate-200">
 			<thead>
@@ -28,7 +29,10 @@ export function SimpleTable<R>({ columns, data, onRowClick }: SimpleTableProps<R
 					return (
 						<tr
 							key={index}
-							className={onRowClick ? "cursor-pointer hover:bg-slate-50" : undefined}
+							className={twMerge(
+								onRowClick ? "cursor-pointer hover:bg-slate-50" : undefined,
+								rowClassName?.(row)
+							)}
 							onClick={onRowClick ? () => onRowClick(row) : undefined}
 						>
 							{columns.map((column) => (
