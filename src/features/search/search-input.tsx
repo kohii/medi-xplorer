@@ -13,7 +13,10 @@ type SearchInputProps = {
 
 export function SearchInput({ value, onChange, onSubmit }: SearchInputProps) {
 	const { push } = useRouterFn();
-	const handleSubmit = onSubmit ?? ((event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = onSubmit ? ((event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		onSubmit();
+	}) : ((event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const q = event.currentTarget.q.value;
 		push(`/s?q=${encodeURIComponent(q)}`);
