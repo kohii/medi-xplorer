@@ -318,7 +318,8 @@ export const shinryokouiMasterFields = [
 １６：悪性腫瘍遺伝子検査（血液・血漿）（ＭＥＴｅｘ１４遺伝子検査、ＮＴＲＫ融合遺伝子検査）`,
 		codes: [{
 			code: "0",
-			name: "「１」から「１４」以外の診療行為"
+			name: "「１」から「１４」以外の診療行為",
+			alias: "該当しない",
 		}, {
 			code: "1",
 			name: "血液化学検査の包括項目"
@@ -1365,6 +1366,7 @@ export const shinryokouiMasterFields = [
 			{
 				code: "0",
 				name: "「１」及び「２」以外の診療行為",
+				alias: "該当しない",
 			},
 			{
 				code: "1",
@@ -1410,6 +1412,7 @@ export const shinryokouiMasterFields = [
 			{
 				code: "0",
 				name: "「１」から「４２」以外の診療行為",
+				alias: "該当しない",
 			},
 			{
 				code: "1",
