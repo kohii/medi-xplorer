@@ -7,6 +7,7 @@ import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 
 import { getValue } from "../fields/get-values";
 
+import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { SimpleTable, SimpleTableColumn } from "./simple-table";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
@@ -46,14 +47,7 @@ const columns: SimpleTableColumn<string[]>[] = [{
 	render: (row) => getValue(row, chuukasanSeqField),
 }, {
 	name: "告示等識別区分",
-	render: (row) => {
-		const value = getValue(row, kokujiShikibetsuField);
-		return (
-			<ColorChip color={getNthColorChipColor(+value)} >
-				{formatCodeValue(row, kokujiShikibetsuField)}
-			</ColorChip>
-		);
-	},
+	render: (row) => <KokujiShikibetsu1Chip row={row} />
 }];
 
 export function ChuukasanTable({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanTableProps) {

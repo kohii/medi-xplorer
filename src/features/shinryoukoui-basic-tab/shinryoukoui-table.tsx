@@ -12,6 +12,7 @@ import { filterShinryoukouiRows } from "../search/filter-rows";
 import { normalizeFilterExpression } from "../search/normalize-filter-expression";
 import { FilterExpression } from "../search/types";
 
+import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { SimpleTable, SimpleTableColumn } from "./simple-table";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
@@ -42,14 +43,7 @@ const columns: SimpleTableColumn<string[]>[] = [{
 	},
 }, {
 	name: "告示等識別区分",
-	render: (row) => {
-		const value = getValue(row, getField("告示等識別区分（１）")!);
-		return (
-			<ColorChip color={getNthColorChipColor(+value)} >
-				{formatCodeValue(row, getField("告示等識別区分（１）")!)}
-			</ColorChip>
-		);
-	},
+	render: (row) => <KokujiShikibetsu1Chip row={row} />
 }, {
 	name: "点数",
 	render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
