@@ -32,7 +32,7 @@ export function formatPoint(
 
 export function formatCodeValue(row: string[], field: Field) {
 	const value = getValue(row, field);
-	const label = getCodeLabel(value, field, true);
+	const label = getCodeLabel(row, field, true);
 	return value + ": " + label;
 }
 

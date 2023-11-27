@@ -53,7 +53,7 @@ const columns: DataTableColumn[] = [{
 	name: "告示等識別区分",
 	value: row => {
 		const value = getValue(row, kokujiShikibetsuField);
-		const label = getCodeLabel(value, kokujiShikibetsuField, true);
+		const label = getCodeLabel(row, kokujiShikibetsuField, true);
 		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>;
 	},
 	width: 128,

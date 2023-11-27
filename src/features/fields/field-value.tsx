@@ -17,7 +17,7 @@ export function FieldValue({ field, row, raw }: FieldValueProps) {
 	}
 
 	if (field.codes) {
-		const label = getCodeLabel(value, field);
+		const label = getCodeLabel(row, field);
 		if (label) {
 			return (
 				<>
