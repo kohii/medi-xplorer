@@ -41,13 +41,13 @@ const columns: DataTableColumn[] = [{
 		const v = shinryoukouiMasterVirtualFields.区分番号.value(row);
 		return v === "-" ? "-" : <ColorChip color={getKubunBangouColor(v)}>{v}</ColorChip>;
 	},
-	width: 88,
+	width: 92,
 }, {
 	name: "診療行為コード",
 	value: row => getValue(row, codeField),
 	width: 120,
 }, {
-	name: "診療行為名称",
+	name: "名称",
 	value: row => getValue(row, getField("診療行為省略名称/省略漢字名称")!),
 }, {
 	name: "告示等識別区分",
