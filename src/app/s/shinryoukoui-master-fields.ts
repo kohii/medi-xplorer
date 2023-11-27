@@ -1755,26 +1755,14 @@ export const shinryokouiMasterFields = [
 			{
 				code: "0",
 				name: "「１」及び「２」以外の診療行為",
-				condition: {
-					seq: 68,
-					value: ["1", "3", "5"]
-				}
 			},
 			{
 				code: "1",
 				name: "外来管理加算を算定できない診療行為",
-				condition: {
-					seq: 68,
-					value: ["1", "3", "5"]
-				}
 			},
 			{
 				code: "2",
 				name: "外来管理加算自体",
-				condition: {
-					seq: 68,
-					value: ["1", "3", "5"]
-				}
 			}]
 	},
 	{
