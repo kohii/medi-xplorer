@@ -201,16 +201,8 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 									}]} />
 								</div>
 							</>)}
-					</section>)}
-
-			{getValue(row, getField("包括対象検査")!) !== "0" && (
-				<section>
-					<SectionHeading>包括対象検査</SectionHeading>
-					<SplitChip label="包括対象検査">
-						{formatCodeValue(row, getField("包括対象検査")!)}
-					</SplitChip>
-				</section>
-			)}
+					</section>
+				)}
 
 			<OthersSection row={row} />
 		</>
