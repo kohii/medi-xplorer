@@ -1,12 +1,12 @@
 import { FieldValue } from "@/features/fields/field-value";
 
-import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
+import { shinryokouiMasterFields } from "../../app/s/shinryoukoui-master-fields";
 
 type DetailRawTabProps = {
 	row: string[];
 };
 
-export function DetailRawTab({ row }: DetailRawTabProps) {
+export function ShinryoukouiRawTab({ row }: DetailRawTabProps) {
 	return (
 		<table className="border-collapse border-spacing-0 table-fixed w-full text-sm">
 			<tbody>

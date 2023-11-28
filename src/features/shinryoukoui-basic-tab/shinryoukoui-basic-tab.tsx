@@ -24,7 +24,7 @@ export type DetailBasicTabProps = {
 	rows: string[][];
 };
 
-export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
+export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 	const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
 	const ageAdditionalFeeData = getAgeAdditionalFeeData(row);
 

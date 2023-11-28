@@ -5,9 +5,9 @@ import { VSplit, VSplitItem } from "@/components/v-split";
 import { FieldValue } from "@/features/fields/field-value";
 import { getValue } from "@/features/fields/get-values";
 
-import { DetailBasicTab } from "../../features/shinryoukoui-basic-tab/detail-basic-tab";
+import { ShinryoukouiBasicTab } from "../../features/shinryoukoui-basic-tab/shinryoukoui-basic-tab";
+import { ShinryoukouiRawTab } from "../../features/shinryoukoui-raw-tab/shinryoukoui-raw-tab";
 
-import { DetailRawTab } from "./detail-raw-tab";
 import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
 
 const tabs = [{
@@ -33,8 +33,8 @@ export function Detail({ row, rows }: DetailProps) {
 				</VSplitItem>
 				<VSplitItem pos={2} overflow="auto">
 					<div className="p-4">
-						{selectedTab === "raw" && <DetailRawTab row={row} />}
-						{selectedTab === "detail" && <DetailBasicTab row={row} rows={rows} />}
+						{selectedTab === "raw" && <ShinryoukouiRawTab row={row} />}
+						{selectedTab === "detail" && <ShinryoukouiBasicTab row={row} rows={rows} />}
 					</div>
 				</VSplitItem>
 			</VSplit>

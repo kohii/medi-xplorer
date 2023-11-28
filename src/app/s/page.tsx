@@ -1,5 +1,4 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -25,7 +24,7 @@ import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
 
 import { Detail } from "./detail";
-import { getField, getFields } from "./shinryoukoui-master-fields";
+import { getField } from "./shinryoukoui-master-fields";
 import { getKubunBangouColor } from "./shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 
