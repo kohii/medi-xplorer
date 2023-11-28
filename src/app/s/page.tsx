@@ -19,7 +19,6 @@ import { normalizeFilterExpression } from "@/features/search/normalize-filter-ex
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchInput } from "@/features/search/search-input";
 import { DataTable, DataTableColumn } from "@/features/tables/data-table";
-import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { useRouterFn } from "@/hooks/use-router-fn";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
