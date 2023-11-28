@@ -5,9 +5,9 @@ import { getValue } from "../fields/get-values";
 
 import { NormalizedFilterExpression, NormalizedFilterItem } from "./normalize-filter-expression";
 
-const codeField = getField("診療行為コード")!;
-const nameField = getField("診療行為省略名称/省略漢字名称")!;
-const kanaField = getField("診療行為省略名称/省略カナ名称")!;
+const codeField = getField("診療行為コード");
+const nameField = getField("診療行為省略名称/省略漢字名称");
+const kanaField = getField("診療行為省略名称/省略カナ名称");
 
 export function filterShinryoukouiRows(rows: string[][], expression: NormalizedFilterExpression): string[][] {
 	return rows.filter(row => {
