@@ -2,7 +2,7 @@ import { FormItem } from "@/components/form-item";
 import { FormLabel } from "@/components/form-label";
 import { TextInput } from "@/components/text-input";
 
-import { FieldName } from "../../app/s/shinryoukoui-master-fields";
+import { FieldName } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { AdvancedSearchItemForm } from "./advanced-search-item-form";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";

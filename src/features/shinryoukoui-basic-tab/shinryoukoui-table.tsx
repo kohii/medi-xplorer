@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useMemo } from "react";
 
-import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
-import { shinryoukouiMasterVirtualFields } from "@/app/s/shinryoukoui-master-virtual-field";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { formatCodeValue } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
+import { shinryoukouiMasterVirtualFields } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 import { getValue } from "../fields/get-values";

@@ -1,4 +1,4 @@
-import { FieldName } from "@/app/s/shinryoukoui-master-fields";
+import { FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { FieldFilterItem } from "../search/types";
 

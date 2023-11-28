@@ -1,6 +1,6 @@
 import { FieldValue } from "@/features/fields/field-value";
 
-import { shinryokouiMasterFields } from "../../app/s/shinryoukoui-master-fields";
+import { shinryokouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 type DetailRawTabProps = {
 	row: string[];

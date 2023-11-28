@@ -1,14 +1,14 @@
-import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/app/s/shinryoukoui-master-utils";
 import { Chip } from "@/components/chip";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { SplitChip } from "@/components/split-chip";
 import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
+import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
-import { getField } from "../../app/s/shinryoukoui-master-fields";
-import { shinryoukouiMasterVirtualFields } from "../../app/s/shinryoukoui-master-virtual-field";
 import { getCodeLabel } from "../fields/get-code-label";
+import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { AgeAdditionalFeeTable } from "./age-additional-fee-table";
 import { ChuukasanTable } from "./chuukasan-table";

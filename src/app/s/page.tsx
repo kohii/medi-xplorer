@@ -23,10 +23,11 @@ import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
 
+import { getField } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getKubunBangouColor } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-utils";
+import { shinryoukouiMasterVirtualFields } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
+
 import { Detail } from "./detail";
-import { getField } from "./shinryoukoui-master-fields";
-import { getKubunBangouColor } from "./shinryoukoui-master-utils";
-import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 
 const codeField = getField("診療行為コード");
 const nameField = getField("診療行為省略名称/省略漢字名称");

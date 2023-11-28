@@ -6,9 +6,9 @@ import { FieldValue } from "@/features/fields/field-value";
 import { getValue } from "@/features/fields/get-values";
 
 import { ShinryoukouiBasicTab } from "../../features/shinryoukoui-basic-tab/shinryoukoui-basic-tab";
+import { shinryokouiMasterFields } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { ShinryoukouiRawTab } from "../../features/shinryoukoui-raw-tab/shinryoukoui-raw-tab";
 
-import { shinryokouiMasterFields } from "./shinryoukoui-master-fields";
 
 const tabs = [{
 	label: "詳細",

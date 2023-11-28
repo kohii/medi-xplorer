@@ -1,5 +1,5 @@
-import { getShisetsukijunCodeList } from "@/app/s/shinryoukoui-master-utils";
 import { useShisetsukijunData } from "@/contexts/shisetsukijun-data-context";
+import { getShisetsukijunCodeList } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
 import { SimpleTableColumn } from "./simple-table";
 import { SimpleTable } from "./simple-table";

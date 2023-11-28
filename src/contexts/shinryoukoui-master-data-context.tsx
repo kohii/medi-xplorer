@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, useMemo } from "react";
 
 import { fetchMasterData } from "@/app/apis/fetch-master-data";
-import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { getValue } from "@/features/fields/get-values";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 type ShinryoukouiMasterDataContextType = {
 	data?: string[][];

@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from "react";
 
-import { FieldName, getField } from "@/app/s/shinryoukoui-master-fields";
 import { FilterableSelect } from "@/components/filterable-select";
 import { IconButton } from "@/components/icon-button";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
+import { FieldName, getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { CodeSelect } from "./code-select";
 import { AdvancedSearchItem, AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";

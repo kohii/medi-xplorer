@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { FieldName, getField, getFieldBySeq } from "@/app/s/shinryoukoui-master-fields";
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
+import { FieldName, getField, getFieldBySeq } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { splitByWhitespace } from "@/utils/text";
 
 import { parseQuery } from "../search/parse-query";

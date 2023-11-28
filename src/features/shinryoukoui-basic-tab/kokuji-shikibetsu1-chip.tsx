@@ -1,6 +1,6 @@
-import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { formatCodeValue } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
 import { getValue } from "../fields/get-values";
 

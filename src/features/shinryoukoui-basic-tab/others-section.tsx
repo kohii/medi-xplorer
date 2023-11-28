@@ -1,6 +1,6 @@
-import { getField } from "@/app/s/shinryoukoui-master-fields";
 import { Chip } from "@/components/chip";
 import { HStack } from "@/components/h-stack";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { getCodeLabel } from "../fields/get-code-label";
 import { getValue } from "../fields/get-values";

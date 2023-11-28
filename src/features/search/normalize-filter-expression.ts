@@ -1,4 +1,4 @@
-import { getFieldBySeq, getField, FieldName } from "@/app/s/shinryoukoui-master-fields";
+import { getFieldBySeq, getField, FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth } from "@/utils/text";
 
 import { Field } from "../fields/types";

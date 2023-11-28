@@ -1,4 +1,4 @@
-import { getField } from "@/app/s/shinryoukoui-master-fields";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { isNumeric } from "@/utils/text";
 
 import { getValue } from "../fields/get-values";
