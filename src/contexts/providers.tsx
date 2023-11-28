@@ -8,13 +8,17 @@ import {
 
 import { ShinryoukouiMasterDataProvider } from "@/contexts/shinryoukoui-master-data-context";
 
+import { ShisetsukijunDataProvider } from "./shisetsukijun-data-context";
+
 const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (
 		<QueryClientProvider client={queryClient} >
 			<ShinryoukouiMasterDataProvider>
-				{children}
+				<ShisetsukijunDataProvider>
+					{children}
+				</ShisetsukijunDataProvider>
 			</ShinryoukouiMasterDataProvider>
 		</QueryClientProvider>
 	);

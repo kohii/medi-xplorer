@@ -103,7 +103,6 @@ export function getAgeRangeLabel(lower: string, upper: string) {
 	return `${lowerLabel}～${upperLabel}`;
 }
 
-
 export function getAgeAdditionalFeeData(row: string[]): {
 	age: string;
 	code: string;
@@ -132,4 +131,17 @@ export function getAgeAdditionalFeeData(row: string[]): {
 	if (!n4) return [n1, n2, n3];
 
 	return [n1, n2, n3, n4];
+}
+
+export function getShisetsukijunCodeList(row: string[]): string[] {
+	const codes: string[] = [];
+
+	const firstFieldIndex = getField("施設基準①～⑩/施設基準コード①").seq - 1;
+	for (let i = 0; i < 10; i++) {
+		const code = row[firstFieldIndex + i];
+		if (code === "0") break;
+		codes.push(code);
+	}
+
+	return codes;
 }

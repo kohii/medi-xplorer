@@ -2,8 +2,6 @@ import Link from "next/link";
 import { useMemo } from "react";
 
 import { getField } from "@/app/s/shinryoukoui-master-fields";
-import { formatCodeValue } from "@/app/s/shinryoukoui-master-utils";
-import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 
 import { getValue } from "../fields/get-values";
 

@@ -16,6 +16,7 @@ import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { OthersSection } from "./others-section";
 import { SectionHeading } from "./section-heading";
 import { ShinryoukouiTable } from "./shinryoukoui-table";
+import { ShisetsukijunList } from "./shisetsukijun-list";
 import { SubHeading } from "./sub-heading";
 
 export type DetailBasicTabProps = {
@@ -74,7 +75,8 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						{shinryoukouiMasterVirtualFields.上下限年齢.value(row)}
 					</SplitChip>
 				</HStack>
-			</section >
+				<ShisetsukijunList row={row} />
+			</section>
 
 			<section>
 				<SectionHeading>点数</SectionHeading>
