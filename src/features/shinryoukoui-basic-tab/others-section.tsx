@@ -36,6 +36,10 @@ export function OthersSection({
 		labels.push(getCodeLabel(row, getField("入院基本料等減算対象識別")));
 	}
 
+	if (getValue(row, getField("短期滞在手術")) === "3") {
+		labels.push("短期滞在手術等基本料１を算定可能");
+	}
+
 	if (labels.length === 0) {
 		return null;
 	}
