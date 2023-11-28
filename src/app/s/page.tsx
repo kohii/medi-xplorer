@@ -8,7 +8,7 @@ import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { Drawer } from "@/components/drawer";
 import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
-import { TextInput } from "@/components/text-input";
+import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
 import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
 import { getCodeLabel } from "@/features/fields/get-code-label";
@@ -25,7 +25,6 @@ import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
 
 import { Detail } from "./detail";
-import { getMasterData } from "./get-master-data";
 import { getField, getFields } from "./shinryoukoui-master-fields";
 import { getKubunBangouColor } from "./shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
@@ -70,9 +69,18 @@ export default function Page() {
 	const searchParams = useSearchParams();
 	const { push } = useRouterFn();
 	const updateSearchParams = useUpdateSearchParams();
+	const {
+		data,
+		isLoading,
+		getRowByCode,
+	} = useShinryoukouiMasterData();
 
 	const query = searchParams.get("q") ?? "";
 	const selectedCode = searchParams.get("code");
+	const selectedRow = useMemo(
+		() => selectedCode ? getRowByCode(selectedCode) : undefined,
+		[selectedCode, getRowByCode],
+	);
 
 	const [searchInputValue, setSearchInputValue] = useStateFromProp(query);
 
@@ -101,27 +109,6 @@ export default function Page() {
 			code,
 		});
 	}, [updateSearchParams]);
-
-	const { data, error, isLoading } = useQuery({
-		queryKey: ["s"],
-		queryFn: getMasterData,
-	});
-	if (error) {
-		throw error;
-	}
-
-	const codeToRow = useMemo(() => {
-		const map = new Map<string, string[]>();
-		if (!data) {
-			return map;
-		}
-		const codeField = getField("診療行為コード")!;
-		for (let row of data) {
-			const code = getValue(row, codeField);
-			map.set(code, row);
-		}
-		return map;
-	}, [data]);
 
 	const filteredData = useMemo(() => {
 		if (!data) {
@@ -185,11 +172,13 @@ export default function Page() {
 					}
 				</div>
 			</div>
-			{selectedCode && !isLoading && (<Drawer title={codeToRow.has(selectedCode) ? getValue(codeToRow.get(selectedCode)!, nameField) : ""} onClose={select}>
-				{codeToRow.has(selectedCode) ? <Detail row={codeToRow.get(selectedCode)!} rows={data!} /> : <div className="flex items-center justify-center h-full">
-					No data found for code {selectedCode}
-				</div>}
-			</Drawer>)}
+			{selectedCode && !isLoading && (
+				<Drawer title={selectedRow ? getValue(selectedRow, nameField) : ""} onClose={select}>
+					{selectedRow ? <Detail row={selectedRow} rows={data!} /> : <div className="flex items-center justify-center h-full">
+						No data found for code {selectedCode}
+					</div>}
+				</Drawer>
+			)}
 			{advancedSearchOpen && <AdvancedSearchFormModal query={searchInputValue} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
 		</div>
 	);

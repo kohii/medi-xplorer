@@ -3,8 +3,6 @@ import { AppIcon } from "@/components/app-icon";
 import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
 import { SearchInput } from "@/features/search/search-input";
 
-import { Prefetch } from "./prefetch";
-
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-between h-full">
@@ -30,7 +28,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      <Prefetch />
     </div>
   );
 }

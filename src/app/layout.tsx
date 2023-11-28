@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
 
-import { Providers } from "./providers";
+import { Providers } from "../contexts/providers";
 
 import "./globals.css";
 
