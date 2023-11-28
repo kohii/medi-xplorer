@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MediXplorer | 医科診療行為マスタービューアー",
-  description: "診療報酬支払基金から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。",
+  description: "社会保険診療報酬支払基金から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。",
   manifest: "/site.webmanifest",
   icons: {
     icon: "/favicon-32x32.png",
