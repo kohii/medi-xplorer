@@ -18,14 +18,14 @@ export type ChuukasanTableProps = {
 	shinryoukouiCodeToHighlight?: string;
 };
 
-const chuukasanCodeField = getField("注加算/注加算コード")!;
-const chuukasanSeqField = getField("注加算/注加算通番")!;
-const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
+const chuukasanCodeField = getField("注加算/注加算コード");
+const chuukasanSeqField = getField("注加算/注加算通番");
+const kokujiShikibetsuField = getField("告示等識別区分（１）");
 
 const columns: SimpleTableColumn<string[]>[] = [{
 	name: "診療行為コード",
 	render: (row) => {
-		const code = getValue(row, getField("診療行為コード")!);
+		const code = getValue(row, getField("診療行為コード"));
 		return (
 			<Link href={`/s?code=${code}`} >
 				{code}
@@ -35,10 +35,10 @@ const columns: SimpleTableColumn<string[]>[] = [{
 }, {
 	name: "名称",
 	render: (row) => {
-		const code = getValue(row, getField("診療行為コード")!);
+		const code = getValue(row, getField("診療行為コード"));
 		return (
 			<Link href={`/s?code=${code}`} >
-				{getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
+				{getValue(row, getField("診療行為省略名称/省略漢字名称"))}
 			</Link>
 		);
 	},
@@ -74,7 +74,7 @@ export function ChuukasanTable({ rows, chuukasanCode, shinryoukouiCodeToHighligh
 			columns={columns}
 			onRowClick={selectByRow}
 			rowClassName={(row) => {
-				const code = getValue(row, getField("診療行為コード")!);
+				const code = getValue(row, getField("診療行為コード"));
 				return code === shinryoukouiCodeToHighlight ? "font-semibold" : "";
 			}}
 		/>

@@ -3345,7 +3345,11 @@ for (const field of shinryokouiMasterFields) {
 	seqToField[field.seq] = field;
 }
 
-export function getField(name: FieldName): Field | undefined {
+export function getField(name: FieldName): Field {
+	return nameToField.get(name)!;
+}
+
+export function getFieldOrUndefined(name: FieldName): Field | undefined {
 	return nameToField.get(name);
 }
 

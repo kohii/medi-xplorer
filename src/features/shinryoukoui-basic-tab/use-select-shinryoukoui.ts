@@ -13,7 +13,7 @@ export function useSelectShinryoukoui() {
 			updateSearchParams({ code });
 		},
 		selectByRow: (row: string[]) => {
-			updateSearchParams({ code: getValue(row, getField("診療行為コード")!) });
+			updateSearchParams({ code: getValue(row, getField("診療行為コード")) });
 		}
 	}), [updateSearchParams]);
 }

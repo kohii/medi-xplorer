@@ -27,9 +27,6 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 	const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
 	const ageAdditionalFeeData = getAgeAdditionalFeeData(row);
 
-	const 告示等識別区分 = getValue(row, getField("告示等識別区分（１）")!);
-	const is基本項目 = 告示等識別区分 === "1" || 告示等識別区分 === "3" || 告示等識別区分 === "5";
-
 	return (
 		<>
 			<section className="mb-4">
@@ -38,13 +35,13 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 					<KokujiShikibetsu1Chip row={row} />
 				</HStack>
 				<div>
-					<span className="text-slate-500">{getValue(row, getField("診療行為コード")!)}</span>
+					<span className="text-slate-500">{getValue(row, getField("診療行為コード"))}</span>
 					<span className="text-slate-300 text-lg"> | </span>
-					<span className="text-lg">{getValue(row, getField("基本漢字名称")!)}</span>
+					<span className="text-lg">{getValue(row, getField("基本漢字名称"))}</span>
 				</div>
-				{getValue(row, getField("基本漢字名称")!) !== getValue(row, getField("診療行為省略名称/省略漢字名称")!) &&
+				{getValue(row, getField("基本漢字名称")) !== getValue(row, getField("診療行為省略名称/省略漢字名称")) &&
 					(<div className="text-sm my-1 text-slate-500">
-						略称: {getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
+						略称: {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
 					</div>)
 				}
 			</section>
@@ -53,10 +50,10 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<SectionHeading>告示等識別区分</SectionHeading>
 				<HStack>
 					<SplitChip label="(1)">
-						{formatCodeValue(row, getField("告示等識別区分（１）")!)}
+						{formatCodeValue(row, getField("告示等識別区分（１）"))}
 					</SplitChip>
 					<SplitChip label="(2)">
-						{formatCodeValue(row, getField("告示等識別区分（２）")!)}
+						{formatCodeValue(row, getField("告示等識別区分（２）"))}
 					</SplitChip>
 				</HStack>
 			</section>
@@ -65,13 +62,13 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<SectionHeading>算定可能な状況</SectionHeading>
 				<HStack>
 					<SplitChip label="入外適用区分">
-						{formatCodeValue(row, getField("入外適用区分")!)}
+						{formatCodeValue(row, getField("入外適用区分"))}
 					</SplitChip>
 					<SplitChip label="病院・診療所区分">
-						{formatCodeValue(row, getField("病院・診療所区分")!)}
+						{formatCodeValue(row, getField("病院・診療所区分"))}
 					</SplitChip>
 					<SplitChip label="後期高齢者医療適用区分">
-						{formatCodeValue(row, getField("後期高齢者医療適用区分")!)}
+						{formatCodeValue(row, getField("後期高齢者医療適用区分"))}
 					</SplitChip>
 					<SplitChip label="上下限年齢">
 						{shinryoukouiMasterVirtualFields.上下限年齢.value(row)}
@@ -96,32 +93,32 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				<HStack>
 					<SplitChip label="点数欄集計先識別（入院外）">
 						{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-							getValue(row, getField("点数欄集計先識別（入院外）")!)
+							getValue(row, getField("点数欄集計先識別（入院外）"))
 						))}
 					</SplitChip>
 					<SplitChip label="点数欄集計先識/別（入院）">
 						{emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-							getValue(row, getField("点数欄集計先識別（入院）")!)
+							getValue(row, getField("点数欄集計先識別（入院）"))
 						))}
 					</SplitChip>
 				</HStack>
 				<HStack className="mt-1">
 					<SplitChip label="数量データの記録">
-						{getValue(row, getField("データ規格コード")!) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称")!)})`}
+						{getValue(row, getField("データ規格コード")) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称"))})`}
 					</SplitChip>
 				</HStack>
 			</section>
 
-			{getValue(row, getField("注加算/注加算コード")!) !== "0" && (
+			{getValue(row, getField("注加算/注加算コード")) !== "0" && (
 				<section>
 					<SectionHeading>注加算</SectionHeading>
 					<>
 						<HStack>
 							<SplitChip label="注加算コード">
-								{getValue(row, getField("注加算/注加算コード")!)}
+								{getValue(row, getField("注加算/注加算コード"))}
 							</SplitChip>
 							<SplitChip label="注加算通番">
-								{getValue(row, getField("注加算/注加算通番")!)}
+								{getValue(row, getField("注加算/注加算通番"))}
 							</SplitChip>
 						</HStack>
 						<UncontrolledToggle
@@ -130,8 +127,8 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 						>
 							{(open) => open && (<ChuukasanTable
 								rows={rows}
-								chuukasanCode={getValue(row, getField("注加算/注加算コード")!)}
-								shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード")!)}
+								chuukasanCode={getValue(row, getField("注加算/注加算コード"))}
+								shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード"))}
 							/>)
 							}
 						</UncontrolledToggle>
@@ -146,26 +143,26 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 				</section>
 			)}
 
-			{(getValue(row, getField("検査等実施判断区分")!) !== "0" ||
-				getValue(row, getField("包括対象検査")!) !== "0" ||
-				getValue(row, getField("逓減対象区分")!) !== "0") && (
+			{(getValue(row, getField("検査等実施判断区分")) !== "0" ||
+				getValue(row, getField("包括対象検査")) !== "0" ||
+				getValue(row, getField("逓減対象区分")) !== "0") && (
 					<section>
 						<SectionHeading>検査</SectionHeading>
 						<HStack>
 							<SplitChip label="検査等実施判断区分">
-								{formatCodeValue(row, getField("検査等実施判断区分")!)}
+								{formatCodeValue(row, getField("検査等実施判断区分"))}
 							</SplitChip>
 							<SplitChip label="検査等実施判断グループ区分">
-								{formatCodeValue(row, getField("検査等実施判断グループ区分")!)}
+								{formatCodeValue(row, getField("検査等実施判断グループ区分"))}
 							</SplitChip>
 							<SplitChip label="包括対象検査">
-								{formatCodeValue(row, getField("包括対象検査")!)}
+								{formatCodeValue(row, getField("包括対象検査"))}
 							</SplitChip>
 							<SplitChip label="逓減対象区分">
-								{formatCodeValue(row, getField("逓減対象区分")!)}
+								{formatCodeValue(row, getField("逓減対象区分"))}
 							</SplitChip>
 						</HStack>
-						{getValue(row, getField("検査等実施判断区分")!) === "2" && (<UncontrolledToggle
+						{getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
 							label="対応する検査等の実施料..."
 							className="my-2"
 						>
@@ -177,12 +174,12 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 							}, {
 								fieldKey: "検査等実施判断グループ区分",
 								operator: ":",
-								value: getValue(row, getField("検査等実施判断グループ区分")!),
+								value: getValue(row, getField("検査等実施判断グループ区分")),
 								negative: false,
 							}]} />)}
 						</UncontrolledToggle>)
 						}
-						{getValue(row, getField("検査等実施判断区分")!) === "1" && (
+						{getValue(row, getField("検査等実施判断区分")) === "1" && (
 							<>
 								<SubHeading>
 									対応する判断料・診断料
@@ -196,7 +193,7 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 									}, {
 										fieldKey: "検査等実施判断グループ区分",
 										operator: ":",
-										value: getValue(row, getField("検査等実施判断グループ区分")!),
+										value: getValue(row, getField("検査等実施判断グループ区分")),
 										negative: false,
 									}]} />
 								</div>

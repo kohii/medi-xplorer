@@ -27,7 +27,7 @@ export function AdvancedSearchItemForm({
 	onChange,
 	onDelete,
 }: AdvancedSearchItemFormProps) {
-	const field = getField(item.field)!;
+	const field = getField(item.field);
 	const values = useMemo(() => item.restValues ? [item.value, ...item.restValues] : [item.value], [item]);
 	const takesMultipleValues = item.operatorKind === "in" || item.operatorKind === "not-in";
 

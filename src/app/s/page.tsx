@@ -29,9 +29,9 @@ import { getField, getFields } from "./shinryoukoui-master-fields";
 import { getKubunBangouColor } from "./shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "./shinryoukoui-master-virtual-field";
 
-const codeField = getField("診療行為コード")!;
-const nameField = getField("診療行為省略名称/省略漢字名称")!;
-const kokujiShikibetsuField = getField("告示等識別区分（１）")!;
+const codeField = getField("診療行為コード");
+const nameField = getField("診療行為省略名称/省略漢字名称");
+const kokujiShikibetsuField = getField("告示等識別区分（１）");
 
 const columns: DataTableColumn[] = [{
 	name: "区分番号",
@@ -46,7 +46,7 @@ const columns: DataTableColumn[] = [{
 	width: 120,
 }, {
 	name: "名称",
-	value: row => getValue(row, getField("診療行為省略名称/省略漢字名称")!),
+	value: row => getValue(row, getField("診療行為省略名称/省略漢字名称")),
 }, {
 	name: "告示等識別区分",
 	value: row => {
@@ -61,7 +61,7 @@ const columns: DataTableColumn[] = [{
 	width: 112,
 }, {
 	name: "変更日",
-	value: row => formatDate(getValue(row, getField("変更年月日")!)),
+	value: row => formatDate(getValue(row, getField("変更年月日"))),
 	width: 112,
 }];
 
@@ -104,7 +104,7 @@ export default function Page() {
 	}, [query]);
 
 	const select = useCallback((row?: string[]) => {
-		const code = row ? getValue(row, getField("診療行為コード")!) : undefined;
+		const code = row ? getValue(row, getField("診療行為コード")) : undefined;
 		updateSearchParams({
 			code,
 		});

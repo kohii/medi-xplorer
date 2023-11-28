@@ -4,7 +4,7 @@ import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 
 import { getValue } from "../fields/get-values";
 
-const FIELD = getField("告示等識別区分（１）")!;
+const FIELD = getField("告示等識別区分（１）");
 
 type KokujiShikibetsu1ChipProps = {
 	row: string[];

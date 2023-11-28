@@ -38,10 +38,10 @@ export function AgeAdditionalFeeTable({
 
 	const rows = useMemo(() => {
 		return data.map(item => {
-			const row = originalRows.find((row) => getValue(row, getField("診療行為コード")!) === item.code);
+			const row = originalRows.find((row) => getValue(row, getField("診療行為コード")) === item.code);
 			return ({
 				...item,
-				name: getValue(row!, getField("診療行為省略名称/省略漢字名称")!),
+				name: getValue(row!, getField("診療行為省略名称/省略漢字名称")),
 			});
 		});
 	}, [data, originalRows]);

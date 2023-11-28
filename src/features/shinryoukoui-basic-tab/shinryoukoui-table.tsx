@@ -24,7 +24,7 @@ type ShinryoukouiTableProps = {
 const columns: SimpleTableColumn<string[]>[] = [{
 	name: "診療行為コード",
 	render: (row) => {
-		const code = getValue(row, getField("診療行為コード")!);
+		const code = getValue(row, getField("診療行為コード"));
 		return (
 			<Link href={`/s?code=${code}`} >
 				{code}
@@ -34,10 +34,10 @@ const columns: SimpleTableColumn<string[]>[] = [{
 }, {
 	name: "名称",
 	render: (row) => {
-		const code = getValue(row, getField("診療行為コード")!);
+		const code = getValue(row, getField("診療行為コード"));
 		return (
 			<Link href={`/s?code=${code}`} >
-				{getValue(row, getField("診療行為省略名称/省略漢字名称")!)}
+				{getValue(row, getField("診療行為省略名称/省略漢字名称"))}
 			</Link>
 		);
 	},

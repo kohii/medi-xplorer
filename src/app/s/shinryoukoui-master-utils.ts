@@ -109,12 +109,12 @@ export function getAgeAdditionalFeeData(row: string[]): {
 	code: string;
 }[] {
 	const get = (key: "①" | "②" | "③" | "④") => {
-		const code = getValue(row, getField(`年齢加算${key}/注加算診療行為コード`)!);
+		const code = getValue(row, getField(`年齢加算${key}/注加算診療行為コード`));
 		if (code === "0") {
 			return undefined;
 		}
-		const lower = getValue(row, getField(`年齢加算${key}/下限年齢`)!);
-		const upper = getValue(row, getField(`年齢加算${key}/上限年齢`)!);
+		const lower = getValue(row, getField(`年齢加算${key}/下限年齢`));
+		const upper = getValue(row, getField(`年齢加算${key}/上限年齢`));
 		const age = getAgeRangeLabel(lower, upper);
 		return { age, code };
 	};
