@@ -1,7 +1,7 @@
 import { Parser } from "csv-string/dist/Parser";
 
 async function _getMasterData(): Promise<string[][]> {
-	const res = await fetch("/master-data/s_ALL20231101.csv", {
+	const res = await fetch("/master-data/s/s_ALL20231101.csv", {
 		cache: "force-cache"
 	});
 	if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
