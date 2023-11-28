@@ -48,14 +48,19 @@ export function DetailBasicTab({ row, rows }: DetailBasicTabProps) {
 			</section>
 
 			<section>
-				<SectionHeading>告示等識別区分</SectionHeading>
+				<SectionHeading>基本情報</SectionHeading>
 				<HStack>
-					<SplitChip label="(1)">
+					<SplitChip label="告示等識別区分（１）">
 						{formatCodeValue(row, getField("告示等識別区分（１）"))}
 					</SplitChip>
-					<SplitChip label="(2)">
+					<SplitChip label="告示等識別区分（２）">
 						{formatCodeValue(row, getField("告示等識別区分（２）"))}
 					</SplitChip>
+					{getValue(row, getField("異動関連")) !== "0" &&
+						(<SplitChip label="異動前の診療行為コード">
+							{getValue(row, getField("異動関連"))}
+						</SplitChip>)
+					}
 				</HStack>
 			</section>
 
