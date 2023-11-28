@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
 
 import { AppIcon } from "@/components/app-icon";
@@ -64,13 +65,11 @@ const columns: DataTableColumn[] = [{
 	width: 112,
 }];
 
-export default function Search({
-	query = "",
-	selectedCode,
-}: {
-	query: string | undefined;
-	selectedCode: string | undefined;
-}) {
+export default function Search() {
+	const searchParams = useSearchParams();
+	const query = searchParams.get("q") ?? "";
+	const selectedCode = searchParams.get("code");
+
 	const { push } = useRouterFn();
 	const updateSearchParams = useUpdateSearchParams();
 	const {
