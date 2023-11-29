@@ -110,8 +110,8 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 					</SplitChip>
 				</HStack>
 				<HStack className="mt-1">
-					<SplitChip label="数量データの記録">
-						{getValue(row, getField("データ規格コード")) === "0" ? "不要" : `必要 (単位=${getValue(row, getField("データ規格名/漢字名称"))})`}
+					<SplitChip label="データ規格">
+						{getValue(row, getField("データ規格コード")) === "0" ? "数量の記録は不要" : `数量の記録が必要 (単位=${getValue(row, getField("データ規格名/漢字名称"))})`}
 					</SplitChip>
 				</HStack>
 			</section>
