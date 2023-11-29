@@ -79,6 +79,9 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 					<SplitChip label="上下限年齢">
 						{shinryoukouiMasterVirtualFields.上下限年齢.value(row)}
 					</SplitChip>
+					<SplitChip label="ＤＰＣ適用区分">
+						{formatCodeValue(row, getField("ＤＰＣ適用区分"))}
+					</SplitChip>
 				</HStack>
 				<ShisetsukijunList row={row} />
 			</section>
