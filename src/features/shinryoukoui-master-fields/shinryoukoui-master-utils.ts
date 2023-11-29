@@ -2,7 +2,7 @@ import { getNthColorChipColor } from "@/components/color-chip";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
-import { alphabetToNumber, trimDecimalZero, trimLeadingZero } from "@/utils/text";
+import { alphabetToNumber, toHalfWidth, trimDecimalZero, trimLeadingZero } from "@/utils/text";
 
 import { FieldName, getField } from "./shinryoukoui-master-fields";
 
@@ -144,4 +144,11 @@ export function getShisetsukijunCodeList(row: string[]): string[] {
 	}
 
 	return codes;
+}
+
+export function normalizeUnit(unit: string) {
+	if (unit === "ｃｍ２") {
+		unit = "cm²";
+	}
+	return toHalfWidth(unit);
 }

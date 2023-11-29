@@ -4,7 +4,7 @@ import { HStack } from "@/components/h-stack";
 import { SplitChip } from "@/components/split-chip";
 import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
-import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
+import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel, normalizeUnit } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
 import { getCodeLabel } from "../fields/get-code-label";
 import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
@@ -12,6 +12,7 @@ import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/s
 
 import { AgeAdditionalFeeTable } from "./age-additional-fee-table";
 import { ChuukasanTable } from "./chuukasan-table";
+import { KizamichiFormula } from "./kizamichi-formula";
 import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { OthersSection } from "./others-section";
 import { SectionHeading } from "./section-heading";
@@ -96,6 +97,12 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 						{shinryoukouiMasterVirtualFields.旧点数.value(row)}
 					</SplitChip>
 				</HStack>
+				{getValue(row, getField("きざみ値/きざみ値計算識別")) === "1" && (
+					<div>
+						<SubHeading>きざみ値</SubHeading>
+						<KizamichiFormula row={row} />
+					</div>
+				)}
 			</section>
 
 			<section>
@@ -114,7 +121,7 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 				</HStack>
 				<HStack className="mt-1">
 					<SplitChip label="データ規格">
-						{getValue(row, getField("データ規格コード")) === "0" ? "数量の記録は不要" : `数量の記録が必要 (単位=${getValue(row, getField("データ規格名/漢字名称"))})`}
+						{getValue(row, getField("データ規格コード")) === "0" ? "数量の記録は不要" : `数量の記録が必要 (単位=${normalizeUnit(getValue(row, getField("データ規格名/漢字名称")))})`}
 					</SplitChip>
 				</HStack>
 			</section>
