@@ -111,7 +111,7 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
 	return {
 		field: field.name as FieldName,
 		operatorKind,
-		value,
+		value: value ?? "",
 		restValues,
 	};
 }
