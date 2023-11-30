@@ -28,6 +28,7 @@ import { getKubunBangouColor } from "../../features/shinryoukoui-master-fields/s
 import { shinryoukouiMasterVirtualFields } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { Detail } from "./detail";
+import { VersionSelect } from "./version-select";
 
 const codeField = getField("診療行為コード");
 const nameField = getField("診療行為省略名称/省略漢字名称");
@@ -148,7 +149,7 @@ export default function Search() {
 							<div className="mt-2 flex justify-between items-center">
 								<AdvancedSearchAnchor initialQuery={searchInputValue} />
 								<div className="text-sm text-gray-500">
-									マスター更新日: 2023年11月1日
+									<VersionSelect />
 								</div>
 							</div>
 						</div>

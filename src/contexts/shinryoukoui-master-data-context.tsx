@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useContext, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
 import { fetchMasterData } from "@/app/apis/fetch-master-data";
+import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/constants";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 type ShinryoukouiMasterDataContextType = {
+	version: ShinryoukouiMasterVersion;
+	setVersion: (version: ShinryoukouiMasterVersion) => void;
 	data?: string[][];
 	isLoading: boolean;
 
@@ -13,6 +18,8 @@ type ShinryoukouiMasterDataContextType = {
 };
 
 const ShinryoukouiMasterDataContext = createContext<ShinryoukouiMasterDataContextType>({
+	version: LATEST_SHINRYOUKOUI_MASTER_VERSION,
+	setVersion: () => { },
 	isLoading: true,
 	getRowByCode(code) {
 		return undefined;
@@ -24,9 +31,16 @@ export function useShinryoukouiMasterData() {
 }
 
 export function ShinryoukouiMasterDataProvider({ children }: { children: React.ReactNode }) {
+	const searchParams = useSearchParams();
+	const updateSearchParams = useUpdateSearchParams();
+	const paramVersion = searchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
+	const version: ShinryoukouiMasterVersion = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion as ShinryoukouiMasterVersion) ?
+		paramVersion as ShinryoukouiMasterVersion :
+		LATEST_SHINRYOUKOUI_MASTER_VERSION;
+
 	const { data, error, isLoading } = useQuery({
-		queryKey: ["s"],
-		queryFn: fetchMasterData,
+		queryKey: ["s", version],
+		queryFn: () => fetchMasterData(version),
 	});
 
 	if (error) {
@@ -42,13 +56,17 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
 			}) ?? [],
 		);
 		return {
+			version,
+			setVersion(version: ShinryoukouiMasterVersion) {
+				updateSearchParams({ [MASTER_VERSION_SEARCH_PARAM_NAME]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
+			},
 			data: data ?? [],
 			isLoading,
 			getRowByCode(code: string) {
 				return codeToRow.get(code);
 			},
 		};
-	}, [data, isLoading]);
+	}, [data, isLoading, updateSearchParams, version]);
 
 	// Provide the example data to the children components
 	return (
