@@ -19,6 +19,7 @@ import { parseQuery } from "@/features/search/parse-query";
 import { SearchInput } from "@/features/search/search-input";
 import { DataTable, DataTableColumn } from "@/features/tables/data-table";
 import { useRouterFn } from "@/hooks/use-router-fn";
+import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { formatDate } from "@/utils/format-data";
@@ -87,15 +88,7 @@ export default function Search() {
 	const [searchInputValue, setSearchInputValue] = useStateFromProp(query ?? "");
 
 	const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
-
-	const search = useCallback((value: string) => {
-		push(`/s?q=${encodeURIComponent(value)}`);
-	}, [push]);
-
-	const handleSubmitSearch = useCallback(
-		() => search(searchInputValue),
-		[searchInputValue, search],
-	);
+	const search = useShinryoukouiSearch();
 
 	const filterExpression = useMemo(() => {
 		const r = parseQuery(query);
@@ -142,7 +135,6 @@ export default function Search() {
 								<SearchInput
 									value={searchInputValue}
 									onChange={setSearchInputValue}
-									onSubmit={handleSubmitSearch}
 								/>
 								{filterExpression.kind === "ERROR" && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
 							</div>

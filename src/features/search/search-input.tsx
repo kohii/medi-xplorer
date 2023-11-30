@@ -3,23 +3,18 @@
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
 import { TextInput } from "@/components/text-input";
-import { useRouterFn } from "@/hooks/use-router-fn";
+import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 
 type SearchInputProps = {
 	value?: string;
 	onChange?: (value: string) => void;
-	onSubmit?: () => void;
 };
 
-export function SearchInput({ value, onChange, onSubmit }: SearchInputProps) {
-	const { push } = useRouterFn();
-	const handleSubmit = onSubmit ? ((event: React.FormEvent<HTMLFormElement>) => {
+export function SearchInput({ value, onChange }: SearchInputProps) {
+	const search = useShinryoukouiSearch();
+	const handleSubmit = ((event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		onSubmit();
-	}) : ((event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const q = event.currentTarget.q.value;
-		push(`/s?q=${encodeURIComponent(q)}`);
+		search(event.currentTarget.q.value);
 	});
 
 	return (
