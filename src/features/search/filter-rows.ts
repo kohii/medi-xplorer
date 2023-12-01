@@ -55,6 +55,6 @@ export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem)
 		if (isNumeric(item.kanaValue) && getValue(row, codeField).startsWith(item.kanaValue)) {
 			return true;
 		}
-		return getValue(row, nameField).includes(item.value) || getValue(row, kanaField).includes(item.kanaValue);
+		return getValue(row, nameField).includes(item.fullWidthValue) || getValue(row, kanaField).includes(item.kanaValue);
 	}
 }

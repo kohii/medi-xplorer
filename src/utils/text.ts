@@ -28,6 +28,10 @@ export function toHalfWidth(s: string): string {
 	return s.replace(/[！-～]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0));
 }
 
+export function toFullWidth(s: string): string {
+	return s.replace(/[!-~]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xFEE0));
+}
+
 export function toHalfWidthKatakana(s: string): string {
 	return s.replace(/[ァ-ン]/g, c => KANA_MAP[c] || c);
 }

@@ -1,5 +1,5 @@
 import { getFieldBySeq, getField, FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth } from "@/utils/text";
+import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth } from "@/utils/text";
 
 import { Field } from "../fields/types";
 
@@ -12,6 +12,7 @@ type NormalizedFieldFilterItem = FieldFilterItem & {
 }
 
 export type NormalizedKeywordFilterItem = KeywordFilterItem & {
+	fullWidthValue: string;
 	kanaValue: string;
 }
 
@@ -39,6 +40,7 @@ export function normalizeFilterExpression(
 		} else {
 			result.push({
 				// text to search in 省略カナ名称
+				fullWidthValue: toFullWidth(item.value),
 				kanaValue: toHalfWidthKatakana(toKatakana(toHalfWidth(item.value))).toUpperCase(),
 				...item,
 			});
