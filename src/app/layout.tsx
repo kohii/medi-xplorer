@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon-32x32.png",
     apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    images: "/og.png",
+    siteName: "MediXplorer",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
   }
 };
 
