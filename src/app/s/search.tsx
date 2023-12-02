@@ -16,7 +16,7 @@ import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
-import { SearchInput } from "@/features/search/search-input";
+import { SearchBar } from "@/features/search/search-bar";
 import { DataTable, DataTableColumn } from "@/features/tables/data-table";
 import { useRouterFn } from "@/hooks/use-router-fn";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
@@ -132,7 +132,7 @@ export default function Search() {
 						</Link>
 						<div className="flex-1">
 							<div>
-								<SearchInput
+								<SearchBar
 									value={searchInputValue}
 									onChange={setSearchInputValue}
 								/>

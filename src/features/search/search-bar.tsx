@@ -5,12 +5,12 @@ import { SearchIcon } from "@/components/icons/search-icon";
 import { TextInput } from "@/components/text-input";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 
-type SearchInputProps = {
+type SearchBarProps = {
 	value?: string;
 	onChange?: (value: string) => void;
 };
 
-export function SearchInput({ value, onChange }: SearchInputProps) {
+export function SearchBar({ value, onChange }: SearchBarProps) {
 	const search = useShinryoukouiSearch();
 	const handleSubmit = ((event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
