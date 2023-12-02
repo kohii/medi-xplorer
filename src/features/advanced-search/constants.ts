@@ -1,4 +1,5 @@
 import { FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { splitByWhitespace } from "@/utils/text";
 
 import { FieldFilterItem } from "../search/types";
 
@@ -49,7 +50,9 @@ export const advancedSearchOperatorOptions = [{
 	operator: ":",
 	negative: false,
 	toFieldFilterItem(item: AdvancedSearchItem) {
-		const values = (item.restValues ? [item.value, ...item.restValues] : [item.value]).map(value => value.trim()).filter(Boolean);
+		let values = (item.restValues ? [item.value, ...item.restValues] : [item.value]);
+		// migrate spaces to commas
+		values = values.flatMap(value => splitByWhitespace(value)).map(value => value.trim()).filter(Boolean);
 		return {
 			fieldKey: item.field,
 			operator: ":",
@@ -63,7 +66,9 @@ export const advancedSearchOperatorOptions = [{
 	operator: ":",
 	negative: true,
 	toFieldFilterItem(item: AdvancedSearchItem) {
-		const values = (item.restValues ? [item.value, ...item.restValues] : [item.value]).map(value => value.trim()).filter(Boolean);
+		let values = (item.restValues ? [item.value, ...item.restValues] : [item.value]);
+		// migrate spaces to commas
+		values = values.flatMap(value => splitByWhitespace(value)).map(value => value.trim()).filter(Boolean);
 		return {
 			fieldKey: item.field,
 			operator: ":",
