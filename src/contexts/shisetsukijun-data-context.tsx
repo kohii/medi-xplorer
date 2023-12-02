@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, useMemo } from "react";
 
-import { fetchShisetsukijunData } from "@/app/apis/fetch-shisetsukijun-data";
+import { fetchShisetsukijunData } from "@/apis/fetch-shisetsukijun-data";
 
 type ShisetsukijunDataContextType = {
 	data?: [string, string][];

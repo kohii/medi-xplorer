@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-import { fetchMasterData } from "@/app/apis/fetch-master-data";
+import { fetchMasterData } from "@/apis/fetch-master-data";
 import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/constants";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
