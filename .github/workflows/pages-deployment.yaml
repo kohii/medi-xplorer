@@ -19,14 +19,11 @@ jobs:
 
       - run: npm ci
 
-      - name: Build
-        run: npm run pages:build
-        env:
-          NODE_ENV: production
+      - run: npm run pages:build
 
       - name: Deploy
         uses: cloudflare/wrangler-action@3.0.0
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: ".vercel/output/static"
+          command: pages publish .vercel/output/static --project-name medi-xplorer --branch ${{ steps.extract_branch.outputs.branch }} --commit-hash ${{ github.sha }}
