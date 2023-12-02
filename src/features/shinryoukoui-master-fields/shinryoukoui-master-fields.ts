@@ -3355,8 +3355,8 @@ export function getField(name: FieldName): Field {
 	return nameToField.get(name)!;
 }
 
-export function getFieldOrUndefined(name: FieldName): Field | undefined {
-	return nameToField.get(name);
+export function getFieldOrUndefined(name: string): Field | undefined {
+	return nameToField.get(name as FieldName);
 }
 
 export function getFieldBySeq(seq: number): Field | undefined {

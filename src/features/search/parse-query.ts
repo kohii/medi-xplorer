@@ -1,5 +1,7 @@
 import { splitByWhitespace } from "@/utils/text";
 
+import { getFieldBySeq, getFieldOrUndefined } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+
 import { FilterExpression, FilterExpressionText, Operator, ParseResult } from "./types";
 
 export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpression> {
@@ -18,18 +20,20 @@ export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpres
 		const fieldMatch = adjustedItem.match(/([^:]+)(:>=?|:<=?|:)(.*)/);
 		if (fieldMatch) {
 			const [_, fieldKey, operator, value] = fieldMatch;
-			expression.push({
-				operator: operator as Operator,
-				fieldKey,
-				value,
-				negative
-			});
-		} else {
-			expression.push({
-				value: adjustedItem,
-				negative
-			});
+			if (getFieldOrUndefined(fieldKey) !== undefined || getFieldBySeq(+fieldKey) !== undefined) {
+				expression.push({
+					operator: operator as Operator,
+					fieldKey,
+					value,
+					negative,
+				});
+				continue;
+			}
 		}
+		expression.push({
+			value: adjustedItem,
+			negative,
+		});
 	}
 
 	return { kind: "SUCCESS", value: expression };
