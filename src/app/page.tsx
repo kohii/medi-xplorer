@@ -1,7 +1,7 @@
 
 import { AppIcon } from "@/components/app-icon";
 import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
-import { SearchBar } from "@/features/search/search-bar";
+import { UncontrolledSearchBar } from "@/features/search/search-bar";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
             医科診療行為マスター Viewer
           </p>
           <div className="my-8 w-full">
-            <SearchBar />
+            <UncontrolledSearchBar />
           </div>
           <AdvancedSearchAnchor />
         </main>
