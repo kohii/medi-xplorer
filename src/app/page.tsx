@@ -1,4 +1,3 @@
-
 import { AppIcon } from "@/components/app-icon";
 import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
 import { UncontrolledSearchBar } from "@/features/search/search-bar";
@@ -13,7 +12,7 @@ export default function Home() {
             MediXplorer
           </h1>
           <p className="text-center text-gray-500 mt-4">
-            医科診療行為マスター Viewer
+            医科診療行為マスタービューアー
           </p>
           <div className="my-8 w-full">
             <UncontrolledSearchBar />
