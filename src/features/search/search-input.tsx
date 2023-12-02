@@ -5,7 +5,7 @@ import { shinryokouiMasterFields } from "../shinryoukoui-master-fields/shinryouk
 
 const FIELD_NAMES = shinryokouiMasterFields.map((f) => f.name);
 const FIELD_HIGHLIGHT_REG = new RegExp(
-	`(?<=(^|\\s))(${FIELD_NAMES.map((f) => `${f}`).join("|")}):`,
+	`(?<=(^|\\s)|-)(${FIELD_NAMES.map((f) => `${f}`).join("|")}):`,
 	"g"
 );
 const renderer = createRegexRenderer([
