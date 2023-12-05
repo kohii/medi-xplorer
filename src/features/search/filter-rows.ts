@@ -52,7 +52,7 @@ export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem)
 			}
 		}
 	} else {
-		if (isNumeric(item.kanaValue) && getValue(row, codeField).startsWith(item.kanaValue)) {
+		if (isNumeric(item.kanaValue) && getValue(row, codeField) === item.kanaValue) {
 			return true;
 		}
 		return getValue(row, nameField).includes(item.fullWidthValue) || getValue(row, kanaField).includes(item.kanaValue);
