@@ -4,7 +4,6 @@ import {
 	getCoreRowModel,
 	getSortedRowModel,
 	Row,
-	SortingState,
 	useReactTable,
 } from "@tanstack/react-table";
 import { useVirtual } from "@tanstack/react-virtual";
@@ -17,7 +16,8 @@ import { BreakLine } from "@/components/break-line";
 export type DataTableColumn = {
 	name: string;
 	width?: number;
-	value: (row: string[]) => React.ReactNode;
+	value: (row: string[]) => string;
+	styledValue?: (row: string[]) => React.ReactNode;
 };
 
 export type DataTableProps = {
@@ -40,7 +40,7 @@ export const DataTable = React.memo(function DataTable({
 			return columns.map((col) => ({
 				id: col.name,
 				accessorFn: row => col.value(row),
-				cell: (info) => col.value(info.row.original),
+				cell: (info) => col.styledValue?.(info.row.original) ?? col.value(info.row.original),
 				header: () => <BreakLine value={col.name.replace("/", "/\n")} />,
 				size: col.width,
 			}));
