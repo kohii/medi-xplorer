@@ -14,6 +14,7 @@ type NormalizedFieldFilterItem = FieldFilterItem & {
 export type NormalizedKeywordFilterItem = KeywordFilterItem & {
 	fullWidthValue: string;
 	kanaValue: string;
+	codeValue: string | null;
 }
 
 export type NormalizedFilterItem = NormalizedFieldFilterItem | NormalizedKeywordFilterItem;
@@ -38,10 +39,15 @@ export function normalizeFilterExpression(
 				...item,
 			});
 		} else {
+			const halfWidthValue = toHalfWidth(item.value);
+			const codeValue = halfWidthValue.length === 9 && isNumeric(halfWidthValue) ? halfWidthValue : null;
 			result.push({
-				// text to search in 省略カナ名称
+				// text to search in 省略漢字名称
 				fullWidthValue: toFullWidth(item.value),
-				kanaValue: toHalfWidthKatakana(toKatakana(toHalfWidth(item.value))).toUpperCase(),
+				// text to search in 省略カナ名称
+				kanaValue: toHalfWidthKatakana(toKatakana(halfWidthValue)).toUpperCase(),
+				// text to search in 診療行為コード
+				codeValue,
 				...item,
 			});
 		}
