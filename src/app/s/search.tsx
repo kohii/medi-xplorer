@@ -1,5 +1,7 @@
 "use client";
 
+import { get } from "http";
+
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
 
@@ -37,7 +39,8 @@ const kokujiShikibetsuField = getField("告示等識別区分（１）");
 
 const columns: DataTableColumn[] = [{
 	name: "区分番号",
-	value: row => {
+	value: row => shinryoukouiMasterVirtualFields.区分番号.value(row),
+	styledValue: row => {
 		const v = shinryoukouiMasterVirtualFields.区分番号.value(row);
 		return v === "-" ? "-" : <ColorChip color={getKubunBangouColor(v)}>{v}</ColorChip>;
 	},
@@ -51,7 +54,8 @@ const columns: DataTableColumn[] = [{
 	value: row => getValue(row, getField("診療行為省略名称/省略漢字名称")),
 }, {
 	name: "告示等識別区分",
-	value: row => {
+	value: row => getValue(row, kokujiShikibetsuField),
+	styledValue: row => {
 		const value = getValue(row, kokujiShikibetsuField);
 		const label = getCodeLabel(row, kokujiShikibetsuField, true);
 		return <ColorChip color={getNthColorChipColor(+value)}>{value + ": " + label}</ColorChip>;
