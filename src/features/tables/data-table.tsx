@@ -7,7 +7,7 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import { useVirtual } from "@tanstack/react-virtual";
-import React from "react";
+import React, { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { BreakLine } from "@/components/break-line";
@@ -76,11 +76,15 @@ export const DataTable = React.memo(function DataTable({
 			? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
 			: 0;
 
+	const minTableWidth = useMemo(() => columnDefs.reduce((acc, col) => acc + (col.size ?? 128), 0), [columnDefs]);
+
 	return (
 		<div ref={tableContainerRef} className="overflow-auto" style={{
 			height,
 		}}>
-			<table className='border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]'>
+			<table className='border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]' style={{
+				minWidth: minTableWidth,
+			}}>
 				<thead className='sticky top-0 m-0 bg-white'>
 					{table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
 						<tr key={headerGroup.id}>

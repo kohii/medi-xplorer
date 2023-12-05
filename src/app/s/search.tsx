@@ -123,6 +123,7 @@ export default function Search() {
 		<div className="relative h-full">
 			<div className="h-full grid" style={{
 				gridTemplateRows: "124px minmax(0, 1fr)",
+				gridTemplateColumns: "minmax(0, 1fr)",
 			}}
 			>
 				<div
