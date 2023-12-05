@@ -1,4 +1,5 @@
 export const SHINRYOUKOUI_MASTER_VERSION_LIST = [
+	{ key: "20231201", label: "2023年12月1日" },
 	{ key: "20231101", label: "2023年11月1日" },
 	{ key: "20231002", label: "2023年10月2日" },
 	{ key: "20230922", label: "2023年9月22日" },
