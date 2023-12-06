@@ -71,7 +71,7 @@ const columns: DataTableColumn[] = [{
 	width: 112,
 }];
 
-export default function Search() {
+export default function SearchResult() {
 	const searchParams = useSearchParams();
 	const query = searchParams.get("q") ?? "";
 	const selectedCode = searchParams.get("code");

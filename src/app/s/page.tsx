@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import Search from "./search";
+import SearchResult from "./search-result";
 
 export const metadata: Metadata = {
 	title: "検索結果 | MediXplorer",
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<Search />
+		<SearchResult />
 	);
 }
