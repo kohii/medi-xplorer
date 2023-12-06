@@ -1,6 +1,6 @@
 import { Parser } from "csv-string/dist/Parser";
 
-import { ShinryoukouiMasterVersion } from "@/constants";
+import { ShinryoukouiMasterVersion } from "@/features/shinryoukoui-master-versions/constants";
 
 export async function fetchMasterData(version: ShinryoukouiMasterVersion): Promise<string[][]> {
 	const res = await fetch(`/master-data/s/s_ALL${version}.csv`, {

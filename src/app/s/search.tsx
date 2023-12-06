@@ -29,9 +29,9 @@ import { formatDate } from "@/utils/format-data";
 import { getField } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { getKubunBangouColor } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
+import { VersionSelect } from "../../features/shinryoukoui-master-versions/version-select";
 
 import { Detail } from "./detail";
-import { VersionSelect } from "./version-select";
 
 const codeField = getField("診療行為コード");
 const nameField = getField("診療行為省略名称/省略漢字名称");
