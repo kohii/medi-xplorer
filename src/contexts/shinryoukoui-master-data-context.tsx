@@ -3,9 +3,9 @@ import { useSearchParams } from "next/navigation";
 import React, { createContext, useContext, useMemo, useState } from "react";
 
 import { fetchMasterData } from "@/apis/fetch-master-data";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/constants";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/features/shinryoukoui-master-versions/constants";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 type ShinryoukouiMasterDataContextType = {

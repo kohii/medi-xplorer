@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const MASTER_FILES_DIR = `${__dirname}/../public/master-data/s/`;
-const OUTPUT_FILENAME = `${__dirname}/../src/shinryoukoui-master-versions.json`;
+const OUTPUT_FILENAME = `${__dirname}/../src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json`;
 
 const versionKeys = readdirSync(MASTER_FILES_DIR)
 	.filter(f => f.endsWith(".csv"))
