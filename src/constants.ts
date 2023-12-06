@@ -1,16 +1,9 @@
-export const SHINRYOUKOUI_MASTER_VERSION_LIST = [
-	{ key: "20231201", label: "2023年12月1日" },
-	{ key: "20231101", label: "2023年11月1日" },
-	{ key: "20231002", label: "2023年10月2日" },
-	{ key: "20230922", label: "2023年9月22日" },
-	{ key: "20230901", label: "2023年9月1日" },
-	{ key: "20230801", label: "2023年8月1日" },
-	{ key: "20230523", label: "2023年5月23日" },
-	{ key: "20230424", label: "2023年4月24日" },
-	{ key: "20230317", label: "2023年3月17日" },
-	{ key: "20230227", label: "2023年2月27日" },
-	{ key: "20230201", label: "2023年2月1日" },
-] as const;
+import versions from "./shinryoukoui-master-versions.json" assert { type: "json" };
+
+export const SHINRYOUKOUI_MASTER_VERSION_LIST: {
+	key: string;
+	label: string;
+}[] = versions;
 
 export const SHINRYOUKOUI_MASTER_VERSION_KEYS = SHINRYOUKOUI_MASTER_VERSION_LIST.map(item => item.key);
 
