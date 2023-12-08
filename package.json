@@ -31,7 +31,7 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.7.4",
+    "@cloudflare/next-on-pages": "^1.8.1",
     "@types/jest": "^29.5.9",
     "@types/node": "^20",
     "@types/react": "^18",
