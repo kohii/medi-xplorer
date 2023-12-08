@@ -14,5 +14,5 @@ jobs:
 
       - name: Run script
         run: |
-          chmod +x check_new_master.sh
-          ./check_new_master.sh
+          chmod +x ./scripts/check-for-new-master-data.sh
+          ./scripts/check-for-new-master-data.sh
