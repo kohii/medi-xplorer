@@ -7,13 +7,13 @@ import { formatCodeValue } from "@/features/shinryoukoui-master-fields/shinryouk
 import { shinryoukouiMasterVirtualFields } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
+import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
 import { filterShinryoukouiRows } from "../search/filter-rows";
 import { normalizeFilterExpression } from "../search/normalize-filter-expression";
 import { FilterExpression } from "../search/types";
 
 import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
-import { SimpleTable, SimpleTableColumn } from "./simple-table";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
 type ShinryoukouiTableProps = {

@@ -1,10 +1,10 @@
 import { toHalfWidth, trimDecimalZero } from "@/utils/text";
 
+import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
 import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { normalizeUnit } from "../shinryoukoui-master-fields/shinryoukoui-master-utils";
 
-import { SimpleTable, SimpleTableColumn } from "./simple-table";
 
 type Row = {
 	amount: string;

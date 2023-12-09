@@ -3,8 +3,9 @@ import { twMerge } from "tailwind-merge";
 import { useShisetsukijunData } from "@/contexts/shisetsukijun-data-context";
 import { getShisetsukijunCodeGroupList } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
-import { SimpleTableColumn } from "./simple-table";
-import { SimpleTable } from "./simple-table";
+import { SimpleTableColumn } from "../../components/simple-table";
+import { SimpleTable } from "../../components/simple-table";
+
 import { SubHeading } from "./sub-heading";
 
 export function ShisetsukijunList({ row }: { row: string[] }) {
