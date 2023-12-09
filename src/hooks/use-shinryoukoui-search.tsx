@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/features/shinryoukoui-master-versions/constants";
+import { MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
 
 import { useRouterFn } from "./use-router-fn";
 
@@ -14,7 +14,7 @@ export function useShinryoukouiSearch() {
 		if (query) {
 			searchParams.set("q", query);
 		}
-		if (masterVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(masterVersion as ShinryoukouiMasterVersion)) {
+		if (masterVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(masterVersion)) {
 			searchParams.set(MASTER_VERSION_SEARCH_PARAM_NAME, masterVersion);
 		}
 		push(`/s?${searchParams.toString()}`);
