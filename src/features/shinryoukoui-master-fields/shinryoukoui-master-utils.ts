@@ -133,14 +133,33 @@ export function getAgeAdditionalFeeData(row: string[]): {
 	return [n1, n2, n3, n4];
 }
 
-export function getShisetsukijunCodeList(row: string[]): string[] {
-	const codes: string[] = [];
+// codes are grouped by the following:
+// 1st group: 施設基準①～⑥
+// 2nd group: 施設基準⑦～⑨
+// 3rd group: 施設基準⑩
+// https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/spec/R04rec2.pdf#page=65
+const shisetsukijunGroupStartIndices = [
+	getField("施設基準①～⑩/施設基準コード①").seq - 1,
+	getField("施設基準①～⑩/施設基準コード⑦").seq - 1,
+	getField("施設基準①～⑩/施設基準コード⑩").seq - 1,
+];
 
-	const firstFieldIndex = getField("施設基準①～⑩/施設基準コード①").seq - 1;
-	for (let i = 0; i < 10; i++) {
-		const code = row[firstFieldIndex + i];
-		if (code === "0") break;
-		codes.push(code);
+export function getShisetsukijunCodeGroupList(row: string[]): string[][] {
+	const codes: string[][] = [];
+
+	for (const groupStartIndex of shisetsukijunGroupStartIndices) {
+		const group = [];
+		for (let i = 0; i < 6; i++) {
+			const code = row[groupStartIndex + i];
+			if (code === "0") {
+				break;
+			}
+			group.push(code);
+		}
+		if (group.length === 0) {
+			break;
+		}
+		codes.push(group);
 	}
 
 	return codes;
