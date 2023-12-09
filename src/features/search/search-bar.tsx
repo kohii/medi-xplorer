@@ -1,12 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
-import { TextInput } from "@/components/text-input";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
+
+import SearchInput from "./search-input";
 
 type SearchBarProps = {
   value?: string;
@@ -26,7 +26,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
         <div className="absolute flex items-center text-gray-400 inset-y-0 start-0 ps-3 pointer-events-none h-10">
           <SearchIcon />
         </div>
-        <DynamicSearchInput
+        <SearchInput
           value={value}
           onChange={onChange}
           className="block w-full ps-10 py-2 h-10"
@@ -46,8 +46,3 @@ export function UncontrolledSearchBar() {
   const [value, setValue] = useState("");
   return <SearchBar value={value} onChange={setValue} />;
 }
-
-const DynamicSearchInput = dynamic(
-  () => import("./search-input"),
-  { ssr: false, loading: () => <TextInput placeholder="診療行為を検索" className="block w-full ps-10 py-2 h-10" /> },
-);

@@ -30,7 +30,7 @@
     "react-select": "^5.8.0",
     "react-virtualized-auto-sizer": "^1.0.20",
     "react-window": "^1.8.10",
-    "rich-textarea": "^0.24.3",
+    "rich-textarea": "^0.24.4",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
