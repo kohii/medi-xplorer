@@ -3,15 +3,15 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 type LinkProps = {
-	children: React.ReactNode;
-	className?: string;
-	target?: string;
+  children: React.ReactNode;
+  className?: string;
+  target?: string;
 } & Pick<NextLinkProps, "href">;
 
 export function Link({ children, className, ...rest }: LinkProps) {
   return (
     <NextLink
-      className={twMerge("text-blue-500 hover:text-blue-700 text-small", className)}
+      className={twMerge("text-blue-600 hover:text-blue-800 text-small", className)}
       {...rest}
     >
       {children}
