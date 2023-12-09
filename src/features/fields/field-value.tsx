@@ -11,24 +11,24 @@ type FieldValueProps = {
 };
 
 export function FieldValue({ field, row, raw }: FieldValueProps) {
-	const value = getValue(row, field);
-	if (!raw && field.mode === "date") {
-		return formatDate(value);
-	}
+  const value = getValue(row, field);
+  if (!raw && field.mode === "date") {
+    return formatDate(value);
+  }
 
-	if (field.codes) {
-		const label = getCodeLabel(row, field);
-		if (label) {
-			return (
-				<>
-					{value}{" "}
-					<span className="text-gray-400">
+  if (field.codes) {
+    const label = getCodeLabel(row, field);
+    if (label) {
+      return (
+        <>
+          {value}{" "}
+          <span className="text-gray-400">
 						: {label}
-					</span>
-				</>
-			);
-		}
-	}
+          </span>
+        </>
+      );
+    }
+  }
 
-	return value;
+  return value;
 }

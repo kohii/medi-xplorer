@@ -12,25 +12,25 @@ type Props<IsNullable extends boolean> = {
 }
 
 const options = shinryokouiMasterFields.map(field => ({
-	label: `${field.seq}. ${field.name}`,
-	value: field.name,
+  label: `${field.seq}. ${field.name}`,
+  value: field.name,
 }));
 
 export function FieldSelect<IsNullable extends boolean = false>({
-	value,
-	onChange,
-	placeholder,
-	className,
-	isNullable
+  value,
+  onChange,
+  placeholder,
+  className,
+  isNullable
 }: Props<IsNullable>) {
-	return (
-		<FilterableSelect
-			options={options}
-			onChange={onChange}
-			value={value}
-			placeholder={placeholder}
-			className={className}
-			isNullable={isNullable}
-		/>
-	);
+  return (
+    <FilterableSelect
+      options={options}
+      onChange={onChange}
+      value={value}
+      placeholder={placeholder}
+      className={className}
+      isNullable={isNullable}
+    />
+  );
 }

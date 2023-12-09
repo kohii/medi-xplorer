@@ -5,15 +5,15 @@ type BreakLineProps = {
 };
 
 export function BreakLine({ value }: BreakLineProps) {
-	const lines = value.split("\n");
-	return (
-		<>
-			{lines.map((line, index) => (
-				<React.Fragment key={index}>
-					{line}
-					{index < lines.length - 1 && <br />}
-				</React.Fragment>
-			))}
-		</>
-	);
+  const lines = value.split("\n");
+  return (
+    <>
+      {lines.map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </React.Fragment>
+      ))}
+    </>
+  );
 }

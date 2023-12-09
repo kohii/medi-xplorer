@@ -13,6 +13,10 @@
       "error",
       "always"
     ],
+    "indent": [
+      "error",
+      2
+    ],
     "quotes": [
       "error",
       "double",

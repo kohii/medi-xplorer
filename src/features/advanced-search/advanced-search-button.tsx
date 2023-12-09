@@ -13,27 +13,27 @@ type AdvancedSearchLinkProps = {
 };
 
 export function AdvancedSearchButton({ initialQuery }: AdvancedSearchLinkProps) {
-	const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
+  const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
 
-	const open = () => {
-		setAdvancedSearchOpen(true);
-	};
+  const open = () => {
+    setAdvancedSearchOpen(true);
+  };
 
-	const search = useShinryoukouiSearch();
+  const search = useShinryoukouiSearch();
 
-	return (
-		<>
-			<button
-				onClick={open}
-				className="text-blue-500 hover:text-blue-700 text-sm">
+  return (
+    <>
+      <button
+        onClick={open}
+        className="text-blue-500 hover:text-blue-700 text-sm">
 				詳細検索
-			</button>
-			{advancedSearchOpen && <DynamicAdvancedSearchFormModal query={initialQuery ?? ""} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
-		</>
-	);
+      </button>
+      {advancedSearchOpen && <DynamicAdvancedSearchFormModal query={initialQuery ?? ""} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
+    </>
+  );
 }
 
 const DynamicAdvancedSearchFormModal = dynamic(
-	() => import("./advancedj-search-form-modal").then(m => m.AdvancedSearchFormModal),
-	{ ssr: false, loading: () => <Backdrop /> },
+  () => import("./advancedj-search-form-modal").then(m => m.AdvancedSearchFormModal),
+  { ssr: false, loading: () => <Backdrop /> },
 );

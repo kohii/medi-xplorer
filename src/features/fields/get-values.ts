@@ -1,15 +1,15 @@
 import { Field } from "./types";
 
 export function getValue(
-	row: string[],
-	field: Field,
+  row: string[],
+  field: Field,
 ): string {
-	return row[field.seq - 1];
+  return row[field.seq - 1];
 }
 
 export function getValues(
-	row: string[],
-	fields: Field[],
+  row: string[],
+  fields: Field[],
 ): string[] {
-	return fields.map(field => row[field.seq - 1]);
+  return fields.map(field => row[field.seq - 1]);
 }

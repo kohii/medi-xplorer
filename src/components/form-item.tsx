@@ -3,11 +3,11 @@ type FormItemProps = {
 };
 
 export function FormItem({
-	children,
+  children,
 }: FormItemProps) {
-	return (
-		<div className="mb-2">
-			{children}
-		</div>
-	);
+  return (
+    <div className="mb-2">
+      {children}
+    </div>
+  );
 }

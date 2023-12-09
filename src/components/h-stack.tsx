@@ -7,5 +7,5 @@ type HStackProps = {
 };
 
 export function HStack({ children, className }: HStackProps) {
-	return <div className={twMerge("flex flex-wrap gap-1", className)}>{children}</div>;
+  return <div className={twMerge("flex flex-wrap gap-1", className)}>{children}</div>;
 }
