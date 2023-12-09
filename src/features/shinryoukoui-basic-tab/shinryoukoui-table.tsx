@@ -22,50 +22,50 @@ type ShinryoukouiTableProps = {
 };
 
 const columns: SimpleTableColumn<string[]>[] = [{
-	name: "診療行為コード",
-	render: (row) => {
-		const code = getValue(row, getField("診療行為コード"));
-		return (
-			<Link href={`/s?code=${code}`} >
-				{code}
-			</Link>
-		);
-	},
+  name: "診療行為コード",
+  render: (row) => {
+    const code = getValue(row, getField("診療行為コード"));
+    return (
+      <Link href={`/s?code=${code}`} >
+        {code}
+      </Link>
+    );
+  },
 }, {
-	name: "名称",
-	render: (row) => {
-		const code = getValue(row, getField("診療行為コード"));
-		return (
-			<Link href={`/s?code=${code}`} >
-				{getValue(row, getField("診療行為省略名称/省略漢字名称"))}
-			</Link>
-		);
-	},
+  name: "名称",
+  render: (row) => {
+    const code = getValue(row, getField("診療行為コード"));
+    return (
+      <Link href={`/s?code=${code}`} >
+        {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
+      </Link>
+    );
+  },
 }, {
-	name: "告示等識別区分",
-	render: (row) => <KokujiShikibetsu1Chip row={row} />
+  name: "告示等識別区分",
+  render: (row) => <KokujiShikibetsu1Chip row={row} />
 }, {
-	name: "点数",
-	render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
+  name: "点数",
+  render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
 }];
 
 export function ShinryoukouiTable({
-	rows,
-	filter,
+  rows,
+  filter,
 }: ShinryoukouiTableProps) {
-	const matchedRows = useMemo(() => {
-		const normalizedFilter = normalizeFilterExpression(filter);
-		if (normalizedFilter.kind === "ERROR") return [];
-		return filterShinryoukouiRows(rows, normalizedFilter.value);
-	}, [filter, rows]);
+  const matchedRows = useMemo(() => {
+    const normalizedFilter = normalizeFilterExpression(filter);
+    if (normalizedFilter.kind === "ERROR") return [];
+    return filterShinryoukouiRows(rows, normalizedFilter.value);
+  }, [filter, rows]);
 
-	const { selectByRow } = useSelectShinryoukoui();
+  const { selectByRow } = useSelectShinryoukoui();
 
-	return (
-		<SimpleTable
-			data={matchedRows}
-			columns={columns}
-			onRowClick={selectByRow}
-		/>
-	);
+  return (
+    <SimpleTable
+      data={matchedRows}
+      columns={columns}
+      onRowClick={selectByRow}
+    />
+  );
 }

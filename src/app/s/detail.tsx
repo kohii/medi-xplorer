@@ -11,11 +11,11 @@ import { ShinryoukouiRawTab } from "../../features/shinryoukoui-raw-tab/shinryou
 
 
 const tabs = [{
-	label: "詳細",
-	value: "detail",
+  label: "詳細",
+  value: "detail",
 }, {
-	label: "Raw",
-	value: "raw",
+  label: "Raw",
+  value: "raw",
 }];
 
 type DetailProps = {
@@ -24,20 +24,20 @@ type DetailProps = {
 }
 
 export function Detail({ row, rows }: DetailProps) {
-	const [selectedTab, setSelectedTab] = useState("detail");
-	return (
-		<div className="h-full">
-			<VSplit gridTemplateRows="min-content minmax(0, 1fr)">
-				<VSplitItem pos={1}>
-					<Tabs value={selectedTab} onChange={setSelectedTab} tabs={tabs} />
-				</VSplitItem>
-				<VSplitItem pos={2} overflow="auto">
-					<div className="p-4">
-						{selectedTab === "raw" && <ShinryoukouiRawTab row={row} />}
-						{selectedTab === "detail" && <ShinryoukouiBasicTab row={row} rows={rows} />}
-					</div>
-				</VSplitItem>
-			</VSplit>
-		</div>
-	);
+  const [selectedTab, setSelectedTab] = useState("detail");
+  return (
+    <div className="h-full">
+      <VSplit gridTemplateRows="min-content minmax(0, 1fr)">
+        <VSplitItem pos={1}>
+          <Tabs value={selectedTab} onChange={setSelectedTab} tabs={tabs} />
+        </VSplitItem>
+        <VSplitItem pos={2} overflow="auto">
+          <div className="p-4">
+            {selectedTab === "raw" && <ShinryoukouiRawTab row={row} />}
+            {selectedTab === "detail" && <ShinryoukouiBasicTab row={row} rows={rows} />}
+          </div>
+        </VSplitItem>
+      </VSplit>
+    </div>
+  );
 }

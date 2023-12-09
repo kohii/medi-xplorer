@@ -8,14 +8,14 @@ export type VSplitItemProps = {
 };
 
 export function VSplitItem({ children, className, overflow, pos }: VSplitItemProps) {
-	return (
-		<div className={className} style={{
-			gridRow: pos,
-			overflowY: overflow,
-		}}>
-			{children}
-		</div>
-	);
+  return (
+    <div className={className} style={{
+      gridRow: pos,
+      overflowY: overflow,
+    }}>
+      {children}
+    </div>
+  );
 }
 
 
@@ -26,11 +26,11 @@ export type VSplitProps = {
 };
 
 export function VSplit({ children, className, gridTemplateRows }: VSplitProps) {
-	return (
-		<div className={twMerge("grid h-full overflow-hidden", className)} style={{
-			gridTemplateRows,
-		}}>
-			{children}
-		</div>
-	);
+  return (
+    <div className={twMerge("grid h-full overflow-hidden", className)} style={{
+      gridTemplateRows,
+    }}>
+      {children}
+    </div>
+  );
 }

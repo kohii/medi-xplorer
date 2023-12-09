@@ -4,10 +4,10 @@ type FormLabelProps = {
 };
 
 export function FormLabel({
-	children,
-	htmlFor,
+  children,
+  htmlFor,
 }: FormLabelProps) {
-	return (
-		<label className="block mb-0.5 text-sm text-gray-500 font-medium">{children}</label>
-	);
+  return (
+    <label className="block mb-0.5 text-sm text-gray-500 font-medium">{children}</label>
+  );
 }

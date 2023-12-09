@@ -11,23 +11,23 @@ type CodeSelectProps = {
 }
 
 export function CodeSelect({
-	codes,
-	value,
-	onChange,
+  codes,
+  value,
+  onChange,
 }: CodeSelectProps) {
-	const options = useMemo(() => {
-		return codes.map(code => ({
-			label: `${code.code}: ${code.name}`,
-			value: code.code,
-		}));
-	}, [codes]);
-	return (
-		<FilterableSelect
-			isNullable
-			clearable
-			options={options}
-			value={value || null}
-			onChange={onChange}
-		/>
-	);
+  const options = useMemo(() => {
+    return codes.map(code => ({
+      label: `${code.code}: ${code.name}`,
+      value: code.code,
+    }));
+  }, [codes]);
+  return (
+    <FilterableSelect
+      isNullable
+      clearable
+      options={options}
+      value={value || null}
+      onChange={onChange}
+    />
+  );
 }

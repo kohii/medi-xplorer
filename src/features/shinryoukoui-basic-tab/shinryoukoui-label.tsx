@@ -10,20 +10,20 @@ type ShinryoukouiLabelProps = {
 };
 
 export function ShinryoukouiLabel({ row }: ShinryoukouiLabelProps) {
-	const code = getValue(row, getField("診療行為コード"));
-	const updateSearchParams = useUpdateSearchParams();
-	const handleRowClick = (code: string) => {
-		updateSearchParams({
-			code,
-		});
-	};
+  const code = getValue(row, getField("診療行為コード"));
+  const updateSearchParams = useUpdateSearchParams();
+  const handleRowClick = (code: string) => {
+    updateSearchParams({
+      code,
+    });
+  };
 
-	return (
-		<Link href={`/s?code=${code}`} onClick={(e) => {
-			e.preventDefault();
-			handleRowClick(code);
-		}}>
-			{code} {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
-		</Link>
-	);
+  return (
+    <Link href={`/s?code=${code}`} onClick={(e) => {
+      e.preventDefault();
+      handleRowClick(code);
+    }}>
+      {code} {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
+    </Link>
+  );
 }

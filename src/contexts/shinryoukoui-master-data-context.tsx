@@ -18,60 +18,60 @@ type ShinryoukouiMasterDataContextType = {
 };
 
 const ShinryoukouiMasterDataContext = createContext<ShinryoukouiMasterDataContextType>({
-	version: LATEST_SHINRYOUKOUI_MASTER_VERSION,
-	setVersion: () => { },
-	isLoading: true,
-	getRowByCode(code) {
-		return undefined;
-	},
+  version: LATEST_SHINRYOUKOUI_MASTER_VERSION,
+  setVersion: () => { },
+  isLoading: true,
+  getRowByCode(code) {
+    return undefined;
+  },
 });
 
 export function useShinryoukouiMasterData() {
-	return useContext(ShinryoukouiMasterDataContext);
+  return useContext(ShinryoukouiMasterDataContext);
 }
 
 export function ShinryoukouiMasterDataProvider({ children }: { children: React.ReactNode }) {
-	const searchParams = useSearchParams();
-	const updateSearchParams = useUpdateSearchParams();
-	const paramVersion = searchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
-	const version = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion) ?
-		paramVersion :
-		LATEST_SHINRYOUKOUI_MASTER_VERSION;
+  const searchParams = useSearchParams();
+  const updateSearchParams = useUpdateSearchParams();
+  const paramVersion = searchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
+  const version = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion) ?
+    paramVersion :
+    LATEST_SHINRYOUKOUI_MASTER_VERSION;
 
-	const { data, error, isLoading } = useQuery({
-		queryKey: ["s", version],
-		queryFn: () => fetchMasterData(version),
-	});
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["s", version],
+    queryFn: () => fetchMasterData(version),
+  });
 
-	if (error) {
-		throw error;
-	}
+  if (error) {
+    throw error;
+  }
 
-	const value = useMemo(() => {
-		const codeField = getField("診療行為コード")!;
-		const codeToRow = new Map<string, string[]>(
-			data?.map((row) => {
-				const code = getValue(row, codeField);
-				return [code, row];
-			}) ?? [],
-		);
-		return {
-			version,
-			setVersion(version: string) {
-				updateSearchParams({ [MASTER_VERSION_SEARCH_PARAM_NAME]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
-			},
-			data: data ?? [],
-			isLoading,
-			getRowByCode(code: string) {
-				return codeToRow.get(code);
-			},
-		};
-	}, [data, isLoading, updateSearchParams, version]);
+  const value = useMemo(() => {
+    const codeField = getField("診療行為コード")!;
+    const codeToRow = new Map<string, string[]>(
+      data?.map((row) => {
+        const code = getValue(row, codeField);
+        return [code, row];
+      }) ?? [],
+    );
+    return {
+      version,
+      setVersion(version: string) {
+        updateSearchParams({ [MASTER_VERSION_SEARCH_PARAM_NAME]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
+      },
+      data: data ?? [],
+      isLoading,
+      getRowByCode(code: string) {
+        return codeToRow.get(code);
+      },
+    };
+  }, [data, isLoading, updateSearchParams, version]);
 
-	// Provide the example data to the children components
-	return (
-		<ShinryoukouiMasterDataContext.Provider value={value}>
-			{children}
-		</ShinryoukouiMasterDataContext.Provider>
-	);
+  // Provide the example data to the children components
+  return (
+    <ShinryoukouiMasterDataContext.Provider value={value}>
+      {children}
+    </ShinryoukouiMasterDataContext.Provider>
+  );
 }
