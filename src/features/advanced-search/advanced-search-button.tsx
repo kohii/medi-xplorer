@@ -9,7 +9,7 @@ import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 import { AdvancedSearchFormModal } from "./advancedj-search-form-modal";
 
 type AdvancedSearchLinkProps = {
-	initialQuery?: string;
+  initialQuery?: string;
 };
 
 export function AdvancedSearchButton({ initialQuery }: AdvancedSearchLinkProps) {
@@ -25,8 +25,8 @@ export function AdvancedSearchButton({ initialQuery }: AdvancedSearchLinkProps) 
     <>
       <button
         onClick={open}
-        className="text-blue-500 hover:text-blue-700 text-sm">
-				詳細検索
+        className="text-blue-600 hover:text-blue-800 text-sm">
+        詳細検索
       </button>
       {advancedSearchOpen && <DynamicAdvancedSearchFormModal query={initialQuery ?? ""} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
     </>
