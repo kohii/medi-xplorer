@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
 
-import { Providers } from "../contexts/providers";
+import { SearchResultDataProviders } from "./s/search-result-data-providers";
 
 import "./globals.css";
 
@@ -36,9 +36,7 @@ export default function RootLayout({
   return (
     <html lang="ja" className="h-full">
       <body className={inter.className + " h-full bg-white leading-tight"}>
-        <Providers>
-          {children}
-        </Providers>
+        {children}
       </body>
     </html >
   );
