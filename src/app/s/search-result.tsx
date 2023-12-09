@@ -12,7 +12,7 @@ import { Drawer } from "@/components/drawer";
 import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
-import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
+import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
@@ -144,7 +144,7 @@ export default function SearchResult() {
 								{filterExpression.kind === "ERROR" && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
 							</div>
 							<div className="mt-2 flex justify-between items-center">
-								<AdvancedSearchAnchor initialQuery={searchInputValue} />
+								<AdvancedSearchButton initialQuery={searchInputValue} />
 								<div className="text-sm text-gray-500">
 									<VersionSelect />
 								</div>
