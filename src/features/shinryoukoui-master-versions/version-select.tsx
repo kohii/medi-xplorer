@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_LIST, ShinryoukouiMasterVersion } from "@/features/shinryoukoui-master-versions/constants";
+import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_LIST } from "@/features/shinryoukoui-master-versions/constants";
 
 export const VersionSelect = React.memo(function VersionSelect() {
 	const { version, setVersion } = useShinryoukouiMasterData();
@@ -10,7 +10,7 @@ export const VersionSelect = React.memo(function VersionSelect() {
 	return (
 		<>
 			<select
-				onChange={(e) => setVersion(e.target.value as ShinryoukouiMasterVersion)}
+				onChange={(e) => setVersion(e.target.value)}
 				className="text-blue-500 hover:text-blue-700 bg-white border-none text-sm appearance-none width-auto text-right cursor-pointer outline-none"
 				value={version}
 			>

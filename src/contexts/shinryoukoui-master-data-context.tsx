@@ -5,12 +5,12 @@ import React, { createContext, useContext, useMemo, useState } from "react";
 import { fetchMasterData } from "@/apis/fetch-master-data";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS, ShinryoukouiMasterVersion } from "@/features/shinryoukoui-master-versions/constants";
+import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 type ShinryoukouiMasterDataContextType = {
-	version: ShinryoukouiMasterVersion;
-	setVersion: (version: ShinryoukouiMasterVersion) => void;
+	version: string;
+	setVersion: (version: string) => void;
 	data?: string[][];
 	isLoading: boolean;
 
@@ -34,8 +34,8 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
 	const searchParams = useSearchParams();
 	const updateSearchParams = useUpdateSearchParams();
 	const paramVersion = searchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
-	const version: ShinryoukouiMasterVersion = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion as ShinryoukouiMasterVersion) ?
-		paramVersion as ShinryoukouiMasterVersion :
+	const version = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion) ?
+		paramVersion :
 		LATEST_SHINRYOUKOUI_MASTER_VERSION;
 
 	const { data, error, isLoading } = useQuery({
@@ -57,7 +57,7 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
 		);
 		return {
 			version,
-			setVersion(version: ShinryoukouiMasterVersion) {
+			setVersion(version: string) {
 				updateSearchParams({ [MASTER_VERSION_SEARCH_PARAM_NAME]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
 			},
 			data: data ?? [],
