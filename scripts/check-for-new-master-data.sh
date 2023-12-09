@@ -35,4 +35,6 @@ if [ "$date" != "$json_date" ]; then
   # git commit -m "Add new master data for $date"
   # git push origin "new-master-data-${date}"
   # hub pull-request -m "Add new master data for ${date}" -b master -h "new-master-data-${date}"
+else
+  echo "No new master data available."
 fi
