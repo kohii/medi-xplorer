@@ -1,3 +1,5 @@
+"use client";
+
 import { experimental_RichInput as RichInput, RichInputHandle, createRegexRenderer } from "rich-textarea";
 import { twMerge } from "tailwind-merge";
 
@@ -69,7 +71,7 @@ type SearchInputProps = {
 	className?: string;
 }
 
-export function SearchInput({
+export default function SearchInput({
 	value,
 	onChange,
 	className,
@@ -87,7 +89,7 @@ export function SearchInput({
 					"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
 					className
 				)}
-				onChange={(e) => onChange?.(e.target.value)}
+				onChange={onChange ? (e) => onChange(e.target.value) : undefined}
 				value={value}
 			>
 				{renderer}

@@ -1,5 +1,7 @@
+import { Suspense } from "react";
+
 import { AppIcon } from "@/components/app-icon";
-import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
+import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { UncontrolledSearchBar } from "@/features/search/search-bar";
 
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
@@ -19,7 +21,7 @@ export default function Home() {
           <div className="my-8 w-full">
             <UncontrolledSearchBar />
           </div>
-          <AdvancedSearchAnchor />
+          <AdvancedSearchButton />
         </main>
       </div>
       <footer>
@@ -29,7 +31,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      <PrefetchSearchResultPage />
+      <Suspense>
+        <PrefetchSearchResultPage />
+      </Suspense>
     </div>
   );
 }
