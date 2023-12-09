@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
+import { Backdrop } from "@/components/backdrop";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 
 import { AdvancedSearchFormModal } from "./advancedj-search-form-modal";
@@ -34,5 +35,5 @@ export function AdvancedSearchButton({ initialQuery }: AdvancedSearchLinkProps) 
 
 const DynamicAdvancedSearchFormModal = dynamic(
 	() => import("./advancedj-search-form-modal").then(m => m.AdvancedSearchFormModal),
-	{ ssr: false, loading: () => <>Loading...</> },
+	{ ssr: false, loading: () => <Backdrop /> },
 );
