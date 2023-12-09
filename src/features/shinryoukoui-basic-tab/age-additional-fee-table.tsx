@@ -2,9 +2,9 @@ import { useMemo } from "react";
 
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
+import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
 
-import { SimpleTable, SimpleTableColumn } from "./simple-table";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
 const columns: SimpleTableColumn<{
