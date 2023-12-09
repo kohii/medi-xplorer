@@ -2,6 +2,8 @@ import { AppIcon } from "@/components/app-icon";
 import { AdvancedSearchAnchor } from "@/features/advanced-search/advanced-search-anchor";
 import { UncontrolledSearchBar } from "@/features/search/search-bar";
 
+import { PrefetchSearchResultPage } from "./prefetch-search-result";
+
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-between h-full">
@@ -27,6 +29,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <PrefetchSearchResultPage />
     </div>
   );
 }

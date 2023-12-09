@@ -7,6 +7,7 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import { AppIcon } from "@/components/app-icon";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { DataTable, DataTableColumn } from "@/components/data-table";
 import { Drawer } from "@/components/drawer";
 import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
@@ -19,7 +20,6 @@ import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar } from "@/features/search/search-bar";
-import { DataTable, DataTableColumn } from "@/features/tables/data-table";
 import { useRouterFn } from "@/hooks/use-router-fn";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
