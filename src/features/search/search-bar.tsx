@@ -1,19 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 
-import SearchInput from "./search-input";
+import { SearchInput } from "./search-input";
 
 type SearchBarProps = {
   value?: string;
   onChange?: (value: string) => void;
 };
 
-export function SearchBar({ value, onChange }: SearchBarProps) {
+export type SearchBarHandle = {
+  focus: () => void;
+};
+
+export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function SearchBar(
+  { value, onChange }, ref
+) {
   const search = useShinryoukouiSearch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +33,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
           <SearchIcon />
         </div>
         <SearchInput
+          ref={ref as any}
           value={value}
           onChange={onChange}
           className="block w-full ps-10 py-2 h-10"
@@ -40,7 +47,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
       </div>
     </form >
   );
-}
+});
 
 export function UncontrolledSearchBar() {
   const [value, setValue] = useState("");
