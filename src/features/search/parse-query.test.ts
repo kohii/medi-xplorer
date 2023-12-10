@@ -75,12 +75,24 @@ describe("parseQuery", () => {
       ]
     });
   });
+  test("マイナスのみ", () => {
+    const result = parseQuery("-");
+    expect(result).toEqual({
+      kind: "SUCCESS",
+      value: [
+        {
+          value: "-",
+          negative: false
+        },
+      ]
+    });
+  });
   test("key:value", () => {
-    const result = parseQuery("foo:bar");
+    const result = parseQuery("診療行為コード:bar");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":",
         value: "bar",
         negative: false
@@ -88,18 +100,18 @@ describe("parseQuery", () => {
     });
   });
   test("key:value（複数、マイナスあり）", () => {
-    const result = parseQuery(" foo:bar -baz:qux ");
+    const result = parseQuery(" 診療行為コード:bar -基本漢字名称:qux ");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [
         {
-          fieldKey: "foo",
+          fieldKey: "診療行為コード",
           operator: ":",
           value: "bar",
           negative: false
         },
         {
-          fieldKey: "baz",
+          fieldKey: "基本漢字名称",
           operator: ":",
           value: "qux",
           negative: true
@@ -108,11 +120,11 @@ describe("parseQuery", () => {
     });
   });
   test("key:value（値が空文字列）", () => {
-    const result = parseQuery("foo:");
+    const result = parseQuery("診療行為コード:");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":",
         value: "",
         negative: false
@@ -120,11 +132,11 @@ describe("parseQuery", () => {
     });
   });
   test("key:>value", () => {
-    const result = parseQuery("foo:>bar");
+    const result = parseQuery("診療行為コード:>bar");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":>",
         value: "bar",
         negative: false
@@ -132,11 +144,11 @@ describe("parseQuery", () => {
     });
   });
   test("key:<value", () => {
-    const result = parseQuery("foo:<bar");
+    const result = parseQuery("診療行為コード:<bar");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":<",
         value: "bar",
         negative: false
@@ -144,11 +156,11 @@ describe("parseQuery", () => {
     });
   });
   test("key:>=value", () => {
-    const result = parseQuery("foo:>=bar");
+    const result = parseQuery("診療行為コード:>=bar");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":>=",
         value: "bar",
         negative: false
@@ -156,11 +168,11 @@ describe("parseQuery", () => {
     });
   });
   test("key:<=value", () => {
-    const result = parseQuery("foo:<=bar");
+    const result = parseQuery("診療行為コード:<=bar");
     expect(result).toEqual({
       kind: "SUCCESS",
       value: [{
-        fieldKey: "foo",
+        fieldKey: "診療行為コード",
         operator: ":<=",
         value: "bar",
         negative: false
