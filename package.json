@@ -12,6 +12,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "generate-versions": "node --loader ts-node/esm scripts/generate-versions.mts",
+    "generate-json-const-types": "node --loader ts-node/esm scripts/generate-json-const-types.ts",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
     "pages:watch": "npx @cloudflare/next-on-pages --watch",
