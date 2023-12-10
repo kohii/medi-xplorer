@@ -135,7 +135,7 @@ export default function SearchResult() {
   return (
     <div className="relative h-full">
       <div className="h-full grid" style={{
-        gridTemplateRows: "124px minmax(0, 1fr)",
+        gridTemplateRows: "min-content minmax(0, 1fr)",
         gridTemplateColumns: "minmax(0, 1fr)",
       }}
       >
@@ -145,7 +145,9 @@ export default function SearchResult() {
             <Link href="/">
               <div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
                 <AppIcon size="small" />
-                MediXplorer
+                <span className="hidden md:inline">
+                  MediXplorer
+                </span>
               </div>
             </Link>
             <div className="flex-1">
