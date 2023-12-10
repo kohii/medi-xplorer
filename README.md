@@ -2,7 +2,7 @@
 
 ## About
 
-[MediXplorer](https://medi-xplorer.com/)は厚生労働省から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。
+[MediXplorer](https://medi-xplorer.com/) は厚生労働省から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。
 
 ## Development
 
