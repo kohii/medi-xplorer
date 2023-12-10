@@ -27,6 +27,10 @@ export function OthersSection({
     labels.push("時間外加算等を算定可能");
   }
 
+  if (is基本項目 && getValue(row, getField("外来感染対策向上加算等")) !== "0") {
+    labels.push(getCodeLabel(row, getField("外来感染対策向上加算等"))?.replace("な診療行為", ""));
+  }
+
   if (is基本項目 && getValue(row, getField("処置乳幼児加算区分")) !== "0") {
     labels.push(getCodeLabel(row, getField("処置乳幼児加算区分"))?.replace("な診療行為", ""));
   }
