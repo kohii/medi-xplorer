@@ -1,5 +1,6 @@
 "use client";
 
+import { forwardRef } from "react";
 import { experimental_RichInput as RichInput, RichInputHandle, createRegexRenderer } from "rich-textarea";
 import { twMerge } from "tailwind-merge";
 
@@ -24,11 +25,11 @@ const Menu = ({
   left,
   complete,
 }: {
-	chars: string[];
-	index: number;
-	top: number;
-	left: number;
-	complete: (index: number) => void;
+  chars: string[];
+  index: number;
+  top: number;
+  left: number;
+  complete: (index: number) => void;
 }) => {
   return (
     <div
@@ -66,19 +67,20 @@ const Menu = ({
 };
 
 type SearchInputProps = {
-	value?: string;
-	onChange?: (value: string) => void;
-	className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  className?: string;
 }
 
-export default function SearchInput({
+export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(function SearchInput({
   value,
   onChange,
   className,
-}: SearchInputProps) {
+}, ref) {
   return (
     <>
       <RichInput
+        ref={ref}
         name="q"
         autoFocus
         placeholder="診療行為を検索"
@@ -96,4 +98,4 @@ export default function SearchInput({
       </RichInput>
     </>
   );
-}
+});

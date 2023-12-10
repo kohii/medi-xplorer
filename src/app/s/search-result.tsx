@@ -1,9 +1,7 @@
 "use client";
 
-import { get } from "http";
-
 import { useSearchParams } from "next/navigation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { AppIcon } from "@/components/app-icon";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
@@ -19,8 +17,7 @@ import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
-import { SearchBar } from "@/features/search/search-bar";
-import { useRouterFn } from "@/hooks/use-router-fn";
+import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
@@ -76,13 +73,29 @@ export default function SearchResult() {
   const query = searchParams.get("q") ?? "";
   const selectedCode = searchParams.get("code");
 
-  const { push } = useRouterFn();
   const updateSearchParams = useUpdateSearchParams();
   const {
     data,
     isLoading,
     getRowByCode,
   } = useShinryoukouiMasterData();
+
+  const searchBarRef = useRef<SearchBarHandle>(null);
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === "/") {
+      const currentFocusOwner = document.activeElement;
+      if (!currentFocusOwner || currentFocusOwner === document.body) {
+        event.preventDefault();
+        searchBarRef.current?.focus();
+      }
+    }
+  }, []);
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   const selectedRow = useMemo(
     () => selectedCode ? getRowByCode(selectedCode) : undefined,
@@ -132,12 +145,13 @@ export default function SearchResult() {
             <Link href="/">
               <div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
                 <AppIcon size="small" />
-								MediXplorer
+                MediXplorer
               </div>
             </Link>
             <div className="flex-1">
               <div>
                 <SearchBar
+                  ref={searchBarRef}
                   value={searchInputValue}
                   onChange={setSearchInputValue}
                 />
@@ -152,7 +166,7 @@ export default function SearchResult() {
             </div>
           </div>
           {filteredData && (<div className="text-sm text-gray-500 p-2 px-4">
-						Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
+            Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
           </div>)}
         </div>
         <div style={{ gridRow: 2 }} className="px-2">
@@ -160,7 +174,7 @@ export default function SearchResult() {
             isLoading || !filteredData ?
               <div className="flex items-center justify-center gap-2 mt-16">
                 <Loading />
-								Downloading...
+                Downloading...
               </div> : <DataTable
                 data={filteredData}
                 columns={columns}
@@ -174,7 +188,7 @@ export default function SearchResult() {
       {selectedCode && !isLoading && (
         <Drawer title={selectedRow ? getValue(selectedRow, nameField) : ""} onClose={select}>
           {selectedRow ? <Detail row={selectedRow} rows={data!} /> : <div className="flex items-center justify-center h-full">
-						No data found for code {selectedCode}
+            No data found for code {selectedCode}
           </div>}
         </Drawer>
       )}
