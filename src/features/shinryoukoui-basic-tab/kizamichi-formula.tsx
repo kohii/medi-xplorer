@@ -37,12 +37,12 @@ export function KizamichiFormula({ row }: { row: string[] }) {
   const 点数識別 = getValue(row, getField("新又は現点数/点数識別"));
   const 点数単位 = (() => {
     switch (点数識別) {
-    case "1":
-      return "円";
-    case "3":
-      return "点";
-    default:
-      throw new Error(`Unknown 点数識別: ${点数識別}`);
+      case "1":
+        return "円";
+      case "3":
+        return "点";
+      default:
+        throw new Error(`Unknown 点数識別: ${点数識別}`);
     }
   })();
 

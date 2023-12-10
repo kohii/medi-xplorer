@@ -89,19 +89,19 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
   const operatorKind: AdvancedSearchOperatorKind = (() => {
     if (!filterItem.negative) {
       switch (filterItem.operator) {
-      case ":": return restValues.length > 0 ? "in" : "eq";
-      case ":>": return "gt";
-      case ":>=": return "gte";
-      case ":<": return "lt";
-      case ":<=": return "lte";
+        case ":": return restValues.length > 0 ? "in" : "eq";
+        case ":>": return "gt";
+        case ":>=": return "gte";
+        case ":<": return "lt";
+        case ":<=": return "lte";
       }
     }
     switch (filterItem.operator) {
-    case ":": return restValues.length > 0 ? "not-in" : "not-eq";
-    case ":>": return "lte";
-    case ":>=": return "lt";
-    case ":<": return "gte";
-    case ":<=": return "gt";
+      case ":": return restValues.length > 0 ? "not-in" : "not-eq";
+      case ":>": return "lte";
+      case ":>=": return "lt";
+      case ":<": return "gte";
+      case ":<=": return "gt";
     }
   })();
 
