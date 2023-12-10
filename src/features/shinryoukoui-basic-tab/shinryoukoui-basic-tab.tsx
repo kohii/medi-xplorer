@@ -85,6 +85,9 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
           <SplitChip label="上限回数">
             {shinryoukouiMasterVirtualFields.上限回数.value(row)}
           </SplitChip>
+          <SplitChip label="病床数区分">
+            {formatCodeValue(row, getField("病床数区分"))}
+          </SplitChip>
           <SplitChip label="ＤＰＣ適用区分">
             {formatCodeValue(row, getField("ＤＰＣ適用区分"))}
           </SplitChip>
