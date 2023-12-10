@@ -1,4 +1,4 @@
-import { Parser } from "csv-string/dist/Parser";
+import { parseCsv } from "@/utils/csvs";
 
 export async function fetchShisetsukijunData(): Promise<[string, string][]> {
   const res = await fetch("/master-data/shisetsukijun_20231020.csv", {
@@ -7,6 +7,5 @@ export async function fetchShisetsukijunData(): Promise<[string, string][]> {
   if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
   const text = await res.text();
-  const csv = new Parser(text);
-  return csv.File() as [string, string][];
+  return parseCsv(text) as [string, string][];
 }
