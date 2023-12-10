@@ -1,14 +1,14 @@
 import { type JestConfigWithTsJest } from "ts-jest";
-import { defaults as tsjPreset } from "ts-jest/presets";
+import { defaultsESM as tsjPreset } from "ts-jest/presets";
 
 const jestConfig: JestConfigWithTsJest = {
-  preset: "ts-jest",
   testEnvironment: "node",
   verbose: true,
   roots: ["<rootDir>"],
   transform: {
     ...tsjPreset.transform,
   },
+  extensionsToTreatAsEsm: [".ts", ".tsx"],
   testMatch: ["<rootDir>/**/*.test.ts"],
   modulePaths: ["<rootDir>/src"],
   moduleNameMapper: {
