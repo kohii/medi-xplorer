@@ -165,62 +165,61 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 
       {(getValue(row, getField("検査等実施判断区分")) !== "0" ||
         getValue(row, getField("包括対象検査")) !== "0" ||
-        getValue(row, getField("逓減対象区分")) !== "0") && (
-          <section>
-            <SectionHeading>検査</SectionHeading>
-            <HStack>
-              <SplitChip label="検査等実施判断区分">
-                {formatCodeValue(row, getField("検査等実施判断区分"))}
-              </SplitChip>
-              <SplitChip label="検査等実施判断グループ区分">
-                {formatCodeValue(row, getField("検査等実施判断グループ区分"))}
-              </SplitChip>
-              <SplitChip label="包括対象検査">
-                {formatCodeValue(row, getField("包括対象検査"))}
-              </SplitChip>
-              <SplitChip label="逓減対象区分">
-                {formatCodeValue(row, getField("逓減対象区分"))}
-              </SplitChip>
-            </HStack>
-            {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
-              label="対応する検査等の実施料..."
-              className="my-2"
-            >
-              {(open) => open && (<ShinryoukouiTable rows={rows} filter={[{
-                fieldKey: "検査等実施判断区分",
-                operator: ":",
-                value: "1",
-                negative: false,
-              }, {
-                fieldKey: "検査等実施判断グループ区分",
-                operator: ":",
-                value: getValue(row, getField("検査等実施判断グループ区分")),
-                negative: false,
-              }]} />)}
-            </UncontrolledToggle>)
-            }
-            {getValue(row, getField("検査等実施判断区分")) === "1" && (
-              <>
-                <SubHeading>
-                  対応する判断料・診断料
-                </SubHeading>
-                <div className="pb-2">
-                  <ShinryoukouiTable rows={rows} filter={[{
-                    fieldKey: "検査等実施判断区分",
-                    operator: ":",
-                    value: "2",
-                    negative: false,
-                  }, {
-                    fieldKey: "検査等実施判断グループ区分",
-                    operator: ":",
-                    value: getValue(row, getField("検査等実施判断グループ区分")),
-                    negative: false,
-                  }]} />
-                </div>
-              </>)}
-          </section>
+        getValue(row, getField("逓減対象区分")) !== "0") &&
+        (<section>
+          <SectionHeading>検査</SectionHeading>
+          <HStack>
+            <SplitChip label="検査等実施判断区分">
+              {formatCodeValue(row, getField("検査等実施判断区分"))}
+            </SplitChip>
+            <SplitChip label="検査等実施判断グループ区分">
+              {formatCodeValue(row, getField("検査等実施判断グループ区分"))}
+            </SplitChip>
+            <SplitChip label="包括対象検査">
+              {formatCodeValue(row, getField("包括対象検査"))}
+            </SplitChip>
+            <SplitChip label="逓減対象区分">
+              {formatCodeValue(row, getField("逓減対象区分"))}
+            </SplitChip>
+          </HStack>
+          {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
+            label="対応する検査等の実施料..."
+            className="my-2"
+          >
+            {(open) => open && (<ShinryoukouiTable rows={rows} filter={[{
+              fieldKey: "検査等実施判断区分",
+              operator: ":",
+              value: "1",
+              negative: false,
+            }, {
+              fieldKey: "検査等実施判断グループ区分",
+              operator: ":",
+              value: getValue(row, getField("検査等実施判断グループ区分")),
+              negative: false,
+            }]} />)}
+          </UncontrolledToggle>)
+          }
+          {getValue(row, getField("検査等実施判断区分")) === "1" && (
+            <>
+              <SubHeading>
+                対応する判断料・診断料
+              </SubHeading>
+              <div className="pb-2">
+                <ShinryoukouiTable rows={rows} filter={[{
+                  fieldKey: "検査等実施判断区分",
+                  operator: ":",
+                  value: "2",
+                  negative: false,
+                }, {
+                  fieldKey: "検査等実施判断グループ区分",
+                  operator: ":",
+                  value: getValue(row, getField("検査等実施判断グループ区分")),
+                  negative: false,
+                }]} />
+              </div>
+            </>)}
+        </section>
         )}
-
       <OthersSection row={row} />
     </>
   );
