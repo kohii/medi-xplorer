@@ -28,6 +28,8 @@ export type DetailBasicTabProps = {
 export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
   const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
   const ageAdditionalFeeData = getAgeAdditionalFeeData(row);
+  const 告示等識別区分 = getValue(row, getField("告示等識別区分（１）"));
+  const is基本項目 = 告示等識別区分 === "1" || 告示等識別区分 === "3" || 告示等識別区分 === "5";
 
   return (
     <>
@@ -100,13 +102,21 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             {shinryoukouiMasterVirtualFields.旧点数.value(row)}
           </SplitChip>
         </HStack>
+        {is基本項目 && (
+          <HStack className="mt-1">
+            <SplitChip label="逓減対象区分">
+              {formatCodeValue(row, getField("逓減対象区分"))}
+            </SplitChip>
+          </HStack>
+        )}
+
         {getValue(row, getField("きざみ値/きざみ値計算識別")) === "1" && (
           <div>
             <SubHeading>きざみ値</SubHeading>
             <KizamichiFormula row={row} />
           </div>
         )}
-      </section>
+      </section >
 
       <section>
         <SectionHeading>記録</SectionHeading>
@@ -129,43 +139,47 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
         </HStack>
       </section>
 
-      {getValue(row, getField("注加算/注加算コード")) !== "0" && (
-        <section>
-          <SectionHeading>注加算</SectionHeading>
-          <>
-            <HStack>
-              <SplitChip label="注加算コード">
-                {getValue(row, getField("注加算/注加算コード"))}
-              </SplitChip>
-              <SplitChip label="注加算通番">
-                {getValue(row, getField("注加算/注加算通番"))}
-              </SplitChip>
-            </HStack>
-            <UncontrolledToggle
-              label="同じ注加算コードの診療行為..."
-              className="mb-4 mt-2"
-            >
-              {(open) => open && (<ChuukasanTable
-                rows={rows}
-                chuukasanCode={getValue(row, getField("注加算/注加算コード"))}
-                shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード"))}
-              />)
-              }
-            </UncontrolledToggle>
-          </>
-        </section>
-      )}
+      {
+        getValue(row, getField("注加算/注加算コード")) !== "0" && (
+          <section>
+            <SectionHeading>注加算</SectionHeading>
+            <>
+              <HStack>
+                <SplitChip label="注加算コード">
+                  {getValue(row, getField("注加算/注加算コード"))}
+                </SplitChip>
+                <SplitChip label="注加算通番">
+                  {getValue(row, getField("注加算/注加算通番"))}
+                </SplitChip>
+              </HStack>
+              <UncontrolledToggle
+                label="同じ注加算コードの診療行為..."
+                className="mb-4 mt-2"
+              >
+                {(open) => open && (<ChuukasanTable
+                  rows={rows}
+                  chuukasanCode={getValue(row, getField("注加算/注加算コード"))}
+                  shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード"))}
+                />)
+                }
+              </UncontrolledToggle>
+            </>
+          </section>
+        )
+      }
 
-      {ageAdditionalFeeData.length > 0 && (
-        <section>
-          <SectionHeading>年齢加算</SectionHeading	>
-          <AgeAdditionalFeeTable data={ageAdditionalFeeData} originalRows={rows} />
-        </section>
-      )}
+      {
+        ageAdditionalFeeData.length > 0 && (
+          <section>
+            <SectionHeading>年齢加算</SectionHeading	>
+            <AgeAdditionalFeeTable data={ageAdditionalFeeData} originalRows={rows} />
+          </section>
+        )
+      }
 
-      {(getValue(row, getField("検査等実施判断区分")) !== "0" ||
-        getValue(row, getField("包括対象検査")) !== "0" ||
-        getValue(row, getField("逓減対象区分")) !== "0") &&
+      {
+        (getValue(row, getField("検査等実施判断区分")) !== "0" ||
+          getValue(row, getField("包括対象検査")) !== "0") &&
         (<section>
           <SectionHeading>検査</SectionHeading>
           <HStack>
@@ -177,9 +191,6 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             </SplitChip>
             <SplitChip label="包括対象検査">
               {formatCodeValue(row, getField("包括対象検査"))}
-            </SplitChip>
-            <SplitChip label="逓減対象区分">
-              {formatCodeValue(row, getField("逓減対象区分"))}
             </SplitChip>
           </HStack>
           {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
@@ -219,7 +230,8 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
               </div>
             </>)}
         </section>
-        )}
+        )
+      }
       <OthersSection row={row} />
     </>
   );
