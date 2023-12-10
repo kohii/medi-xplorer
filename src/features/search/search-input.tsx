@@ -14,7 +14,7 @@ const FIELD_HIGHLIGHT_REG = new RegExp(
 const renderer = createRegexRenderer([
   [
     FIELD_HIGHLIGHT_REG,
-    { background: "#EAF5F9", color: "#4276AA", borderRadius: "2px" },
+    { background: "#EAF5F9", color: "#698199", borderRadius: "2px" },
   ],
 ]);
 
