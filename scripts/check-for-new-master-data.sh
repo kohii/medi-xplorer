@@ -15,8 +15,8 @@ if [ -z "$date" ]; then
   exit 1
 fi
 
-# Get latest update date from JSON
-json_date=$(jq -r '.[-1]' src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json)
+# Get latest update date from JSON (first element in the array)
+json_date=$(jq -r '.[0]' src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json)
 
 # Compare dates and download new data if available
 if [ "$date" != "$json_date" ]; then
@@ -24,9 +24,8 @@ if [ "$date" != "$json_date" ]; then
   unzip s_ALL${date}.zip -d public/master-data/s
   rm s_ALL${date}.zip
 
-  # Insert latest update date into JSON
-  jq --arg date "$date" '. += [$date]' src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json > tmp.json
-  mv tmp.json src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json
+  # Update JSON
+  ./scripts/generate-versions.sh
 
   # git config --global user.email "github-actions[bot]@users.noreply.github.com"
   # git config --global user.name "github-actions[bot]"
