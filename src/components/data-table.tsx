@@ -6,7 +6,7 @@ import {
   Row,
   useReactTable,
 } from "@tanstack/react-table";
-import { useVirtual } from "@tanstack/react-virtual";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import React, { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -14,18 +14,18 @@ import { BreakLine } from "@/components/break-line";
 
 
 export type DataTableColumn = {
-	name: string;
-	width?: number;
-	value: (row: string[]) => string;
-	styledValue?: (row: string[]) => React.ReactNode;
+  name: string;
+  width?: number;
+  value: (row: string[]) => string;
+  styledValue?: (row: string[]) => React.ReactNode;
 };
 
 export type DataTableProps = {
-	data: string[][];
-	columns: DataTableColumn[];
-	height: number | string;
-	onRowClick?: (row: string[]) => void;
-	isSelected?: (row: string[]) => boolean;
+  data: string[][];
+  columns: DataTableColumn[];
+  height: number | string;
+  onRowClick?: (row: string[]) => void;
+  isSelected?: (row: string[]) => boolean;
 };
 
 export const DataTable = React.memo(function DataTable({
@@ -62,19 +62,21 @@ export const DataTable = React.memo(function DataTable({
 
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
   const { rows } = table.getRowModel();
-  const rowVirtualizer = useVirtual({
-    parentRef: tableContainerRef,
-    size: rows.length,
+  const rowVirtualizer = useVirtualizer({
+    getScrollElement: () => tableContainerRef.current,
+    count: rows.length,
+    estimateSize: () => 40,
     overscan: 10,
   });
 
-  const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
+  const totalSize = rowVirtualizer.getTotalSize();
+  const virtualRows = rowVirtualizer.getVirtualItems();
 
-  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+  const paddingTop = virtualRows.length > 0 ? virtualRows[0]?.start ?? 0 : 0;
   const paddingBottom =
-		virtualRows.length > 0
-		  ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0)
-		  : 0;
+    virtualRows.length > 0 ?
+      totalSize - (virtualRows[virtualRows.length - 1]?.end ?? 0) :
+      0;
 
   const minTableWidth = useMemo(() => columnDefs.reduce((acc, col) => acc + (col.size ?? 128), 0), [columnDefs]);
 
