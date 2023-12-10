@@ -1,7 +1,5 @@
+// sorted by date desc
 import versions from "./shinryoukoui-master-versions.json" assert { type: "json" };
-
-// sort in descending order
-versions.sort((a, b) => b.localeCompare(a));
 
 export const SHINRYOUKOUI_MASTER_VERSION_KEYS: string[] = versions;
 
