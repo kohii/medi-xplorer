@@ -14,7 +14,7 @@ export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpres
   const expression: FilterExpression = [];
 
   for (const item of items) {
-    const negative = item.startsWith("-");
+    const negative = item.startsWith("-") && item.length > 1;
     const adjustedItem = negative ? item.substring(1) : item;
 
     const fieldMatch = adjustedItem.match(/([^:]+)(:>=?|:<=?|:)(.*)/);
