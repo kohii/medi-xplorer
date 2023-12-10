@@ -12,7 +12,6 @@ const fields = {
   "コード表用番号（アルファベット部を除く）/枝番": getField("コード表用番号（アルファベット部を除く）/枝番"),
 } as const;
 
-
 export const shinryoukouiMasterVirtualFields = {
   "区分番号": {
     name: "区分番号",
@@ -54,4 +53,17 @@ export const shinryoukouiMasterVirtualFields = {
       return getAgeRangeLabel(lower, upper);
     },
   },
+  "上限回数": {
+    name: "上限回数",
+    value(row: string[]) {
+      const value = getValue(row, getField("上限回数/上限回数"));
+      if (value == "0") return "無制限";
+      const count = `${value}回`;
+
+      const errorPattern = getValue(row, getField("上限回数/上限回数エラー処理"));
+      const error = errorPattern == "1" ? "上限回数を算定" : "上限回数を確認";
+
+      return `${count} (超えた場合、${error})`;
+    },
+  }
 } satisfies Record<string, VirtualField>;
