@@ -8,7 +8,7 @@ import { getValue } from "../fields/get-values";
 import { SectionHeading } from "./section-heading";
 
 type OthersSectionProps = {
-	row: string[];
+  row: string[];
 }
 
 export function OthersSection({
@@ -21,6 +21,10 @@ export function OthersSection({
 
   if (getValue(row, getField("外来管理加算区分")) === "1") {
     labels.push("外来管理加算を算定できない");
+  }
+
+  if (is基本項目 && getValue(row, getField("時間加算区分")) === "1") {
+    labels.push("時間外加算等を算定可能");
   }
 
   if (is基本項目 && getValue(row, getField("処置乳幼児加算区分")) !== "0") {
