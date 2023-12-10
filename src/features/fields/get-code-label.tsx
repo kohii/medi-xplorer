@@ -11,7 +11,7 @@ export function getCodeLabel(
     const code = field.codes.find(code => {
       if (code.code !== value) return false;
       if (!code.condition) return true;
-      return code.condition.value.includes(row[code.condition.seq]);
+      return code.condition.value.includes(row[code.condition.seq - 1]);
     });
     if (code) {
       return preferAlias && code.alias ? code.alias : code.name;
