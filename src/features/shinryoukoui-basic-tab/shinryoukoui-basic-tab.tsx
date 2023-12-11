@@ -192,9 +192,11 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <SplitChip label="検査等実施判断グループ区分">
               {formatCodeValue(row, getField("検査等実施判断グループ区分"))}
             </SplitChip>
-            <SplitChip label="包括対象検査">
-              {formatCodeValue(row, getField("包括対象検査"))}
-            </SplitChip>
+            {getValue(row, getField("検査等実施判断区分")) === "1" &&
+              (<SplitChip label="包括対象検査">
+                {formatCodeValue(row, getField("包括対象検査"))}
+              </SplitChip>)
+            }
           </HStack>
           {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
             label="対応する検査等の実施料..."
