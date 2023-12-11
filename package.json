@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^14.0.4",
-    "@tanstack/react-query": "^5.8.4",
+    "@tanstack/react-query": "^5.13.4",
     "@tanstack/react-table": "^8.10.7",
     "@tanstack/react-virtual": "^3.0.1",
     "csv-string": "^4.1.1",
