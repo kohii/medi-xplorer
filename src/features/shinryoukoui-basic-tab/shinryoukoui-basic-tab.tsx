@@ -1,3 +1,5 @@
+import { get } from "http";
+
 import { Chip } from "@/components/chip";
 import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
@@ -6,7 +8,6 @@ import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
 import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel, normalizeUnit } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
-import { getCodeLabel } from "../fields/get-code-label";
 import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
@@ -105,13 +106,6 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             {shinryoukouiMasterVirtualFields.旧点数.value(row)}
           </SplitChip>
         </HStack>
-        {is基本項目 && (
-          <HStack className="mt-1">
-            <SplitChip label="逓減対象区分">
-              {formatCodeValue(row, getField("逓減対象区分"))}
-            </SplitChip>
-          </HStack>
-        )}
 
         {getValue(row, getField("きざみ値/きざみ値計算識別")) === "1" && (
           <div>
@@ -182,7 +176,8 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
 
       {
         (getValue(row, getField("検査等実施判断区分")) !== "0" ||
-          getValue(row, getField("包括対象検査")) !== "0") &&
+          getValue(row, getField("包括対象検査")) !== "0" ||
+          getValue(row, getField("包括逓減区分")) !== "0") &&
         (<section>
           <SectionHeading>検査</SectionHeading>
           <HStack>
@@ -193,11 +188,25 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
               {formatCodeValue(row, getField("検査等実施判断グループ区分"))}
             </SplitChip>
             {getValue(row, getField("検査等実施判断区分")) === "1" &&
-              (<SplitChip label="包括対象検査">
-                {formatCodeValue(row, getField("包括対象検査"))}
-              </SplitChip>)
+              (<>
+                <SplitChip label="包括対象検査">
+                  {formatCodeValue(row, getField("包括対象検査"))}
+                </SplitChip>
+              </>)
             }
           </HStack>
+          {is基本項目 && (
+            <HStack className="mt-1">
+              <SplitChip label="逓減対象区分">
+                {formatCodeValue(row, getField("逓減対象区分"))}
+              </SplitChip>
+              {getValue(row, getField("逓減対象区分")) === "1" &&
+                (<SplitChip label="包括逓減区分">
+                  {formatCodeValue(row, getField("包括逓減区分"))}
+                </SplitChip>)
+              }
+            </HStack>
+          )}
           {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
             label="対応する検査等の実施料..."
             className="my-2"
