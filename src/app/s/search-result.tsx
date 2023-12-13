@@ -81,21 +81,6 @@ export default function SearchResult() {
   } = useShinryoukouiMasterData();
 
   const searchBarRef = useRef<SearchBarHandle>(null);
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (event.key === "/") {
-      const currentFocusOwner = document.activeElement;
-      if (!currentFocusOwner || currentFocusOwner === document.body) {
-        event.preventDefault();
-        searchBarRef.current?.focus();
-      }
-    }
-  }, []);
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleKeyDown]);
 
   const selectedRow = useMemo(
     () => selectedCode ? getRowByCode(selectedCode) : undefined,
@@ -121,6 +106,25 @@ export default function SearchResult() {
       code,
     });
   }, [updateSearchParams]);
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === "/") {
+      const currentFocusOwner = document.activeElement;
+      if (!currentFocusOwner || currentFocusOwner === document.body) {
+        event.preventDefault();
+        searchBarRef.current?.focus();
+      }
+    }
+    if (event.key === "Escape") {
+      select();
+    }
+  }, [select]);
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   const filteredData = useMemo(() => {
     if (!data) {
