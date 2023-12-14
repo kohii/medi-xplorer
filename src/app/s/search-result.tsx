@@ -148,7 +148,7 @@ export default function SearchResult() {
         <div
           style={{ gridRow: 1 }}>
           <div className="p-3 border-b border-gray-300 flex items-start gap-3">
-            <Link href="/">
+            <Link href="/" title="Go to MediXplorer home">
               <div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
                 <AppIcon size="small" />
                 <span className="hidden md:inline">
