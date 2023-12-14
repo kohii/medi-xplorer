@@ -41,6 +41,7 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
   const { data, error, isLoading } = useQuery({
     queryKey: ["s", version],
     queryFn: () => fetchMasterData(version),
+    refetchOnMount: false,
   });
 
   if (error) {
