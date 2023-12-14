@@ -12,7 +12,7 @@ type ShisetsukijunDataContextType = {
 
 const ShisetsukijunDataContext = createContext<ShisetsukijunDataContextType>({
   isLoading: true,
-  getLabelByCode(code) {
+  getLabelByCode() {
     return undefined;
   },
 });

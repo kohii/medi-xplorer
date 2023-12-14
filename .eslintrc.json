@@ -3,6 +3,7 @@
     "next/core-web-vitals",
     "plugin:eslint-plugin-next-on-pages/recommended",
     "next",
+    "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "plugins": [
@@ -58,6 +59,15 @@
           "order": "asc",
           "caseInsensitive": true
         }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
       }
     ]
   }

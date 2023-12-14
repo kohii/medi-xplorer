@@ -4,14 +4,14 @@ import { twMerge } from "tailwind-merge";
 
 // FilterableSelectProps 型を条件付き型に変更
 type FilterableSelectProps<ValueType extends string, IsNullable extends boolean> = {
-	value: IsNullable extends true ? ValueType | null : ValueType;
-	options: { label: string; value: ValueType }[];
-	// eslint-disable-next-line no-unused-vars
-	onChange: (value: IsNullable extends true ? ValueType | null : ValueType) => void;
-	placeholder?: string;
-	className?: string;
-	clearable?: boolean;
-	isNullable?: IsNullable;
+  value: IsNullable extends true ? ValueType | null : ValueType;
+  options: { label: string; value: ValueType }[];
+  // eslint-disable-next-line no-unused-vars
+  onChange: (value: IsNullable extends true ? ValueType | null : ValueType) => void;
+  placeholder?: string;
+  className?: string;
+  clearable?: boolean;
+  isNullable?: IsNullable;
 };
 
 export function FilterableSelect<ValueType extends string, IsNullable extends boolean = false>({
@@ -43,6 +43,7 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
         ]),
       }}
       options={options}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onChange={(option) => onChange(option?.value ?? null as any)}
       value={selectedOption}
       placeholder={placeholder ?? "選択"}

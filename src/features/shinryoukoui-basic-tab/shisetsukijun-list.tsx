@@ -1,10 +1,5 @@
-import { twMerge } from "tailwind-merge";
-
 import { useShisetsukijunData } from "@/contexts/shisetsukijun-data-context";
 import { getShisetsukijunCodeGroupList } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
-
-import { SimpleTableColumn } from "../../components/simple-table";
-import { SimpleTable } from "../../components/simple-table";
 
 import { SubHeading } from "./sub-heading";
 
@@ -20,15 +15,6 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
     return <div className="p-4">Loading...</div>;
   }
 
-  const columns: SimpleTableColumn<string>[] = [{
-    name: "施設基準コード",
-    render: code => code,
-    width: 124,
-  }, {
-    name: "施設基準",
-    render: code => getLabelByCode(code)
-  }];
-
   const hasOr = codeGroups.some(codes => codes.length > 1);
   const hasAnd = codeGroups.length > 1;
   const codeLength = codeGroups.reduce((acc, codes) => acc + codes.length, 0);
@@ -40,10 +26,10 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
         <thead>
           <tr className="bg-slate-100">
             <th className="text-left font-medium px-2 py-1 w-32" >
-							施設基準コード
+              施設基準コード
             </th>
             <th className="text-left font-medium px-2 py-1" >
-							施設基準
+              施設基準
             </th>
             {hasOr && (
               <th className="w-11" />
@@ -71,7 +57,7 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
                   )}
                   {hasAnd && groupIndex === 0 && index === 0 && (
                     <td className="px-1 py-1 border-l text-center" rowSpan={codeLength}>
-											AND
+                      AND
                     </td>
                   )}
                 </tr>

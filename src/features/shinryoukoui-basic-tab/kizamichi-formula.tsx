@@ -1,4 +1,4 @@
-import { toHalfWidth, trimDecimalZero } from "@/utils/text";
+import { trimDecimalZero } from "@/utils/text";
 
 import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
@@ -7,8 +7,8 @@ import { normalizeUnit } from "../shinryoukoui-master-fields/shinryoukoui-master
 
 
 type Row = {
-	amount: string;
-	point: React.ReactNode;
+  amount: string;
+  point: React.ReactNode;
 }
 
 const columns: SimpleTableColumn<Row>[] = [

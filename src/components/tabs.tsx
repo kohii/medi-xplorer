@@ -1,14 +1,13 @@
-import { useCallback } from "react";
 import { twMerge } from "tailwind-merge";
 
 export type TabsProps<T extends string = string> = {
-	value: T;
-	onChange: (value: T) => void;
-	tabs: {
-		value: T;
-		label: string;
-		disabled?: boolean;
-	}[];
+  value: T;
+  onChange: (value: T) => void;
+  tabs: {
+    value: T;
+    label: string;
+    disabled?: boolean;
+  }[];
 };
 
 export function Tabs<T extends string = string>({

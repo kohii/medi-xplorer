@@ -1,13 +1,11 @@
-import { on } from "events";
-
 import { IconButton } from "./icon-button";
 import { CloseIcon } from "./icons/close-icon";
 import { VSplit, VSplitItem } from "./v-split";
 
 type DrawerProps = {
-	children: React.ReactNode;
-	onClose: () => void;
-	title: string;
+  children: React.ReactNode;
+  onClose: () => void;
+  title: string;
 };
 
 export function Drawer({

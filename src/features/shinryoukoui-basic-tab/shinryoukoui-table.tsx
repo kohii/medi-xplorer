@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { useMemo } from "react";
 
-import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { formatCodeValue } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 import { shinryoukouiMasterVirtualFields } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
-import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
@@ -17,8 +14,8 @@ import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
 type ShinryoukouiTableProps = {
-	rows: string[][];
-	filter: FilterExpression
+  rows: string[][];
+  filter: FilterExpression
 };
 
 const columns: SimpleTableColumn<string[]>[] = [{

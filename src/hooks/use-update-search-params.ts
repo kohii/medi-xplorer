@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 
 import { useRouterFn } from "./use-router-fn";
 
@@ -7,8 +7,8 @@ export function useUpdateSearchParams() {
   return useCallback((
     params: Record<string, string | undefined>,
     options: {
-			mode: "replace" | "push";
-		} = { mode: "push" },
+      mode: "replace" | "push";
+    } = { mode: "push" },
   ) => {
     const url = new URL(window.location.href);
     Object.entries(params).forEach(([key, value]) => {

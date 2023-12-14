@@ -33,6 +33,7 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
           <SearchIcon />
         </div>
         <SearchInput
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ref={ref as any}
           value={value}
           onChange={onChange}

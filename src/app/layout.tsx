@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
+
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-
-import { SearchResultDataProviders } from "./s/search-result-data-providers";
 
 import "./globals.css";
 

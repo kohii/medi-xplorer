@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 
 import { fetchMasterData } from "@/apis/fetch-master-data";
 import { getValue } from "@/features/fields/get-values";
@@ -9,19 +9,19 @@ import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, S
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 type ShinryoukouiMasterDataContextType = {
-	version: string;
-	setVersion: (version: string) => void;
-	data?: string[][];
-	isLoading: boolean;
+  version: string;
+  setVersion: (version: string) => void;
+  data?: string[][];
+  isLoading: boolean;
 
-	getRowByCode(code: string): string[] | undefined;
+  getRowByCode(code: string): string[] | undefined;
 };
 
 const ShinryoukouiMasterDataContext = createContext<ShinryoukouiMasterDataContextType>({
   version: LATEST_SHINRYOUKOUI_MASTER_VERSION,
   setVersion: () => { },
   isLoading: true,
-  getRowByCode(code) {
+  getRowByCode() {
     return undefined;
   },
 });
