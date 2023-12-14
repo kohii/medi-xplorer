@@ -1,9 +1,9 @@
 import { useRef, useEffect, useCallback } from "react";
 
 export function useDebouncedCallback(
-  callback: (...args: any[]) => void,
+  callback: (...args: unknown[]) => void,
   wait: number,
-  dependencies: any[],
+  dependencies: unknown[],
 ) {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const callbackRef = useRef(callback);
@@ -18,7 +18,7 @@ export function useDebouncedCallback(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
-  return useCallback((...args: any[]) => {
+  return useCallback((...args: unknown[]) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }

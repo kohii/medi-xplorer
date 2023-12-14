@@ -1,13 +1,16 @@
 type FormLabelProps = {
-	children: React.ReactNode;
-	htmlFor?: string;
+  children: React.ReactNode;
+  htmlFor?: string;
 };
 
 export function FormLabel({
   children,
-  htmlFor,
+  ...props
 }: FormLabelProps) {
   return (
-    <label className="block mb-0.5 text-sm text-gray-500 font-medium">{children}</label>
+    <label
+      className="block mb-0.5 text-sm text-gray-500 font-medium"
+      {...props}
+    >{children}</label>
   );
 }

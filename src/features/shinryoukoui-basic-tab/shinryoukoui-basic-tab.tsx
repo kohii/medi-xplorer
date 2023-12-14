@@ -1,7 +1,4 @@
-import { get } from "http";
-
-import { Chip } from "@/components/chip";
-import { ColorChip, getNthColorChipColor } from "@/components/color-chip";
+import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { SplitChip } from "@/components/split-chip";
 import { UncontrolledToggle } from "@/components/toggle";

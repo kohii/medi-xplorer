@@ -1,4 +1,4 @@
-import { FieldFilterItem, FilterExpression, FilterExpressionText } from "./types";
+import { FilterExpression, FilterExpressionText } from "./types";
 
 export function stringifyQuery(filterExpression: FilterExpression): FilterExpressionText {
   return filterExpression.map((item) => {

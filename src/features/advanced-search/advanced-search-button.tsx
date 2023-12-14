@@ -6,8 +6,6 @@ import { useState } from "react";
 import { Backdrop } from "@/components/backdrop";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 
-import { AdvancedSearchFormModal } from "./advancedj-search-form-modal";
-
 type AdvancedSearchLinkProps = {
   initialQuery?: string;
 };

@@ -4,10 +4,10 @@ import { FilterableSelect } from "@/components/filterable-select";
 import { IconButton } from "@/components/icon-button";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
-import { FieldName, getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { CodeSelect } from "./code-select";
-import { AdvancedSearchItem, AdvancedSearchOperatorKind, advancedSearchOperatorOptions } from "./constants";
+import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
 
 const operatorOptions = advancedSearchOperatorOptions.map(option => ({
@@ -17,9 +17,9 @@ const operatorOptions = advancedSearchOperatorOptions.map(option => ({
 
 
 type AdvancedSearchItemFormProps = {
-	item: AdvancedSearchItem;
-	onChange: (value: AdvancedSearchItem) => void;
-	onDelete: () => void;
+  item: AdvancedSearchItem;
+  onChange: (value: AdvancedSearchItem) => void;
+  onDelete: () => void;
 };
 
 export function AdvancedSearchItemForm({

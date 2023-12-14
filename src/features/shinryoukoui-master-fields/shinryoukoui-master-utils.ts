@@ -4,7 +4,7 @@ import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
 import { alphabetToNumber, toHalfWidth, trimDecimalZero, trimLeadingZero } from "@/utils/text";
 
-import { FieldName, getField } from "./shinryoukoui-master-fields";
+import { getField } from "./shinryoukoui-master-fields";
 
 export function formatPoint(
   pointType: string,

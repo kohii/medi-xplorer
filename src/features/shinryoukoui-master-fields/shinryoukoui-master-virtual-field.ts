@@ -1,6 +1,5 @@
 import { getValue } from "@/features/fields/get-values";
 import { VirtualField } from "@/features/fields/virtual-field";
-import { trimLeadingZero } from "@/utils/text";
 
 import { getField } from "./shinryoukoui-master-fields";
 import { formatPoint, getAgeRangeLabel } from "./shinryoukoui-master-utils";
