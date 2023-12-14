@@ -8,10 +8,11 @@ export const VersionSelect = React.memo(function VersionSelect() {
 
   return (
     <>
-      <span className="hidden sm:inline">
+      <label className="hidden sm:inline" htmlFor="master-version">
         マスターのバージョン:{" "}
-      </span>
+      </label>
       <select
+        id="master-version"
         onChange={(e) => setVersion(e.target.value)}
         className="text-blue-600 hover:text-blue-800 bg-white border-none text-sm appearance-none width-auto text-right cursor-pointer outline-none"
         value={version}

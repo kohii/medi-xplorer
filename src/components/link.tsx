@@ -6,6 +6,7 @@ type LinkProps = {
   children: React.ReactNode;
   className?: string;
   target?: string;
+  title?: string;
 } & Pick<NextLinkProps, "href">;
 
 export function Link({ children, className, ...rest }: LinkProps) {
