@@ -116,13 +116,15 @@ export default function SearchResult() {
       }
     }
     if (event.key === "Escape") {
-      select();
+      event.preventDefault();
+      select(undefined);
+      console.log("Escape");
     }
   }, [select]);
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
 

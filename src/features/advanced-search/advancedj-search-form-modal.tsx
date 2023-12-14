@@ -16,9 +16,9 @@ import { AdvancedSearchItem, AdvancedSearchOperatorKind, advancedSearchOperatorO
 
 
 type AdvancedSearchFormModalProps = {
-	query: string;
-	onChange: (query: string) => void;
-	onClose: () => void;
+  query: string;
+  onChange: (query: string) => void;
+  onClose: () => void;
 };
 
 export function AdvancedSearchFormModal({
@@ -64,7 +64,15 @@ export function AdvancedSearchFormModal({
   // Commend+Enter or Ctrl+Enter to submit
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      e.stopPropagation();
       handleOk();
+    }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      onClose();
+      console.log("close");
     }
   };
 
