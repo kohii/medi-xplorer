@@ -1,4 +1,3 @@
-import { assert } from "node:console";
 import { writeFileSync } from "node:fs";
 
 import fieldGroups from "../src/features/shinryoukoui-master-fields/shinryoukoui-master-field-groups.json" assert { type: "json" };

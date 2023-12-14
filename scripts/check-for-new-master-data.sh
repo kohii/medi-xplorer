@@ -21,7 +21,7 @@ json_date=$(jq -r '.[0]' src/features/shinryoukoui-master-versions/shinryoukoui-
 # Compare dates and download new data if available
 if [ "$date" != "$json_date" ]; then
   curl -o s_ALL${date}.zip https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.files/s_ALL${date}.zip
-  unzip s_ALL${date}.zip -d public/master-data/s
+  unzip s_ALL${date}.zip -d raw-master-data/s/
   rm s_ALL${date}.zip
 
   # Update JSON
