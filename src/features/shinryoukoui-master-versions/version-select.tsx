@@ -5,10 +5,12 @@ import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_LIST } 
 
 export const VersionSelect = React.memo(function VersionSelect() {
   const { version, setVersion } = useShinryoukouiMasterData();
-  const label = SHINRYOUKOUI_MASTER_VERSION_LIST.find((v) => v.key === version)!.label;
 
   return (
     <>
+      <span className="hidden sm:inline">
+        マスターのバージョン:{" "}
+      </span>
       <select
         onChange={(e) => setVersion(e.target.value)}
         className="text-blue-600 hover:text-blue-800 bg-white border-none text-sm appearance-none width-auto text-right cursor-pointer outline-none"
@@ -16,7 +18,7 @@ export const VersionSelect = React.memo(function VersionSelect() {
       >
         {SHINRYOUKOUI_MASTER_VERSION_LIST.map((v) => (
           <option key={v.key} value={v.key}>
-            マスターのバージョン: {v.key === LATEST_SHINRYOUKOUI_MASTER_VERSION ? `${v.label} (最新)` : v.label}
+            {v.key === LATEST_SHINRYOUKOUI_MASTER_VERSION ? `${v.label} (最新)` : v.label}
           </option>
         ))}
       </select>
