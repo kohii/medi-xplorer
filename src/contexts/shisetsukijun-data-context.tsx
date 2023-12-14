@@ -25,6 +25,7 @@ export function ShisetsukijunDataProvider({ children }: { children: React.ReactN
   const { data, error, isLoading } = useQuery({
     queryKey: ["shisetsukijun"],
     queryFn: fetchShisetsukijunData,
+    refetchOnMount: false,
   });
 
   if (error) {

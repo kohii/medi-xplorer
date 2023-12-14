@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define directories and files
-MASTER_FILES_DIR="public/master-data/s/"
+MASTER_FILES_DIR="raw-master-data/s/"
 OUTPUT_FILENAME="src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json"
 
 # Get version keys

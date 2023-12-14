@@ -1,12 +1,11 @@
-import { parseCsv } from "@/utils/csvs";
+import { parseTsv } from "@/utils/csvs";
 
 export async function fetchMasterData(version: string): Promise<string[][]> {
-  const res = await fetch(`/master-data/s/s_ALL${version}.csv`, {
+  const res = await fetch(`/master-data/s/s_ALL${version}.tsv`, {
     cache: "force-cache"
   });
   if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-  const arrayBuffer = await res.arrayBuffer();
-  const text = new TextDecoder("shift_jis").decode(arrayBuffer);
-  return parseCsv(text);
+  const result = parseTsv(await res.text());
+  return result;
 }
