@@ -15,11 +15,10 @@ if [ -z "$date" ]; then
   exit 1
 fi
 
-# Get latest update date from recent file
-latest_date = $(ls -r raw-master-data/s/ | grep '.csv$' | head -n 1 | grep -oE '[0-9]{8}')
+file_name="s_ALL${date}.csv"
 
-# Compare dates and download new data if available
-if [ "$date" != "$latest_date" ]; then
+# Download latest master data if not exists
+if [ ! -f "raw-master-data/s/$file_name" ]; then
   curl -o s_ALL${date}.zip https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.files/s_ALL${date}.zip
   unzip s_ALL${date}.zip -d raw-master-data/s/
   rm s_ALL${date}.zip
