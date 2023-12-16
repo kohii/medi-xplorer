@@ -1,5 +1,5 @@
 
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
 
@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
   }
+};
+
+// prevent auto zooming on iOS Safari when input is focused
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
