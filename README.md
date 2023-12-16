@@ -8,6 +8,6 @@
 
 ```
 npm install
-npm run generate-master-data
+npm run build:masters
 npm run dev
 ```

@@ -20,7 +20,7 @@ jobs:
 
       - run: npm run test
 
-      - run: npm run generate-master-data
+      - run: npm run build:masters
 
       - run: npm run pages:build
         env:
