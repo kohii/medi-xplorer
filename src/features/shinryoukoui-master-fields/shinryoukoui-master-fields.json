@@ -2520,7 +2520,185 @@
 		"seq": 91,
 		"name": "コード表用番号（アルファベット部を除く）/部",
 		"mode": "numeric",
-		"description": ""
+		"description": "",
+		"codes": [
+			{
+				"code": "01",
+				"name": "初・再診料",
+				"condition": {
+					"seq": 90,
+					"value": "1"
+				}
+			},
+			{
+				"code": "02",
+				"name": "入院料等",
+				"condition": {
+					"seq": 90,
+					"value": "1"
+				}
+			},
+			{
+				"code": "01",
+				"name": "医学管理等",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "02",
+				"name": "医学管理等",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "01",
+				"name": "医学管理等",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "02",
+				"name": "在宅医療",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "03",
+				"name": "検査",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "04",
+				"name": "画像診断",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "05",
+				"name": "投薬",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "06",
+				"name": "注射",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "07",
+				"name": "リハビリテーション",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "08",
+				"name": "精神科専門療法",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "09",
+				"name": "処置",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "10",
+				"name": "手術",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "11",
+				"name": "麻酔",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "12",
+				"name": "放射線治療",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "13",
+				"name": "病理診断",
+				"condition": {
+					"seq": 90,
+					"value": "2"
+				}
+			},
+			{
+				"code": "01",
+				"name": "併設保険医療機関の療養に関する事項",
+				"condition": {
+					"seq": 90,
+					"value": "3"
+				}
+			},
+			{
+				"code": "02",
+				"name": "併設保険医療機関以外の保険医療機関の療養に関する事項",
+				"condition": {
+					"seq": 90,
+					"value": "3"
+				}
+			},
+			{
+				"code": "01",
+				"name": "入院料",
+				"condition": {
+					"seq": 90,
+					"value": "6"
+				}
+			},
+			{
+				"code": "02",
+				"name": "通院料",
+				"condition": {
+					"seq": 90,
+					"value": "6"
+				}
+			},
+			{
+				"code": "03",
+				"name": "医療観察精神科専門療法",
+				"condition": {
+					"seq": 90,
+					"value": "6"
+				}
+			}
+		]
 	},
 	{
 		"seq": 92,
