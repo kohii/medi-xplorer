@@ -1,4 +1,4 @@
-# [MediXplorer](https://medi-xplorer.com/)
+# MediXplorer
 
 ## About
 
@@ -11,3 +11,7 @@ npm install
 npm run build:masters
 npm run dev
 ```
+
+## License
+
+MediXplorer は [AGPL-3.0](https://github.com/kohii/medi-xplorer/blob/main/LICENSE) ライセンスの下で公開されています。
