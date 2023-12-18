@@ -5,6 +5,7 @@ import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search
 import { UncontrolledSearchBar } from "@/features/search/search-bar";
 
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
+import { GitHubIcon } from "@/components/icons/github-icon";
 
 export default function Home() {
   return (
@@ -25,10 +26,19 @@ export default function Home() {
         </main>
       </div>
       <footer>
-        <div className="flex items-center justify-center h-24">
-          <div className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} kohii
+        <div className="flex items-center justify-center h-24 gap-4 text-gray-500 text-sm">
+          <div>
+            © {new Date().getFullYear()} MediXplorer • Crafted by kohii
           </div>
+          <a href="https://github.com/kohii/medi-xplorer"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="MediXplorer on GitHub"
+            className="block flex items-center gap-2 underline"
+          >
+            <GitHubIcon />
+            GitHub
+          </a>
         </div>
       </footer>
       <Suspense>
