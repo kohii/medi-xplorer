@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-between h-full">
       <div className="flex flex-col items-center justify-center h-full w-full">
-        <main className="flex flex-col items-center max-w-[600px] w-full pb-28 pt-12 px-4">
+        <main className="flex flex-col items-center max-w-[600px] w-full pb-24 pt-12 px-4">
           <h1 className="text-center text-5xl text-slate-500 flex items-center gap-2">
             <AppIcon />
             MediXplorer
