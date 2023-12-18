@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 
 import { AppIcon } from "@/components/app-icon";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { UncontrolledSearchBar } from "@/features/search/search-bar";
 
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
-import { GitHubIcon } from "@/components/icons/github-icon";
 
 export default function Home() {
   return (
