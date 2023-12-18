@@ -6,4 +6,7 @@
   },
   "tailwindCSS.validate": false,
   "prettier.configPath": ".prettierrc",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
 }
