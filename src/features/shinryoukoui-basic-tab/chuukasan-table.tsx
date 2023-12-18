@@ -5,15 +5,16 @@ import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-mas
 
 import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
+import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
 
 export type ChuukasanTableProps = {
-	rows: string[][];
-	chuukasanCode: string;
-	shinryoukouiCodeToHighlight?: string;
+  rows: string[][];
+  chuukasanCode: string;
+  shinryoukouiCodeToHighlight?: string;
 };
 
 const chuukasanCodeField = getField("注加算/注加算コード");
@@ -46,6 +47,9 @@ const columns: SimpleTableColumn<string[]>[] = [{
 }, {
   name: "告示等識別区分",
   render: (row) => <KokujiShikibetsu1Chip row={row} />
+}, {
+  name: "点数",
+  render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
 }];
 
 export function ChuukasanTable({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanTableProps) {

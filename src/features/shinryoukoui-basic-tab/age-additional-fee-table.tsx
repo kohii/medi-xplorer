@@ -4,13 +4,15 @@ import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-mas
 
 import { SimpleTable, SimpleTableColumn } from "../../components/simple-table";
 import { getValue } from "../fields/get-values";
+import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
 const columns: SimpleTableColumn<{
-	age: string;
-	code: string;
-	name: string;
+  age: string;
+  code: string;
+  name: string;
+  point: string;
 }>[] = [{
   name: "対象年齢",
   render: (row) => row.age,
@@ -20,14 +22,17 @@ const columns: SimpleTableColumn<{
 }, {
   name: "名称",
   render: (row) => row.name,
+}, {
+  name: "点数",
+  render: (row) => row.point,
 }];
 
 type AgeAdditionalFeeTableProps = {
-	data: {
-		age: string;
-		code: string;
-	}[];
-	originalRows: string[][];
+  data: {
+    age: string;
+    code: string;
+  }[];
+  originalRows: string[][];
 }
 
 export function AgeAdditionalFeeTable({
@@ -42,6 +47,7 @@ export function AgeAdditionalFeeTable({
       return ({
         ...item,
         name: getValue(row!, getField("診療行為省略名称/省略漢字名称")),
+        point: shinryoukouiMasterVirtualFields.新又は現点数.value(row!),
       });
     });
   }, [data, originalRows]);
