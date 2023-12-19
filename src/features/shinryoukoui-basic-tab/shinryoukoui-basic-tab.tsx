@@ -208,17 +208,18 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             label="対応する検査等の実施料..."
             className="my-2"
           >
-            {(open) => open && (<ShinryoukouiTable rows={rows} filter={[{
-              fieldKey: "検査等実施判断区分",
-              operator: ":",
-              value: "1",
-              negative: false,
-            }, {
-              fieldKey: "検査等実施判断グループ区分",
-              operator: ":",
-              value: getValue(row, getField("検査等実施判断グループ区分")),
-              negative: false,
-            }]} />)}
+            {(open) => open && (<ShinryoukouiTable rows={rows}
+              filter={[{
+                fieldKey: "検査等実施判断区分",
+                operator: ":",
+                value: "1",
+                negative: false,
+              }, {
+                fieldKey: "検査等実施判断グループ区分",
+                operator: ":",
+                value: getValue(row, getField("検査等実施判断グループ区分")),
+                negative: false,
+              }]} />)}
           </UncontrolledToggle>)
           }
           {getValue(row, getField("検査等実施判断区分")) === "1" && (
@@ -227,17 +228,18 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
                 対応する判断料・診断料
               </SubHeading>
               <div className="pb-2">
-                <ShinryoukouiTable rows={rows} filter={[{
-                  fieldKey: "検査等実施判断区分",
-                  operator: ":",
-                  value: "2",
-                  negative: false,
-                }, {
-                  fieldKey: "検査等実施判断グループ区分",
-                  operator: ":",
-                  value: getValue(row, getField("検査等実施判断グループ区分")),
-                  negative: false,
-                }]} />
+                <ShinryoukouiTable rows={rows}
+                  filter={[{
+                    fieldKey: "検査等実施判断区分",
+                    operator: ":",
+                    value: "2",
+                    negative: false,
+                  }, {
+                    fieldKey: "検査等実施判断グループ区分",
+                    operator: ":",
+                    value: getValue(row, getField("検査等実施判断グループ区分")),
+                    negative: false,
+                  }]} />
               </div>
             </>)}
         </section>
