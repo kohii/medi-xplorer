@@ -10,3 +10,16 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+input,
+select:active {
+  @apply text-sm;
+}
+
+/* prevent iOS from zooming in on input focus */
+@media screen and (max-width: 599px) {
+  input,
+  select:active {
+    font-size: 16px;
+  }
+}
