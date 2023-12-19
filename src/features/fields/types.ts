@@ -3,8 +3,9 @@ export type Field = Readonly<{
   seq: number;
   /** 項目名 */
   name: string;
-  /** 内容 */
-  description: string;
+  // 現状では使用していないのでコメントアウト
+  // /** 内容 */
+  // description: string;
   /** モード */
   mode: "numeric" | "text" | "date" | "alphanumeric";
   /** コード定義 */
