@@ -9,7 +9,14 @@ import { ShinryoukouiMasterDataProvider } from "@/contexts/shinryoukoui-master-d
 
 import { ShisetsukijunDataProvider } from "../../contexts/shisetsukijun-data-context";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      gcTime: Infinity,
+    }
+  }
+});
 
 export function SearchResultDataProviders({ children }: { children: React.ReactNode }) {
   return (
