@@ -26,6 +26,11 @@ jobs:
         env:
           URL: ${{ vars.URL }}
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       - name: Deploy
         uses: cloudflare/wrangler-action@3.0.0
         with:
