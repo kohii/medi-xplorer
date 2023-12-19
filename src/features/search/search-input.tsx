@@ -40,7 +40,7 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
           width: "100%",
         }}
         className={twMerge(
-          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
+          "bg-gray-50 border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
           className
         )}
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
