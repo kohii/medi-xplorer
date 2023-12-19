@@ -44,6 +44,6 @@ export default function RootLayout({
       <body className={inter.className + " h-full bg-white leading-tight"}>
         {children}
       </body>
-    </html >
+    </html>
   );
 }

@@ -140,10 +140,11 @@ export default function SearchResult() {
 
   return (
     <div className="relative h-full">
-      <div className="h-full grid" style={{
-        gridTemplateRows: "min-content minmax(0, 1fr)",
-        gridTemplateColumns: "minmax(0, 1fr)",
-      }}
+      <div className="h-full grid"
+        style={{
+          gridTemplateRows: "min-content minmax(0, 1fr)",
+          gridTemplateColumns: "minmax(0, 1fr)",
+        }}
       >
         <div
           style={{ gridRow: 1 }}>

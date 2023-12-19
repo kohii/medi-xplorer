@@ -81,12 +81,15 @@ export const DataTable = React.memo(function DataTable({
   const minTableWidth = useMemo(() => columnDefs.reduce((acc, col) => acc + (col.size ?? 128), 0), [columnDefs]);
 
   return (
-    <div ref={tableContainerRef} className="overflow-auto" style={{
-      height,
-    }}>
-      <table className='border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]' style={{
-        minWidth: minTableWidth,
+    <div ref={tableContainerRef}
+      className="overflow-auto"
+      style={{
+        height,
       }}>
+      <table className='border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]'
+        style={{
+          minWidth: minTableWidth,
+        }}>
         <thead className='sticky top-0 m-0 bg-white'>
           {table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
             <tr key={headerGroup.id}>
@@ -140,10 +143,11 @@ export const DataTable = React.memo(function DataTable({
               >
                 {row.getVisibleCells().map((cell, cellIndex) => {
                   return (
-                    <td key={cell.id} className={twMerge(
-                      "p-1 h-10",
-                      cellIndex === 0 ? "pl-2 rounded-l" : ""
-                    )}>
+                    <td key={cell.id}
+                      className={twMerge(
+                        "p-1 h-10",
+                        cellIndex === 0 ? "pl-2 rounded-l" : ""
+                      )}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
