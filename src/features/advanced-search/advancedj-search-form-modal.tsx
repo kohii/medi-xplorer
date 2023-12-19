@@ -72,7 +72,6 @@ export function AdvancedSearchFormModal({
       e.preventDefault();
       e.stopPropagation();
       onClose();
-      console.log("close");
     }
   };
 

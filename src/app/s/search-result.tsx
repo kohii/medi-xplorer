@@ -118,7 +118,6 @@ export default function SearchResult() {
     if (event.key === "Escape") {
       event.preventDefault();
       select(undefined);
-      console.log("Escape");
     }
   }, [select]);
   useEffect(() => {
