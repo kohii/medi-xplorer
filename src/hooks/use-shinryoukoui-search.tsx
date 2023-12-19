@@ -1,11 +1,12 @@
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 import { MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
 
-import { useRouterFn } from "./use-router-fn";
+
 
 export function useShinryoukouiSearch() {
-  const { push } = useRouterFn();
+  const { push } = useRouter();
 
   return useCallback((query: string) => {
     const currentSearchParams = new URLSearchParams(location.search);
