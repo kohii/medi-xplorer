@@ -1,5 +1,5 @@
 import { getFieldBySeq, getField, FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth } from "@/utils/text";
+import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth, isHalfWidth } from "@/utils/text";
 
 import { Field } from "../fields/types";
 
@@ -13,7 +13,7 @@ type NormalizedFieldFilterItem = FieldFilterItem & {
 
 export type NormalizedKeywordFilterItem = KeywordFilterItem & {
   fullWidthValue: string;
-  kanaValue: string;
+  kanaValue: string | null;
   codeValue: string | null;
 }
 
@@ -40,12 +40,13 @@ export function normalizeFilterExpression(
       });
     } else {
       const halfWidthValue = toHalfWidth(item.value);
+      const kanaValue = toHalfWidthKatakana(toKatakana(halfWidthValue)).toUpperCase();
       const codeValue = halfWidthValue.length === 9 && isNumeric(halfWidthValue) ? halfWidthValue : null;
       result.push({
         // text to search in 省略漢字名称
         fullWidthValue: toFullWidth(item.value),
         // text to search in 省略カナ名称
-        kanaValue: toHalfWidthKatakana(toKatakana(halfWidthValue)).toUpperCase(),
+        kanaValue: isHalfWidth(kanaValue) ? kanaValue : null,
         // text to search in 診療行為コード
         codeValue,
         ...item,
