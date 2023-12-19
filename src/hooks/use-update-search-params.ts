@@ -1,9 +1,8 @@
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
-import { useRouterFn } from "./use-router-fn";
-
 export function useUpdateSearchParams() {
-  const router = useRouterFn();
+  const router = useRouter();
   return useCallback((
     params: Record<string, string | undefined>,
     options: {
