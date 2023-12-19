@@ -12,7 +12,6 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "jest --watch",
     "generate-master-versions": "chmod +x ./scripts/generate-versions.sh && ./scripts/generate-versions.sh",
-    "generate-json-const-types": "node --loader ts-node/esm scripts/generate-json-const-types.ts",
     "generate-master-data": "node --loader ts-node/esm scripts/generate-master-data.ts",
     "build:masters": "npm run generate-master-data && npm run generate-master-versions",
     "pages:build": "npx @cloudflare/next-on-pages",
