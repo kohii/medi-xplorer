@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import SearchResult from "./search-result";
 import { SearchResultDataProviders } from "./search-result-data-providers";
@@ -12,8 +13,10 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <SearchResultDataProviders>
-      <SearchResult />
-    </SearchResultDataProviders>
+    <Suspense>
+      <SearchResultDataProviders>
+        <SearchResult />
+      </SearchResultDataProviders>
+    </Suspense>
   );
 }
