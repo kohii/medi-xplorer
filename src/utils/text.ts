@@ -77,3 +77,7 @@ export function trimLeadingZero(s: string): string {
 export function alphabetToNumber(s: string): number {
   return s.charCodeAt(0) - 65;
 }
+
+export function isHalfWidth(s: string): boolean {
+  return !!s.match(/[^\x01-\x7E\uFF65-\uFF9F]*$/);
+}
