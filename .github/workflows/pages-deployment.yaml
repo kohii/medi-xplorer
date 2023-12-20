@@ -34,6 +34,7 @@ jobs:
 
       - name: Deploy
         uses: cloudflare/wrangler-action@3.0.0
+        if: github.repository == 'kohii/medi-xplorer'
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
