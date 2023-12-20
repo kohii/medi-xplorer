@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 export type TabsProps<T extends string = string> = {
   value: T;
   onChange: (value: T) => void;
-  tabs: {
+  tabs: readonly {
     value: T;
     label: string;
     disabled?: boolean;

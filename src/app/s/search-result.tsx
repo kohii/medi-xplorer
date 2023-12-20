@@ -100,10 +100,16 @@ export default function SearchResult() {
     return normalizeFilterExpression(r.value);
   }, [query]);
 
-  const select = useCallback((row?: string[]) => {
-    const code = row ? getValue(row, getField("診療行為コード")) : undefined;
+  const select = useCallback((row: string[]) => {
+    const code = getValue(row, getField("診療行為コード"));
     updateSearchParams({
       code,
+    });
+  }, [updateSearchParams]);
+  const unselect = useCallback(() => {
+    updateSearchParams({
+      code: undefined,
+      tab: undefined,
     });
   }, [updateSearchParams]);
 
@@ -117,9 +123,9 @@ export default function SearchResult() {
     }
     if (event.key === "Escape") {
       event.preventDefault();
-      select(undefined);
+      unselect();
     }
-  }, [select]);
+  }, [unselect]);
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -194,7 +200,7 @@ export default function SearchResult() {
         </div>
       </div>
       {selectedCode && !isLoading && (
-        <Drawer title={selectedRow ? getValue(selectedRow, nameField) : ""} onClose={select}>
+        <Drawer title={selectedRow ? getValue(selectedRow, nameField) : ""} onClose={unselect}>
           {selectedRow ? <Detail row={selectedRow} rows={data!} /> : <div className="flex items-center justify-center h-full">
             No data found for code {selectedCode}
           </div>}
