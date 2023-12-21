@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: '.node-version'
+          node-version-file: ".node-version"
           cache: npm
 
       - run: npm ci
@@ -38,4 +38,4 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy .vercel/output/static --project-name medi-xplorer --branch ${{ steps.extract_branch.outputs.branch }} --commit-hash ${{ github.sha }}
+          command: pages deploy .vercel/output/static --project-name medi-xplorer --branch "${{ steps.extract_branch.outputs.branch }}" --commit-hash ${{ github.sha }}
