@@ -29,7 +29,7 @@ if [ ! -f "raw-master-data/s/$file_name" ]; then
   git add .
   git commit -m "Add new master data for $date"
   git push origin "new-master-data-${date}"
-  gh pr create -m "Add new master data for ${date}" -B master -H "new-master-data-${date}"
+  gh pr create --title "Add new master data for ${date}" --body "This PR was created automatically by GitHub Actions" -B master -H "new-master-data-${date}"
 else
   echo "No new master data available."
 fi
