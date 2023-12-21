@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit if pull request already exists
-if [ -n "$(gh pr list -H new-master-data-* --state open)" ]; then
+if [ -n "$(gh pr list --search head:new-master-data --state open)" ]; then
   echo "Pull request already exists."
   exit 0
 fi
