@@ -28,7 +28,7 @@ export default function Home() {
       <footer>
         <div className="flex items-center justify-center h-24 gap-4 text-gray-500 text-sm">
           <div>
-            © {new Date().getFullYear()} MediXplorer • Crafted by kohii
+            © {new Date().getFullYear()} kohii
           </div>
           <a href="https://github.com/kohii/medi-xplorer"
             target="_blank"
