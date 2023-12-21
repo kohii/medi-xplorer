@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit if pull request already exists
-if [ -n "$(hub pr list -h new-master-data-*)" ]; then
+if [ -n "$(gh pr list -H new-master-data-* --state open)" ]; then
   echo "Pull request already exists."
   exit 0
 fi
@@ -29,7 +29,7 @@ if [ ! -f "raw-master-data/s/$file_name" ]; then
   git add .
   git commit -m "Add new master data for $date"
   git push origin "new-master-data-${date}"
-  hub pull-request -m "Add new master data for ${date}" -b master -h "new-master-data-${date}"
+  gh pr create -m "Add new master data for ${date}" -B master -H "new-master-data-${date}"
 else
   echo "No new master data available."
 fi
