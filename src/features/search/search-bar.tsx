@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
@@ -49,8 +49,3 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
     </form >
   );
 });
-
-export function UncontrolledSearchBar() {
-  const [value, setValue] = useState("");
-  return <SearchBar value={value} onChange={setValue} />;
-}

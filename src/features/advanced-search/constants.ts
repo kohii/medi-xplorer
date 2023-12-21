@@ -1,21 +1,21 @@
-import { FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import type { FieldFilterItem } from "@/features/search/types";
+import type { FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { splitByWhitespace } from "@/utils/text";
 
-import { FieldFilterItem } from "../search/types";
 
 export type AdvancedSearchItem = {
-	field: FieldName;
-	operatorKind: AdvancedSearchOperatorKind;
-	value: string;
-	restValues?: string[];
+  field: FieldName;
+  operatorKind: AdvancedSearchOperatorKind;
+  value: string;
+  restValues?: string[];
 };
 
 type Option = {
-	kind: string;
-	label: string;
-	operator: string;
-	negative: boolean;
-	toFieldFilterItem(item: AdvancedSearchItem): FieldFilterItem;
+  kind: string;
+  label: string;
+  operator: string;
+  negative: boolean;
+  toFieldFilterItem(item: AdvancedSearchItem): FieldFilterItem;
 };
 
 export const advancedSearchOperatorOptions = [{
