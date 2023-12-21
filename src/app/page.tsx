@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { AppIcon } from "@/components/app-icon";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
-import { UncontrolledSearchBar } from "@/features/search/search-bar";
+import { SearchBar } from "@/features/search/search-bar";
 
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
 
@@ -20,7 +20,7 @@ export default function Home() {
             医科診療行為マスタービューアー
           </p>
           <div className="my-8 w-full">
-            <UncontrolledSearchBar />
+            <SearchBar />
           </div>
           <AdvancedSearchButton />
         </main>
