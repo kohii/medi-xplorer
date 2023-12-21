@@ -18,3 +18,5 @@ jobs:
         run: |
           chmod +x ./scripts/check-for-new-master-data.sh
           ./scripts/check-for-new-master-data.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
