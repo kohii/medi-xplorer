@@ -15,7 +15,7 @@ export function Drawer({
 }: DrawerProps) {
   return (
     <VSplit
-      className=" fixed z-10 right-0 top-0 bg-white h-screen max-w-full w-[1000px] shadow-2xl"
+      className="fixed z-10 right-0 top-0 bg-white h-dvh max-w-full w-[1000px] shadow-2xl"
       gridTemplateRows="min-content minmax(0, 1fr)"
     >
       <VSplitItem pos={1}>
