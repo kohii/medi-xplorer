@@ -1,19 +1,20 @@
 {
-    "name": "",
-    "short_name": "",
-    "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+  "name": "MediXplorer",
+  "short_name": "MediXplorer",
+  "description": "MediXplorerは社会保険診療報酬支払基金から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0790D4",
+  "background_color": "#ffffff",
+  "display": "browser"
 }
