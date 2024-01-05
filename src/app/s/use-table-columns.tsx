@@ -29,6 +29,12 @@ const DEFAULT_COLUMN_CONFIGS: DisplayColumnConfig[] = [{
   seq: getField("変更年月日").seq,
 }];
 
+const UNKNOWN_COLUMN: DataTableColumn = {
+  name: "(unknown)",
+  value: () => "",
+  width: 100,
+};
+
 export function useTableColumns(): DataTableColumn[] {
   return useMemo(() => {
     return DEFAULT_COLUMN_CONFIGS.map(config => {
@@ -37,11 +43,7 @@ export function useTableColumns(): DataTableColumn[] {
           const { seq } = config;
           const field = getFieldBySeq(seq);
           if (!field) {
-            return {
-              name: "(unknown)",
-              value: () => "",
-              width: 100,
-            } satisfies DataTableColumn;
+            return UNKNOWN_COLUMN;
           }
           return {
             name: field.shortName ?? field.name,
@@ -51,20 +53,23 @@ export function useTableColumns(): DataTableColumn[] {
             },
             styledValue: field.codes ? (row: string[]) => {
               const value = getValue(row, field);
-              let v = value;
-              if (config.option?.showLabel !== false) {
-                const label = getCodeLabel(row, field, true);
-                if (config.option?.showValue !== false) {
+              let v: string;
+              switch (config.option?.variant ?? "label-value") {
+                case "label-value": {
+                  const label = getCodeLabel(row, field, true);
                   v = value + ": " + label;
-                } else {
-                  v = label ?? value;
+                  break;
+                }
+                case "label": {
+                  v = getCodeLabel(row, field, true) ?? value;
+                  break;
+                }
+                case "value": {
+                  v = value;
+                  break;
                 }
               }
-
-              if (config.option?.colorize !== false) {
-                return <ColorChip color={getNthColorChipColor(+value)}>{v}</ColorChip>;
-              }
-              return v;
+              return <ColorChip color={getNthColorChipColor(+value)}>{v}</ColorChip>;
             } : undefined,
             width: field.columnWidth,
           } satisfies DataTableColumn;
@@ -72,13 +77,6 @@ export function useTableColumns(): DataTableColumn[] {
         case "virtual": {
           const { key } = config;
           const field = getShinryoukouiMasterVirtualField(key);
-          if (!field) {
-            return {
-              name: "(unknown)",
-              value: () => "",
-              width: 100,
-            } satisfies DataTableColumn;
-          }
           return {
             name: field.name,
             value(row: string[]) {
@@ -88,7 +86,7 @@ export function useTableColumns(): DataTableColumn[] {
               const value = field.value(row);
               const v = value;
 
-              if (field.colorize && config.option?.colorize !== false) {
+              if (field.colorize) {
                 const color = field.colorize(value);
                 return color ? <ColorChip color={color}>{v}</ColorChip> : v;
               }
@@ -97,6 +95,8 @@ export function useTableColumns(): DataTableColumn[] {
             width: field.columnWidth,
           } satisfies DataTableColumn;
         }
+        case "unknown":
+          return UNKNOWN_COLUMN;
       }
     });
   }, []);

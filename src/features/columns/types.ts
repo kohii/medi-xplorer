@@ -4,14 +4,12 @@ export type DisplayColumnConfig = {
   kind: "normal";
   seq: number;
   option?: {
-    showLabel?: boolean;
-    showValue?: boolean;
-    colorize?: boolean;
+    variant?: "label-value" | "label" | "value";
   }
 } | {
   kind: "virtual";
   key: ShinryoukouiMasterVirtualFieldId;
-  option?: {
-    colorize?: boolean;
-  }
+} | {
+  kind: "unknown";
+  key: string;
 }
