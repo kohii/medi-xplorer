@@ -145,9 +145,10 @@ export const DataTable = React.memo(function DataTable({
                   return (
                     <td key={cell.id}
                       className={twMerge(
-                        "p-1 h-10",
+                        "p-1 h-10 overflow-ellipsis overflow-hidden text-nowrap hover:overflow-visible hover:text-clip hover:break-all",
                         cellIndex === 0 ? "pl-2 rounded-l" : ""
-                      )}>
+                      )}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
