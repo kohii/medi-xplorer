@@ -1,4 +1,4 @@
-import { getFieldBySeq, getField, FieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getFieldBySeq, getField, ShinryoukouiMasterFieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth, isHalfWidth } from "@/utils/text";
 
 import { Field } from "../fields/types";
@@ -28,7 +28,7 @@ export function normalizeFilterExpression(
   expression.forEach((item) => {
     if ("fieldKey" in item) {
       const key = (item as FieldFilterItem).fieldKey;
-      const field = isNumeric(key) ? getFieldBySeq(+key) : getField(key as FieldName);
+      const field = isNumeric(key) ? getFieldBySeq(+key) : getField(key as ShinryoukouiMasterFieldName);
       if (!field) {
         return { kind: "ERROR", message: `Unknown field: ${key}` };
       }

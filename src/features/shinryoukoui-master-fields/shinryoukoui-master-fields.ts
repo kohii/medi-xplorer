@@ -3858,9 +3858,9 @@ export const shinryokouiMasterFields = [
   }
 ] as const satisfies readonly Field[];
 
-export type FieldName = typeof shinryokouiMasterFields[number]["name"];
+export type ShinryoukouiMasterFieldName = typeof shinryokouiMasterFields[number]["name"];
 
-const nameToField = new Map<FieldName, Field>(
+const nameToField = new Map<ShinryoukouiMasterFieldName, Field>(
   shinryokouiMasterFields.map(field => [field.name, field])
 );
 
@@ -3869,19 +3869,19 @@ for (const field of shinryokouiMasterFields) {
   seqToField[field.seq] = field;
 }
 
-export function getField(name: FieldName): Field {
+export function getField(name: ShinryoukouiMasterFieldName): Field {
   return nameToField.get(name)!;
 }
 
 export function getFieldOrUndefined(name: string): Field | undefined {
-  return nameToField.get(name as FieldName);
+  return nameToField.get(name as ShinryoukouiMasterFieldName);
 }
 
 export function getFieldBySeq(seq: number): Field | undefined {
   return seqToField[seq];
 }
 
-export function getFields(names: FieldName[]): Field[] {
+export function getFields(names: ShinryoukouiMasterFieldName[]): Field[] {
   return names.map(name => {
     const f = getField(name);
     if (!f) throw new Error(`Field ${name} not found`);

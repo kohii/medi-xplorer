@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
-import { FieldName, getField, getFieldBySeq } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { ShinryoukouiMasterFieldName, getField, getFieldBySeq } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { splitByWhitespace } from "@/utils/text";
 
 import { parseQuery } from "../search/parse-query";
@@ -112,11 +112,11 @@ function convertFilterItemToAdvancedSearchItem(filterItem: FieldFilterItem): Adv
     }
   })();
 
-  const field = getField(filterItem.fieldKey as FieldName) ?? getFieldBySeq(+filterItem.fieldKey);
+  const field = getField(filterItem.fieldKey as ShinryoukouiMasterFieldName) ?? getFieldBySeq(+filterItem.fieldKey);
   if (!field) return undefined;
 
   return {
-    field: field.name as FieldName,
+    field: field.name as ShinryoukouiMasterFieldName,
     operatorKind,
     value,
     restValues,
