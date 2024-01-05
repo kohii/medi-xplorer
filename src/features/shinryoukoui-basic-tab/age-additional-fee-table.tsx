@@ -47,7 +47,7 @@ export function AgeAdditionalFeeTable({
       return ({
         ...item,
         name: getValue(row!, getField("診療行為省略名称/省略漢字名称")),
-        point: shinryoukouiMasterVirtualFields.新又は現点数.value(row!),
+        point: shinryoukouiMasterVirtualFields.point.value(row!),
       });
     });
   }, [data, originalRows]);

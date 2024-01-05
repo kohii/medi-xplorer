@@ -38,6 +38,7 @@ export function formatCodeValue(row: string[], field: Field) {
 
 export function getKubunBangouColor(value: string) {
   const v = value.substring(0, 1);
+  if (v === "-") return undefined;
   return getNthColorChipColor(alphabetToNumber(v));
 }
 

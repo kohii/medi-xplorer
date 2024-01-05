@@ -43,7 +43,7 @@ const columns: SimpleTableColumn<string[]>[] = [{
   render: (row) => <KokujiShikibetsu1Chip row={row} />
 }, {
   name: "点数",
-  render: (row) => shinryoukouiMasterVirtualFields.新又は現点数.value(row),
+  render: (row) => shinryoukouiMasterVirtualFields.point.value(row),
 }];
 
 export function ShinryoukouiTable({

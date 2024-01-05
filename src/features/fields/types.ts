@@ -3,6 +3,8 @@ export type Field = Readonly<{
   seq: number;
   /** 項目名 */
   name: string;
+  /** 短縮項目名 */
+  shortName?: string;
   // 現状では使用していないのでコメントアウト
   // /** 内容 */
   // description: string;
@@ -26,6 +28,8 @@ export type Field = Readonly<{
   }[];
   /** {@link codes}が指定されていた場合に、そのコード以外の値が入っているかどうか */
   allowFreeValue?: boolean;
+  /** 一覧表示するときの列の幅 */
+  columnWidth?: number;
 }>;
 
 export type FieldGroup = Readonly<{

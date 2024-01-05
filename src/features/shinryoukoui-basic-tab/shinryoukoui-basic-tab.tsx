@@ -24,7 +24,7 @@ export type DetailBasicTabProps = {
 };
 
 export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
-  const kubunBangou = shinryoukouiMasterVirtualFields.区分番号.value(row);
+  const kubunBangou = shinryoukouiMasterVirtualFields.kubunNo.value(row);
   const ageAdditionalFeeData = getAgeAdditionalFeeData(row);
   const 告示等識別区分 = getValue(row, getField("告示等識別区分（１）"));
   const is基本項目 = 告示等識別区分 === "1" || 告示等識別区分 === "3" || 告示等識別区分 === "5";
@@ -78,10 +78,10 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             {formatCodeValue(row, getField("後期高齢者医療適用区分"))}
           </LabeledChip>
           <LabeledChip label="上下限年齢">
-            {shinryoukouiMasterVirtualFields.上下限年齢.value(row)}
+            {shinryoukouiMasterVirtualFields.ageRange.value(row)}
           </LabeledChip>
           <LabeledChip label="上限回数">
-            {shinryoukouiMasterVirtualFields.上限回数.value(row)}
+            {shinryoukouiMasterVirtualFields.limitCount.value(row)}
           </LabeledChip>
           <LabeledChip label="病床数区分">
             {formatCodeValue(row, getField("病床数区分"))}
@@ -97,10 +97,10 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
         <SectionHeading>点数</SectionHeading>
         <HStack>
           <LabeledChip label="点数">
-            {shinryoukouiMasterVirtualFields.新又は現点数.value(row)}
+            {shinryoukouiMasterVirtualFields.point.value(row)}
           </LabeledChip>
           <LabeledChip label="旧点数">
-            {shinryoukouiMasterVirtualFields.旧点数.value(row)}
+            {shinryoukouiMasterVirtualFields.prevPoint.value(row)}
           </LabeledChip>
         </HStack>
 
