@@ -72,6 +72,13 @@ export function useTableColumns(): DataTableColumn[] {
         case "virtual": {
           const { key } = config;
           const field = getShinryoukouiMasterVirtualField(key);
+          if (!field) {
+            return {
+              name: "(unknown)",
+              value: () => "",
+              width: 100,
+            } satisfies DataTableColumn;
+          }
           return {
             name: field.name,
             value(row: string[]) {
