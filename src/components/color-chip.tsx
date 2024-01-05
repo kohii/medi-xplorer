@@ -17,14 +17,16 @@ const COLOR_CHIP_COLORS = [
   "amber",
 ] as const;
 
+export type ColorChipColor = typeof COLOR_CHIP_COLORS[number];
+
 export function getNthColorChipColor(n: number) {
   return COLOR_CHIP_COLORS[n % COLOR_CHIP_COLORS.length];
 }
 
 export type ColorChipProps = {
-	children?: string;
-	className?: string;
-	color?: typeof COLOR_CHIP_COLORS[number];
+  children?: string;
+  className?: string;
+  color?: ColorChipColor;
 };
 
 export function ColorChip({ children, className, color }: ColorChipProps) {
