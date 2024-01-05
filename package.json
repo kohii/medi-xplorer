@@ -21,7 +21,7 @@
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.14.6",
+    "@tanstack/react-query": "^5.17.0",
     "@tanstack/react-table": "^8.10.7",
     "@tanstack/react-virtual": "^3.0.1",
     "next": "14.0.4",
