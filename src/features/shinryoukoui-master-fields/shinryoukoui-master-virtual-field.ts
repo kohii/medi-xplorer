@@ -36,7 +36,7 @@ export const shinryoukouiMasterVirtualFields = {
         getValue(row, getField("新又は現点数/新又は現点数")),
       );
     },
-    columnWidth: 112,
+    columnWidth: 92,
   },
   prevPoint: {
     name: "旧点数",
@@ -46,6 +46,7 @@ export const shinryoukouiMasterVirtualFields = {
         getValue(row, getField("旧点数/旧点数")),
       );
     },
+    columnWidth: 92,
   },
   ageRange: {
     name: "上下限年齢",
