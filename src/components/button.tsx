@@ -1,11 +1,12 @@
 import { twMerge } from "tailwind-merge";
 
 type ButtonProps = {
-	type?: "button" | "submit";
-	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-	children: React.ReactNode;
-	className?: string;
-	disabled?: boolean;
+  type?: "button" | "submit";
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  children: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+  variant?: "primary" | "secondary";
 };
 
 export function Button({
@@ -14,6 +15,7 @@ export function Button({
   onClick,
   className,
   disabled,
+  variant = "primary",
 }: ButtonProps) {
   return (
     <button
@@ -21,7 +23,9 @@ export function Button({
       data-modal-hide="default-modal"
       className={
         twMerge(
-          "text-white bg-blue-700 hover:bg-blue-800 focus:ring-[1px] focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+          "focus:ring-[1px] focus:outline-none font-medium rounded text-sm px-4 py-2 text-center",
+          variant === "primary" && "text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300",
+          variant === "secondary" && "border border-blue-700 text-blue-700 hover:bg-blue-50 focus:ring-blue-300",
           disabled && "opacity-50 cursor-not-allowed",
           className,
         )}
