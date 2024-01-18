@@ -61,8 +61,8 @@ export function AdvancedSearchFormModal({
     onClose();
   };
 
-  // Commend+Enter or Ctrl+Enter to submit
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    // Commend+Enter or Ctrl+Enter to submit
     if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       e.stopPropagation();
@@ -85,6 +85,7 @@ export function AdvancedSearchFormModal({
           <Button onClick={handleOk}>検索</Button>
         </>
       )}
+      size="xl"
     >
       <AdvancedSearchForm value={params} onChange={setParams} />
     </Modal>

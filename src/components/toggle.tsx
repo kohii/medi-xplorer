@@ -4,10 +4,10 @@ import { twMerge } from "tailwind-merge";
 import { ChevronRightIcon } from "./icons/chevron-right-icon";
 
 type ToggleProps = {
-	label: string;
-	className?: string;
-	open?: boolean;
-	onToggle?: (open: boolean) => void;
+  label: string;
+  className?: string;
+  open?: boolean;
+  onToggle?: (open: boolean) => void;
 };
 
 export function Toggle({ label, className, open, onToggle }: ToggleProps) {
@@ -22,7 +22,7 @@ export function Toggle({ label, className, open, onToggle }: ToggleProps) {
 }
 
 type UncontrolledToggleProps = Omit<ToggleProps, "open" | "onToggle"> & {
-	children: (open: boolean) => React.ReactNode;
+  children: (open: boolean) => React.ReactNode;
 };
 
 export function UncontrolledToggle({ label, className, children }: UncontrolledToggleProps) {

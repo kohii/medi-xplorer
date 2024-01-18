@@ -11,6 +11,8 @@ import { Loading } from "@/components/loading";
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
+import { DisplayColumnsButton } from "@/features/columns/display-columns-buttom";
+import { useDisplayColumnConfigs } from "@/features/columns/use-display-column-configs";
 import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
@@ -104,7 +106,8 @@ export default function SearchResult() {
     return filterShinryoukouiRows(data, filterExpression.value);
   }, [data, filterExpression]);
 
-  const columns = useTableColumns();
+  const displayColumnConfigs = useDisplayColumnConfigs();
+  const columns = useTableColumns(displayColumnConfigs);
 
   return (
     <div className="relative h-full">
@@ -142,9 +145,16 @@ export default function SearchResult() {
               </div>
             </div>
           </div>
-          {filteredData && (<div className="text-sm text-gray-500 p-2 px-4">
-            Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
-          </div>)}
+          <div className="flex justify-between items-center">
+            <div>
+              {filteredData && (<div className="text-sm text-gray-500 p-2 px-4">
+                Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
+              </div>)}
+            </div>
+            <div className="pr-4">
+              <DisplayColumnsButton initialColumnsConfigs={displayColumnConfigs} />
+            </div>
+          </div>
         </div>
         <div style={{ gridRow: 2 }} className="px-2">
           {

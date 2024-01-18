@@ -29,7 +29,7 @@ export type Field = Readonly<{
   /** {@link codes}が指定されていた場合に、そのコード以外の値が入っているかどうか */
   allowFreeValue?: boolean;
   /** 一覧表示するときの列の幅 */
-  columnWidth?: number;
+  columnWidth?: number | "auto";
 }>;
 
 export type FieldGroup = Readonly<{

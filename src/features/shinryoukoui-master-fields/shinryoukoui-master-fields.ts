@@ -28,7 +28,8 @@ export const shinryokouiMasterFields = [
         code: "9",
         name: "廃止"
       }
-    ]
+    ],
+    columnWidth: 112,
   },
   {
     seq: 2,
@@ -55,6 +56,7 @@ export const shinryokouiMasterFields = [
     name: "診療行為省略名称/省略漢字名称",
     shortName: "省略漢字名称",
     mode: "text",
+    columnWidth: "auto",
     // description: "漢字：３２文字"
   },
   {
@@ -69,7 +71,8 @@ export const shinryokouiMasterFields = [
     name: "診療行為省略名称/省略カナ名称",
     shortName: "省略カナ名称",
     mode: "text",
-    // description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。"
+    // description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。",
+    columnWidth: 160,
   },
   {
     seq: 8,
@@ -123,7 +126,8 @@ export const shinryokouiMasterFields = [
         code: "8",
         name: "点数（マイナス）"
       }
-    ]
+    ],
+    columnWidth: 144,
   },
   {
     seq: 12,
@@ -323,6 +327,7 @@ export const shinryokouiMasterFields = [
     name: "画像等手術支援加算",
     mode: "numeric",
     // description: "画像等手術支援加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：「１」から「６」以外の診療行為\n１：ナビゲーションによる支援加算（２，０００点）を算 定可能な診療行為\n２：実物大臓器立体モデルによる支援加算（２，０００点）を算定可能な診療行為\n３：ナビゲーション又は実物大臓器立体モデルによる支援加算（共に２，０００点）を算定可能な診療行為\n４：患者適合型手術支援ガイドによる支援加算（２，０００点）を算定可能な診療行為\n５：ナビゲーション又は患者適合型手術支援ガイドによる支援加算（共に２，０００点）を算定可能な診療行為\n６：実物大臓器立体モデル又は患者適合型手術支援ガイドによる支援加算（共に２，０００点）を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：「１」、「２」及び「４」以外の診療行為\n１：ナビゲーションによる支援加算自体\n２：実物大臓器立体モデルによる支援加算自体\n４：患者適合型手術支援ガイドによる支援加算自体\n※ 「基本項目」及び「合成項目」等の種別は、項番６８「告示等識別区分（１）」を参照。"
+    columnWidth: 92,
   },
   {
     seq: 21,
@@ -332,7 +337,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -350,7 +356,8 @@ export const shinryokouiMasterFields = [
         code: "4",
         name: "医療観察診療報酬点数表に規定する診療行為"
       }
-    ]
+    ],
+    columnWidth: 192,
   },
   {
     seq: 22,
@@ -366,7 +373,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「９」以外の診療行為"
+        name: "「１」から「９」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -414,7 +422,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「３」から「９」以外の診療行為"
+        name: "「３」から「９」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "3",
@@ -446,7 +455,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -480,7 +490,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -736,8 +747,9 @@ export const shinryokouiMasterFields = [
             "1",
             "3",
             "5"
-          ]
-        }
+          ],
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -748,8 +760,8 @@ export const shinryokouiMasterFields = [
             "1",
             "3",
             "5"
-          ]
-        }
+          ],
+        },
       },
       {
         code: "3",
@@ -820,7 +832,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -931,7 +944,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「２」以外の診療行為"
+        name: "「１」及び「２」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -965,7 +979,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1036,7 +1051,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1111,7 +1127,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1157,7 +1174,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「５」以外の診療行為"
+        name: "「１」から「５」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1189,7 +1207,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「６」以外の診療行為"
+        name: "「１」から「６」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1226,7 +1245,7 @@ export const shinryokouiMasterFields = [
       {
         code: "0",
         name: "「１」及び「２」以外の診療行為",
-        alias: "該当しない"
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1249,7 +1268,7 @@ export const shinryokouiMasterFields = [
       {
         code: "0",
         name: "「１」から「４２」以外の診療行為",
-        alias: "該当しない"
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1370,7 +1389,7 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
       },
       {
         code: "1",
@@ -1401,7 +1420,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1436,7 +1456,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1663,7 +1684,8 @@ export const shinryokouiMasterFields = [
         code: "8",
         name: "点数（マイナス）"
       }
-    ]
+    ],
+    columnWidth: 144,
   },
   {
     seq: 58,
@@ -1711,7 +1733,7 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "検体コメント以外の診療行為"
+        name: "検体コメント以外の診療行為",
       },
       {
         code: "1",
@@ -2238,7 +2260,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「７」以外の診療行為"
+        name: "「１」から「７」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -2447,7 +2470,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「３」以外の診療行為"
+        name: "「１」及び「３」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3206,7 +3230,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3278,7 +3303,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3313,7 +3339,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3409,7 +3436,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3563,7 +3591,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「２」以外の診療行為"
+        name: "「１」及び「２」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3599,7 +3628,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3634,7 +3664,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3853,7 +3884,7 @@ export const shinryokouiMasterFields = [
             "5"
           ]
         }
-      }
+      },
     ]
   }
 ] as const satisfies readonly Field[];
