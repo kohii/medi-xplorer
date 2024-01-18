@@ -3,32 +3,32 @@ import { useState } from "react";
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
 
-import { DEFAULT_COLUMN_CONFIGS } from "./constants";
-import { DisplayColumnsForm } from "./display-columns-form";
-import { DisplayColumnConfig, IdentifiedDisplayColumnConfig } from "./types";
+import { DEFAULT_DISPLAY_FIELDS } from "./constants";
+import { DisplayFieldsForm } from "./display-fields-form";
+import { DisplayFieldConfig, IdentifiedDisplayFieldConfig } from "./types";
 
-type DisplayColumnsModalProps = {
-  columns: DisplayColumnConfig[];
-  onOk: (columns: DisplayColumnConfig[]) => void;
+type DisplayFieldsModalProps = {
+  fields: DisplayFieldConfig[];
+  onOk: (fields: DisplayFieldConfig[]) => void;
   onClose: () => void;
 }
 
-export function DisplayColumnsModal({
-  columns: initialColumns,
+export function DisplayFieldsModal({
+  fields: initialFields,
   onOk,
   onClose,
-}: DisplayColumnsModalProps) {
-  const [columns, setColumns] = useState<IdentifiedDisplayColumnConfig[]>(() => initialColumns.map((column) => ({
-    ...column,
+}: DisplayFieldsModalProps) {
+  const [fields, setFields] = useState<IdentifiedDisplayFieldConfig[]>(() => initialFields.map((field) => ({
+    ...field,
     id: crypto.randomUUID(),
   })));
 
   const handleOk = () => {
-    onOk(columns);
+    onOk(fields);
   };
   const handleReset = () => {
-    setColumns(DEFAULT_COLUMN_CONFIGS.map((column) => ({
-      ...column,
+    setFields(DEFAULT_DISPLAY_FIELDS.map((field) => ({
+      ...field,
       id: crypto.randomUUID(),
     })));
   };
@@ -60,7 +60,7 @@ export function DisplayColumnsModal({
         </div>
       )}
     >
-      <DisplayColumnsForm columns={columns} onChange={setColumns} />
+      <DisplayFieldsForm fields={fields} onChange={setFields} />
     </Modal>
   );
 }

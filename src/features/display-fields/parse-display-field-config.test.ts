@@ -1,13 +1,13 @@
-import { parseDisplayColumnConfigs } from "./parse-display-column-config";
+import { parseDisplayFieldConfigs } from "./parse-display-field-config";
 
-describe("parseDisplayColumnConfigs", () => {
+describe("parseDisplayFieldConfigs", () => {
   test("empty", () => {
-    const result = parseDisplayColumnConfigs("");
+    const result = parseDisplayFieldConfigs("");
     expect(result).toEqual([]);
   });
 
   test("normal column", () => {
-    const result = parseDisplayColumnConfigs("1");
+    const result = parseDisplayFieldConfigs("1");
     expect(result).toEqual([{
       kind: "normal",
       seq: 1
@@ -15,7 +15,7 @@ describe("parseDisplayColumnConfigs", () => {
   });
 
   test("normal column with label", () => {
-    const result = parseDisplayColumnConfigs("1-l");
+    const result = parseDisplayFieldConfigs("1-l");
     expect(result).toEqual([{
       kind: "normal",
       seq: 1,
@@ -26,7 +26,7 @@ describe("parseDisplayColumnConfigs", () => {
   });
 
   test("normal column with code", () => {
-    const result = parseDisplayColumnConfigs("1-c");
+    const result = parseDisplayFieldConfigs("1-c");
     expect(result).toEqual([{
       kind: "normal",
       seq: 1,
@@ -37,7 +37,7 @@ describe("parseDisplayColumnConfigs", () => {
   });
 
   test("virtual column", () => {
-    const result = parseDisplayColumnConfigs("kubunNo");
+    const result = parseDisplayFieldConfigs("kubunNo");
     expect(result).toEqual([{
       kind: "virtual",
       key: "kubunNo"
@@ -45,15 +45,15 @@ describe("parseDisplayColumnConfigs", () => {
   });
 
   test("unknown column", () => {
-    const result = parseDisplayColumnConfigs("foo");
+    const result = parseDisplayFieldConfigs("foo");
     expect(result).toEqual([{
       kind: "unknown",
       key: "foo"
     }]);
   });
 
-  test("multiple columns", () => {
-    const result = parseDisplayColumnConfigs("1_2_kubunNo");
+  test("multiple fields", () => {
+    const result = parseDisplayFieldConfigs("1_2_kubunNo");
     expect(result).toEqual([
       {
         kind: "normal",

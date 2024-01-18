@@ -11,19 +11,19 @@ import { Loading } from "@/components/loading";
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
-import { DisplayColumnsButton } from "@/features/columns/display-columns-buttom";
-import { useDisplayColumnConfigs } from "@/features/columns/use-display-column-configs";
+import { DisplayFieldsButton } from "@/features/display-fields/display-fields-buttom";
+import { useDisplayFieldConfigs as useDisplayFields } from "@/features/display-fields/use-display-fields";
 import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
+import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { VersionSelect } from "@/features/shinryoukoui-master-versions/version-select";
 import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
-import { getField } from "../../features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { VersionSelect } from "../../features/shinryoukoui-master-versions/version-select";
 
 import { Detail } from "./detail";
 import { useTableColumns } from "./use-table-columns";
@@ -106,8 +106,8 @@ export default function SearchResult() {
     return filterShinryoukouiRows(data, filterExpression.value);
   }, [data, filterExpression]);
 
-  const displayColumnConfigs = useDisplayColumnConfigs();
-  const columns = useTableColumns(displayColumnConfigs);
+  const displayFields = useDisplayFields();
+  const columns = useTableColumns(displayFields);
 
   return (
     <div className="relative h-full">
@@ -152,7 +152,7 @@ export default function SearchResult() {
               </div>)}
             </div>
             <div className="pr-4">
-              <DisplayColumnsButton initialColumnsConfigs={displayColumnConfigs} />
+              <DisplayFieldsButton initialFieldsConfigs={displayFields} />
             </div>
           </div>
         </div>

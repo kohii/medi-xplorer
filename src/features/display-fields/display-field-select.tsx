@@ -5,7 +5,7 @@ import { FilterableSelect } from "@/components/filterable-select";
 import { shinryokouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { ShinryoukouiMasterVirtualFieldId, shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
-import { DisplayColumnConfig } from "./types";
+import { DisplayFieldConfig } from "./types";
 
 const normalFieldsOptions = shinryokouiMasterFields.map(field => ({
   label: `${field.seq}: ${field.name}`,
@@ -19,15 +19,15 @@ const virtualFieldsOptions = Object.entries(shinryoukouiMasterVirtualFields).map
 
 const options = [...normalFieldsOptions, ...virtualFieldsOptions];
 
-type DisplayColumnSelectProps = {
-  onChange: (value: DisplayColumnConfig) => void;
+type DisplayFieldSelectProps = {
+  onChange: (value: DisplayFieldConfig) => void;
   className?: string;
 };
 
-export function DisplayColumnSelect({
+export function DisplayFieldSelect({
   onChange,
   className,
-}: DisplayColumnSelectProps) {
+}: DisplayFieldSelectProps) {
   const handleChange = useCallback((value: string | null) => {
     if (!value) return;
     const seq = parseInt(value);

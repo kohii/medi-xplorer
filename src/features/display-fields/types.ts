@@ -2,7 +2,7 @@ import { ShinryoukouiMasterVirtualFieldId } from "@/features/shinryoukoui-master
 
 export type CodeValueVariant = "label-with-code" | "label" | "code";
 
-export type DisplayColumnConfig = {
+export type DisplayFieldConfig = {
   kind: "normal";
   seq: number;
   options?: {
@@ -17,4 +17,4 @@ export type DisplayColumnConfig = {
 }
 
 // for internal use
-export type IdentifiedDisplayColumnConfig = DisplayColumnConfig & { id: string };
+export type IdentifiedDisplayFieldConfig = DisplayFieldConfig & { id: string };

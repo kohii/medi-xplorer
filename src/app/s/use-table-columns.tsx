@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { ColorChip } from "@/components/color-chip";
 import { DataTableColumn } from "@/components/data-table";
-import { DisplayColumnConfig } from "@/features/columns/types";
+import { DisplayFieldConfig } from "@/features/display-fields/types";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { getFieldBySeq } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
@@ -17,9 +17,9 @@ const UNKNOWN_COLUMN: Omit<DataTableColumn, "id"> = {
   width: 100,
 };
 
-export function useTableColumns(displayColumnConfigs: DisplayColumnConfig[]): DataTableColumn[] {
+export function useTableColumns(displayFieldConfigs: DisplayFieldConfig[]): DataTableColumn[] {
   return useMemo(() => {
-    return displayColumnConfigs.map(config => {
+    return displayFieldConfigs.map(config => {
       switch (config.kind) {
         case "normal": {
           const { seq } = config;
@@ -94,5 +94,5 @@ export function useTableColumns(displayColumnConfigs: DisplayColumnConfig[]): Da
           };
       }
     });
-  }, [displayColumnConfigs]);
+  }, [displayFieldConfigs]);
 }

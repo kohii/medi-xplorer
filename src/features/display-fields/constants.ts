@@ -1,8 +1,8 @@
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
-import { DisplayColumnConfig } from "./types";
+import { DisplayFieldConfig } from "./types";
 
-export const DEFAULT_COLUMN_CONFIGS: DisplayColumnConfig[] = [{
+export const DEFAULT_DISPLAY_FIELDS: DisplayFieldConfig[] = [{
   kind: "virtual",
   key: "kubunNo"
 }, {

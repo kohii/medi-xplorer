@@ -1,4 +1,3 @@
-import { useSortable } from "@dnd-kit/sortable";
 import { ReactNode, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -11,7 +10,7 @@ import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master
 import { getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { CodeValueOptions } from "./code-value-options";
-import { DisplayColumnConfig } from "./types";
+import { DisplayFieldConfig } from "./types";
 
 function DeleteButton({ onClick }: { onClick?: () => void }) {
   return (
@@ -46,15 +45,15 @@ function Container({
   );
 }
 
-export type DisplayColumnItemProps = {
-  value: DisplayColumnConfig;
-  onChange?: (value: DisplayColumnConfig) => void;
+export type DisplayFieldItemProps = {
+  value: DisplayFieldConfig;
+  onChange?: (value: DisplayFieldConfig) => void;
   onDelete?: () => void;
   className?: string;
   style?: React.CSSProperties;
 };
 
-export const DisplayColumnItem = forwardRef<HTMLDivElement, DisplayColumnItemProps>(function DisplayColumnItem({
+export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps>(function DisplayFieldItem({
   value,
   onChange,
   onDelete,

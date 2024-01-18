@@ -1,21 +1,21 @@
-import { stringifyDisplayColumnConfigs } from "./stringify-display-column-config";
+import { stringifyDisplayFieldConfigs } from "./stringify-display-field-config";
 
-describe("stringifyDisplayColumnConfigs", () => {
+describe("stringifyDisplayFieldConfigs", () => {
   test("empty", () => {
-    const result = stringifyDisplayColumnConfigs([]);
+    const result = stringifyDisplayFieldConfigs([]);
     expect(result).toEqual("");
   });
 
-  test("normal column", () => {
-    const result = stringifyDisplayColumnConfigs([{
+  test("normal field", () => {
+    const result = stringifyDisplayFieldConfigs([{
       kind: "normal",
       seq: 1
     }]);
     expect(result).toEqual("1");
   });
 
-  test("normal column with label", () => {
-    const result = stringifyDisplayColumnConfigs([{
+  test("normal field with label", () => {
+    const result = stringifyDisplayFieldConfigs([{
       kind: "normal",
       seq: 1,
       options: {
@@ -25,8 +25,8 @@ describe("stringifyDisplayColumnConfigs", () => {
     expect(result).toEqual("1-l");
   });
 
-  test("normal column with code", () => {
-    const result = stringifyDisplayColumnConfigs([{
+  test("normal field with code", () => {
+    const result = stringifyDisplayFieldConfigs([{
       kind: "normal",
       seq: 1,
       options: {
@@ -36,24 +36,24 @@ describe("stringifyDisplayColumnConfigs", () => {
     expect(result).toEqual("1-c");
   });
 
-  test("virtual column", () => {
-    const result = stringifyDisplayColumnConfigs([{
+  test("virtual field", () => {
+    const result = stringifyDisplayFieldConfigs([{
       kind: "virtual",
       key: "kubunNo"
     }]);
     expect(result).toEqual("kubunNo");
   });
 
-  test("unknown column", () => {
-    const result = stringifyDisplayColumnConfigs([{
+  test("unknown field", () => {
+    const result = stringifyDisplayFieldConfigs([{
       kind: "unknown",
       key: "foo"
     }]);
     expect(result).toEqual("foo");
   });
 
-  test("multiple columns", () => {
-    const result = stringifyDisplayColumnConfigs([
+  test("multiple fields", () => {
+    const result = stringifyDisplayFieldConfigs([
       {
         kind: "normal",
         seq: 1

@@ -1,13 +1,13 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import { DisplayColumnItem, DisplayColumnItemProps } from "./display-column-item";
+import { DisplayFieldItem, DisplayFieldItemProps } from "./display-field-item";
 
-type SortableDisplayColumnItemProps = DisplayColumnItemProps & {
+type SortableDisplayFieldItemProps = DisplayFieldItemProps & {
   id: string;
 };
 
-export function SortableDisplayColumnItem({ id, ...props }: SortableDisplayColumnItemProps) {
+export function SortableDisplayFieldItem({ id, ...props }: SortableDisplayFieldItemProps) {
   const {
     attributes,
     listeners,
@@ -23,7 +23,7 @@ export function SortableDisplayColumnItem({ id, ...props }: SortableDisplayColum
   };
 
   return (
-    <DisplayColumnItem
+    <DisplayFieldItem
       ref={setNodeRef}
       style={style}
       {...props}

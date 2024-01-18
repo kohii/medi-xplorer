@@ -3,10 +3,10 @@ import { isNumeric } from "@/utils/text";
 import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { ShinryoukouiMasterVirtualFieldId, getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
-import { DisplayColumnConfig } from "./types";
+import { DisplayFieldConfig } from "./types";
 
 
-function parseDisplayColumnConfig(config: string): DisplayColumnConfig {
+function parseDisplayFieldConfig(config: string): DisplayFieldConfig {
   const [key, variant] = config.split("-");
   if (isNumeric(key)) {
     const seq = parseInt(key);
@@ -24,7 +24,7 @@ function parseDisplayColumnConfig(config: string): DisplayColumnConfig {
   return { kind: "virtual", key: key as ShinryoukouiMasterVirtualFieldId };
 }
 
-export function parseDisplayColumnConfigs(configs: string): DisplayColumnConfig[] {
+export function parseDisplayFieldConfigs(configs: string): DisplayFieldConfig[] {
   if (!configs) return [];
-  return configs.split("_").map(parseDisplayColumnConfig);
+  return configs.split("_").map(parseDisplayFieldConfig);
 }

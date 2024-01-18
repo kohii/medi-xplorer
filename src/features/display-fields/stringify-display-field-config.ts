@@ -2,9 +2,9 @@ import { assertUnreachable } from "@/utils/assert-unreachable";
 
 import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
-import { DisplayColumnConfig } from "./types";
+import { DisplayFieldConfig } from "./types";
 
-function stringifyDisplayColumnConfig(config: DisplayColumnConfig): string {
+function stringifyDisplayFieldConfig(config: DisplayFieldConfig): string {
   switch (config.kind) {
     case "normal": {
       const { seq, options: option } = config;
@@ -34,6 +34,6 @@ function stringifyDisplayColumnConfig(config: DisplayColumnConfig): string {
   }
 }
 
-export function stringifyDisplayColumnConfigs(displayColumns: DisplayColumnConfig[]): string {
-  return displayColumns.map(stringifyDisplayColumnConfig).join("_");
+export function stringifyDisplayFieldConfigs(displayFields: DisplayFieldConfig[]): string {
+  return displayFields.map(stringifyDisplayFieldConfig).join("_");
 }
