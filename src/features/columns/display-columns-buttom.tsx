@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
 import { Backdrop } from "@/components/backdrop";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
+import { DEFAULT_COLUMN_CONFIGS } from "./constants";
 import { stringifyDisplayColumnConfigs } from "./stringify-display-column-config";
 import { DisplayColumnConfig } from "./types";
 
@@ -25,9 +27,15 @@ export function DisplayColumnsButton({ initialColumnsConfigs }: DisplayColumnsBu
   const handleOk = useCallback((columnConfigs: DisplayColumnConfig[]) => {
     const searchParams = new URLSearchParams(location.search);
     if (columnConfigs.length === 0) {
-      searchParams.delete("columns");
+      searchParams.delete(SEARCH_PARAM_NAMES.COLUMNS);
     } else {
-      searchParams.set("columns", stringifyDisplayColumnConfigs(columnConfigs));
+      const s = stringifyDisplayColumnConfigs(columnConfigs);
+      const defaults = stringifyDisplayColumnConfigs(DEFAULT_COLUMN_CONFIGS);
+      if (s === defaults) {
+        searchParams.delete(SEARCH_PARAM_NAMES.COLUMNS);
+      } else {
+        searchParams.set(SEARCH_PARAM_NAMES.COLUMNS, s);
+      }
     }
 
     setOpen(false);
