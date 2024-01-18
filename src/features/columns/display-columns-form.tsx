@@ -6,6 +6,8 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -13,6 +15,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { useState } from "react";
 
 import { DisplayColumnItem } from "./display-column-item";
 import { DisplayColumnSelect } from "./display-column-select";
@@ -25,12 +28,20 @@ type TableColumnsEditorProps = {
 };
 
 export function DisplayColumnsForm({ columns, onChange }: TableColumnsEditorProps) {
+  const [activeColumn, setActiveColumn] = useState<IdentifiedDisplayColumnConfig | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  function handleDragStart(event: DragStartEvent) {
+    const { active } = event;
+
+    const column = columns.find((column) => column.id === active.id)!;
+    setActiveColumn(column);
+  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -41,6 +52,8 @@ export function DisplayColumnsForm({ columns, onChange }: TableColumnsEditorProp
 
       onChange(arrayMove(columns, oldIndex, newIndex));
     }
+
+    setActiveColumn(null);
   };
 
   const handleAddColumn = (column: DisplayColumnConfig) => {
@@ -52,6 +65,7 @@ export function DisplayColumnsForm({ columns, onChange }: TableColumnsEditorProp
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
         <SortableContext
@@ -77,6 +91,9 @@ export function DisplayColumnsForm({ columns, onChange }: TableColumnsEditorProp
             />
           ))}
         </SortableContext>
+        <DragOverlay>
+          {activeColumn ? <DisplayColumnItem value={activeColumn} className="shadow-md" /> : null}
+        </DragOverlay>
       </DndContext>
       <DisplayColumnSelect onChange={handleAddColumn} className="mt-2" />
     </div>

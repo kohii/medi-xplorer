@@ -1,10 +1,10 @@
 import { twMerge } from "tailwind-merge";
 
 type IconButtonProps = {
-	icon: React.ReactNode;
-	label: string;
-	onClick: () => void;
-	className?: string;
+  icon: React.ReactNode;
+  label: string;
+  onClick?: () => void;
+  className?: string;
 };
 
 export function IconButton({

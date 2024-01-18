@@ -13,7 +13,7 @@ import { getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields
 import { CodeValueOptions } from "./code-value-options";
 import { DisplayColumnConfig } from "./types";
 
-function DeleteButton({ onClick }: { onClick: () => void }) {
+function DeleteButton({ onClick }: { onClick?: () => void }) {
   return (
     <IconButton className="p-2" icon={<DeleteIcon />} label="列を削除" onClick={onClick} />
   );
@@ -29,11 +29,11 @@ function Container({
   label: ReactNode;
   options?: ReactNode;
   className?: string
-  onDelete: () => void;
+  onDelete?: () => void;
   style?: React.CSSProperties;
 }) {
   return (
-    <div className={twMerge("flex gap-2 items-center text-sm font-medium py-1", className)}>
+    <div className={twMerge("flex gap-2 items-center text-sm font-medium py-1 bg-white", className)}>
       <div className="cursor-grab"  {...props}>
         <DragHandleIcon className="text-gray-400" />
       </div>
@@ -48,8 +48,8 @@ function Container({
 
 export type DisplayColumnItemProps = {
   value: DisplayColumnConfig;
-  onChange: (value: DisplayColumnConfig) => void;
-  onDelete: () => void;
+  onChange?: (value: DisplayColumnConfig) => void;
+  onDelete?: () => void;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -72,7 +72,7 @@ export const DisplayColumnItem = forwardRef<HTMLDivElement, DisplayColumnItemPro
             label={`${field.seq}: ${field.name}`}
             options={field.codes && (<CodeValueOptions
               value={value.options}
-              onChange={(option) => onChange({ ...value, options: option })}
+              onChange={(option) => onChange?.({ ...value, options: option })}
             />)}
             onDelete={onDelete}
             className={className} />
