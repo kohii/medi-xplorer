@@ -1,4 +1,4 @@
-import { ColorChipColor } from "@/components/color-chip";
+import { ColorChipColor } from "@/utils/color-chip-color";
 
 export type VirtualField = {
   name: string;
