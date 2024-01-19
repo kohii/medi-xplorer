@@ -2,25 +2,25 @@ import { FormItem } from "@/components/form-item";
 import { FormLabel } from "@/components/form-label";
 import { TextInput } from "@/components/text-input";
 
-import { FieldName } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { ShinryoukouiMasterFieldName } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { AdvancedSearchItemForm } from "./advanced-search-item-form";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
 
 export type AdvancedSearchParams = {
-	keyword: string;
-	exclude: string;
-	items: AdvancedSearchItem[];
+  keyword: string;
+  exclude: string;
+  items: AdvancedSearchItem[];
 }
 
 export type AdvancedSearchFormProps = {
-	value: AdvancedSearchParams;
-	onChange: (value: AdvancedSearchParams) => void;
+  value: AdvancedSearchParams;
+  onChange: (value: AdvancedSearchParams) => void;
 };
 
 export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps) {
-  const onSelect = (field: FieldName | null) => {
+  const onSelect = (field: ShinryoukouiMasterFieldName | null) => {
     if (!field) return;
     onChange({
       ...value,

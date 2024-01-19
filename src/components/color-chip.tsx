@@ -1,30 +1,11 @@
 import { twMerge } from "tailwind-merge";
 
-const COLOR_CHIP_COLORS = [
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "blue",
-  "indigo",
-  "purple",
-  "pink",
-  "stone",
-  "cyan",
-  "lime",
-  "violet",
-  "slate",
-  "amber",
-] as const;
-
-export function getNthColorChipColor(n: number) {
-  return COLOR_CHIP_COLORS[n % COLOR_CHIP_COLORS.length];
-}
+import { ColorChipColor } from "@/utils/color-chip-color";
 
 export type ColorChipProps = {
-	children?: string;
-	className?: string;
-	color?: typeof COLOR_CHIP_COLORS[number];
+  children?: string;
+  className?: string;
+  color?: ColorChipColor;
 };
 
 export function ColorChip({ children, className, color }: ColorChipProps) {

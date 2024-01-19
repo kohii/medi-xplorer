@@ -14,6 +14,7 @@ import { BreakLine } from "@/components/break-line";
 
 
 export type DataTableColumn = {
+  id: string;
   name: string;
   width?: number;
   value: (row: string[]) => string;
@@ -38,7 +39,7 @@ export const DataTable = React.memo(function DataTable({
   const columnDefs = React.useMemo<ColumnDef<string[]>[]>(
     () => {
       return columns.map((col) => ({
-        id: col.name,
+        id: col.id,
         accessorFn: row => col.value(row),
         cell: (info) => col.styledValue?.(info.row.original) ?? col.value(info.row.original),
         header: () => <BreakLine value={col.name.replace("/", "/\n")} />,
@@ -86,7 +87,8 @@ export const DataTable = React.memo(function DataTable({
       style={{
         height,
       }}>
-      <table className='border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]'
+      <table
+        className="border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]"
         style={{
           minWidth: minTableWidth,
         }}>
@@ -145,9 +147,10 @@ export const DataTable = React.memo(function DataTable({
                   return (
                     <td key={cell.id}
                       className={twMerge(
-                        "p-1 h-10",
+                        "p-1 px-1.5 h-10 overflow-ellipsis overflow-hidden text-nowrap hover:overflow-visible hover:text-clip hover:break-all",
                         cellIndex === 0 ? "pl-2 rounded-l" : ""
-                      )}>
+                      )}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

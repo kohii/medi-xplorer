@@ -28,7 +28,8 @@ export const shinryokouiMasterFields = [
         code: "9",
         name: "廃止"
       }
-    ]
+    ],
+    columnWidth: 112,
   },
   {
     seq: 2,
@@ -41,30 +42,37 @@ export const shinryokouiMasterFields = [
     name: "診療行為コード",
     mode: "numeric",
     // description: "1桁目: 診療行為コードを表す「１」を設定する。\n2桁目以降: 診療行為ごとに重複しない番号を設定する。"
+    columnWidth: 120,
   },
   {
     seq: 4,
     name: "診療行為省略名称/省略漢字有効桁数",
+    shortName: "省略漢字有効桁数",
     mode: "numeric",
     // description: "項番５「省略漢字名称」の文字数を表す。"
   },
   {
     seq: 5,
     name: "診療行為省略名称/省略漢字名称",
+    shortName: "省略漢字名称",
     mode: "text",
+    columnWidth: "auto",
     // description: "漢字：３２文字"
   },
   {
     seq: 6,
     name: "診療行為省略名称/省略カナ有効桁数",
+    shortName: "省略カナ有効桁数",
     mode: "numeric",
     // description: "項番７「省略カナ名称」の文字数を表す。"
   },
   {
     seq: 7,
     name: "診療行為省略名称/省略カナ名称",
+    shortName: "省略カナ名称",
     mode: "text",
-    // description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。"
+    // description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。",
+    columnWidth: 160,
   },
   {
     seq: 8,
@@ -118,7 +126,8 @@ export const shinryokouiMasterFields = [
         code: "8",
         name: "点数（マイナス）"
       }
-    ]
+    ],
+    columnWidth: 144,
   },
   {
     seq: 12,
@@ -318,6 +327,7 @@ export const shinryokouiMasterFields = [
     name: "画像等手術支援加算",
     mode: "numeric",
     // description: "画像等手術支援加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：「１」から「６」以外の診療行為\n１：ナビゲーションによる支援加算（２，０００点）を算 定可能な診療行為\n２：実物大臓器立体モデルによる支援加算（２，０００点）を算定可能な診療行為\n３：ナビゲーション又は実物大臓器立体モデルによる支援加算（共に２，０００点）を算定可能な診療行為\n４：患者適合型手術支援ガイドによる支援加算（２，０００点）を算定可能な診療行為\n５：ナビゲーション又は患者適合型手術支援ガイドによる支援加算（共に２，０００点）を算定可能な診療行為\n６：実物大臓器立体モデル又は患者適合型手術支援ガイドによる支援加算（共に２，０００点）を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：「１」、「２」及び「４」以外の診療行為\n１：ナビゲーションによる支援加算自体\n２：実物大臓器立体モデルによる支援加算自体\n４：患者適合型手術支援ガイドによる支援加算自体\n※ 「基本項目」及び「合成項目」等の種別は、項番６８「告示等識別区分（１）」を参照。"
+    columnWidth: 92,
   },
   {
     seq: 21,
@@ -327,7 +337,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -345,7 +356,8 @@ export const shinryokouiMasterFields = [
         code: "4",
         name: "医療観察診療報酬点数表に規定する診療行為"
       }
-    ]
+    ],
+    columnWidth: 192,
   },
   {
     seq: 22,
@@ -361,7 +373,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「９」以外の診療行為"
+        name: "「１」から「９」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -409,7 +422,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「３」から「９」以外の診療行為"
+        name: "「３」から「９」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "3",
@@ -441,7 +455,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -475,7 +490,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「４」以外の診療行為"
+        name: "「１」から「４」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -562,12 +578,14 @@ export const shinryokouiMasterFields = [
   {
     seq: 38,
     name: "注加算/注加算コード",
+    shortName: "注加算コード",
     mode: "numeric",
     // description: "注加算が算定可能な診療行為（基本項目、合成項目及び準用項目）と注加算を関連付ける任意の同一番号を設定する。\n\n項番６８「告示等識別区分（１）」に「７：加算項目」を設定している診療行為のうち、注加算コードを設定せずに専用の項目を設定して算定可否を判定する診療行為は「別紙７\n－６」のとおりである。"
   },
   {
     seq: 39,
     name: "注加算/注加算通番",
+    shortName: "注加算通番",
     mode: "alphanumeric",
     // description: "１つの診療行為に対して同時に算定が可能な注加算に、異なる番号を設定する。\n注加算が算定可能な診療行為（基本項目、合成項目及び準用項目）に「０」を、注加算である診療行為に「１」から\n「９」及び「Ａ」から「Ｚ」（昇順、アルファベット順）を設定する。\n\n注加算コードと注加算通番の関連は「別紙７－７」のとおりである。"
   },
@@ -729,8 +747,9 @@ export const shinryokouiMasterFields = [
             "1",
             "3",
             "5"
-          ]
-        }
+          ],
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -741,8 +760,8 @@ export const shinryokouiMasterFields = [
             "1",
             "3",
             "5"
-          ]
-        }
+          ],
+        },
       },
       {
         code: "3",
@@ -813,7 +832,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -924,7 +944,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「２」以外の診療行為"
+        name: "「１」及び「２」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -958,7 +979,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1029,7 +1051,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1104,7 +1127,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1150,7 +1174,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「５」以外の診療行為"
+        name: "「１」から「５」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1182,7 +1207,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「６」以外の診療行為"
+        name: "「１」から「６」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1219,7 +1245,7 @@ export const shinryokouiMasterFields = [
       {
         code: "0",
         name: "「１」及び「２」以外の診療行為",
-        alias: "該当しない"
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1242,7 +1268,7 @@ export const shinryokouiMasterFields = [
       {
         code: "0",
         name: "「１」から「４２」以外の診療行為",
-        alias: "該当しない"
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1363,7 +1389,7 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
       },
       {
         code: "1",
@@ -1394,7 +1420,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1429,7 +1456,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -1656,7 +1684,8 @@ export const shinryokouiMasterFields = [
         code: "8",
         name: "点数（マイナス）"
       }
-    ]
+    ],
+    columnWidth: 144,
   },
   {
     seq: 58,
@@ -1704,7 +1733,7 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "検体コメント以外の診療行為"
+        name: "検体コメント以外の診療行為",
       },
       {
         code: "1",
@@ -2200,7 +2229,8 @@ export const shinryokouiMasterFields = [
         code: "9",
         name: "通則加算項目"
       }
-    ]
+    ],
+    columnWidth: 152,
   },
   {
     seq: 69,
@@ -2230,7 +2260,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」から「７」以外の診療行為"
+        name: "「１」から「７」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -2310,60 +2341,70 @@ export const shinryokouiMasterFields = [
   {
     seq: 72,
     name: "施設基準/施設基準コード①",
+    shortName: "施設基準コード①",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 73,
     name: "施設基準/施設基準コード②",
+    shortName: "施設基準コード②",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 74,
     name: "施設基準/施設基準コード③",
+    shortName: "施設基準コード③",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 75,
     name: "施設基準/施設基準コード④",
+    shortName: "施設基準コード④",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 76,
     name: "施設基準/施設基準コード⑤",
+    shortName: "施設基準コード⑤",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 77,
     name: "施設基準/施設基準コード⑥",
+    shortName: "施設基準コード⑥",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 78,
     name: "施設基準/施設基準コード⑦",
+    shortName: "施設基準コード⑦",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 79,
     name: "施設基準/施設基準コード⑧",
+    shortName: "施設基準コード⑧",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 80,
     name: "施設基準/施設基準コード⑨",
+    shortName: "施設基準コード⑨",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
   {
     seq: 81,
     name: "施設基準/施設基準コード⑩",
+    shortName: "施設基準コード⑩",
     mode: "numeric",
     // description: "施設基準を要する診療行為であるか否かを表す。\n\n施設基準コードは「別紙７－８」のとおりである。"
   },
@@ -2429,7 +2470,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「３」以外の診療行為"
+        name: "「１」及び「３」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -2540,6 +2582,7 @@ export const shinryokouiMasterFields = [
     name: "変更年月日",
     mode: "date",
     // description: "当該診療行為の情報に変更等が生じた場合、適用となる日付を西暦年「４桁」、月「２桁」及び日「２桁」の８桁で表す。"
+    columnWidth: 112,
   },
   {
     seq: 88,
@@ -2556,6 +2599,7 @@ export const shinryokouiMasterFields = [
   {
     seq: 90,
     name: "コード表用番号（アルファベット部を除く）/章",
+    shortName: "コード表用番号/章",
     mode: "numeric",
     // description: "",
     codes: [
@@ -2588,6 +2632,7 @@ export const shinryokouiMasterFields = [
   {
     seq: 91,
     name: "コード表用番号（アルファベット部を除く）/部",
+    shortName: "コード表用番号/部",
     mode: "numeric",
     // description: "",
     codes: [
@@ -2772,48 +2817,56 @@ export const shinryokouiMasterFields = [
   {
     seq: 92,
     name: "コード表用番号（アルファベット部を除く）/区分番号",
+    shortName: "コード表用番号/区分番号",
     mode: "numeric",
     // description: ""
   },
   {
     seq: 93,
     name: "コード表用番号（アルファベット部を除く）/枝番",
+    shortName: "コード表用番号/枝番",
     mode: "numeric",
     // description: ""
   },
   {
     seq: 94,
     name: "コード表用番号（アルファベット部を除く）/項番",
+    shortName: "コード表用番号/項番",
     mode: "numeric",
     // description: ""
   },
   {
     seq: 95,
     name: "告示・通知関連番号（アルファベット部を除く）/章",
+    shortName: "告示・通知関連番号/章",
     mode: "numeric",
     // description: "未使用の場合：「０」を設定する。"
   },
   {
     seq: 96,
     name: "告示・通知関連番号（アルファベット部を除く）/部",
+    shortName: "告示・通知関連番号/部",
     mode: "numeric",
     // description: "未使用の場合：「００」を設定する。"
   },
   {
     seq: 97,
     name: "告示・通知関連番号（アルファベット部を除く）/区分番号",
+    shortName: "告示・通知関連番号/区分番号",
     mode: "numeric",
     // description: "未使用の場合：「０００」を設定する。"
   },
   {
     seq: 98,
     name: "告示・通知関連番号（アルファベット部を除く）/枝番",
+    shortName: "告示・通知関連番号/枝番",
     mode: "numeric",
     // description: "未使用の場合：「００」を設定する。"
   },
   {
     seq: 99,
     name: "告示・通知関連番号（アルファベット部を除く）/項番",
+    shortName: "告示・通知関連番号/項番",
     mode: "numeric",
     // description: "未使用の場合：「００」を設定する。"
   },
@@ -3177,7 +3230,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3249,7 +3303,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3284,7 +3339,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3380,7 +3436,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3534,7 +3591,8 @@ export const shinryokouiMasterFields = [
     codes: [
       {
         code: "0",
-        name: "「１」及び「２」以外の診療行為"
+        name: "「１」及び「２」以外の診療行為",
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3570,7 +3628,8 @@ export const shinryokouiMasterFields = [
             "3",
             "5"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3605,7 +3664,8 @@ export const shinryokouiMasterFields = [
             "7",
             "9"
           ]
-        }
+        },
+        alias: "該当しない",
       },
       {
         code: "1",
@@ -3824,14 +3884,14 @@ export const shinryokouiMasterFields = [
             "5"
           ]
         }
-      }
+      },
     ]
   }
 ] as const satisfies readonly Field[];
 
-export type FieldName = typeof shinryokouiMasterFields[number]["name"];
+export type ShinryoukouiMasterFieldName = typeof shinryokouiMasterFields[number]["name"];
 
-const nameToField = new Map<FieldName, Field>(
+const nameToField = new Map<ShinryoukouiMasterFieldName, Field>(
   shinryokouiMasterFields.map(field => [field.name, field])
 );
 
@@ -3840,19 +3900,19 @@ for (const field of shinryokouiMasterFields) {
   seqToField[field.seq] = field;
 }
 
-export function getField(name: FieldName): Field {
+export function getField(name: ShinryoukouiMasterFieldName): Field {
   return nameToField.get(name)!;
 }
 
 export function getFieldOrUndefined(name: string): Field | undefined {
-  return nameToField.get(name as FieldName);
+  return nameToField.get(name as ShinryoukouiMasterFieldName);
 }
 
 export function getFieldBySeq(seq: number): Field | undefined {
   return seqToField[seq];
 }
 
-export function getFields(names: FieldName[]): Field[] {
+export function getFields(names: ShinryoukouiMasterFieldName[]): Field[] {
   return names.map(name => {
     const f = getField(name);
     if (!f) throw new Error(`Field ${name} not found`);

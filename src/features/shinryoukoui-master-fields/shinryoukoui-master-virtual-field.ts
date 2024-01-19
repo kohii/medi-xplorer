@@ -2,7 +2,7 @@ import { getValue } from "@/features/fields/get-values";
 import { VirtualField } from "@/features/fields/virtual-field";
 
 import { getField } from "./shinryoukoui-master-fields";
-import { formatPoint, getAgeRangeLabel } from "./shinryoukoui-master-utils";
+import { formatPoint, getAgeRangeLabel, getKubunBangouColor } from "./shinryoukoui-master-utils";
 
 
 const fields = {
@@ -12,7 +12,7 @@ const fields = {
 } as const;
 
 export const shinryoukouiMasterVirtualFields = {
-  "区分番号": {
+  kubunNo: {
     name: "区分番号",
     value(row: string[]) {
       const alphabet = getValue(row, fields["コード表用番号（アルファベット部）"]);
@@ -22,18 +22,23 @@ export const shinryoukouiMasterVirtualFields = {
       const kubun = getValue(row, fields["コード表用番号（アルファベット部を除く）/区分番号"]);
       const edaban = getValue(row, fields["コード表用番号（アルファベット部を除く）/枝番"]);
       return `${alphabet}${kubun}-${edaban}`;
-    }
+    },
+    colorize(value: string) {
+      return getKubunBangouColor(value);
+    },
+    columnWidth: 92,
   },
-  "新又は現点数": {
-    name: "新又は現点数",
+  point: {
+    name: "点数",
     value(row: string[]) {
       return formatPoint(
         getValue(row, getField("新又は現点数/点数識別")),
         getValue(row, getField("新又は現点数/新又は現点数")),
       );
     },
+    columnWidth: 92,
   },
-  "旧点数": {
+  prevPoint: {
     name: "旧点数",
     value(row: string[]) {
       return formatPoint(
@@ -41,8 +46,9 @@ export const shinryoukouiMasterVirtualFields = {
         getValue(row, getField("旧点数/旧点数")),
       );
     },
+    columnWidth: 92,
   },
-  "上下限年齢": {
+  ageRange: {
     name: "上下限年齢",
     value(row: string[]) {
       const lowerAgeField = getField("上下限年齢/下限年齢");
@@ -52,7 +58,7 @@ export const shinryoukouiMasterVirtualFields = {
       return getAgeRangeLabel(lower, upper);
     },
   },
-  "上限回数": {
+  limitCount: {
     name: "上限回数",
     value(row: string[]) {
       const value = getValue(row, getField("上限回数/上限回数"));
@@ -66,3 +72,9 @@ export const shinryoukouiMasterVirtualFields = {
     },
   }
 } satisfies Record<string, VirtualField>;
+
+export type ShinryoukouiMasterVirtualFieldId = keyof typeof shinryoukouiMasterVirtualFields;
+
+export function getShinryoukouiMasterVirtualField(id: ShinryoukouiMasterVirtualFieldId): VirtualField {
+  return shinryoukouiMasterVirtualFields[id];
+}

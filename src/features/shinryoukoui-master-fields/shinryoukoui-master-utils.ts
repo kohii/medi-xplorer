@@ -1,7 +1,7 @@
-import { getNthColorChipColor } from "@/components/color-chip";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
 import { Field } from "@/features/fields/types";
+import { getNthColorChipColor } from "@/utils/color-chip-color";
 import { alphabetToNumber, toHalfWidth, trimDecimalZero, trimLeadingZero } from "@/utils/text";
 
 import { getField } from "./shinryoukoui-master-fields";
@@ -33,11 +33,12 @@ export function formatPoint(
 export function formatCodeValue(row: string[], field: Field) {
   const value = getValue(row, field);
   const label = getCodeLabel(row, field, true);
-  return value + ": " + label;
+  return value + ": " + (label ?? "-");
 }
 
 export function getKubunBangouColor(value: string) {
   const v = value.substring(0, 1);
+  if (v === "-") return undefined;
   return getNthColorChipColor(alphabetToNumber(v));
 }
 
