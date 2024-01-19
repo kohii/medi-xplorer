@@ -85,8 +85,8 @@ export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps
           <Container
             {...props}
             label={(
-              <div className="flex items-center gap-1">
-                <div title="MediXplorerが独自に定義した、複数の列を組み合わせた項目です。">
+              <div className="flex items-center gap-1.5">
+                <div title="MediXplorerが独自に定義した項目です。複数の項目を組み合わせて解釈して表示します。">
                   <SparklesIcon className="text-purple-500" />
                 </div>
                 {field.name}

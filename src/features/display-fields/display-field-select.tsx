@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 
 import { FilterableSelect } from "@/components/filterable-select";
+import { SparklesIcon } from "@/components/icons/sparkles-icon";
 
 import { shinryokouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { ShinryoukouiMasterVirtualFieldId, shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
@@ -13,7 +14,11 @@ const normalFieldsOptions = shinryokouiMasterFields.map(field => ({
 }));
 
 const virtualFieldsOptions = Object.entries(shinryoukouiMasterVirtualFields).map(([key, field]) => ({
-  label: field.name,
+  label: (<div className="flex items-center gap-1.5">
+    <SparklesIcon className="text-purple-500" />
+    {field.name}
+    <div className="text-xs text-gray-400 ml-2">MediXplorer 独自項目</div>
+  </div>),
   value: key,
 }));
 

@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import ReactSelect from "react-select";
 import { twMerge } from "tailwind-merge";
 
 // FilterableSelectProps 型を条件付き型に変更
 type FilterableSelectProps<ValueType extends string, IsNullable extends boolean> = {
   value: IsNullable extends true ? ValueType | null : ValueType;
-  options: { label: string; value: ValueType }[];
+  options: { label: string | React.ReactNode; value: ValueType }[];
   // eslint-disable-next-line no-unused-vars
   onChange: (value: IsNullable extends true ? ValueType | null : ValueType) => void;
   placeholder?: string;
