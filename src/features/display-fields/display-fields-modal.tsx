@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { DEFAULT_DISPLAY_FIELDS } from "./constants";
 import { DisplayFieldsForm } from "./display-fields-form";
+import { stringifyDisplayFieldConfigs } from "./stringify-display-field-config";
 import { DisplayFieldConfig, IdentifiedDisplayFieldConfig } from "./types";
 
 type DisplayFieldsModalProps = {
   fields: DisplayFieldConfig[];
-  onOk: (fields: DisplayFieldConfig[]) => void;
   onClose: () => void;
 }
 
 export function DisplayFieldsModal({
   fields: initialFields,
-  onOk,
   onClose,
 }: DisplayFieldsModalProps) {
   const [fields, setFields] = useState<IdentifiedDisplayFieldConfig[]>(() => initialFields.map((field) => ({
@@ -23,9 +24,27 @@ export function DisplayFieldsModal({
     id: crypto.randomUUID(),
   })));
 
-  const handleOk = () => {
-    onOk(fields);
-  };
+  const { push } = useRouter();
+
+  const handleOk = useCallback(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (fields.length === 0) {
+      searchParams.delete(SEARCH_PARAM_NAMES.FIELDS);
+    } else {
+      const s = stringifyDisplayFieldConfigs(fields);
+      const defaults = stringifyDisplayFieldConfigs(DEFAULT_DISPLAY_FIELDS);
+      if (s === defaults) {
+        searchParams.delete(SEARCH_PARAM_NAMES.FIELDS);
+      } else {
+        searchParams.set(SEARCH_PARAM_NAMES.FIELDS, s);
+      }
+    }
+
+    push(`/s?${searchParams.toString()}`);
+
+    onClose();
+  }, [fields, onClose, push]);
+
   const handleReset = () => {
     setFields(DEFAULT_DISPLAY_FIELDS.map((field) => ({
       ...field,

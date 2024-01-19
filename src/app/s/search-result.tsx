@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { SearchResultMenuAnchor } from "@/app/s/search-result-menu-anchor";
 import { AppIcon } from "@/components/app-icon";
 import { DataTable } from "@/components/data-table";
 import { Drawer } from "@/components/drawer";
@@ -11,7 +12,6 @@ import { Loading } from "@/components/loading";
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { AdvancedSearchFormModal } from "@/features/advanced-search/advancedj-search-form-modal";
-import { DisplayFieldsButton } from "@/features/display-fields/display-fields-buttom";
 import { useDisplayFieldConfigs as useDisplayFields } from "@/features/display-fields/use-display-fields";
 import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
@@ -152,7 +152,7 @@ export default function SearchResult() {
               </div>)}
             </div>
             <div className="pr-4">
-              <DisplayFieldsButton initialFieldsConfigs={displayFields} />
+              <SearchResultMenuAnchor displayFields={displayFields} />
             </div>
           </div>
         </div>
