@@ -49,7 +49,7 @@ export function DisplayFieldsModal({
 
   return (
     <Modal
-      title="表示する列変更"
+      title="表示する列を変更"
       onClose={onClose}
       onKeyDown={handleKeyDown}
       size="lg"
