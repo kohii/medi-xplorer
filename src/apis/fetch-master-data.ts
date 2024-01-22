@@ -1,4 +1,4 @@
-import { parseTsv } from "@/utils/csvs";
+import { parseTsv } from "@/utils/tsv";
 
 export async function fetchMasterData(version: string): Promise<string[][]> {
   const res = await fetch(`/master-data/s/s_ALL${version}.tsv`, {
