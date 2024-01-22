@@ -152,7 +152,7 @@ export default function SearchResult() {
               </div>)}
             </div>
             <div className="pr-4">
-              <SearchResultMenuAnchor displayFields={displayFields} />
+              <SearchResultMenuAnchor displayFields={displayFields} rows={filteredData ?? []} />
             </div>
           </div>
         </div>

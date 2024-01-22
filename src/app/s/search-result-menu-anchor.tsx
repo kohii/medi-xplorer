@@ -9,9 +9,10 @@ import { DisplayFieldConfig } from "../../features/display-fields/types";
 
 type SearchResultMenuAnchorProps = {
   displayFields: DisplayFieldConfig[];
+  rows: string[][];
 };
 
-export function SearchResultMenuAnchor({ displayFields }: SearchResultMenuAnchorProps) {
+export function SearchResultMenuAnchor({ displayFields, rows }: SearchResultMenuAnchorProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -23,6 +24,12 @@ export function SearchResultMenuAnchor({ displayFields }: SearchResultMenuAnchor
   const [displayFieldsFormModalOpen, setDisplayFieldsFormModalOpen] = useState(false);
   const handleCustomizeDisplayFields = () => {
     setDisplayFieldsFormModalOpen(true);
+    handleClose();
+  };
+
+  const [exportModalOpen, setExportModalOpen] = useState(false);
+  const handleExport = () => {
+    setExportModalOpen(true);
     handleClose();
   };
 
@@ -41,12 +48,18 @@ export function SearchResultMenuAnchor({ displayFields }: SearchResultMenuAnchor
         anchorOrigin="right"
       >
         <MenuItem onClick={handleCustomizeDisplayFields}>表示する列を変更</MenuItem>
-        <MenuItem onClick={handleClose}>エクスポート</MenuItem>
+        <MenuItem onClick={handleExport}>エクスポート</MenuItem>
       </Menu>
       {displayFieldsFormModalOpen && (
         <DynamicDisplayFieldsFormModal
           fields={displayFields}
           onClose={() => setDisplayFieldsFormModalOpen(false)}
+        />)}
+      {exportModalOpen && (
+        <DynamicExportDataModal
+          rows={rows}
+          displayFields={displayFields}
+          onClose={() => setExportModalOpen(false)}
         />)}
     </>
   );
@@ -55,5 +68,10 @@ export function SearchResultMenuAnchor({ displayFields }: SearchResultMenuAnchor
 
 const DynamicDisplayFieldsFormModal = dynamic(
   () => import("@/features/display-fields/display-fields-modal").then(m => m.DisplayFieldsModal),
+  { ssr: false, loading: () => <Backdrop /> },
+);
+
+const DynamicExportDataModal = dynamic(
+  () => import("@/features/exports/export-data-modal").then(m => m.ExportDataModal),
   { ssr: false, loading: () => <Backdrop /> },
 );
