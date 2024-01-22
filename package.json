@@ -55,6 +55,6 @@
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5",
-    "vercel": "^33.1.0"
+    "vercel": "^33.2.0"
   }
 }
