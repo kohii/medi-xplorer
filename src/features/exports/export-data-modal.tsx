@@ -67,7 +67,7 @@ export function ExportDataModal({
     >
       <div className="grid gap-3"
         style={{
-          gridTemplateColumns: "192px 1fr",
+          gridTemplateColumns: "224px 1fr",
         }}>
         <div className="flex flex-col gap-1">
           <FormItem>
