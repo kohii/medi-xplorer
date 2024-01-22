@@ -7,7 +7,7 @@ type ModalProps = {
   title: string;
   children: React.ReactNode;
   footer: React.ReactNode;
-  size?: "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl";
   onClose: () => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
@@ -30,12 +30,13 @@ export function Modal({
       <div className="fixed inset-0 bg-gray-950 opacity-40" onClick={onClose} />
       <div className={twMerge(
         "relative p-4 w-full max-h-full mx-auto",
-        size === "md" && "max-w-[640px]",
+        size === "sm" && "max-w-[640px]",
+        size === "md" && "max-w-[768px]",
         size === "lg" && "max-w-[832px]",
         size === "xl" && "max-w-[1080px]",
       )}>
         <div className="relative bg-white rounded-lg shadow">
-          <div className="flex items-center justify-between p-4 border-b rounded-t">
+          <div className="flex items-center justify-between px-4 py-3 border-b rounded-t">
             <h3 className="text-xl font-medium text-gray-900">
               {title}
             </h3>

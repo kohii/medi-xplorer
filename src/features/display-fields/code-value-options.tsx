@@ -1,4 +1,9 @@
+import { twMerge } from "tailwind-merge";
+
+import { Option, Select } from "@/components/select";
+
 import { CodeValueVariant } from "./types";
+
 
 type CodeValueOptionsProps = {
   className?: string;
@@ -8,24 +13,33 @@ type CodeValueOptionsProps = {
   onChange: (value: { variant: CodeValueVariant }) => void;
 };
 
+const options: Option<CodeValueVariant>[] = [{
+  value: "label-with-code",
+  label: "コードとラベル (デフォルト)",
+}, {
+  value: "code",
+  label: "コードのみ",
+}, {
+  value: "label",
+  label: "ラベルのみ",
+}];
+
 export function CodeValueOptions({
   className,
   value,
   onChange,
 }: CodeValueOptionsProps) {
-  const variant = value?.variant ?? "code-label";
+  const variant : CodeValueVariant = value?.variant ?? "label-with-code";
   return (
-    <div className={className}>
+    <div className={twMerge("flex items-center gap-1", className)}>
       表示内容:
-      <select
+      <Select
         value={variant}
-        onChange={(event) => onChange({ variant: event.target.value as CodeValueVariant })}
-        className="border border-gray-300 rounded-md px-2 py-1 ml-1"
+        options={options}
+        onChange={(v) => onChange({ variant: v })}
+        className="w-auto py-1"
       >
-        <option value="code-label">コードとラベル (デフォルト)</option>
-        <option value="code">コードのみ</option>
-        <option value="label">ラベルのみ</option>
-      </select>
+      </Select>
     </div>
   );
 }
