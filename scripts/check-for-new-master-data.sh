@@ -7,7 +7,7 @@ if [ -n "$(gh pr list --search head:new-master-data --state open)" ]; then
 fi
 
 # Get latest update date from website
-content=$(curl https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.html)
+content=$(curl https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r04/kihonmasta_01.html)
 date=$(echo $content | grep -oE 'kihonmasta_01\.files/s_ALL[0-9]{8}\.zip' | grep -oE '[0-9]{8}')
 
 if [ -z "$date" ]; then
