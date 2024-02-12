@@ -26,7 +26,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@tanstack/react-query": "^5.17.0",
     "@tanstack/react-table": "^8.11.6",
-    "@tanstack/react-virtual": "^3.0.1",
+    "@tanstack/react-virtual": "^3.0.4",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
