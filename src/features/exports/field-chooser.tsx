@@ -47,7 +47,7 @@ export function FieldChooser({
                   onChange(newSelectedFieldIndices);
                 }}
                 label={(
-                  <div className={selectedFieldIndices.has(i) ? undefined : "text-gray-400" }>{(() => {
+                  <div>{(() => {
                     switch (field.kind) {
                       case "normal":
                         return getFieldBySeq(field.seq)?.name;
