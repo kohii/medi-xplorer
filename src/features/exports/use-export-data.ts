@@ -23,9 +23,9 @@ export function useExportData(
         switch (f.kind) {
           case "normal": {
             const { seq, options: option } = f;
-            const field = getFieldBySeq(seq);
+            const field = getFieldBySeq(seq)!;
 
-            if (field?.codes) {
+            if (field.codes) {
               const variant = option?.variant ?? "label-with-code";
               if (variant === "label") {
                 return getCodeLabel(row, field) ?? "";
@@ -35,7 +35,7 @@ export function useExportData(
               }
               return `${getValue(row, field)}: ${getCodeLabel(row, field)}`;
             }
-            return `${seq}`;
+            return getValue(row, field);
           }
           case "virtual": {
             const { key } = f;
@@ -96,9 +96,9 @@ export function useExportData(
         a.download = "data.csv";
         a.click();
       },
-      copy() {
+      async copy() {
         const csv = stringifyRows();
-        copyToClipboard(csv);
+        await copyToClipboard(csv);
       }
     };
   }, [stringifyRows]);
