@@ -26,9 +26,9 @@ export function ExportDataModal({
   onClose,
 }: ExportDataModalProps) {
   const [exportOptions, setExportOptions] = useState<ExportOptions>({
-    delimiter: ",",
+    delimiter: "\t",
     includeHeader: true,
-    quoteWhen: "always",
+    quoteWhen: "auto",
     rowDelimiter: "\n",
   });
   const [selectedFieldIndices, setSelectedFieldIndices] = useState<Set<number>>(() => new Set(displayFields.map((_, i) => i)));
