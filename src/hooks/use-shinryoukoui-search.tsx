@@ -1,23 +1,48 @@
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
-import { MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
+export type SearchParamNames = typeof SEARCH_PARAM_NAMES["SEARCH"][keyof typeof SEARCH_PARAM_NAMES["SEARCH"]];
 
+type Options = {
+  preserveExtraSearchParams: boolean
+}
 
-export function useShinryoukouiSearch() {
+export function useShinryoukouiSearch({
+  preserveExtraSearchParams,
+}: Options) {
   const { push } = useRouter();
 
-  return useCallback((query: string) => {
-    const currentSearchParams = new URLSearchParams(location.search);
-    const masterVersion = currentSearchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
+  return useCallback((params: {
+    [key in SearchParamNames]?: string | undefined
+  }) => {
+    const currentSearchParams = new URLSearchParams(window.location.search);
     const searchParams = new URLSearchParams();
-    if (query) {
-      searchParams.set("q", query);
-    }
-    if (masterVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(masterVersion)) {
-      searchParams.set(MASTER_VERSION_SEARCH_PARAM_NAME, masterVersion);
-    }
+
+    const searchParamNames =  Object.values(SEARCH_PARAM_NAMES.SEARCH);
+    currentSearchParams.forEach((value, key) => {
+      if (preserveExtraSearchParams || searchParamNames.includes(key as SearchParamNames)) {
+        searchParams.set(key, value);
+      }
+    });
+
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+    });
     push(`/s?${searchParams.toString()}`);
-  }, [push]);
+  }, [preserveExtraSearchParams, push]);
+}
+
+export function useShinryoukouiSearchByQuery() {
+  const search = useShinryoukouiSearch({preserveExtraSearchParams: false});
+  return useCallback((q: string) => {
+    search({
+      q,
+    });
+  }, [search]);
 }

@@ -4,6 +4,8 @@ import { forwardRef } from "react";
 import { experimental_RichInput as RichInput, RichInputHandle, createRegexRenderer } from "rich-textarea";
 import { twMerge } from "tailwind-merge";
 
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
+
 import { shinryokouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 const FIELD_NAMES = shinryokouiMasterFields.map((f) => f.name);
@@ -33,7 +35,7 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
     <>
       <RichInput
         ref={ref}
-        name="q"
+        name={SEARCH_PARAM_NAMES.SEARCH.QUERY}
         autoFocus
         placeholder="診療行為を検索"
         style={{

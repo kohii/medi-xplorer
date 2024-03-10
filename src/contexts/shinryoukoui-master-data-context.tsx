@@ -5,8 +5,9 @@ import React, { createContext, useContext, useMemo } from "react";
 import { fetchMasterData } from "@/apis/fetch-master-data";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, MASTER_VERSION_SEARCH_PARAM_NAME, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
+import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 type ShinryoukouiMasterDataContextType = {
   version: string;
@@ -33,7 +34,7 @@ export function useShinryoukouiMasterData() {
 export function ShinryoukouiMasterDataProvider({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
-  const paramVersion = searchParams.get(MASTER_VERSION_SEARCH_PARAM_NAME);
+  const paramVersion = searchParams.get(SEARCH_PARAM_NAMES.SEARCH.MASTER_VERSION);
   const version = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion) ?
     paramVersion :
     LATEST_SHINRYOUKOUI_MASTER_VERSION;
@@ -59,7 +60,7 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
     return {
       version,
       setVersion(version: string) {
-        updateSearchParams({ [MASTER_VERSION_SEARCH_PARAM_NAME]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
+        updateSearchParams({ [SEARCH_PARAM_NAMES.SEARCH.MASTER_VERSION]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
       },
       data: data ?? [],
       isLoading,

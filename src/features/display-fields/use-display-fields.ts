@@ -9,7 +9,7 @@ import { DisplayFieldConfig } from "./types";
 
 export function useDisplayFieldConfigs(): DisplayFieldConfig[] {
   const searchParams = useSearchParams();
-  const fields = searchParams.get(SEARCH_PARAM_NAMES.FIELDS);
+  const fields = searchParams.get(SEARCH_PARAM_NAMES.SEARCH.FIELDS);
   return useMemo(() => {
     if (!fields) return DEFAULT_DISPLAY_FIELDS;
     const fieldConfigs = parseDisplayFieldConfigs(fields);
