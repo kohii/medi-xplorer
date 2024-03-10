@@ -20,10 +20,10 @@ import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { VersionSelect } from "@/features/shinryoukoui-master-versions/version-select";
-import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
+import { useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
-
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { Detail } from "./detail";
 import { useTableColumns } from "./use-table-columns";
@@ -33,7 +33,7 @@ const nameField = getField("診療行為省略名称/省略漢字名称");
 
 export default function SearchResult() {
   const searchParams = useSearchParams();
-  const query = searchParams.get("q") ?? "";
+  const query = searchParams.get(SEARCH_PARAM_NAMES.SEARCH.QUERY) ?? "";
   const selectedCode = searchParams.get("code");
 
   const updateSearchParams = useUpdateSearchParams();
@@ -53,7 +53,7 @@ export default function SearchResult() {
   const [searchInputValue, setSearchInputValue] = useStateFromProp(query ?? "");
 
   const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
-  const search = useShinryoukouiSearch();
+  const search = useShinryoukouiSearchByQuery();
 
   const filterExpression = useMemo(() => {
     const r = parseQuery(query);

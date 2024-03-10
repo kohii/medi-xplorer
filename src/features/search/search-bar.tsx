@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
-import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
+import {  useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
 
 import { SearchInput } from "./search-input";
 
@@ -20,7 +20,7 @@ export type SearchBarHandle = {
 export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function SearchBar(
   { value, onChange }, ref
 ) {
-  const search = useShinryoukouiSearch();
+  const search = useShinryoukouiSearchByQuery();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     search(event.currentTarget.q.value);

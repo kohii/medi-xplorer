@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { Backdrop } from "@/components/backdrop";
-import { useShinryoukouiSearch } from "@/hooks/use-shinryoukoui-search";
+import { useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
 
 type AdvancedSearchLinkProps = {
   initialQuery?: string;
@@ -17,7 +17,7 @@ export function AdvancedSearchButton({ initialQuery }: AdvancedSearchLinkProps) 
     setAdvancedSearchOpen(true);
   };
 
-  const search = useShinryoukouiSearch();
+  const search = useShinryoukouiSearchByQuery();
 
   return (
     <>
