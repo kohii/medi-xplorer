@@ -142,7 +142,7 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
               ),
             )}
           </LabeledChip>
-          <LabeledChip label="点数欄集計先識/別（入院）">
+          <LabeledChip label="点数欄集計先識別（入院）">
             {emptyToHyphen(
               getTensuuranShuukeisakiShikibetsuLabel(
                 getValue(row, getField("点数欄集計先識別（入院）")),
