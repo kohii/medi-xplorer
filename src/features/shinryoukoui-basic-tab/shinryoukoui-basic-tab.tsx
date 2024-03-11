@@ -3,7 +3,13 @@ import { HStack } from "@/components/h-stack";
 import { LabeledChip } from "@/components/labeled-chip";
 import { UncontrolledToggle } from "@/components/toggle";
 import { getValue } from "@/features/fields/get-values";
-import { formatCodeValue, getAgeAdditionalFeeData, getKubunBangouColor, getTensuuranShuukeisakiShikibetsuLabel, normalizeUnit } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
+import {
+  formatCodeValue,
+  getAgeAdditionalFeeData,
+  getKubunBangouColor,
+  getTensuuranShuukeisakiShikibetsuLabel,
+  normalizeUnit,
+} from "@/features/shinryoukoui-master-fields/shinryoukoui-master-utils";
 
 import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
@@ -33,7 +39,9 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
     <>
       <section className="mb-4">
         <HStack className="mb-2 gap-2">
-          {kubunBangou !== "-" && <ColorChip color={getKubunBangouColor(kubunBangou)} >{kubunBangou}</ColorChip>}
+          {kubunBangou !== "-" && (
+            <ColorChip color={getKubunBangouColor(kubunBangou)}>{kubunBangou}</ColorChip>
+          )}
           <KokujiShikibetsu1Chip row={row} />
         </HStack>
         <div>
@@ -41,11 +49,12 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
           <span className="text-slate-300 text-lg"> | </span>
           <span className="text-lg">{getValue(row, getField("基本漢字名称"))}</span>
         </div>
-        {getValue(row, getField("基本漢字名称")) !== getValue(row, getField("診療行為省略名称/省略漢字名称")) &&
-          (<div className="text-sm my-1 text-slate-500">
+        {getValue(row, getField("基本漢字名称")) !==
+          getValue(row, getField("診療行為省略名称/省略漢字名称")) && (
+          <div className="text-sm my-1 text-slate-500">
             略称: {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
-          </div>)
-        }
+          </div>
+        )}
       </section>
 
       <section>
@@ -57,11 +66,11 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
           <LabeledChip label="告示等識別区分（２）">
             {formatCodeValue(row, getField("告示等識別区分（２）"))}
           </LabeledChip>
-          {getValue(row, getField("異動関連")) !== "0" &&
-            (<LabeledChip label="異動前の診療行為コード">
+          {getValue(row, getField("異動関連")) !== "0" && (
+            <LabeledChip label="異動前の診療行為コード">
               {getValue(row, getField("異動関連"))}
-            </LabeledChip>)
-          }
+            </LabeledChip>
+          )}
         </HStack>
       </section>
 
@@ -96,9 +105,7 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
       <section>
         <SectionHeading>点数</SectionHeading>
         <HStack>
-          <LabeledChip label="点数">
-            {shinryoukouiMasterVirtualFields.point.value(row)}
-          </LabeledChip>
+          <LabeledChip label="点数">{shinryoukouiMasterVirtualFields.point.value(row)}</LabeledChip>
           <LabeledChip label="旧点数">
             {shinryoukouiMasterVirtualFields.prevPoint.value(row)}
           </LabeledChip>
@@ -109,11 +116,11 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <LabeledChip label="逓減対象区分">
               {formatCodeValue(row, getField("逓減対象区分"))}
             </LabeledChip>
-            {getValue(row, getField("逓減対象区分")) === "1" &&
-              (<LabeledChip label="包括逓減区分">
+            {getValue(row, getField("逓減対象区分")) === "1" && (
+              <LabeledChip label="包括逓減区分">
                 {formatCodeValue(row, getField("包括逓減区分"))}
-              </LabeledChip>)
-            }
+              </LabeledChip>
+            )}
           </HStack>
         )}
 
@@ -123,71 +130,74 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <KizamichiFormula row={row} />
           </div>
         )}
-      </section >
+      </section>
 
       <section>
         <SectionHeading>記録</SectionHeading>
         <HStack>
           <LabeledChip label="点数欄集計先識別（入院外）">
-            {emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-              getValue(row, getField("点数欄集計先識別（入院外）"))
-            ))}
+            {emptyToHyphen(
+              getTensuuranShuukeisakiShikibetsuLabel(
+                getValue(row, getField("点数欄集計先識別（入院外）")),
+              ),
+            )}
           </LabeledChip>
           <LabeledChip label="点数欄集計先識/別（入院）">
-            {emptyToHyphen(getTensuuranShuukeisakiShikibetsuLabel(
-              getValue(row, getField("点数欄集計先識別（入院）"))
-            ))}
+            {emptyToHyphen(
+              getTensuuranShuukeisakiShikibetsuLabel(
+                getValue(row, getField("点数欄集計先識別（入院）")),
+              ),
+            )}
           </LabeledChip>
         </HStack>
         <HStack className="mt-1">
           <LabeledChip label="データ規格">
-            {getValue(row, getField("データ規格コード")) === "0" ? "数量の記録は不要" : `数量の記録が必要 (単位=${normalizeUnit(getValue(row, getField("データ規格名/漢字名称")))})`}
+            {getValue(row, getField("データ規格コード")) === "0"
+              ? "数量の記録は不要"
+              : `数量の記録が必要 (単位=${normalizeUnit(
+                getValue(row, getField("データ規格名/漢字名称")),
+              )})`}
           </LabeledChip>
         </HStack>
       </section>
 
-      {
-        getValue(row, getField("注加算/注加算コード")) !== "0" && (
-          <section>
-            <SectionHeading>注加算</SectionHeading>
-            <>
-              <HStack>
-                <LabeledChip label="注加算コード">
-                  {getValue(row, getField("注加算/注加算コード"))}
-                </LabeledChip>
-                <LabeledChip label="注加算通番">
-                  {getValue(row, getField("注加算/注加算通番"))}
-                </LabeledChip>
-              </HStack>
-              <UncontrolledToggle
-                label="同じ注加算コードの診療行為..."
-                className="mb-4 mt-2"
-              >
-                {(open) => open && (<ChuukasanTable
-                  rows={rows}
-                  chuukasanCode={getValue(row, getField("注加算/注加算コード"))}
-                  shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード"))}
-                />)
-                }
-              </UncontrolledToggle>
-            </>
-          </section>
-        )
-      }
+      {getValue(row, getField("注加算/注加算コード")) !== "0" && (
+        <section>
+          <SectionHeading>注加算</SectionHeading>
+          <>
+            <HStack>
+              <LabeledChip label="注加算コード">
+                {getValue(row, getField("注加算/注加算コード"))}
+              </LabeledChip>
+              <LabeledChip label="注加算通番">
+                {getValue(row, getField("注加算/注加算通番"))}
+              </LabeledChip>
+            </HStack>
+            <UncontrolledToggle label="同じ注加算コードの診療行為..." className="mb-4 mt-2">
+              {(open) =>
+                open && (
+                  <ChuukasanTable
+                    rows={rows}
+                    chuukasanCode={getValue(row, getField("注加算/注加算コード"))}
+                    shinryoukouiCodeToHighlight={getValue(row, getField("診療行為コード"))}
+                  />
+                )
+              }
+            </UncontrolledToggle>
+          </>
+        </section>
+      )}
 
-      {
-        ageAdditionalFeeData.length > 0 && (
-          <section>
-            <SectionHeading>年齢加算</SectionHeading	>
-            <AgeAdditionalFeeTable data={ageAdditionalFeeData} originalRows={rows} />
-          </section>
-        )
-      }
+      {ageAdditionalFeeData.length > 0 && (
+        <section>
+          <SectionHeading>年齢加算</SectionHeading>
+          <AgeAdditionalFeeTable data={ageAdditionalFeeData} originalRows={rows} />
+        </section>
+      )}
 
-      {
-        (getValue(row, getField("検査等実施判断区分")) !== "0" ||
-          getValue(row, getField("包括対象検査")) !== "0") &&
-        (<section>
+      {(getValue(row, getField("検査等実施判断区分")) !== "0" ||
+        getValue(row, getField("包括対象検査")) !== "0") && (
+        <section>
           <SectionHeading>検査</SectionHeading>
           <HStack>
             <LabeledChip label="検査等実施判断区分">
@@ -196,55 +206,65 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <LabeledChip label="検査等実施判断グループ区分">
               {formatCodeValue(row, getField("検査等実施判断グループ区分"))}
             </LabeledChip>
-            {getValue(row, getField("検査等実施判断区分")) === "1" &&
-              (<>
+            {getValue(row, getField("検査等実施判断区分")) === "1" && (
+              <>
                 <LabeledChip label="包括対象検査">
                   {formatCodeValue(row, getField("包括対象検査"))}
                 </LabeledChip>
-              </>)
-            }
+              </>
+            )}
           </HStack>
-          {getValue(row, getField("検査等実施判断区分")) === "2" && (<UncontrolledToggle
-            label="対応する検査等の実施料..."
-            className="my-2"
-          >
-            {(open) => open && (<ShinryoukouiTable rows={rows}
-              filter={[{
-                fieldKey: "検査等実施判断区分",
-                operator: ":",
-                value: "1",
-                negative: false,
-              }, {
-                fieldKey: "検査等実施判断グループ区分",
-                operator: ":",
-                value: getValue(row, getField("検査等実施判断グループ区分")),
-                negative: false,
-              }]} />)}
-          </UncontrolledToggle>)
-          }
+          {getValue(row, getField("検査等実施判断区分")) === "2" && (
+            <UncontrolledToggle label="対応する検査等の実施料..." className="my-2">
+              {(open) =>
+                open && (
+                  <ShinryoukouiTable
+                    rows={rows}
+                    filter={[
+                      {
+                        fieldKey: "検査等実施判断区分",
+                        operator: ":",
+                        value: "1",
+                        negative: false,
+                      },
+                      {
+                        fieldKey: "検査等実施判断グループ区分",
+                        operator: ":",
+                        value: getValue(row, getField("検査等実施判断グループ区分")),
+                        negative: false,
+                      },
+                    ]}
+                  />
+                )
+              }
+            </UncontrolledToggle>
+          )}
           {getValue(row, getField("検査等実施判断区分")) === "1" && (
             <>
-              <SubHeading>
-                対応する判断料・診断料
-              </SubHeading>
+              <SubHeading>対応する判断料・診断料</SubHeading>
               <div className="pb-2">
-                <ShinryoukouiTable rows={rows}
-                  filter={[{
-                    fieldKey: "検査等実施判断区分",
-                    operator: ":",
-                    value: "2",
-                    negative: false,
-                  }, {
-                    fieldKey: "検査等実施判断グループ区分",
-                    operator: ":",
-                    value: getValue(row, getField("検査等実施判断グループ区分")),
-                    negative: false,
-                  }]} />
+                <ShinryoukouiTable
+                  rows={rows}
+                  filter={[
+                    {
+                      fieldKey: "検査等実施判断区分",
+                      operator: ":",
+                      value: "2",
+                      negative: false,
+                    },
+                    {
+                      fieldKey: "検査等実施判断グループ区分",
+                      operator: ":",
+                      value: getValue(row, getField("検査等実施判断グループ区分")),
+                      negative: false,
+                    },
+                  ]}
+                />
               </div>
-            </>)}
+            </>
+          )}
         </section>
-        )
-      }
+      )}
       <OthersSection row={row} />
     </>
   );
