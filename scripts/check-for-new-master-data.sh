@@ -7,7 +7,7 @@ if [ -n "$(gh pr list --search head:new-master-data --state open)" ]; then
 fi
 
 # Get latest update date from website
-content=$(curl https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r04/kihonmasta_01.html)
+content=$(curl https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r06/kihonmasta_01.html)
 date=$(echo $content | grep -oE 'kihonmasta_01\.files/s_ALL[0-9]{8}\.zip' | grep -oE '[0-9]{8}')
 
 if [ -z "$date" ]; then
@@ -19,7 +19,7 @@ file_name="s_ALL${date}.csv"
 
 # Download latest master data if not exists
 if [ ! -f "raw-master-data/s/$file_name" ]; then
-  curl -o s_ALL${date}.zip https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.files/s_ALL${date}.zip
+  curl -o s_ALL${date}.zip https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r06/kihonmasta_01.files/s_ALL${date}.zip
   unzip s_ALL${date}.zip -d raw-master-data/s/
   rm s_ALL${date}.zip
 
