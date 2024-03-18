@@ -18,20 +18,19 @@ type ExportDataModalProps = {
   rows: string[][];
   displayFields: DisplayFieldConfig[];
   onClose: () => void;
-}
+};
 
-export function ExportDataModal({
-  rows,
-  displayFields,
-  onClose,
-}: ExportDataModalProps) {
+export function ExportDataModal({ rows, displayFields, onClose }: ExportDataModalProps) {
   const [exportOptions, setExportOptions] = useState<ExportOptions>({
     delimiter: "\t",
     includeHeader: true,
     quoteWhen: "auto",
     rowDelimiter: "\n",
   });
-  const [selectedFieldIndices, setSelectedFieldIndices] = useState<Set<number>>(() => new Set(displayFields.map((_, i) => i)));
+  const [selectedFieldIndices, setSelectedFieldIndices] = useState<Set<number>>(
+    () => new Set(displayFields.map((_, i) => i)),
+  );
+  const selectedFields = displayFields.filter((_, i) => selectedFieldIndices.has(i));
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Escape") {
@@ -42,7 +41,7 @@ export function ExportDataModal({
   };
 
   const [copied, setCopied] = useAutoResetState(false, 2000);
-  const { download, copy } = useExportData(rows, displayFields, exportOptions);
+  const { download, copy } = useExportData(rows, selectedFields, exportOptions);
 
   return (
     <Modal
@@ -60,21 +59,29 @@ export function ExportDataModal({
               setCopied(true);
             }}
           >
-            { copied ? <div className="flex items-center gap-1"><CheckIcon/> コピーしました</div> : "クリップボードにコピー" }
+            {copied ? (
+              <div className="flex items-center gap-1">
+                <CheckIcon /> コピーしました
+              </div>
+            ) : (
+              "クリップボードにコピー"
+            )}
           </Button>
         </div>
       )}
     >
-      <div className="grid gap-3"
+      <div
+        className="grid gap-3"
         style={{
           gridTemplateColumns: "224px 1fr",
-        }}>
+        }}
+      >
         <div className="flex flex-col gap-1">
           <FormItem>
             <FormLabel>区切り文字</FormLabel>
             <Select
               value={exportOptions.delimiter}
-              onChange={delimiter => setExportOptions({ ...exportOptions, delimiter })}
+              onChange={(delimiter) => setExportOptions({ ...exportOptions, delimiter })}
               className="py-1.5"
               options={[
                 { label: "カンマ", value: "," },
@@ -86,7 +93,7 @@ export function ExportDataModal({
             <FormLabel>囲み文字</FormLabel>
             <Select
               value={exportOptions.quoteWhen}
-              onChange={quoteWhen => setExportOptions({ ...exportOptions, quoteWhen })}
+              onChange={(quoteWhen) => setExportOptions({ ...exportOptions, quoteWhen })}
               className="py-1.5"
               options={[
                 { label: "あり", value: "always" },
@@ -99,7 +106,7 @@ export function ExportDataModal({
             <FormLabel>改行</FormLabel>
             <Select
               value={exportOptions.rowDelimiter}
-              onChange={rowDelimiter => setExportOptions({ ...exportOptions, rowDelimiter })}
+              onChange={(rowDelimiter) => setExportOptions({ ...exportOptions, rowDelimiter })}
               className="py-1.5"
               options={[
                 { label: "LF (\\n)", value: "\n" },
@@ -111,7 +118,7 @@ export function ExportDataModal({
             <FormLabel>ヘッダー</FormLabel>
             <Checkbox
               value={exportOptions.includeHeader}
-              onChange={includeHeader => setExportOptions({ ...exportOptions, includeHeader })}
+              onChange={(includeHeader) => setExportOptions({ ...exportOptions, includeHeader })}
               label="あり"
             />
           </FormItem>
