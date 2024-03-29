@@ -1,4 +1,3 @@
-import { Chip } from "@/components/chip";
 import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { LabeledChip } from "@/components/labeled-chip";
