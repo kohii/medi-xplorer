@@ -1,3 +1,4 @@
+import { Chip } from "@/components/chip";
 import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { LabeledChip } from "@/components/labeled-chip";
@@ -43,6 +44,9 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <ColorChip color={getKubunBangouColor(kubunBangou)}>{kubunBangou}</ColorChip>
           )}
           <KokujiShikibetsu1Chip row={row} />
+          {getValue(row, getField("検体検査コメント")) === "1" && (
+            <ColorChip color="violet">検体検査コメント</ColorChip>
+          )}
         </HStack>
         <div>
           <span className="text-slate-500">{getValue(row, getField("診療行為コード"))}</span>
@@ -155,8 +159,8 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             {getValue(row, getField("データ規格コード")) === "0"
               ? "数量の記録は不要"
               : `数量の記録が必要 (単位=${normalizeUnit(
-                getValue(row, getField("データ規格名/漢字名称")),
-              )})`}
+                  getValue(row, getField("データ規格名/漢字名称")),
+                )})`}
           </LabeledChip>
         </HStack>
       </section>
