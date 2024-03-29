@@ -65,15 +65,20 @@ export function OthersSection({ row }: OthersSectionProps) {
   }
 
   const 脊髄誘発電位測定等加算区分 = getValue(row, getField("脊髄誘発電位測定等加算区分"));
-  if (is基本項目 && 脊髄誘発電位測定等加算区分 === "1") {
+  if (is基本項目 && 脊髄誘発電位測定等加算区分 !== "0") {
     labels.push(
       getCodeLabel(row, getField("脊髄誘発電位測定等加算区分"))?.replace("な診療行為", ""),
     );
   }
 
   const 頸部郭清術併施加算区分 = getValue(row, getField("頸部郭清術併施加算区分"));
-  if (is基本項目 && 頸部郭清術併施加算区分 === "1") {
+  if (is基本項目 && 頸部郭清術併施加算区分 === "0") {
     labels.push(getCodeLabel(row, getField("頸部郭清術併施加算区分"))?.replace("な診療行為", ""));
+  }
+
+  const 自動縫合器加算区分 = getValue(row, getField("自動縫合器加算区分"));
+  if (is基本項目 && 自動縫合器加算区分 !== "0") {
+    labels.push(getCodeLabel(row, getField("自動縫合器加算区分"))?.replace("な診療行為", ""));
   }
 
   const 長時間麻酔管理加算 = getValue(row, getField("長時間麻酔管理加算"));
