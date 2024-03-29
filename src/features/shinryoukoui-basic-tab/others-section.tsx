@@ -64,6 +64,13 @@ export function OthersSection({ row }: OthersSectionProps) {
     labels.push(getCodeLabel(row, getField("画像等手術支援加算"))?.replace("な診療行為", ""));
   }
 
+  const 脊髄誘発電位測定等加算区分 = getValue(row, getField("脊髄誘発電位測定等加算区分"));
+  if (is基本項目 && 脊髄誘発電位測定等加算区分 === "1") {
+    labels.push(
+      getCodeLabel(row, getField("脊髄誘発電位測定等加算区分"))?.replace("な診療行為", ""),
+    );
+  }
+
   const 頸部郭清術併施加算区分 = getValue(row, getField("頸部郭清術併施加算区分"));
   if (is基本項目 && 頸部郭清術併施加算区分 === "1") {
     labels.push(getCodeLabel(row, getField("頸部郭清術併施加算区分"))?.replace("な診療行為", ""));
