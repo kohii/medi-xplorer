@@ -446,7 +446,6 @@ export const shinryokouiMasterFields = [
         name: "医療観察診療報酬点数表に規定する診療行為",
       },
     ],
-    columnWidth: 192,
   },
   {
     seq: 22,
