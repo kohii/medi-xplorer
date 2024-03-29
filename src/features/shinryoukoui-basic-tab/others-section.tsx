@@ -9,11 +9,9 @@ import { SectionHeading } from "./section-heading";
 
 type OthersSectionProps = {
   row: string[];
-}
+};
 
-export function OthersSection({
-  row,
-}: OthersSectionProps) {
+export function OthersSection({ row }: OthersSectionProps) {
   const 告示等識別区分 = getValue(row, getField("告示等識別区分（１）"));
   const is基本項目 = 告示等識別区分 === "1" || 告示等識別区分 === "3" || 告示等識別区分 === "5";
 
@@ -53,9 +51,17 @@ export function OthersSection({
     labels.push("副鼻腔手術用内視鏡加算を算定可能");
   }
 
-  const 副鼻腔手術用骨軟部組織切除機器加算 = getValue(row, getField("副鼻腔手術用骨軟部組織切除機器加算"));
+  const 副鼻腔手術用骨軟部組織切除機器加算 = getValue(
+    row,
+    getField("副鼻腔手術用骨軟部組織切除機器加算"),
+  );
   if (is基本項目 && 副鼻腔手術用骨軟部組織切除機器加算 === "1") {
     labels.push("副鼻腔手術用骨軟部組織切除機器加算を算定可能");
+  }
+
+  const 画像等手術支援加算 = getValue(row, getField("画像等手術支援加算"));
+  if (is基本項目 && 画像等手術支援加算 !== "0") {
+    labels.push(getCodeLabel(row, getField("画像等手術支援加算"))?.replace("な診療行為", ""));
   }
 
   const 長時間麻酔管理加算 = getValue(row, getField("長時間麻酔管理加算"));
@@ -109,11 +115,10 @@ export function OthersSection({
     <section>
       <SectionHeading>その他</SectionHeading>
       <HStack>
-        {labels.map(label => (
-          <Chip key={label} >{label}</Chip>
+        {labels.map((label) => (
+          <Chip key={label}>{label}</Chip>
         ))}
       </HStack>
     </section>
-
   );
 }
