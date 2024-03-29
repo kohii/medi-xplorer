@@ -1,4 +1,3 @@
-import { Chip } from "@/components/chip";
 import { ColorChip } from "@/components/color-chip";
 import { HStack } from "@/components/h-stack";
 import { LabeledChip } from "@/components/labeled-chip";
@@ -159,8 +158,8 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             {getValue(row, getField("データ規格コード")) === "0"
               ? "数量の記録は不要"
               : `数量の記録が必要 (単位=${normalizeUnit(
-                  getValue(row, getField("データ規格名/漢字名称")),
-                )})`}
+                getValue(row, getField("データ規格名/漢字名称")),
+              )})`}
           </LabeledChip>
         </HStack>
       </section>
