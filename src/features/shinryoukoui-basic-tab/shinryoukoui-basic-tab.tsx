@@ -43,6 +43,9 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             <ColorChip color={getKubunBangouColor(kubunBangou)}>{kubunBangou}</ColorChip>
           )}
           <KokujiShikibetsu1Chip row={row} />
+          {getValue(row, getField("検体検査コメント")) === "1" && (
+            <ColorChip color="violet">検体検査コメント</ColorChip>
+          )}
         </HStack>
         <div>
           <span className="text-slate-500">{getValue(row, getField("診療行為コード"))}</span>
