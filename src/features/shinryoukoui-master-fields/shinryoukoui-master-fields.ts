@@ -1,6 +1,9 @@
 import { Field } from "@/features/fields/types";
 
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+import {
+  INITIAL_SHINRYOUKOUI_MASTER_LAYOUT_VERSION,
+  ShinryoukouiMasterLayoutVersion,
+} from "../shinryoukoui-master-versions/layouts";
 
 // https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/spec/R04rec.pdf
 const shinryokouiMasterFields = [
@@ -3697,10 +3700,9 @@ export function getShinryoukouiMasterFields(
   const cache = fieldsByLayoutVersion.get(layoutVersion);
   if (cache) return cache;
 
-  const fields = shinryokouiMasterFields.filter(
-    (field: Field) => field.validFrom ?? "2024",
-    +layoutVersion,
-  );
+  const fields = shinryokouiMasterFields.filter((field: Field) => {
+    return (field.validFrom ?? INITIAL_SHINRYOUKOUI_MASTER_LAYOUT_VERSION) <= layoutVersion;
+  });
   if (!fields.length) throw new Error(`No fields for layout version ${layoutVersion}`);
   fieldsByLayoutVersion.set(layoutVersion, fields);
   return fields;
