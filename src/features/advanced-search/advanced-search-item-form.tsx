@@ -6,29 +6,35 @@ import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 
+import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+
 import { CodeSelect } from "./code-select";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
 import { FieldSelect } from "./field-select";
 
-const operatorOptions = advancedSearchOperatorOptions.map(option => ({
+const operatorOptions = advancedSearchOperatorOptions.map((option) => ({
   label: option.label,
   value: option.kind,
 }));
-
 
 type AdvancedSearchItemFormProps = {
   item: AdvancedSearchItem;
   onChange: (value: AdvancedSearchItem) => void;
   onDelete: () => void;
+  layoutVersion: ShinryoukouiMasterLayoutVersion;
 };
 
 export function AdvancedSearchItemForm({
   item,
   onChange,
   onDelete,
+  layoutVersion,
 }: AdvancedSearchItemFormProps) {
   const field = getField(item.field);
-  const values = useMemo(() => item.restValues ? [item.value, ...item.restValues] : [item.value], [item]);
+  const values = useMemo(
+    () => (item.restValues ? [item.value, ...item.restValues] : [item.value]),
+    [item],
+  );
   const takesMultipleValues = item.operatorKind === "in" || item.operatorKind === "not-in";
 
   useEffect(() => {
@@ -52,7 +58,10 @@ export function AdvancedSearchItemForm({
     onChange({
       ...item,
       value: index === 0 ? value : values[0],
-      restValues: index === 0 ? values.slice(1) : [...values.slice(1, index), value, ...values.slice(index + 1)],
+      restValues:
+        index === 0
+          ? values.slice(1)
+          : [...values.slice(1, index), value, ...values.slice(index + 1)],
     });
   };
 
@@ -61,10 +70,13 @@ export function AdvancedSearchItemForm({
       <div className="flex-grow basis-1">
         <FieldSelect
           value={item.field}
-          onChange={field => onChange({
-            ...item,
-            field,
-          })}
+          onChange={(field) =>
+            onChange({
+              ...item,
+              field,
+            })
+          }
+          layoutVersion={layoutVersion}
         />
       </div>
 
@@ -72,33 +84,41 @@ export function AdvancedSearchItemForm({
         <FilterableSelect
           options={operatorOptions}
           value={item.operatorKind}
-          onChange={operatorKind => onChange({
-            ...item,
-            operatorKind,
-          })}
+          onChange={(operatorKind) =>
+            onChange({
+              ...item,
+              operatorKind,
+            })
+          }
         />
       </div>
 
       <div className="flex-grow basis-1 flex flex-col gap-2">
-        {
-          values.map((value, index) => (
-            <React.Fragment key={index}>
-              {!field.codes || field.allowFreeValue ? <TextInput
+        {values.map((value, index) => (
+          <React.Fragment key={index}>
+            {!field.codes || field.allowFreeValue ? (
+              <TextInput
                 value={value}
-                onChange={value => handleValueChange(value, index)}
+                onChange={(value) => handleValueChange(value, index)}
                 placeholder={index === 0 ? "値を入力..." : "値を追加..."}
-              /> : <CodeSelect
+              />
+            ) : (
+              <CodeSelect
                 codes={field.codes}
                 value={value}
-                onChange={value => handleValueChange(value ?? "", index)}
-              />}
-            </React.Fragment>
-          ))
-        }
+                onChange={(value) => handleValueChange(value ?? "", index)}
+              />
+            )}
+          </React.Fragment>
+        ))}
       </div>
 
-
-      <IconButton className="p-2" icon={<DeleteIcon />} label="フィルターを削除" onClick={onDelete} />
+      <IconButton
+        className="p-2"
+        icon={<DeleteIcon />}
+        label="フィルターを削除"
+        onClick={onDelete}
+      />
     </div>
   );
 }

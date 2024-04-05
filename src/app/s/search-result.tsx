@@ -19,6 +19,7 @@ import { normalizeFilterExpression } from "@/features/search/normalize-filter-ex
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getLayoutVersion } from "@/features/shinryoukoui-master-versions/layouts";
 import { VersionSelect } from "@/features/shinryoukoui-master-versions/version-select";
 import { useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
@@ -37,16 +38,12 @@ export default function SearchResult() {
   const selectedCode = searchParams.get("code");
 
   const updateSearchParams = useUpdateSearchParams();
-  const {
-    data,
-    isLoading,
-    getRowByCode,
-  } = useShinryoukouiMasterData();
+  const { data, isLoading, getRowByCode, layoutVersion } = useShinryoukouiMasterData();
 
   const searchBarRef = useRef<SearchBarHandle>(null);
 
   const selectedRow = useMemo(
-    () => selectedCode ? getRowByCode(selectedCode) : undefined,
+    () => (selectedCode ? getRowByCode(selectedCode) : undefined),
     [selectedCode, getRowByCode],
   );
 
@@ -63,12 +60,15 @@ export default function SearchResult() {
     return normalizeFilterExpression(r.value);
   }, [query]);
 
-  const select = useCallback((row: string[]) => {
-    const code = getValue(row, getField("診療行為コード"));
-    updateSearchParams({
-      code,
-    });
-  }, [updateSearchParams]);
+  const select = useCallback(
+    (row: string[]) => {
+      const code = getValue(row, getField("診療行為コード"));
+      updateSearchParams({
+        code,
+      });
+    },
+    [updateSearchParams],
+  );
   const unselect = useCallback(() => {
     updateSearchParams({
       code: undefined,
@@ -76,19 +76,22 @@ export default function SearchResult() {
     });
   }, [updateSearchParams]);
 
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (event.key === "/") {
-      const currentFocusOwner = document.activeElement;
-      if (!currentFocusOwner || currentFocusOwner === document.body) {
-        event.preventDefault();
-        searchBarRef.current?.focus();
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "/") {
+        const currentFocusOwner = document.activeElement;
+        if (!currentFocusOwner || currentFocusOwner === document.body) {
+          event.preventDefault();
+          searchBarRef.current?.focus();
+        }
       }
-    }
-    if (event.key === "Escape") {
-      event.preventDefault();
-      unselect();
-    }
-  }, [unselect]);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        unselect();
+      }
+    },
+    [unselect],
+  );
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -111,21 +114,19 @@ export default function SearchResult() {
 
   return (
     <div className="relative h-full">
-      <div className="h-full grid"
+      <div
+        className="h-full grid"
         style={{
           gridTemplateRows: "min-content minmax(0, 1fr)",
           gridTemplateColumns: "minmax(0, 1fr)",
         }}
       >
-        <div
-          style={{ gridRow: 1 }}>
+        <div style={{ gridRow: 1 }}>
           <div className="p-3 border-b border-gray-300 flex items-start gap-3">
             <Link href="/" title="Go to MediXplorer home">
               <div className="text-center text-lg text-slate-500 flex items-center gap-1 mt-1">
                 <AppIcon size="small" />
-                <span className="hidden md:inline">
-                  MediXplorer
-                </span>
+                <span className="hidden md:inline">MediXplorer</span>
               </div>
             </Link>
             <div className="flex-1">
@@ -135,10 +136,15 @@ export default function SearchResult() {
                   value={searchInputValue}
                   onChange={setSearchInputValue}
                 />
-                {filterExpression.kind === "ERROR" && <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>}
+                {filterExpression.kind === "ERROR" && (
+                  <div className="text-red-500 text-sm mt-2">{filterExpression.message}</div>
+                )}
               </div>
               <div className="mt-2 flex justify-between items-center">
-                <AdvancedSearchButton initialQuery={searchInputValue} />
+                <AdvancedSearchButton
+                  initialQuery={searchInputValue}
+                  layoutVersion={layoutVersion}
+                />
                 <div className="text-sm text-gray-500">
                   <VersionSelect />
                 </div>
@@ -147,9 +153,11 @@ export default function SearchResult() {
           </div>
           <div className="flex justify-between items-center">
             <div>
-              {filteredData && (<div className="text-sm text-gray-500 p-2 px-4">
-                Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
-              </div>)}
+              {filteredData && (
+                <div className="text-sm text-gray-500 p-2 px-4">
+                  Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
+                </div>
+              )}
             </div>
             <div className="pr-4">
               <SearchResultMenuAnchor displayFields={displayFields} rows={filteredData ?? []} />
@@ -157,29 +165,43 @@ export default function SearchResult() {
           </div>
         </div>
         <div style={{ gridRow: 2 }} className="px-2">
-          {
-            isLoading || !filteredData ?
-              <div className="flex items-center justify-center gap-2 mt-16">
-                <Loading />
-                Downloading...
-              </div> : <DataTable
-                data={filteredData}
-                columns={columns}
-                height="100%"
-                onRowClick={select}
-                isSelected={(row) => Boolean(selectedCode) && getValue(row, codeField) === selectedCode}
-              />
-          }
+          {isLoading || !filteredData ? (
+            <div className="flex items-center justify-center gap-2 mt-16">
+              <Loading />
+              Downloading...
+            </div>
+          ) : (
+            <DataTable
+              data={filteredData}
+              columns={columns}
+              height="100%"
+              onRowClick={select}
+              isSelected={(row) =>
+                Boolean(selectedCode) && getValue(row, codeField) === selectedCode
+              }
+            />
+          )}
         </div>
       </div>
       {selectedCode && !isLoading && (
         <Drawer title={selectedRow ? getValue(selectedRow, nameField) : ""} onClose={unselect}>
-          {selectedRow ? <Detail row={selectedRow} rows={data!} /> : <div className="flex items-center justify-center h-full">
-            No data found for code {selectedCode}
-          </div>}
+          {selectedRow ? (
+            <Detail row={selectedRow} rows={data!} layoutVersion={layoutVersion} />
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              No data found for code {selectedCode}
+            </div>
+          )}
         </Drawer>
       )}
-      {advancedSearchOpen && <AdvancedSearchFormModal query={searchInputValue} onChange={search} onClose={() => setAdvancedSearchOpen(false)} />}
+      {advancedSearchOpen && (
+        <AdvancedSearchFormModal
+          query={searchInputValue}
+          onChange={search}
+          onClose={() => setAdvancedSearchOpen(false)}
+          layoutVersion={layoutVersion}
+        />
+      )}
     </div>
   );
 }

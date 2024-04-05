@@ -5,12 +5,20 @@ import React, { createContext, useContext, useMemo } from "react";
 import { fetchMasterData } from "@/apis/fetch-master-data";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_KEYS } from "@/features/shinryoukoui-master-versions/constants";
+import {
+  LATEST_SHINRYOUKOUI_MASTER_VERSION,
+  SHINRYOUKOUI_MASTER_VERSION_KEYS,
+} from "@/features/shinryoukoui-master-versions/constants";
+import {
+  ShinryoukouiMasterLayoutVersion,
+  getLayoutVersion,
+} from "@/features/shinryoukoui-master-versions/layouts";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 type ShinryoukouiMasterDataContextType = {
   version: string;
+  layoutVersion: ShinryoukouiMasterLayoutVersion;
   setVersion: (version: string) => void;
   data?: string[][];
   isLoading: boolean;
@@ -20,7 +28,8 @@ type ShinryoukouiMasterDataContextType = {
 
 const ShinryoukouiMasterDataContext = createContext<ShinryoukouiMasterDataContextType>({
   version: LATEST_SHINRYOUKOUI_MASTER_VERSION,
-  setVersion: () => { },
+  layoutVersion: getLayoutVersion(LATEST_SHINRYOUKOUI_MASTER_VERSION),
+  setVersion: () => {},
   isLoading: true,
   getRowByCode() {
     return undefined;
@@ -35,9 +44,10 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
   const paramVersion = searchParams.get(SEARCH_PARAM_NAMES.SEARCH.MASTER_VERSION);
-  const version = paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion) ?
-    paramVersion :
-    LATEST_SHINRYOUKOUI_MASTER_VERSION;
+  const version =
+    paramVersion && SHINRYOUKOUI_MASTER_VERSION_KEYS.includes(paramVersion)
+      ? paramVersion
+      : LATEST_SHINRYOUKOUI_MASTER_VERSION;
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["s", version],
@@ -59,8 +69,12 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
     );
     return {
       version,
+      layoutVersion: getLayoutVersion(version),
       setVersion(version: string) {
-        updateSearchParams({ [SEARCH_PARAM_NAMES.SEARCH.MASTER_VERSION]: version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version });
+        updateSearchParams({
+          [SEARCH_PARAM_NAMES.SEARCH.MASTER_VERSION]:
+            version === LATEST_SHINRYOUKOUI_MASTER_VERSION ? undefined : version,
+        });
       },
       data: data ?? [],
       isLoading,
