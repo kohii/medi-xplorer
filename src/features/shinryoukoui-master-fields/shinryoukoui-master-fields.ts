@@ -1,7 +1,12 @@
 import { Field } from "@/features/fields/types";
 
+import {
+  INITIAL_SHINRYOUKOUI_MASTER_LAYOUT_VERSION,
+  ShinryoukouiMasterLayoutVersion,
+} from "../shinryoukoui-master-versions/layouts";
+
 // https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/spec/R04rec.pdf
-export const shinryokouiMasterFields = [
+const shinryokouiMasterFields = [
   {
     seq: 1,
     name: "変更区分",
@@ -2438,6 +2443,10 @@ export const shinryokouiMasterFields = [
         name: "病理診断",
       },
       {
+        code: "O",
+        name: "その他",
+      },
+      {
         code: "-",
         name: "介護老人保健施設入所者に係る診療料、医療観察診療報酬点数表に規定する診療行為、入院時食事療養、入院時生活療養、標準負担額",
       },
@@ -3567,9 +3576,145 @@ export const shinryokouiMasterFields = [
       },
     ],
   },
+  {
+    seq: 128,
+    validFrom: "2024",
+    name: "看護職員処遇改善評価料等",
+    mode: "alphanumeric",
+    // description: "看護職員処遇改善評価料又は入院ベースアップ評価料を算定可能な診療行為であるか否かを表す。\n\n０：「１」及び「２」以外の診療行為\n１：看護職員処遇改善評価料等を算定可能な診療行為\n２：看護職員処遇改善評価料等自体",
+    codes: [
+      {
+        code: "0",
+        name: "「１」及び「２」以外の診療行為",
+      },
+      {
+        code: "1",
+        name: "看護職員処遇改善評価料等を算定可能な診療行為",
+      },
+      {
+        code: "2",
+        name: "看護職員処遇改善評価料等自体",
+      },
+    ],
+  },
+  {
+    seq: 129,
+    validFrom: "2024",
+    name: "外来・在宅ベースアップ評価料（１）",
+    mode: "alphanumeric",
+    // description: "外来・在宅ベースアップ評価料（１）を算定可能な診療行為であるか否かを表す。\n\n０：「１」から「８」以外の診療行為\n１：外来・在宅ベースアップ評価料（１）１（初診時）を算定可能な診療行為\n２：外来・在宅ベースアップ評価料（１）１（初診時）自体\n３：外来・在宅ベースアップ評価料（１）２（再診時）を算定可能な診療行為\n４：外来・在宅ベースアップ評価料（１）２（再診時）自体\n５：外来・在宅ベースアップ評価料（１）３（訪問診療時）イを算定可能な診療行為\n６：外来・在宅ベースアップ評価料（１）３（訪問診療時）イ自体\n７：外来・在宅ベースアップ評価料（１）３（訪問診療時）ロを算定可能な診療行為\n８：外来・在宅ベースアップ評価料（１）３（訪問診療時）ロ自体"
+    codes: [
+      {
+        code: "0",
+        name: "「１」から「８」以外の診療行為",
+      },
+      {
+        code: "1",
+        name: "外来・在宅ベースアップ評価料（１）１（初診時）を算定可能な診療行為",
+      },
+      {
+        code: "2",
+        name: "外来・在宅ベースアップ評価料（１）１（初診時）自体",
+      },
+      {
+        code: "3",
+        name: "外来・在宅ベースアップ評価料（１）２（再診時）を算定可能な診療行為",
+      },
+      {
+        code: "4",
+        name: "外来・在宅ベースアップ評価料（１）２（再診時）自体",
+      },
+      {
+        code: "5",
+        name: "外来・在宅ベースアップ評価料（１）３（訪問診療時）イを算定可能な診療行為",
+      },
+      {
+        code: "6",
+        name: "外来・在宅ベースアップ評価料（１）３（訪問診療時）イ自体",
+      },
+      {
+        code: "7",
+        name: "外来・在宅ベースアップ評価料（１）３（訪問診療時）ロを算定可能な診療行為",
+      },
+      {
+        code: "8",
+        name: "外来・在宅ベースアップ評価料（１）３（訪問診療時）ロ自体",
+      },
+    ],
+  },
+  {
+    seq: 130,
+    validFrom: "2024",
+    name: "外来・在宅ベースアップ評価料（２）",
+    mode: "alphanumeric",
+    // description: "外来・在宅ベースアップ評価料（２）であるか否かを表す。\n\n０：「１」及び「２」以外の診療行為\n１：外来・在宅ベースアップ評価料（２）（初診又は訪問診療）自体\n２：外来・在宅ベースアップ評価料（２）（再診時）自体"
+    codes: [
+      {
+        code: "0",
+        name: "「１」及び「２」以外の診療行為",
+      },
+      {
+        code: "1",
+        name: "外来・在宅ベースアップ評価料（２）（初診又は訪問診療）自体",
+      },
+      {
+        code: "2",
+        name: "外来・在宅ベースアップ評価料（２）（再診時）自体",
+      },
+    ],
+  },
+  {
+    seq: 131,
+    validFrom: "2024",
+    name: "再製造単回使用医療機器使用加算",
+    mode: "numeric",
+    // description: "再製造単回使用医療機器使用加算であるか否かを表す。\n\n０００：再製造単回使用医療機器使用加算以外\n００１：再製造単回使用医療機器使用加算（体外式ペースメーカー用カテーテル電極（再製造・冠状静脈洞型））自体\n００２：再製造単回使用医療機器使用加算（体外式ペースメーカー用カテーテル電極（再製造・房室弁輪部型））自体\n００３：再製造単回使用医療機器使用加算（心腔内超音波プローブ（再製造・標準型））自体"
+    codes: [
+      {
+        code: "000",
+        name: "再製造単回使用医療機器使用加算以外",
+      },
+      {
+        code: "001",
+        name: "再製造単回使用医療機器使用加算（体外式ペースメーカー用カテーテル電極（再製造・冠状静脈洞型））自体",
+      },
+      {
+        code: "002",
+        name: "再製造単回使用医療機器使用加算（体外式ペースメーカー用カテーテル電極（再製造・房室弁輪部型））自体",
+      },
+      {
+        code: "003",
+        name: "再製造単回使用医療",
+      },
+    ],
+  },
 ] as const satisfies readonly Field[];
 
 export type ShinryoukouiMasterFieldName = (typeof shinryokouiMasterFields)[number]["name"];
+
+type ShinryoukouiMasterRecord = Field & { name: ShinryoukouiMasterFieldName };
+const fieldsByLayoutVersion = new Map<
+  ShinryoukouiMasterLayoutVersion,
+  ShinryoukouiMasterRecord[]
+>();
+
+export function getShinryoukouiMasterFields(
+  layoutVersion: ShinryoukouiMasterLayoutVersion,
+): ShinryoukouiMasterRecord[] {
+  const cache = fieldsByLayoutVersion.get(layoutVersion);
+  if (cache) return cache;
+
+  const fields = shinryokouiMasterFields.filter((field: Field) => {
+    return (field.validFrom ?? INITIAL_SHINRYOUKOUI_MASTER_LAYOUT_VERSION) <= layoutVersion;
+  });
+  if (!fields.length) throw new Error(`No fields for layout version ${layoutVersion}`);
+  fieldsByLayoutVersion.set(layoutVersion, fields);
+  return fields;
+}
+
+export function getAllShinryoukouiMasterFields() {
+  return shinryokouiMasterFields;
+}
 
 const nameToField = new Map<ShinryoukouiMasterFieldName, Field>(
   shinryokouiMasterFields.map((field) => [field.name, field]),

@@ -12,7 +12,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "jest --watch",
     "generate-master-versions": "chmod +x ./scripts/generate-versions.sh && ./scripts/generate-versions.sh",
-    "generate-master-data": "node --loader ts-node/esm scripts/generate-master-data.ts",
+    "generate-master-data": "npx tsx scripts/generate-master-data.ts",
     "build:masters": "npm run generate-master-data && npm run generate-master-versions",
     "pages:build": "npx @cloudflare/next-on-pages",
     "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
@@ -53,7 +53,8 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
     "typescript": "^5",
     "vercel": "^33.5.3"
   }

@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, useMemo } from "react";
 
 import { fetchShisetsukijunData } from "@/apis/fetch-shisetsukijun-data";
+import { getShinryoukouiLayoutFor } from "@/features/shinryoukoui-master-versions/layouts";
+
+import { useShinryoukouiMasterData } from "./shinryoukoui-master-data-context";
 
 type ShisetsukijunDataContextType = {
   data?: [string, string][];
@@ -22,9 +25,13 @@ export function useShisetsukijunData() {
 }
 
 export function ShisetsukijunDataProvider({ children }: { children: React.ReactNode }) {
+  const { layoutVersion } = useShinryoukouiMasterData();
   const { data, error, isLoading } = useQuery({
-    queryKey: ["shisetsukijun"],
-    queryFn: fetchShisetsukijunData,
+    queryKey: ["shisetsukijun", layoutVersion],
+    queryFn: () => {
+      const layout = getShinryoukouiLayoutFor(layoutVersion);
+      return fetchShisetsukijunData(layout.shisetsuKijunFileName);
+    },
     refetchOnMount: false,
   });
 
@@ -45,8 +52,6 @@ export function ShisetsukijunDataProvider({ children }: { children: React.ReactN
 
   // Provide the example data to the children components
   return (
-    <ShisetsukijunDataContext.Provider value={value}>
-      {children}
-    </ShisetsukijunDataContext.Provider>
+    <ShisetsukijunDataContext.Provider value={value}>{children}</ShisetsukijunDataContext.Provider>
   );
 }

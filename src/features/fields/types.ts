@@ -1,3 +1,5 @@
+import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+
 export type Field = Readonly<{
   /** 項番 */
   seq: number;
@@ -30,6 +32,8 @@ export type Field = Readonly<{
   allowFreeValue?: boolean;
   /** 一覧表示するときの列の幅 */
   columnWidth?: number | "auto";
+  /** この項目が有効になった改定年度 */
+  validFrom?: ShinryoukouiMasterLayoutVersion;
 }>;
 
 export type FieldGroup = Readonly<{

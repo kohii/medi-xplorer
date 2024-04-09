@@ -4,6 +4,7 @@ import { AppIcon } from "@/components/app-icon";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { SearchBar } from "@/features/search/search-bar";
+import { getLayoutVersion } from "@/features/shinryoukoui-master-versions/layouts";
 
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
 
@@ -16,21 +17,18 @@ export default function Home() {
             <AppIcon />
             MediXplorer
           </h1>
-          <p className="text-center text-gray-500 mt-4">
-            医科診療行為マスタービューアー
-          </p>
+          <p className="text-center text-gray-500 mt-4">医科診療行為マスタービューアー</p>
           <div className="my-8 w-full">
             <SearchBar />
           </div>
-          <AdvancedSearchButton />
+          <AdvancedSearchButton layoutVersion={getLayoutVersion("")} />
         </main>
       </div>
       <footer>
         <div className="flex items-center justify-center h-24 gap-4 text-gray-500 text-sm">
-          <div>
-            © {new Date().getFullYear()} kohii
-          </div>
-          <a href="https://github.com/kohii/medi-xplorer"
+          <div>© {new Date().getFullYear()} kohii</div>
+          <a
+            href="https://github.com/kohii/medi-xplorer"
             target="_blank"
             rel="noopener noreferrer"
             title="MediXplorer on GitHub"

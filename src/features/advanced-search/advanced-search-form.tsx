@@ -3,6 +3,7 @@ import { FormLabel } from "@/components/form-label";
 import { TextInput } from "@/components/text-input";
 
 import { ShinryoukouiMasterFieldName } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
 
 import { AdvancedSearchItemForm } from "./advanced-search-item-form";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
@@ -12,14 +13,15 @@ export type AdvancedSearchParams = {
   keyword: string;
   exclude: string;
   items: AdvancedSearchItem[];
-}
+};
 
 export type AdvancedSearchFormProps = {
   value: AdvancedSearchParams;
   onChange: (value: AdvancedSearchParams) => void;
+  layoutVersion: ShinryoukouiMasterLayoutVersion;
 };
 
-export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps) {
+export function AdvancedSearchForm({ value, onChange, layoutVersion }: AdvancedSearchFormProps) {
   const onSelect = (field: ShinryoukouiMasterFieldName | null) => {
     if (!field) return;
     onChange({
@@ -37,13 +39,17 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
 
   return (
     <div>
-      <FormItem >
+      <FormItem>
         <FormLabel>検索ワード</FormLabel>
-        <TextInput value={value.keyword} onChange={keyword => onChange({ ...value, keyword })} autoFocus />
+        <TextInput
+          value={value.keyword}
+          onChange={(keyword) => onChange({ ...value, keyword })}
+          autoFocus
+        />
       </FormItem>
       <FormItem>
         <FormLabel>除外ワード</FormLabel>
-        <TextInput value={value.exclude} onChange={exclude => onChange({ ...value, exclude })} />
+        <TextInput value={value.exclude} onChange={(exclude) => onChange({ ...value, exclude })} />
       </FormItem>
       <div>
         <FormLabel>検索項目</FormLabel>
@@ -52,7 +58,7 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
             <AdvancedSearchItemForm
               key={index}
               item={item}
-              onChange={item => {
+              onChange={(item) => {
                 const items = [...value.items];
                 items[index] = item;
                 onChange({ ...value, items });
@@ -62,9 +68,16 @@ export function AdvancedSearchForm({ value, onChange }: AdvancedSearchFormProps)
                 items.splice(index, 1);
                 onChange({ ...value, items });
               }}
+              layoutVersion={layoutVersion}
             />
           ))}
-          <FieldSelect onChange={onSelect} value={null} placeholder="検索する項目を追加..." isNullable />
+          <FieldSelect
+            onChange={onSelect}
+            value={null}
+            placeholder="検索する項目を追加..."
+            isNullable
+            layoutVersion={layoutVersion}
+          />
         </div>
       </div>
     </div>
