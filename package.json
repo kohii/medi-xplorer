@@ -42,7 +42,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-window": "^1.8.8",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
     "autoprefixer": "^10.4.18",
     "csv-string": "^4.1.1",
     "eslint": "^8",
