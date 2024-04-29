@@ -32,7 +32,7 @@
     "react-dom": "^18",
     "react-select": "^5.8.0",
     "rich-textarea": "^0.24.4",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.6",
