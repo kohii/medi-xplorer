@@ -54,7 +54,7 @@
     "ts-jest": "^29.1.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.15.7",
-    "typescript": "^5",
+    "typescript": "^5.5",
     "vercel": "^34.2.8"
   }
 }
