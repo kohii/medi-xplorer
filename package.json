@@ -44,7 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "autoprefixer": "^10.4.19",
     "csv-string": "^4.1.1",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-next-on-pages": "^1.12.0",
