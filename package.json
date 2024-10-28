@@ -41,7 +41,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
     "autoprefixer": "^10.4.19",
     "csv-string": "^4.1.1",
     "eslint": "^8",
