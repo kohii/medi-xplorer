@@ -35,7 +35,7 @@ export function Modal({
         size === "lg" && "max-w-[832px]",
         size === "xl" && "max-w-[1080px]",
       )}>
-        <div className="relative bg-white rounded-lg shadow">
+        <div className="relative bg-white rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-4 py-3 border-b rounded-t">
             <h3 className="text-xl font-medium text-gray-900">
               {title}

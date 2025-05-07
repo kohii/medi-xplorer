@@ -38,8 +38,8 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
       className={`text-sm ${className ?? ""}`}
       classNames={{
         control: (state) => twMerge([
-          "!bg-gray-50 !border !border-gray-300 !text-gray-900 !rounded outline-none",
-          ...(state.isFocused ? ["!ring-blue-500 !border-blue-500"] : [])
+          "bg-gray-50! border! border-gray-300! text-gray-900! rounded-sm! outline-hidden",
+          ...(state.isFocused ? ["ring-blue-500! border-blue-500!"] : [])
         ]),
       }}
       options={options}

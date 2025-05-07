@@ -29,7 +29,7 @@ export function SortableDisplayFieldItem({ id, ...props }: SortableDisplayFieldI
       {...props}
       {...attributes}
       {...listeners}
-      className={isDragging ? "[&_*]:!cursor-grabbing" : undefined}
+      className={isDragging ? "**:cursor-grabbing!" : undefined}
     />
   );
 }

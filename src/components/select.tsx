@@ -15,7 +15,7 @@ export type SelectProps<T extends string> = {
 export function Select<T extends string>({ className, value, options, onChange }: SelectProps<T>) {
   return (
     <select
-      className={twMerge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2", className)}
+      className={twMerge("bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2", className)}
       value={value}
       onChange={(event) => onChange?.(event.target.value as T)}
     >

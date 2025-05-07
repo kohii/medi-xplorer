@@ -64,7 +64,7 @@ export function Menu({
     >
       <div className="fixed inset-0" onClick={onClose} />
       <div
-        className="py-1 mt-1 w-48 absolute z-50 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        className="py-1 mt-1 w-48 absolute z-50 rounded-xs shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-hidden"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="options-menu"
