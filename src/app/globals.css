@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @config '../../tailwind.config.ts';
+@source inline("bg-{red,orange,yellow,green,blue,indigo,purple,pink,stone,cyan,slate,lime,violet,amber}-100");
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
