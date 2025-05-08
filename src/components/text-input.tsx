@@ -20,7 +20,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(func
   return (
     <input
       className={twMerge(
-        "bg-gray-50 border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
+        "bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
         className
       )}
       type="text"

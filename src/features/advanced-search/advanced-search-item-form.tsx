@@ -67,7 +67,7 @@ export function AdvancedSearchItemForm({
 
   return (
     <div className="flex items-start gap-1">
-      <div className="flex-grow basis-1">
+      <div className="grow basis-1">
         <FieldSelect
           value={item.field}
           onChange={(field) =>
@@ -93,7 +93,7 @@ export function AdvancedSearchItemForm({
         />
       </div>
 
-      <div className="flex-grow basis-1 flex flex-col gap-2">
+      <div className="grow basis-1 flex flex-col gap-2">
         {values.map((value, index) => (
           <React.Fragment key={index}>
             {!field.codes || field.allowFreeValue ? (

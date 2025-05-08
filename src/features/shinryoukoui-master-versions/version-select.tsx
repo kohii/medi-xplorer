@@ -14,7 +14,7 @@ export const VersionSelect = React.memo(function VersionSelect() {
       <select
         id="master-version"
         onChange={(e) => setVersion(e.target.value)}
-        className="text-blue-600 hover:text-blue-800 bg-white border-none text-sm appearance-none width-auto text-right cursor-pointer outline-none"
+        className="text-blue-600 hover:text-blue-800 bg-white border-none text-sm appearance-none width-auto text-right cursor-pointer outline-hidden"
         value={version}
       >
         {SHINRYOUKOUI_MASTER_VERSION_LIST.map((v) => (

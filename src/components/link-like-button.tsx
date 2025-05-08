@@ -10,7 +10,7 @@ export function LinkLikeButton({ children, className, onClick }: LinkLikeButtonP
   return (
     <button
       className={twMerge(
-        "text-blue-700 hover:text-blue-800 focus:text-blue-800 focus:outline-none text-sm",
+        "text-blue-700 hover:text-blue-800 focus:text-blue-800 focus:outline-hidden text-sm",
         className,
       )}
       onClick={onClick}
