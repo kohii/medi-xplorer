@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source inline("bg-{red,orange,yellow,green,blue,indigo,purple,pink,stone,cyan,slate,lime,violet,amber}-100");
 
@@ -17,11 +17,6 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
-  }
-  
-  /* Fix for ring utilities in Tailwind CSS v4 */
-  .ring-1, .ring-2, .ring-3, .ring-4 {
-    --tw-ring-opacity: 0.05;
   }
 }
 
