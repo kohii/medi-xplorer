@@ -38,3 +38,7 @@ next-env.d.ts
 # generated master data
 /public/master-data/s/*
 shinryoukoui-master-versions.json
+
+# claude
+.claude/settings.local.json
+
