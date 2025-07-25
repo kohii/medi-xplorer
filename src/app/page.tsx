@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Suspense } from "react";
 
 import { AppIcon } from "@/components/app-icon";
@@ -27,6 +28,9 @@ export default function Home() {
       <footer>
         <div className="flex items-center justify-center h-24 gap-4 text-gray-500 text-sm">
           <div>© {new Date().getFullYear()} kohii</div>
+          <Link href="/terms" className="text-gray-500 text-sm underline">
+            利用規約
+          </Link>
           <a
             href="https://github.com/kohii/medi-xplorer"
             target="_blank"
