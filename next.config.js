@@ -6,7 +6,6 @@ const withBundleAnalyzer =
 /** @type {import('next').NextConfig} */
 const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
-  swcMinify: true,
 });
 
 export default nextConfig;
