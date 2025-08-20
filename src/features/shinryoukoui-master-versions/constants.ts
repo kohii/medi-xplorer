@@ -1,5 +1,5 @@
 // sorted by date desc
-import versions from "./shinryoukoui-master-versions.json" assert { type: "json" };
+import versions from "./shinryoukoui-master-versions.json" with { type: "json" };
 
 export const SHINRYOUKOUI_MASTER_VERSION_KEYS: string[] = versions;
 
