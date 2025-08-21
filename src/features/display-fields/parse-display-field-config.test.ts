@@ -1,14 +1,16 @@
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { parseDisplayFieldConfigs } from "./parse-display-field-config";
 
 describe("parseDisplayFieldConfigs", () => {
   test("empty", () => {
     const result = parseDisplayFieldConfigs("");
-    expect(result).toEqual([]);
+    assert.deepEqual(result, []);
   });
 
   test("normal column", () => {
     const result = parseDisplayFieldConfigs("1");
-    expect(result).toEqual([{
+    assert.deepEqual(result, [{
       kind: "normal",
       seq: 1
     }]);
@@ -16,7 +18,7 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("normal column with label", () => {
     const result = parseDisplayFieldConfigs("1-l");
-    expect(result).toEqual([{
+    assert.deepEqual(result, [{
       kind: "normal",
       seq: 1,
       options: {
@@ -27,7 +29,7 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("normal column with code", () => {
     const result = parseDisplayFieldConfigs("1-c");
-    expect(result).toEqual([{
+    assert.deepEqual(result, [{
       kind: "normal",
       seq: 1,
       options: {
@@ -38,7 +40,7 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("virtual column", () => {
     const result = parseDisplayFieldConfigs("kubunNo");
-    expect(result).toEqual([{
+    assert.deepEqual(result, [{
       kind: "virtual",
       key: "kubunNo"
     }]);
@@ -46,7 +48,7 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("unknown column", () => {
     const result = parseDisplayFieldConfigs("foo");
-    expect(result).toEqual([{
+    assert.deepEqual(result, [{
       kind: "unknown",
       key: "foo"
     }]);
@@ -54,7 +56,7 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("multiple fields", () => {
     const result = parseDisplayFieldConfigs("1_2_kubunNo");
-    expect(result).toEqual([
+    assert.deepEqual(result, [
       {
         kind: "normal",
         seq: 1
