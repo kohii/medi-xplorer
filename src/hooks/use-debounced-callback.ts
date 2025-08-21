@@ -5,7 +5,7 @@ export function useDebouncedCallback(
   wait: number,
   dependencies: unknown[],
 ) {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const callbackRef = useRef(callback);
   const dependenciesRef = useRef(dependencies);
 

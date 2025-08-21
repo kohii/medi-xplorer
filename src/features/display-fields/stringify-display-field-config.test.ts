@@ -1,9 +1,11 @@
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { stringifyDisplayFieldConfigs } from "./stringify-display-field-config";
 
 describe("stringifyDisplayFieldConfigs", () => {
   test("empty", () => {
     const result = stringifyDisplayFieldConfigs([]);
-    expect(result).toEqual("");
+    assert.equal(result, "");
   });
 
   test("normal field", () => {
@@ -11,7 +13,7 @@ describe("stringifyDisplayFieldConfigs", () => {
       kind: "normal",
       seq: 1
     }]);
-    expect(result).toEqual("1");
+    assert.equal(result, "1");
   });
 
   test("normal field with label", () => {
@@ -22,7 +24,7 @@ describe("stringifyDisplayFieldConfigs", () => {
         variant: "label"
       }
     }]);
-    expect(result).toEqual("1-l");
+    assert.equal(result, "1-l");
   });
 
   test("normal field with code", () => {
@@ -33,7 +35,7 @@ describe("stringifyDisplayFieldConfigs", () => {
         variant: "code"
       }
     }]);
-    expect(result).toEqual("1-c");
+    assert.equal(result, "1-c");
   });
 
   test("virtual field", () => {
@@ -41,7 +43,7 @@ describe("stringifyDisplayFieldConfigs", () => {
       kind: "virtual",
       key: "kubunNo"
     }]);
-    expect(result).toEqual("kubunNo");
+    assert.equal(result, "kubunNo");
   });
 
   test("unknown field", () => {
@@ -49,7 +51,7 @@ describe("stringifyDisplayFieldConfigs", () => {
       kind: "unknown",
       key: "foo"
     }]);
-    expect(result).toEqual("foo");
+    assert.equal(result, "foo");
   });
 
   test("multiple fields", () => {
@@ -67,6 +69,6 @@ describe("stringifyDisplayFieldConfigs", () => {
         key: "kubunNo"
       }
     ]);
-    expect(result).toEqual("1_2_kubunNo");
+    assert.equal(result, "1_2_kubunNo");
   });
 });

@@ -1,23 +1,25 @@
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { parseQuery } from "./parse-query";
 
 describe("parseQuery", () => {
   test("空文字列", () => {
     const result = parseQuery("");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: []
     });
   });
   test("空白文字列", () => {
     const result = parseQuery(" 　");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: []
     });
   });
   test("単語", () => {
     const result = parseQuery("foo");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         value: "foo",
@@ -27,7 +29,7 @@ describe("parseQuery", () => {
   });
   test("単語（空白あり）", () => {
     const result = parseQuery(" foo ");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         value: "foo",
@@ -37,7 +39,7 @@ describe("parseQuery", () => {
   });
   test("単語（複数）", () => {
     const result = parseQuery(" foo　 bar baz");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [
         {
@@ -57,7 +59,7 @@ describe("parseQuery", () => {
   });
   test("単語（複数、マイナスあり）", () => {
     const result = parseQuery("foo -bar baz");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [
         {
@@ -77,19 +79,19 @@ describe("parseQuery", () => {
   });
   test("マイナスのみ", () => {
     const result = parseQuery("-");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [
         {
           value: "-",
           negative: false
-        },
+        }
       ]
     });
   });
   test("key:value", () => {
     const result = parseQuery("診療行為コード:bar");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",
@@ -101,7 +103,7 @@ describe("parseQuery", () => {
   });
   test("key:value（複数、マイナスあり）", () => {
     const result = parseQuery(" 診療行為コード:bar -基本漢字名称:qux ");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [
         {
@@ -121,7 +123,7 @@ describe("parseQuery", () => {
   });
   test("key:value（値が空文字列）", () => {
     const result = parseQuery("診療行為コード:");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",
@@ -133,7 +135,7 @@ describe("parseQuery", () => {
   });
   test("key:>value", () => {
     const result = parseQuery("診療行為コード:>bar");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",
@@ -145,7 +147,7 @@ describe("parseQuery", () => {
   });
   test("key:<value", () => {
     const result = parseQuery("診療行為コード:<bar");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",
@@ -157,7 +159,7 @@ describe("parseQuery", () => {
   });
   test("key:>=value", () => {
     const result = parseQuery("診療行為コード:>=bar");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",
@@ -169,7 +171,7 @@ describe("parseQuery", () => {
   });
   test("key:<=value", () => {
     const result = parseQuery("診療行為コード:<=bar");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "診療行為コード",

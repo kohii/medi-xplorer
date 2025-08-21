@@ -19,7 +19,6 @@ import { normalizeFilterExpression } from "@/features/search/normalize-filter-ex
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { getLayoutVersion } from "@/features/shinryoukoui-master-versions/layouts";
 import { VersionSelect } from "@/features/shinryoukoui-master-versions/version-select";
 import { useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
