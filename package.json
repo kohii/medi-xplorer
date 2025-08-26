@@ -51,7 +51,7 @@
     "postcss": "^8",
     "tailwindcss": "^4.1.12",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.19.2",
+    "tsx": "^4.20.5",
     "typescript": "^5.9",
     "vercel": "^37.14.0"
   },
