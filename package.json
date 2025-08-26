@@ -39,7 +39,7 @@
     "@next/bundle-analyzer": "15.5.0",
     "@tailwindcss/postcss": "^4.1.5",
     "@types/node": "^22",
-    "@types/react": "19.1.10",
+    "@types/react": "19.1.11",
     "@types/react-dom": "19.1.7",
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "csv-string": "^4.1.1",
@@ -56,7 +56,7 @@
     "vercel": "^37.14.0"
   },
   "overrides": {
-    "@types/react": "19.1.10",
+    "@types/react": "19.1.11",
     "@types/react-dom": "19.1.7"
   },
   "optionalDependencies": {
