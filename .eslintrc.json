@@ -9,18 +9,21 @@
   "plugins": [
     "eslint-plugin-next-on-pages"
   ],
+  "ignorePatterns": ["next-env.d.ts"],
   "rules": {
     "semi": [
       "error",
       "always"
     ],
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
+    // Disabled indent rule due to conflict with TypeScript ESLint v8+
+    // Prettier handles indentation formatting
+    // "indent": [
+    //   "error",
+    //   2,
+    //   {
+    //     "SwitchCase": 1
+    //   }
+    // ],
     "quotes": [
       "error",
       "double",

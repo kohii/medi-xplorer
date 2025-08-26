@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "tsx --test $(find src -name '*.test.ts' -type f)",
     "test:watch": "tsx --test --watch $(find src -name '*.test.ts' -type f)",
     "generate-master-versions": "chmod +x ./scripts/generate-versions.sh && ./scripts/generate-versions.sh",
@@ -43,7 +43,7 @@
     "@types/react-dom": "19.1.7",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "csv-string": "^4.1.1",
-    "eslint": "^9",
+    "eslint": "^8",
     "eslint-config-next": "15.5.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-next-on-pages": "^1.13.14",
@@ -53,7 +53,8 @@
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9",
-    "vercel": "^46.0.2"
+    "vercel": "^46.0.2",
+    "@eslint/eslintrc": "^3"
   },
   "overrides": {
     "@types/react": "19.1.11",
