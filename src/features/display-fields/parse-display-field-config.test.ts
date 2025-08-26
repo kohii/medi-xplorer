@@ -1,5 +1,6 @@
-import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { describe, test } from "node:test";
+
 import { parseDisplayFieldConfigs } from "./parse-display-field-config";
 
 describe("parseDisplayFieldConfigs", () => {
