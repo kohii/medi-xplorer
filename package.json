@@ -35,7 +35,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.14",
+    "@cloudflare/next-on-pages": "^1.13.15",
     "@next/bundle-analyzer": "15.5.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^24",
