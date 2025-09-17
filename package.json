@@ -44,7 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "csv-string": "^4.1.1",
     "eslint": "^8",
-    "eslint-config-next": "15.5.0",
+    "eslint-config-next": "15.5.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-next-on-pages": "^1.13.14",
     "lightningcss": "^1.30.1",
