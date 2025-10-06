@@ -43,7 +43,7 @@
     "@types/react-dom": "19.1.7",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "csv-string": "^4.1.1",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-next-on-pages": "^1.13.16",
