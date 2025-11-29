@@ -27,19 +27,9 @@ jobs:
 
       - run: pnpm run build:masters
 
-      - run: pnpm run pages:build
-        env:
-          URL: ${{ vars.URL }}
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-        id: extract_branch
-
-      - name: Deploy
-        uses: cloudflare/wrangler-action@3.0.0
+      - name: Deploy to Cloudflare with OpenNext
         if: github.repository == 'kohii/medi-xplorer'
-        with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy .vercel/output/static --project-name medi-xplorer --branch "${{ steps.extract_branch.outputs.branch }}" --commit-hash ${{ github.sha }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: pnpm run deploy
