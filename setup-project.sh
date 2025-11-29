@@ -1,2 +1,2 @@
 pnpm install
-pnpm run build:masters
+pnpm build:masters

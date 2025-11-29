@@ -8,8 +8,8 @@
 
 ```
 pnpm install
-pnpm run build:masters
-pnpm run dev
+pnpm build:masters
+pnpm dev
 ```
 
 ## License

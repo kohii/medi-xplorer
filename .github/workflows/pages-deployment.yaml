@@ -25,7 +25,7 @@ jobs:
 
       - run: pnpm test
 
-      - run: pnpm run build:masters
+      - run: pnpm build:masters
 
       - name: Extract branch name
         id: extract_branch
@@ -40,4 +40,4 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: pnpm run deploy -- --name "medi-xplorer-${{ steps.extract_branch.outputs.branch_slug }}" --env "${{ steps.extract_branch.outputs.branch_slug }}"
+        run: pnpm deploy -- --name "medi-xplorer-${{ steps.extract_branch.outputs.branch_slug }}" --env "${{ steps.extract_branch.outputs.branch_slug }}"

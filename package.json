@@ -13,12 +13,12 @@
     "test:watch": "tsx --test --watch $(find src -name '*.test.ts' -type f)",
     "generate-master-versions": "chmod +x ./scripts/generate-versions.sh && ./scripts/generate-versions.sh",
     "generate-master-data": "pnpm exec tsx scripts/generate-master-data.ts",
-    "build:masters": "pnpm run generate-master-data && pnpm run generate-master-versions",
+    "build:masters": "pnpm generate-master-data && pnpm generate-master-versions",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "analyze": "ANALYZE=true pnpm run build"
+    "analyze": "ANALYZE=true pnpm build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
