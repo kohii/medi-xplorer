@@ -7,9 +7,9 @@
 ## Development
 
 ```
-npm install
-npm run build:masters
-npm run dev
+pnpm install
+pnpm run build:masters
+pnpm run dev
 ```
 
 ## License
