@@ -1,14 +1,11 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:eslint-plugin-next-on-pages/recommended",
     "next",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": [
-    "eslint-plugin-next-on-pages"
-  ],
+  "plugins": [],
   "ignorePatterns": ["next-env.d.ts"],
   "rules": {
     "semi": [

@@ -10,24 +10,25 @@ MediXplorer is a Next.js application for searching and browsing Japanese medical
 
 ```bash
 # Development
-npm install              # Install dependencies
-npm run build:masters    # Generate master data (required before first run)
-npm run dev             # Start development server
+pnpm install              # Install dependencies
+pnpm build:masters    # Generate master data (required before first run)
+pnpm dev             # Start development server
 
 # Build & Deploy
-npm run build           # Build for production
-npm run pages:build     # Build for Cloudflare Pages
-npm run pages:deploy    # Deploy to Cloudflare Pages
+pnpm build           # Build for production
+pnpm preview         # Build & serve with OpenNext Cloudflare adapter
+pnpm deploy          # Deploy to Cloudflare Pages via OpenNext
+pnpm upload          # Upload assets/workers to Cloudflare without deploy
 
 # Code Quality
-npm run lint            # Run ESLint
-npm run lint:fix        # Run ESLint with auto-fix
-npm test                # Run all tests
-npm run test:watch      # Run tests in watch mode
+pnpm lint            # Run ESLint
+pnpm lint:fix        # Run ESLint with auto-fix
+pnpm test                # Run all tests
+pnpm test:watch      # Run tests in watch mode
 
 # Data Generation
-npm run generate-master-data      # Convert CSV to TSV format
-npm run generate-master-versions  # Generate version list from raw data
+pnpm generate-master-data      # Convert CSV to TSV format
+pnpm generate-master-versions  # Generate version list from raw data
 ```
 
 ## Architecture Overview
@@ -83,6 +84,6 @@ The app supports multiple versions of master data. Version management is handled
 Tests use Jest with ts-jest for TypeScript support. Test files follow the pattern `*.test.ts`.
 
 ```bash
-npm test                    # Run all tests
-npm run test:watch         # Run tests in watch mode
+pnpm test                    # Run all tests
+pnpm test:watch         # Run tests in watch mode
 ```

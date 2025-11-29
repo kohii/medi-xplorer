@@ -1,2 +1,2 @@
-npm install
-npm run build:masters
+pnpm install
+pnpm build:masters

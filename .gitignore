@@ -15,6 +15,7 @@
 
 # production
 /build
+.open-next
 
 # misc
 .DS_Store
@@ -27,6 +28,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.dev.vars
 
 # vercel
 .vercel
@@ -41,4 +43,3 @@ shinryoukoui-master-versions.json
 
 # claude
 .claude/settings.local.json
-
