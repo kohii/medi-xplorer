@@ -16,8 +16,9 @@ pnpm run dev             # Start development server
 
 # Build & Deploy
 pnpm run build           # Build for production
-pnpm run pages:build     # Build for Cloudflare Pages
-pnpm run pages:deploy    # Deploy to Cloudflare Pages
+pnpm run preview         # Build & serve with OpenNext Cloudflare adapter
+pnpm run deploy          # Deploy to Cloudflare Pages via OpenNext
+pnpm run upload          # Upload assets/workers to Cloudflare without deploy
 
 # Code Quality
 pnpm run lint            # Run ESLint
