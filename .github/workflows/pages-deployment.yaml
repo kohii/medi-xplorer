@@ -40,4 +40,5 @@ jobs:
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: pnpm deploy -- --name "medi-xplorer-${{ steps.extract_branch.outputs.branch_slug }}" --env "${{ steps.extract_branch.outputs.branch_slug }}"
+        # Use the npm script, not pnpm's built‑in "deploy" command (which expects a workspace)
+        run: pnpm run deploy -- --name "medi-xplorer-${{ steps.extract_branch.outputs.branch_slug }}" --env "${{ steps.extract_branch.outputs.branch_slug }}"
