@@ -54,7 +54,7 @@
     "vercel": "^46.1.1",
     "@eslint/eslintrc": "^3",
     "@opennextjs/cloudflare": "^1.14.0",
-    "wrangler": "^4.51.0"
+    "wrangler": "^4.59.1"
   },
   "overrides": {
     "@types/react": "19.1.11",
