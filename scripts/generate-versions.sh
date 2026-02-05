@@ -1,26 +1,32 @@
 #!/bin/bash
 
-# Define directories and files
-MASTER_FILES_DIR="raw-master-data/s/"
-OUTPUT_FILENAME="src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json"
+set -euo pipefail
 
-# Get version keys
-versionKeys=()
-for file in $(ls -r $MASTER_FILES_DIR | grep '.csv$'); do
-	# file name format: s_ALL{yyyyMMdd}.csv
-  key=$(echo $file | grep -oE '[0-9]{8}')
-  if [ "$key" ]; then
-    versionKeys+=($key)
-  fi
-done
+write_versions() {
+	local master_files_dir="$1"
+	local output_filename="$2"
 
-# Write versions to JSON
-echo "[" > $OUTPUT_FILENAME
-for ((i=0; i<${#versionKeys[@]}; i++)); do
-	if [ $i -eq $((${#versionKeys[@]}-1)) ]; then
-		echo "\"${versionKeys[$i]}\"" >> $OUTPUT_FILENAME
-	else
-		echo "\"${versionKeys[$i]}\"," >> $OUTPUT_FILENAME
+	local versionKeys=()
+	if [ -d "${master_files_dir}" ]; then
+		for file in $(ls -r "${master_files_dir}" | grep '.csv$'); do
+			# file name format: *_ALL{yyyyMMdd}.csv
+			key=$(echo "${file}" | grep -oE '[0-9]{8}')
+			if [ "${key}" ]; then
+				versionKeys+=("${key}")
+			fi
+		done
 	fi
-done
-echo "]" >> $OUTPUT_FILENAME
+
+	echo "[" > "${output_filename}"
+	for ((i=0; i<${#versionKeys[@]}; i++)); do
+		if [ $i -eq $((${#versionKeys[@]}-1)) ]; then
+			echo "\"${versionKeys[$i]}\"" >> "${output_filename}"
+		else
+			echo "\"${versionKeys[$i]}\"," >> "${output_filename}"
+		fi
+	done
+	echo "]" >> "${output_filename}"
+}
+
+write_versions "raw-master-data/s/" "src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json"
+write_versions "raw-master-data/y/" "src/features/iyaku-master-versions/iyaku-master-versions.json"
