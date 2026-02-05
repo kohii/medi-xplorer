@@ -10,8 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: process.env.URL ? new URL(process.env.URL) : undefined,
-  title: "MediXplorer - 医科診療行為マスタービューアー",
-  description: "MediXplorerは社会保険診療報酬支払基金から提供される医科診療行為マスターを検索・閲覧するためのアプリケーションです。",
+  title: "MediXplorer - 診療行為・医薬品マスタービューアー",
+  description: "MediXplorerは社会保険診療報酬支払基金から提供される診療行為マスター・医薬品マスターを検索・閲覧するためのアプリケーションです。",
   manifest: "/site.webmanifest",
   icons: {
     icon: "/favicon-32x32.png",

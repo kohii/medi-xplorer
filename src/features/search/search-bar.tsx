@@ -4,11 +4,14 @@ import { forwardRef } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
-import {  useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { useMasterSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { MasterId } from "@/master-types";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { SearchInput } from "./search-input";
 
 type SearchBarProps = {
+  masterId: MasterId;
   value?: string;
   onChange?: (value: string) => void;
 };
@@ -18,9 +21,9 @@ export type SearchBarHandle = {
 };
 
 export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function SearchBar(
-  { value, onChange }, ref
+  { masterId, value, onChange }, ref
 ) {
-  const search = useShinryoukouiSearchByQuery();
+  const search = useMasterSearchByQuery(masterId);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     search(event.currentTarget.q.value);
@@ -29,10 +32,12 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
   return (
     <form onSubmit={handleSubmit} action="/s">
       <div className="relative h-10">
+        <input type="hidden" name={SEARCH_PARAM_NAMES.SEARCH.MASTER} value={masterId} />
         <div className="absolute flex items-center text-gray-400 inset-y-0 start-0 ps-3 pointer-events-none h-10">
           <SearchIcon />
         </div>
         <SearchInput
+          masterId={masterId}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ref={ref as any}
           value={value}
