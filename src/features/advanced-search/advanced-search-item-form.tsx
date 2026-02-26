@@ -4,9 +4,8 @@ import { FilterableSelect } from "@/components/filterable-select";
 import { IconButton } from "@/components/icon-button";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { TextInput } from "@/components/text-input";
-import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+import { getMasterFieldByName } from "@/features/fields/master-field-resolver";
+import { MasterId } from "@/master-types";
 
 import { CodeSelect } from "./code-select";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
@@ -21,16 +20,18 @@ type AdvancedSearchItemFormProps = {
   item: AdvancedSearchItem;
   onChange: (value: AdvancedSearchItem) => void;
   onDelete: () => void;
-  layoutVersion: ShinryoukouiMasterLayoutVersion;
+  masterId: MasterId;
+  layoutVersion: string;
 };
 
 export function AdvancedSearchItemForm({
   item,
   onChange,
   onDelete,
+  masterId,
   layoutVersion,
 }: AdvancedSearchItemFormProps) {
-  const field = getField(item.field);
+  const field = getMasterFieldByName(masterId, item.field);
   const values = useMemo(
     () => (item.restValues ? [item.value, ...item.restValues] : [item.value]),
     [item],
@@ -76,6 +77,7 @@ export function AdvancedSearchItemForm({
               field,
             })
           }
+          masterId={masterId}
           layoutVersion={layoutVersion}
         />
       </div>
@@ -96,7 +98,7 @@ export function AdvancedSearchItemForm({
       <div className="grow basis-1 flex flex-col gap-2">
         {values.map((value, index) => (
           <React.Fragment key={index}>
-            {!field.codes || field.allowFreeValue ? (
+            {!field?.codes || field.allowFreeValue ? (
               <TextInput
                 value={value}
                 onChange={(value) => handleValueChange(value, index)}

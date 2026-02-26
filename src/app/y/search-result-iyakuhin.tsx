@@ -9,6 +9,7 @@ import { Drawer } from "@/components/drawer";
 import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
 import { useIyakuhinMasterData } from "@/contexts/iyakuhin-master-data-context";
+import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/iyakuhin-master-fields/iyakuhin-master-fields";
 import { IyakuhinVersionSelect } from "@/features/iyakuhin-master-versions/version-select";
@@ -133,7 +134,14 @@ export default function SearchResultIyakuhin() {
                 )}
               </div>
               <div className="mt-2 flex justify-between items-center">
-                <div className="text-sm text-gray-500">医薬品マスター</div>
+                <div className="flex items-center gap-2">
+                  <div className="text-sm text-gray-500">医薬品マスター</div>
+                  <AdvancedSearchButton
+                    initialQuery={searchInputValue}
+                    masterId={MASTER_IDS.IYAKUHIN}
+                    layoutVersion={layoutVersion}
+                  />
+                </div>
                 <div className="text-sm text-gray-500">
                   <IyakuhinVersionSelect />
                 </div>

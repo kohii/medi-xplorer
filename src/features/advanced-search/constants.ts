@@ -1,9 +1,8 @@
 import type { FieldFilterItem } from "@/features/search/types";
-import type { ShinryoukouiMasterFieldName } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { splitByWhitespace } from "@/utils/text";
 
 export type AdvancedSearchItem = {
-  field: ShinryoukouiMasterFieldName;
+  field: string;
   operatorKind: AdvancedSearchOperatorKind;
   value: string;
   restValues?: string[];

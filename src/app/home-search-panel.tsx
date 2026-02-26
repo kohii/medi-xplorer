@@ -4,6 +4,7 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
+import { getIyakuhinLayoutVersion } from "@/features/iyakuhin-master-versions/layouts";
 import { SearchBar } from "@/features/search/search-bar";
 import { getLayoutVersion } from "@/features/shinryoukoui-master-versions/layouts";
 import { DEFAULT_MASTER_ID, MASTER_IDS } from "@/master-types";
@@ -43,11 +44,16 @@ export function HomeSearchPanel() {
         </div>
       </div>
       <SearchBar masterId={masterId} />
-      {masterId === MASTER_IDS.SHINRYOUKOUI && (
-        <div className="mt-3">
-          <AdvancedSearchButton layoutVersion={getLayoutVersion("")} />
-        </div>
-      )}
+      <div className="mt-3">
+        <AdvancedSearchButton
+          masterId={masterId}
+          layoutVersion={
+            masterId === MASTER_IDS.IYAKUHIN
+              ? getIyakuhinLayoutVersion("")
+              : getLayoutVersion("")
+          }
+        />
+      </div>
     </div>
   );
 }

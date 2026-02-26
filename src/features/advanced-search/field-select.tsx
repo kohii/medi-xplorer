@@ -1,42 +1,41 @@
 import React from "react";
 
 import { FilterableSelect } from "@/components/filterable-select";
-import {
-  ShinryoukouiMasterFieldName,
-  getShinryoukouiMasterFields,
-} from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
-
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+import { getMasterFields } from "@/features/fields/master-field-resolver";
+import { MasterId } from "@/master-types";
 
 type Props<IsNullable extends boolean> = {
-  value: IsNullable extends true ? ShinryoukouiMasterFieldName | null : ShinryoukouiMasterFieldName;
+  value: IsNullable extends true ? string | null : string;
   onChange: (
     value: IsNullable extends true
-      ? ShinryoukouiMasterFieldName | null
-      : ShinryoukouiMasterFieldName,
+      ? string | null
+      : string,
   ) => void;
   placeholder?: string;
   className?: string;
   isNullable?: IsNullable;
-  layoutVersion: ShinryoukouiMasterLayoutVersion;
+  masterId: MasterId;
+  layoutVersion: string;
 };
 
 const optionsCache = new Map<
-  ShinryoukouiMasterLayoutVersion,
-  { value: ShinryoukouiMasterFieldName; label: string }[]
+  string,
+  { value: string; label: string }[]
 >();
-function getOptions(version: ShinryoukouiMasterLayoutVersion) {
-  if (!optionsCache.has(version)) {
-    const fields = getShinryoukouiMasterFields(version);
+
+function getOptions(masterId: MasterId, layoutVersion: string) {
+  const cacheKey = `${masterId}:${layoutVersion}`;
+  if (!optionsCache.has(cacheKey)) {
+    const fields = getMasterFields(masterId, layoutVersion);
     optionsCache.set(
-      version,
+      cacheKey,
       fields.map((f) => ({
         value: f.name,
         label: `${f.seq}. ${f.name}`,
       })),
     );
   }
-  return optionsCache.get(version)!;
+  return optionsCache.get(cacheKey)!;
 }
 
 export function FieldSelect<IsNullable extends boolean = false>({
@@ -45,11 +44,12 @@ export function FieldSelect<IsNullable extends boolean = false>({
   placeholder,
   className,
   isNullable,
+  masterId,
   layoutVersion,
 }: Props<IsNullable>) {
   return (
     <FilterableSelect
-      options={getOptions(layoutVersion)}
+      options={getOptions(masterId, layoutVersion)}
       onChange={onChange}
       value={value}
       placeholder={placeholder}

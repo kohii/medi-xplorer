@@ -4,23 +4,23 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { Backdrop } from "@/components/backdrop";
-import { useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { useMasterSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { MasterId } from "@/master-types";
 
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
-
-type AdvancedSearchLinkProps = {
+type AdvancedSearchButtonProps = {
   initialQuery?: string;
-  layoutVersion: ShinryoukouiMasterLayoutVersion;
+  masterId: MasterId;
+  layoutVersion: string;
 };
 
-export function AdvancedSearchButton({ initialQuery, layoutVersion }: AdvancedSearchLinkProps) {
+export function AdvancedSearchButton({ initialQuery, masterId, layoutVersion }: AdvancedSearchButtonProps) {
   const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
 
   const open = () => {
     setAdvancedSearchOpen(true);
   };
 
-  const search = useShinryoukouiSearchByQuery();
+  const search = useMasterSearchByQuery(masterId);
 
   return (
     <>
@@ -32,6 +32,7 @@ export function AdvancedSearchButton({ initialQuery, layoutVersion }: AdvancedSe
           query={initialQuery ?? ""}
           onChange={search}
           onClose={() => setAdvancedSearchOpen(false)}
+          masterId={masterId}
           layoutVersion={layoutVersion}
         />
       )}

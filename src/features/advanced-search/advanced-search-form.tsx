@@ -1,9 +1,7 @@
 import { FormItem } from "@/components/form-item";
 import { FormLabel } from "@/components/form-label";
 import { TextInput } from "@/components/text-input";
-
-import { ShinryoukouiMasterFieldName } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
+import { MasterId } from "@/master-types";
 
 import { AdvancedSearchItemForm } from "./advanced-search-item-form";
 import { AdvancedSearchItem, advancedSearchOperatorOptions } from "./constants";
@@ -18,11 +16,12 @@ export type AdvancedSearchParams = {
 export type AdvancedSearchFormProps = {
   value: AdvancedSearchParams;
   onChange: (value: AdvancedSearchParams) => void;
-  layoutVersion: ShinryoukouiMasterLayoutVersion;
+  masterId: MasterId;
+  layoutVersion: string;
 };
 
-export function AdvancedSearchForm({ value, onChange, layoutVersion }: AdvancedSearchFormProps) {
-  const onSelect = (field: ShinryoukouiMasterFieldName | null) => {
+export function AdvancedSearchForm({ value, onChange, masterId, layoutVersion }: AdvancedSearchFormProps) {
+  const onSelect = (field: string | null) => {
     if (!field) return;
     onChange({
       ...value,
@@ -68,6 +67,7 @@ export function AdvancedSearchForm({ value, onChange, layoutVersion }: AdvancedS
                 items.splice(index, 1);
                 onChange({ ...value, items });
               }}
+              masterId={masterId}
               layoutVersion={layoutVersion}
             />
           ))}
@@ -76,6 +76,7 @@ export function AdvancedSearchForm({ value, onChange, layoutVersion }: AdvancedS
             value={null}
             placeholder="検索する項目を追加..."
             isNullable
+            masterId={masterId}
             layoutVersion={layoutVersion}
           />
         </div>

@@ -139,6 +139,7 @@ export default function SearchResultShinryoukoui() {
               <div className="mt-2 flex justify-between items-center">
                 <AdvancedSearchButton
                   initialQuery={searchInputValue}
+                  masterId={MASTER_IDS.SHINRYOUKOUI}
                   layoutVersion={layoutVersion}
                 />
                 <div className="text-sm text-gray-500">

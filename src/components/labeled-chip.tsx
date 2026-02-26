@@ -1,8 +1,9 @@
+import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 type LabeledChipProps = {
   label: string;
-  children?: string;
+  children?: ReactNode;
   className?: string;
 };
 
