@@ -259,14 +259,23 @@ export function getAllIyakuMasterFields() {
   return iyakuMasterFields;
 }
 
-export function getField(name: IyakuMasterFieldName) {
-  return iyakuMasterFields.find((field) => field.name === name);
+const nameToField = new Map<IyakuMasterFieldName, Field>(
+  iyakuMasterFields.map((field) => [field.name, field]),
+);
+
+const seqToField: Field[] = [];
+for (const field of iyakuMasterFields) {
+  seqToField[field.seq] = field;
+}
+
+export function getField(name: IyakuMasterFieldName): Field {
+  return nameToField.get(name)!;
 }
 
 export function getFieldOrUndefined(name: string): Field | undefined {
-  return iyakuMasterFields.find((field) => field.name === name);
+  return nameToField.get(name as IyakuMasterFieldName);
 }
 
-export function getFieldBySeq(seq: number) {
-  return iyakuMasterFields.find((field) => field.seq === seq);
+export function getFieldBySeq(seq: number): Field | undefined {
+  return seqToField[seq];
 }
