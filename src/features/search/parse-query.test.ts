@@ -184,7 +184,7 @@ describe("parseQuery", () => {
   });
   test("医薬品マスターのキー指定", () => {
     const result = parseQuery("医薬品コード:123456789", "y");
-    expect(result).toEqual({
+    assert.deepEqual(result, {
       kind: "SUCCESS",
       value: [{
         fieldKey: "医薬品コード",

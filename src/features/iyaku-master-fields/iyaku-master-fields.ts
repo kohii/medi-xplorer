@@ -73,7 +73,7 @@ const iyakuMasterFields = [
     mode: "numeric",
     codes: [
       { code: "1", name: "金額" },
-      { code: "3", name: "薬剤使用量省略" },
+      { code: "3", name: "薬剤使用量省略（歯科に限る。）" },
       { code: "7", name: "減点" },
     ],
   },
@@ -92,7 +92,7 @@ const iyakuMasterFields = [
     name: "麻薬・毒薬・覚醒剤原料・向精神薬",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
+      { code: "0", name: "「１」から「５」以外の医薬品" },
       { code: "1", name: "麻薬" },
       { code: "2", name: "毒薬" },
       { code: "3", name: "覚醒剤原料" },
@@ -104,8 +104,8 @@ const iyakuMasterFields = [
     name: "神経破壊剤",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
-      { code: "1", name: "対象" },
+      { code: "0", name: "神経破壊剤以外" },
+      { code: "1", name: "神経破壊剤" },
     ],
   },
   {
@@ -113,8 +113,8 @@ const iyakuMasterFields = [
     name: "生物学的製剤",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
-      { code: "1", name: "対象" },
+      { code: "0", name: "生物学的製剤加算対象品目以外" },
+      { code: "1", name: "生物学的製剤加算対象品目" },
     ],
   },
   {
@@ -122,8 +122,8 @@ const iyakuMasterFields = [
     name: "後発品",
     mode: "numeric",
     codes: [
-      { code: "0", name: "後発品以外" },
-      { code: "1", name: "後発品" },
+      { code: "0", name: "後発医薬品以外" },
+      { code: "1", name: "後発医薬品" },
     ],
   },
   {
@@ -136,8 +136,8 @@ const iyakuMasterFields = [
     name: "歯科特定薬剤",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
-      { code: "1", name: "対象" },
+      { code: "0", name: "歯科特定薬剤以外" },
+      { code: "1", name: "歯科特定薬剤" },
     ],
   },
   {
@@ -145,7 +145,7 @@ const iyakuMasterFields = [
     name: "造影（補助）剤",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
+      { code: "0", name: "「１」及び「２」以外の医薬品" },
       { code: "1", name: "造影剤" },
       { code: "2", name: "造影補助剤" },
     ],
@@ -160,13 +160,13 @@ const iyakuMasterFields = [
     name: "収載方式等識別",
     mode: "numeric",
     codes: [
-      { code: "0", name: "対象外" },
-      { code: "1", name: "日本薬局方収載医薬品" },
-      { code: "2", name: "局方品（生物学的製剤基準医薬品）" },
-      { code: "3", name: "局方品（生薬）" },
+      { code: "0", name: "「１」から「８」以外の医薬品" },
+      { code: "1", name: "日本薬局方収載医薬品（局方品）" },
+      { code: "2", name: "局方品で生物学的製剤基準医薬品" },
+      { code: "3", name: "局方品で生薬" },
       { code: "6", name: "生物学的製剤基準医薬品" },
       { code: "7", name: "生薬" },
-      { code: "8", name: "統一名収載医薬品" },
+      { code: "8", name: "「１」から「７」以外の統一名収載医薬品" },
     ],
   },
   {
@@ -180,9 +180,9 @@ const iyakuMasterFields = [
     shortName: "旧金額種別",
     mode: "numeric",
     codes: [
-      { code: "0", name: "薬価基準改定以降の新設" },
+      { code: "0", name: "薬価基準改定又はそれ以降に新設された医薬品" },
       { code: "1", name: "金額" },
-      { code: "3", name: "薬剤使用量省略" },
+      { code: "3", name: "薬剤使用量省略（歯科に限る。）" },
       { code: "7", name: "減点" },
     ],
   },
@@ -235,6 +235,80 @@ const iyakuMasterFields = [
     seq: 31,
     name: "廃止年月日",
     mode: "date",
+  },
+  {
+    seq: 32,
+    name: "薬価基準収載医薬品コード",
+    mode: "alphanumeric",
+  },
+  {
+    seq: 33,
+    name: "公表順序番号",
+    mode: "numeric",
+  },
+  {
+    seq: 34,
+    name: "経過措置年月日又は商品名医薬品コード使用期限",
+    shortName: "経過措置年月日等",
+    mode: "date",
+  },
+  {
+    seq: 35,
+    name: "基本漢字名称",
+    mode: "text",
+    columnWidth: "auto",
+  },
+  {
+    seq: 36,
+    name: "薬価基準収載年月日",
+    mode: "date",
+  },
+  {
+    seq: 37,
+    name: "一般名コード",
+    mode: "alphanumeric",
+  },
+  {
+    seq: 38,
+    name: "一般名処方の標準的な記載",
+    shortName: "一般名処方記載",
+    mode: "text",
+    columnWidth: "auto",
+  },
+  {
+    seq: 39,
+    name: "一般名処方加算対象区分",
+    shortName: "一般名処方加算",
+    mode: "alphanumeric",
+    codes: [
+      { code: "0", name: "一般名処方マスタにない医薬品" },
+      { code: "1", name: "加算１" },
+      { code: "2", name: "加算１、２" },
+    ],
+  },
+  {
+    seq: 40,
+    name: "抗ＨＩＶ薬区分",
+    mode: "alphanumeric",
+    codes: [
+      { code: "0", name: "「１」以外の医薬品" },
+      { code: "1", name: "抗ＨＩＶ薬" },
+    ],
+  },
+  {
+    seq: 41,
+    name: "長期収載品関連",
+    mode: "numeric",
+  },
+  {
+    seq: 42,
+    name: "選定療養区分",
+    mode: "numeric",
+    codes: [
+      { code: "0", name: "「１」及び「２」以外の医薬品" },
+      { code: "1", name: "対象医薬品（医療上必要があると認める場合等）" },
+      { code: "2", name: "対象医薬品（患者希望）" },
+    ],
   },
 ] as const satisfies readonly Field[];
 
