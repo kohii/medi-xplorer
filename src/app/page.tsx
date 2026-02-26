@@ -4,8 +4,8 @@ import { Suspense } from "react";
 import { AppIcon } from "@/components/app-icon";
 import { GitHubIcon } from "@/components/icons/github-icon";
 
-import { PrefetchSearchResultPage } from "./prefetch-search-result";
 import { HomeSearchPanel } from "./home-search-panel";
+import { PrefetchSearchResultPage } from "./prefetch-search-result";
 
 export default function Home() {
   return (

@@ -1,9 +1,8 @@
 import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 
+import { getValue } from "../fields/get-values";
 import { getField as getIyakuField } from "../iyaku-master-fields/iyaku-master-fields";
 import { getField as getShinryoukouiField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
-
-import { getValue } from "../fields/get-values";
 
 import { NormalizedFilterExpression, NormalizedFilterItem } from "./normalize-filter-expression";
 

@@ -7,7 +7,7 @@ const iyakuMasterFields = [
     name: "変更区分",
     mode: "numeric",
     codes: [
-      { code: "0", name: "前マスターと同じ" },
+      { code: "0", name: "変更なし" },
       { code: "1", name: "抹消" },
       { code: "3", name: "新規" },
       { code: "5", name: "変更" },

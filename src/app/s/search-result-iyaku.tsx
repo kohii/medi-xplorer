@@ -10,12 +10,12 @@ import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
 import { useIyakuMasterData } from "@/contexts/iyaku-master-data-context";
 import { getValue } from "@/features/fields/get-values";
+import { getField } from "@/features/iyaku-master-fields/iyaku-master-fields";
 import { IyakuVersionSelect } from "@/features/iyaku-master-versions/version-select";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
-import { getField } from "@/features/iyaku-master-fields/iyaku-master-fields";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { MASTER_IDS } from "@/master-types";
@@ -64,6 +64,7 @@ export default function SearchResultIyaku() {
   const unselect = useCallback(() => {
     updateSearchParams({
       code: undefined,
+      tab: undefined,
     });
   }, [updateSearchParams]);
 
