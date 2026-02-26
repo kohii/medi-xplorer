@@ -1,7 +1,7 @@
 import { Field } from "../fields/types";
-import { IyakuMasterLayoutVersion, INITIAL_IYAKU_MASTER_LAYOUT_VERSION } from "../iyaku-master-versions/layouts";
+import { IyakuhinMasterLayoutVersion, INITIAL_IYAKUHIN_MASTER_LAYOUT_VERSION } from "../iyakuhin-master-versions/layouts";
 
-const iyakuMasterFields = [
+const iyakuhinMasterFields = [
   {
     seq: 1,
     name: "変更区分",
@@ -312,42 +312,42 @@ const iyakuMasterFields = [
   },
 ] as const satisfies readonly Field[];
 
-export type IyakuMasterFieldName = (typeof iyakuMasterFields)[number]["name"];
+export type IyakuhinMasterFieldName = (typeof iyakuhinMasterFields)[number]["name"];
 
-type IyakuMasterRecord = Field & { name: IyakuMasterFieldName };
-const fieldsByLayoutVersion = new Map<IyakuMasterLayoutVersion, IyakuMasterRecord[]>();
+type IyakuhinMasterRecord = Field & { name: IyakuhinMasterFieldName };
+const fieldsByLayoutVersion = new Map<IyakuhinMasterLayoutVersion, IyakuhinMasterRecord[]>();
 
-export function getIyakuMasterFields(layoutVersion: IyakuMasterLayoutVersion): IyakuMasterRecord[] {
+export function getIyakuhinMasterFields(layoutVersion: IyakuhinMasterLayoutVersion): IyakuhinMasterRecord[] {
   const cache = fieldsByLayoutVersion.get(layoutVersion);
   if (cache) return cache;
 
-  const fields = iyakuMasterFields.filter((field: Field) => {
-    return (field.validFrom ?? INITIAL_IYAKU_MASTER_LAYOUT_VERSION) <= layoutVersion;
+  const fields = iyakuhinMasterFields.filter((field: Field) => {
+    return (field.validFrom ?? INITIAL_IYAKUHIN_MASTER_LAYOUT_VERSION) <= layoutVersion;
   });
   if (!fields.length) throw new Error(`No fields for layout version ${layoutVersion}`);
   fieldsByLayoutVersion.set(layoutVersion, fields);
   return fields;
 }
 
-export function getAllIyakuMasterFields() {
-  return iyakuMasterFields;
+export function getAllIyakuhinMasterFields() {
+  return iyakuhinMasterFields;
 }
 
-const nameToField = new Map<IyakuMasterFieldName, Field>(
-  iyakuMasterFields.map((field) => [field.name, field]),
+const nameToField = new Map<IyakuhinMasterFieldName, Field>(
+  iyakuhinMasterFields.map((field) => [field.name, field]),
 );
 
 const seqToField: Field[] = [];
-for (const field of iyakuMasterFields) {
+for (const field of iyakuhinMasterFields) {
   seqToField[field.seq] = field;
 }
 
-export function getField(name: IyakuMasterFieldName): Field {
+export function getField(name: IyakuhinMasterFieldName): Field {
   return nameToField.get(name)!;
 }
 
 export function getFieldOrUndefined(name: string): Field | undefined {
-  return nameToField.get(name as IyakuMasterFieldName);
+  return nameToField.get(name as IyakuhinMasterFieldName);
 }
 
 export function getFieldBySeq(seq: number): Field | undefined {

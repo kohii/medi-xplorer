@@ -7,9 +7,9 @@ import { Field } from "@/features/fields/types";
 import { SectionHeading } from "@/features/shinryoukoui-basic-tab/section-heading";
 import { ColorChipColor } from "@/utils/color-chip-color";
 
-import { getField } from "../iyaku-master-fields/iyaku-master-fields";
+import { getField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 
-export type IyakuBasicTabProps = {
+export type IyakuhinBasicTabProps = {
   row: string[];
 };
 
@@ -38,7 +38,7 @@ function getZaikeiColor(code: string): ColorChipColor | undefined {
   }
 }
 
-export function IyakuBasicTab({ row }: IyakuBasicTabProps) {
+export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
   const zaikeiCode = getValue(row, getField("剤形"));
   const zaikeiLabel = getCodeLabel(row, getField("剤形"), true);
   const kanjiMeisho = getValue(row, getField("医薬品名・規格名/漢字名称"));
@@ -56,7 +56,7 @@ export function IyakuBasicTab({ row }: IyakuBasicTabProps) {
     getValue(row, getField("造影（補助）剤")) !== "0" ||
     getValue(row, getField("抗ＨＩＶ薬区分")) !== "0";
 
-  const hasKanren =
+  const hasChoukiSentei =
     getValue(row, getField("商品名等関連")) !== "0" ||
     getValue(row, getField("長期収載品関連")) !== "0" ||
     getValue(row, getField("選定療養区分")) !== "0";
@@ -91,48 +91,77 @@ export function IyakuBasicTab({ row }: IyakuBasicTabProps) {
       </section>
 
       <section>
-        <SectionHeading>基本情報</SectionHeading>
+        <SectionHeading>薬価</SectionHeading>
+        {kinyuShubetsu === "1" ? (
+          <div className="flex items-baseline gap-1 mb-2">
+            <span className="text-2xl font-bold">
+              {formatYakka(getValue(row, getField("新又は現金額")))}
+            </span>
+            <span className="text-sm text-slate-500">
+              / {getValue(row, getField("単位漢字名称"))}
+            </span>
+          </div>
+        ) : (
+          <div className="mb-2">
+            <LabeledChip label="新又は現金額種別">
+              {formatCodeValue(row, getField("新又は現金額/金額種別"))}
+            </LabeledChip>
+          </div>
+        )}
+        {kyuKinyuShubetsu !== "0" && (
+          <div className="text-sm text-slate-500 mb-2">
+            旧薬価: {formatYakka(getValue(row, getField("旧金額")))}
+          </div>
+        )}
         <HStack>
-          <LabeledChip label="剤形">
-            {formatCodeValue(row, getField("剤形"))}
-          </LabeledChip>
-          <LabeledChip label="収載方式等識別">
-            {formatCodeValue(row, getField("収載方式等識別"))}
-          </LabeledChip>
-          <LabeledChip label="後発品">
-            {formatCodeValue(row, getField("後発品"))}
-          </LabeledChip>
-          <LabeledChip label="単位">
-            {getValue(row, getField("単位漢字名称"))}
+          <LabeledChip label="薬価基準収載年月日">
+            {getValue(row, getField("薬価基準収載年月日"))}
           </LabeledChip>
         </HStack>
       </section>
 
       <section>
-        <SectionHeading>薬価</SectionHeading>
+        <SectionHeading>後発品・一般名処方</SectionHeading>
         <HStack>
-          {kinyuShubetsu === "1" ? (
-            <LabeledChip label="新又は現薬価">
-              {formatYakka(getValue(row, getField("新又は現金額")))}
-            </LabeledChip>
-          ) : (
-            <LabeledChip label="新又は現金額種別">
-              {formatCodeValue(row, getField("新又は現金額/金額種別"))}
-            </LabeledChip>
-          )}
-          {kyuKinyuShubetsu !== "0" && (
-            <LabeledChip label="旧薬価">
-              {formatYakka(getValue(row, getField("旧金額")))}
-            </LabeledChip>
-          )}
-          <LabeledChip label="薬価基準収載年月日">
-            {getValue(row, getField("薬価基準収載年月日"))}
+          <LabeledChip label="後発品">
+            {formatCodeValue(row, getField("後発品"))}
           </LabeledChip>
-          <LabeledChip label="薬価基準収載医薬品コード">
-            {getValue(row, getField("薬価基準収載医薬品コード"))}
+          <LabeledChip label="一般名処方加算対象区分">
+            {formatCodeValue(row, getField("一般名処方加算対象区分"))}
+          </LabeledChip>
+          <LabeledChip label="一般名コード">
+            {getValue(row, getField("一般名コード"))}
           </LabeledChip>
         </HStack>
+        {ippanmeiKisai && ippanmeiKisai.trim() && (
+          <div className="mt-2 p-2 bg-slate-50 rounded text-sm text-slate-700">
+            {ippanmeiKisai.trim()}
+          </div>
+        )}
       </section>
+
+      {hasChoukiSentei && (
+        <section>
+          <SectionHeading>長期収載品・選定療養</SectionHeading>
+          <HStack>
+            {getValue(row, getField("選定療養区分")) !== "0" && (
+              <LabeledChip label="選定療養区分">
+                {formatCodeValue(row, getField("選定療養区分"))}
+              </LabeledChip>
+            )}
+            {getValue(row, getField("長期収載品関連")) !== "0" && (
+              <LabeledChip label="長期収載品関連">
+                {getValue(row, getField("長期収載品関連"))}
+              </LabeledChip>
+            )}
+            {getValue(row, getField("商品名等関連")) !== "0" && (
+              <LabeledChip label="商品名等関連">
+                {getValue(row, getField("商品名等関連"))}
+              </LabeledChip>
+            )}
+          </HStack>
+        </section>
+      )}
 
       {hasBunruiKisei && (
         <section>
@@ -184,44 +213,22 @@ export function IyakuBasicTab({ row }: IyakuBasicTabProps) {
       )}
 
       <section>
-        <SectionHeading>一般名処方</SectionHeading>
+        <SectionHeading>基本情報</SectionHeading>
         <HStack>
-          <LabeledChip label="一般名コード">
-            {getValue(row, getField("一般名コード"))}
+          <LabeledChip label="剤形">
+            {formatCodeValue(row, getField("剤形"))}
           </LabeledChip>
-          <LabeledChip label="一般名処方加算対象区分">
-            {formatCodeValue(row, getField("一般名処方加算対象区分"))}
+          <LabeledChip label="単位">
+            {getValue(row, getField("単位漢字名称"))}
+          </LabeledChip>
+          <LabeledChip label="収載方式等識別">
+            {formatCodeValue(row, getField("収載方式等識別"))}
+          </LabeledChip>
+          <LabeledChip label="薬価基準収載医薬品コード">
+            {getValue(row, getField("薬価基準収載医薬品コード"))}
           </LabeledChip>
         </HStack>
-        {ippanmeiKisai && ippanmeiKisai.trim() && (
-          <div className="mt-1 text-sm text-slate-600">
-            {ippanmeiKisai.trim()}
-          </div>
-        )}
       </section>
-
-      {hasKanren && (
-        <section>
-          <SectionHeading>関連</SectionHeading>
-          <HStack>
-            {getValue(row, getField("商品名等関連")) !== "0" && (
-              <LabeledChip label="商品名等関連">
-                {getValue(row, getField("商品名等関連"))}
-              </LabeledChip>
-            )}
-            {getValue(row, getField("長期収載品関連")) !== "0" && (
-              <LabeledChip label="長期収載品関連">
-                {getValue(row, getField("長期収載品関連"))}
-              </LabeledChip>
-            )}
-            {getValue(row, getField("選定療養区分")) !== "0" && (
-              <LabeledChip label="選定療養区分">
-                {formatCodeValue(row, getField("選定療養区分"))}
-              </LabeledChip>
-            )}
-          </HStack>
-        </section>
-      )}
 
       <section>
         <SectionHeading>変更履歴</SectionHeading>
@@ -237,12 +244,6 @@ export function IyakuBasicTab({ row }: IyakuBasicTabProps) {
               {haichishiNengetsuhi}
             </LabeledChip>
           )}
-          <LabeledChip label="漢字名称変更区分">
-            {formatCodeValue(row, getField("漢字名称変更区分"))}
-          </LabeledChip>
-          <LabeledChip label="カナ名称変更区分">
-            {formatCodeValue(row, getField("カナ名称変更区分"))}
-          </LabeledChip>
           {keikaSochiNengetsuhi && keikaSochiNengetsuhi.replace(/0/g, "") !== "" && (
             <LabeledChip label="経過措置年月日等">
               {keikaSochiNengetsuhi}

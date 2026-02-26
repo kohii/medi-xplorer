@@ -1,6 +1,6 @@
 import { parseTsv } from "@/utils/tsv";
 
-export async function fetchIyakuMasterData(version: string): Promise<string[][]> {
+export async function fetchIyakuhinMasterData(version: string): Promise<string[][]> {
   const res = await fetch(`/master-data/y/y_ALL${version}.tsv`, {
     cache: "force-cache",
   });

@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
 import { useMasterSearchByQuery } from "@/hooks/use-shinryoukoui-search";
-import { MasterId } from "@/master-types";
+import { MASTER_IDS, MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { SearchInput } from "./search-input";
@@ -29,10 +29,14 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
     search(event.currentTarget.q.value);
   };
 
+  const action = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
+
   return (
-    <form onSubmit={handleSubmit} action="/s">
+    <form onSubmit={handleSubmit} action={action}>
       <div className="relative h-10">
-        <input type="hidden" name={SEARCH_PARAM_NAMES.SEARCH.MASTER} value={masterId} />
+        {masterId !== MASTER_IDS.IYAKUHIN && (
+          <input type="hidden" name={SEARCH_PARAM_NAMES.SEARCH.MASTER} value={masterId} />
+        )}
         <div className="absolute flex items-center text-gray-400 inset-y-0 start-0 ps-3 pointer-events-none h-10">
           <SearchIcon />
         </div>

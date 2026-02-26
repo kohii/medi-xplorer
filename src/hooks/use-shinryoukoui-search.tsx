@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
-import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
+import { DEFAULT_MASTER_ID, MASTER_IDS, MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 export type SearchParamNames = typeof SEARCH_PARAM_NAMES["SEARCH"][keyof typeof SEARCH_PARAM_NAMES["SEARCH"]];
@@ -36,8 +36,14 @@ export function useMasterSearch({
         searchParams.delete(key);
       }
     });
-    searchParams.set(SEARCH_PARAM_NAMES.SEARCH.MASTER, masterId);
-    push(`/s?${searchParams.toString()}`);
+
+    const path = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
+    if (masterId === MASTER_IDS.IYAKUHIN) {
+      searchParams.delete(SEARCH_PARAM_NAMES.SEARCH.MASTER);
+    } else {
+      searchParams.set(SEARCH_PARAM_NAMES.SEARCH.MASTER, masterId);
+    }
+    push(`${path}?${searchParams.toString()}`);
   }, [masterId, preserveExtraSearchParams, push]);
 }
 

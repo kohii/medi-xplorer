@@ -2,7 +2,7 @@ import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth, isHalfWidth } from "@/utils/text";
 
 import { Field } from "../fields/types";
-import { getFieldBySeq as getIyakuFieldBySeq, getField as getIyakuField } from "../iyaku-master-fields/iyaku-master-fields";
+import { getFieldBySeq as getIyakuhinFieldBySeq, getField as getIyakuhinField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 import { getFieldBySeq as getShinryoukouiFieldBySeq, getField as getShinryoukouiField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { FieldFilterItem, KeywordFilterItem, FilterExpression, ParseResult } from "./types";
@@ -28,8 +28,8 @@ export function normalizeFilterExpression(
   masterId: MasterId = DEFAULT_MASTER_ID,
 ): ParseResult<NormalizedFilterExpression> {
   const result: NormalizedFilterExpression = [];
-  const getField = masterId === "y" ? getIyakuField : getShinryoukouiField;
-  const getFieldBySeq = masterId === "y" ? getIyakuFieldBySeq : getShinryoukouiFieldBySeq;
+  const getField = masterId === "y" ? getIyakuhinField : getShinryoukouiField;
+  const getFieldBySeq = masterId === "y" ? getIyakuhinFieldBySeq : getShinryoukouiFieldBySeq;
   expression.forEach((item) => {
     if ("fieldKey" in item) {
       const key = (item as FieldFilterItem).fieldKey;

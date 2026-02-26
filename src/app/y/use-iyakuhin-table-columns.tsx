@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { DataTableColumn } from "@/components/data-table";
 import { getValue } from "@/features/fields/get-values";
-import { getField } from "@/features/iyaku-master-fields/iyaku-master-fields";
+import { getField } from "@/features/iyakuhin-master-fields/iyakuhin-master-fields";
 
 const codeField = getField("医薬品コード");
 const nameField = getField("医薬品名・規格名/漢字名称");
@@ -10,7 +10,7 @@ const kanaField = getField("医薬品名・規格名/カナ名称");
 const amountField = getField("新又は現金額");
 const unitField = getField("単位漢字名称");
 
-export function useIyakuTableColumns() {
+export function useIyakuhinTableColumns() {
   return useMemo<DataTableColumn[]>(() => {
     return [
       {

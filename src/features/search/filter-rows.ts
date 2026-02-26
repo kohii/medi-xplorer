@@ -1,7 +1,7 @@
 import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 
 import { getValue } from "../fields/get-values";
-import { getField as getIyakuField } from "../iyaku-master-fields/iyaku-master-fields";
+import { getField as getIyakuhinField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 import { getField as getShinryoukouiField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { NormalizedFilterExpression, NormalizedFilterItem } from "./normalize-filter-expression";
@@ -13,11 +13,11 @@ const shinryoukouiSearchFields = {
   fullnameField: getShinryoukouiField("基本漢字名称"),
 };
 
-const iyakuSearchFields = {
-  codeField: getIyakuField("医薬品コード"),
-  nameField: getIyakuField("医薬品名・規格名/漢字名称"),
-  kanaField: getIyakuField("医薬品名・規格名/カナ名称"),
-  fullnameField: getIyakuField("医薬品名・規格名/漢字名称"),
+const iyakuhinSearchFields = {
+  codeField: getIyakuhinField("医薬品コード"),
+  nameField: getIyakuhinField("医薬品名・規格名/漢字名称"),
+  kanaField: getIyakuhinField("医薬品名・規格名/カナ名称"),
+  fullnameField: getIyakuhinField("医薬品名・規格名/漢字名称"),
 };
 
 export function filterShinryoukouiRows(
@@ -25,7 +25,7 @@ export function filterShinryoukouiRows(
   expression: NormalizedFilterExpression,
   masterId: MasterId = DEFAULT_MASTER_ID,
 ): string[][] {
-  const searchFields = masterId === "y" ? iyakuSearchFields : shinryoukouiSearchFields;
+  const searchFields = masterId === "y" ? iyakuhinSearchFields : shinryoukouiSearchFields;
   return rows.filter(row => {
     for (const item of expression) {
       const r = filterShinryoukouiRow(row, item, searchFields);

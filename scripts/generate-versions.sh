@@ -29,4 +29,4 @@ write_versions() {
 }
 
 write_versions "raw-master-data/s/" "src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json"
-write_versions "raw-master-data/y/" "src/features/iyaku-master-versions/iyaku-master-versions.json"
+write_versions "raw-master-data/y/" "src/features/iyakuhin-master-versions/iyakuhin-master-versions.json"

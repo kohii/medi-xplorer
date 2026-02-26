@@ -32,11 +32,11 @@ export function HomeSearchPanel() {
             type="button"
             className={twMerge(
               "px-3 py-1.5 text-sm",
-              masterId === MASTER_IDS.IYAKU
+              masterId === MASTER_IDS.IYAKUHIN
                 ? "bg-slate-600 text-white"
                 : "bg-white text-gray-600 hover:bg-gray-50",
             )}
-            onClick={() => setMasterId(MASTER_IDS.IYAKU)}
+            onClick={() => setMasterId(MASTER_IDS.IYAKUHIN)}
           >
             医薬品
           </button>

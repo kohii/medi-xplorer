@@ -1,19 +1,19 @@
 import { FieldValue } from "@/features/fields/field-value";
 
-import { getIyakuMasterFields } from "../iyaku-master-fields/iyaku-master-fields";
-import { IyakuMasterLayoutVersion } from "../iyaku-master-versions/layouts";
+import { getIyakuhinMasterFields } from "../iyakuhin-master-fields/iyakuhin-master-fields";
+import { IyakuhinMasterLayoutVersion } from "../iyakuhin-master-versions/layouts";
 
-type IyakuRawTabProps = {
+type IyakuhinRawTabProps = {
   row: string[];
-  layoutVersion: IyakuMasterLayoutVersion;
+  layoutVersion: IyakuhinMasterLayoutVersion;
 };
 
-export function IyakuRawTab({ row, layoutVersion }: IyakuRawTabProps) {
-  const iyakuMasterFields = getIyakuMasterFields(layoutVersion);
+export function IyakuhinRawTab({ row, layoutVersion }: IyakuhinRawTabProps) {
+  const iyakuhinMasterFields = getIyakuhinMasterFields(layoutVersion);
   return (
     <table className="border-collapse border-spacing-0 table-fixed w-full text-sm">
       <tbody>
-        {iyakuMasterFields.map((field, index) => (
+        {iyakuhinMasterFields.map((field, index) => (
           <tr key={index}>
             <th className="w-2/5 py-1 pr-4 text-left font-medium">
               {field.seq}. {field.name}

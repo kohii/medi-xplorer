@@ -11,7 +11,7 @@ import { twMerge } from "tailwind-merge";
 import { MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
-import { getAllIyakuMasterFields } from "../iyaku-master-fields/iyaku-master-fields";
+import { getAllIyakuhinMasterFields } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 import { getAllShinryoukouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 type SearchInputProps = {
@@ -26,7 +26,7 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
   ref,
 ) {
   const fieldNames = useMemo(() => {
-    const fields = masterId === "y" ? getAllIyakuMasterFields() : getAllShinryoukouiMasterFields();
+    const fields = masterId === "y" ? getAllIyakuhinMasterFields() : getAllShinryoukouiMasterFields();
     return fields.map((f) => f.name);
   }, [masterId]);
 

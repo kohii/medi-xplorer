@@ -7,8 +7,8 @@ import { writeFileSync, readdirSync, readFileSync, mkdirSync, existsSync } from 
 
 import * as CSV from "csv-string";
 
-import { getIyakuMasterFields } from "../src/features/iyaku-master-fields/iyaku-master-fields";
-import { IYAKU_MASTER_LAYOUTS } from "../src/features/iyaku-master-versions/layouts";
+import { getIyakuhinMasterFields } from "../src/features/iyakuhin-master-fields/iyakuhin-master-fields";
+import { IYAKUHIN_MASTER_LAYOUTS } from "../src/features/iyakuhin-master-versions/layouts";
 import { getShinryoukouiMasterFields } from "../src/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { SHINRYOUKOUI_MASTER_LAYOUTS } from "../src/features/shinryoukoui-master-versions/layouts";
 
@@ -66,8 +66,8 @@ const shinryoukouiLayouts = SHINRYOUKOUI_MASTER_LAYOUTS.map((l) => {
   };
 });
 
-const iyakuLayouts = IYAKU_MASTER_LAYOUTS.map((l) => {
-  const fields = getIyakuMasterFields(l.version);
+const iyakuhinLayouts = IYAKUHIN_MASTER_LAYOUTS.map((l) => {
+  const fields = getIyakuhinMasterFields(l.version);
   return {
     ...l,
     fieldCount: fields[fields.length - 1].seq,
@@ -85,5 +85,5 @@ generateMasterData({
   inputDir: "raw-master-data/y/",
   outputDir: "public/master-data/y/",
   filePattern: /^y_ALL(20\d{6})\.csv$/,
-  layouts: iyakuLayouts,
+  layouts: iyakuhinLayouts,
 });

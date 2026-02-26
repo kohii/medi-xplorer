@@ -2,9 +2,9 @@ import { useSearchParams } from "next/navigation";
 
 import { Tabs } from "@/components/tabs";
 import { VSplit, VSplitItem } from "@/components/v-split";
-import { IyakuBasicTab } from "@/features/iyaku-basic-tab/iyaku-basic-tab";
-import { IyakuMasterLayoutVersion } from "@/features/iyaku-master-versions/layouts";
-import { IyakuRawTab } from "@/features/iyaku-raw-tab/iyaku-raw-tab";
+import { IyakuhinBasicTab } from "@/features/iyakuhin-basic-tab/iyakuhin-basic-tab";
+import { IyakuhinMasterLayoutVersion } from "@/features/iyakuhin-master-versions/layouts";
+import { IyakuhinRawTab } from "@/features/iyakuhin-raw-tab/iyakuhin-raw-tab";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 
 const tabs = [
@@ -42,12 +42,12 @@ function useSelectedTab() {
   return [selectedTab, setSelectedTab] as const;
 }
 
-type IyakuDetailProps = {
+type IyakuhinDetailProps = {
   row: string[];
-  layoutVersion: IyakuMasterLayoutVersion;
+  layoutVersion: IyakuhinMasterLayoutVersion;
 };
 
-export function IyakuDetail({ row, layoutVersion }: IyakuDetailProps) {
+export function IyakuhinDetail({ row, layoutVersion }: IyakuhinDetailProps) {
   const [selectedTab, setSelectedTab] = useSelectedTab();
 
   return (
@@ -58,9 +58,9 @@ export function IyakuDetail({ row, layoutVersion }: IyakuDetailProps) {
         </VSplitItem>
         <VSplitItem pos={2} overflow="auto">
           <div className="p-4">
-            {selectedTab === "basic" && <IyakuBasicTab row={row} />}
+            {selectedTab === "basic" && <IyakuhinBasicTab row={row} />}
             {selectedTab === "raw" && (
-              <IyakuRawTab row={row} layoutVersion={layoutVersion} />
+              <IyakuhinRawTab row={row} layoutVersion={layoutVersion} />
             )}
           </div>
         </VSplitItem>
