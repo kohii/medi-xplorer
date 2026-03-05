@@ -53,7 +53,7 @@
     "typescript": "^5.9",
     "vercel": "^46.1.1",
     "@eslint/eslintrc": "^3",
-    "@opennextjs/cloudflare": "^1.14.0",
+    "@opennextjs/cloudflare": "^1.17.1",
     "wrangler": "^4.51.0"
   },
   "overrides": {
