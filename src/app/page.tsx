@@ -17,9 +17,7 @@ export default function Home() {
             MediXplorer
           </h1>
           <p className="text-center text-gray-500 mt-4">診療行為・医薬品マスタービューアー</p>
-          <div className="my-8 w-full">
-            <HomeSearchPanel />
-          </div>
+          <HomeSearchPanel />
         </main>
       </div>
       <footer>
