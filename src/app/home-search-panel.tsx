@@ -47,11 +47,11 @@ export function HomeSearchPanel() {
                 aria-selected={isActive}
                 tabIndex={-1}
                 className={twMerge(
-                  "relative px-3 py-1 text-sm transition-colors rounded-full cursor-pointer",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400",
+                  "relative px-3 py-1 text-sm rounded-full cursor-pointer transition-all duration-200",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300",
                   isActive
-                    ? "bg-gray-200 text-gray-700"
-                    : "text-gray-400 hover:text-gray-500",
+                    ? "bg-blue-50 text-blue-600 font-medium"
+                    : "text-gray-500 hover:text-gray-600 hover:bg-gray-50",
                 )}
                 onClick={() => setMasterId(id)}
               >
