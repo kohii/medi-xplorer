@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React, { createContext, useContext, useMemo } from "react";
 
@@ -37,6 +37,15 @@ export function useIyakuhinMasterData() {
   return useContext(IyakuhinMasterDataContext);
 }
 
+export function getIyakuhinMasterDataQueryOptions(version: string) {
+  return queryOptions({
+    queryKey: ["y", version],
+    queryFn: () => fetchIyakuhinMasterData(version),
+    refetchOnMount: false,
+    enabled: Boolean(version),
+  });
+}
+
 export function IyakuhinMasterDataProvider({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
@@ -46,12 +55,7 @@ export function IyakuhinMasterDataProvider({ children }: { children: React.React
       ? paramVersion
       : LATEST_IYAKUHIN_MASTER_VERSION;
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["y", version],
-    queryFn: () => fetchIyakuhinMasterData(version),
-    refetchOnMount: false,
-    enabled: Boolean(version),
-  });
+  const { data, error, isLoading } = useQuery(getIyakuhinMasterDataQueryOptions(version));
 
   if (error) {
     throw error;

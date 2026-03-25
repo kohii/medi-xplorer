@@ -1,8 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, useMemo } from "react";
 
 import { fetchShisetsukijunData } from "@/apis/fetch-shisetsukijun-data";
-import { getShinryoukouiLayoutFor } from "@/features/shinryoukoui-master-versions/layouts";
+import {
+  getShinryoukouiLayoutFor,
+  ShinryoukouiMasterLayoutVersion,
+} from "@/features/shinryoukoui-master-versions/layouts";
 
 import { useShinryoukouiMasterData } from "./shinryoukoui-master-data-context";
 
@@ -24,9 +27,8 @@ export function useShisetsukijunData() {
   return useContext(ShisetsukijunDataContext);
 }
 
-export function ShisetsukijunDataProvider({ children }: { children: React.ReactNode }) {
-  const { layoutVersion } = useShinryoukouiMasterData();
-  const { data, error, isLoading } = useQuery({
+export function getShisetsukijunDataQueryOptions(layoutVersion: ShinryoukouiMasterLayoutVersion) {
+  return queryOptions({
     queryKey: ["shisetsukijun", layoutVersion],
     queryFn: () => {
       const layout = getShinryoukouiLayoutFor(layoutVersion);
@@ -34,6 +36,11 @@ export function ShisetsukijunDataProvider({ children }: { children: React.ReactN
     },
     refetchOnMount: false,
   });
+}
+
+export function ShisetsukijunDataProvider({ children }: { children: React.ReactNode }) {
+  const { layoutVersion } = useShinryoukouiMasterData();
+  const { data, error, isLoading } = useQuery(getShisetsukijunDataQueryOptions(layoutVersion));
 
   if (error) {
     throw error;

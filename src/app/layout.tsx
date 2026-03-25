@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import React from "react";
 
 import "./globals.css";
+import { Providers } from "./providers";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="ja" className="h-full">
       <body className={inter.className + " h-full bg-white leading-tight"}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
