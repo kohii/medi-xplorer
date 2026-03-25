@@ -35,7 +35,7 @@ export function HomeSearchPanel() {
         <div
           role="tablist"
           aria-label="マスター種別"
-          className="flex gap-1 mb-4"
+          className="flex gap-1 mb-2"
         >
           {MASTER_OPTIONS.map((id) => {
             const isActive = masterId === id;
@@ -47,7 +47,7 @@ export function HomeSearchPanel() {
                 aria-selected={isActive}
                 tabIndex={-1}
                 className={twMerge(
-                  "relative px-3 py-1 text-sm transition-colors rounded-full",
+                  "relative px-3 py-1 text-sm transition-colors rounded-full cursor-pointer",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400",
                   isActive
                     ? "bg-gray-200 text-gray-700"
@@ -59,13 +59,13 @@ export function HomeSearchPanel() {
               </button>
             );
           })}
-          <span className="ml-auto self-center text-xs text-gray-400 select-none">
-            Tab で切り替え
-          </span>
         </div>
         {/* onKeyDown は SearchInput (RichInput) からバブルアップしてくる */}
         <div onKeyDown={handleSearchBarKeyDown}>
           <SearchBar masterId={masterId} />
+        </div>
+        <div className="mt-2 text-left text-xs text-gray-400 select-none">
+          Tab でマスター切り替え、Enter で検索
         </div>
       </div>
       <AdvancedSearchButton
