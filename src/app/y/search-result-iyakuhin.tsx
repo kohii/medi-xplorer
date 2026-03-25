@@ -134,14 +134,11 @@ export default function SearchResultIyakuhin() {
                 )}
               </div>
               <div className="mt-2 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <div className="text-sm text-gray-500">医薬品マスター</div>
-                  <AdvancedSearchButton
-                    initialQuery={searchInputValue}
-                    masterId={MASTER_IDS.IYAKUHIN}
-                    layoutVersion={layoutVersion}
-                  />
-                </div>
+                <AdvancedSearchButton
+                  initialQuery={searchInputValue}
+                  masterId={MASTER_IDS.IYAKUHIN}
+                  layoutVersion={layoutVersion}
+                />
                 <div className="text-sm text-gray-500">
                   <IyakuhinVersionSelect />
                 </div>
