@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
@@ -11,8 +11,23 @@ import { DEFAULT_MASTER_ID, MASTER_IDS, MASTER_LABELS, MasterId } from "@/master
 
 const MASTER_OPTIONS: MasterId[] = [MASTER_IDS.SHINRYOUKOUI, MASTER_IDS.IYAKUHIN];
 
+function nextMasterId(current: MasterId): MasterId {
+  const currentIndex = MASTER_OPTIONS.indexOf(current);
+  return MASTER_OPTIONS[(currentIndex + 1) % MASTER_OPTIONS.length];
+}
+
 export function HomeSearchPanel() {
   const [masterId, setMasterId] = useState(DEFAULT_MASTER_ID);
+  const handleSearchBarKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+    const isToggleShortcut = (event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === "m";
+
+    if (!isToggleShortcut) {
+      return;
+    }
+
+    event.preventDefault();
+    setMasterId((prev) => nextMasterId(prev));
+  }, []);
 
   return (
     <>
@@ -39,9 +54,11 @@ export function HomeSearchPanel() {
             );
           })}
         </div>
-        <SearchBar masterId={masterId} />
+        <div onKeyDown={handleSearchBarKeyDown}>
+          <SearchBar masterId={masterId} />
+        </div>
         <div className="mt-2 text-left text-xs text-gray-400 select-none">
-          Tab で移動、Enter で選択・検索
+          Cmd/Ctrl + Shift + M でマスター切り替え、Tab で移動、Enter で選択・検索
         </div>
       </div>
       <AdvancedSearchButton
