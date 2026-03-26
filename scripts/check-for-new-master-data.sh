@@ -87,13 +87,13 @@ Updated master data:"
 }
 
 collect_master_update "shinryoukoui" \
-  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r06/kihonmasta_01.html" \
+  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.html" \
   "s_ALL" \
   "raw-master-data/s" \
   "kihonmasta_01\\.files"
 
-collect_master_update "iyaku" \
-  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/r06/kihonmasta_04.html" \
+collect_master_update "iyakuhin" \
+  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_04.html" \
   "y_ALL" \
   "raw-master-data/y" \
   "kihonmasta_04\\.files"
