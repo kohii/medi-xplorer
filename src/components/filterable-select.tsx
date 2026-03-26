@@ -26,16 +26,17 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
     if (value === null) {
       return null;
     }
-    return options.find(option => option.value === value) ?? null;
+    return options.find((option) => option.value === value) ?? null;
   }, [options, value]);
 
   type OptionType = { label: string | React.ReactNode; value: ValueType };
-  
+
   const classNamesConfig: ClassNamesConfig<OptionType, false, GroupBase<OptionType>> = {
-    control: (state) => twMerge([
-      "bg-gray-50! border! border-gray-300! text-gray-900! rounded-sm! outline-hidden",
-      ...(state.isFocused ? ["ring-blue-500! border-blue-500!"] : [])
-    ]),
+    control: (state) =>
+      twMerge([
+        "bg-gray-50! border! border-gray-300! text-gray-900! rounded-sm! outline-hidden",
+        ...(state.isFocused ? ["ring-blue-500! border-blue-500!"] : []),
+      ]),
   };
 
   return (
@@ -48,7 +49,7 @@ export function FilterableSelect<ValueType extends string, IsNullable extends bo
       classNames={classNamesConfig}
       options={options}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onChange={(option: OptionType | null) => onChange(option?.value ?? null as any)}
+      onChange={(option: OptionType | null) => onChange(option?.value ?? (null as any))}
       value={selectedOption}
       placeholder={placeholder ?? "選択"}
       isClearable={clearable}

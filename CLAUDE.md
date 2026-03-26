@@ -25,6 +25,8 @@ pnpm lint            # Run ESLint
 pnpm lint:fix        # Run ESLint with auto-fix
 pnpm test                # Run all tests
 pnpm test:watch      # Run tests in watch mode
+pnpm format          # Format code with oxfmt
+pnpm format:check    # Check formatting without modifying
 
 # Data Generation
 pnpm generate-master-data      # Convert CSV to TSV format
@@ -34,6 +36,7 @@ pnpm generate-master-versions  # Generate version list from raw data
 ## Architecture Overview
 
 ### Data Flow
+
 1. Raw CSV files in Shift_JIS encoding are stored in `raw-master-data/s/`
 2. `generate-master-data.ts` converts them to UTF-8 TSV files in `public/master-data/s/`
 3. The app loads TSV data on-demand based on version selection
@@ -47,23 +50,9 @@ pnpm generate-master-versions  # Generate version list from raw data
 - **Styling**: Tailwind CSS v4 with PostCSS
 - **Path Aliases**: `@/` maps to `src/` directory
 
-### Core Components Structure
-
-- `src/app/`: Next.js app router pages and layouts
-- `src/components/`: Reusable UI components (buttons, modals, tables, etc.)
-- `src/features/`: Domain-specific features
-  - `advanced-search/`: Complex search functionality
-  - `display-fields/`: Configurable field display
-  - `exports/`: Data export functionality
-  - `search/`: Search parsing and filtering logic
-  - `shinryoukoui-master-fields/`: Master data field definitions
-- `src/contexts/`: React contexts for global state
-- `src/hooks/`: Custom React hooks
-- `src/apis/`: Data fetching functions
-
 ### Important Code Conventions
 
-- **ESLint Rules**: 
+- **ESLint Rules**:
   - Semicolons required
   - 2-space indentation
   - Double quotes for strings
@@ -75,15 +64,11 @@ pnpm generate-master-versions  # Generate version list from raw data
 ### Master Data Versions
 
 The app supports multiple versions of master data. Version management is handled through:
+
 - `shinryoukoui-master-versions.json`: Auto-generated list of available versions
 - Layout versions in `layouts.ts` define field structure changes over time
 - Version selection persists via URL search params
 
 ### Testing
 
-Tests use Jest with ts-jest for TypeScript support. Test files follow the pattern `*.test.ts`.
-
-```bash
-pnpm test                    # Run all tests
-pnpm test:watch         # Run tests in watch mode
-```
+Tests use Node.js built-in test runner (`node:test`) with `tsx`. Test files follow the pattern `*.test.ts`.

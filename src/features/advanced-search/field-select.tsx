@@ -6,11 +6,7 @@ import { MasterId } from "@/master-types";
 
 type Props<IsNullable extends boolean> = {
   value: IsNullable extends true ? string | null : string;
-  onChange: (
-    value: IsNullable extends true
-      ? string | null
-      : string,
-  ) => void;
+  onChange: (value: IsNullable extends true ? string | null : string) => void;
   placeholder?: string;
   className?: string;
   isNullable?: IsNullable;
@@ -18,10 +14,7 @@ type Props<IsNullable extends boolean> = {
   layoutVersion: string;
 };
 
-const optionsCache = new Map<
-  string,
-  { value: string; label: string }[]
->();
+const optionsCache = new Map<string, { value: string; label: string }[]>();
 
 function getOptions(masterId: MasterId, layoutVersion: string) {
   const cacheKey = `${masterId}:${layoutVersion}`;

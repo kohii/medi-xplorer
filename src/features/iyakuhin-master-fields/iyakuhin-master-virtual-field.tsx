@@ -99,8 +99,6 @@ export const iyakuhinMasterVirtualFields = {
 
 export type IyakuhinMasterVirtualFieldId = keyof typeof iyakuhinMasterVirtualFields;
 
-export function getIyakuhinMasterVirtualField(
-  id: IyakuhinMasterVirtualFieldId,
-): VirtualField {
+export function getIyakuhinMasterVirtualField(id: IyakuhinMasterVirtualFieldId): VirtualField {
   return iyakuhinMasterVirtualFields[id];
 }

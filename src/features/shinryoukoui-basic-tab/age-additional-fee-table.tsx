@@ -13,19 +13,24 @@ const columns: SimpleTableColumn<{
   code: string;
   name: string;
   point: string;
-}>[] = [{
-  name: "対象年齢",
-  render: (row) => row.age,
-}, {
-  name: "診療行為コード",
-  render: (row) => row.code,
-}, {
-  name: "名称",
-  render: (row) => row.name,
-}, {
-  name: "点数",
-  render: (row) => row.point,
-}];
+}>[] = [
+  {
+    name: "対象年齢",
+    render: (row) => row.age,
+  },
+  {
+    name: "診療行為コード",
+    render: (row) => row.code,
+  },
+  {
+    name: "名称",
+    render: (row) => row.name,
+  },
+  {
+    name: "点数",
+    render: (row) => row.point,
+  },
+];
 
 type AgeAdditionalFeeTableProps = {
   data: {
@@ -33,30 +38,23 @@ type AgeAdditionalFeeTableProps = {
     code: string;
   }[];
   originalRows: string[][];
-}
+};
 
-export function AgeAdditionalFeeTable({
-  data,
-  originalRows,
-}: AgeAdditionalFeeTableProps) {
+export function AgeAdditionalFeeTable({ data, originalRows }: AgeAdditionalFeeTableProps) {
   const { selectByCode } = useSelectShinryoukoui();
 
   const rows = useMemo(() => {
-    return data.map(item => {
-      const row = originalRows.find((row) => getValue(row, getField("診療行為コード")) === item.code);
-      return ({
+    return data.map((item) => {
+      const row = originalRows.find(
+        (row) => getValue(row, getField("診療行為コード")) === item.code,
+      );
+      return {
         ...item,
         name: getValue(row!, getField("診療行為省略名称/省略漢字名称")),
         point: shinryoukouiMasterVirtualFields.point.value(row!),
-      });
+      };
     });
   }, [data, originalRows]);
 
-  return (
-    <SimpleTable
-      data={rows}
-      columns={columns}
-      onRowClick={(row) => selectByCode(row.code)}
-    />
-  );
+  return <SimpleTable data={rows} columns={columns} onRowClick={(row) => selectByCode(row.code)} />;
 }

@@ -4,11 +4,12 @@ import { useCallback } from "react";
 import { DEFAULT_MASTER_ID, MASTER_IDS, MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
-export type SearchParamNames = typeof SEARCH_PARAM_NAMES["SEARCH"][keyof typeof SEARCH_PARAM_NAMES["SEARCH"]];
+export type SearchParamNames =
+  (typeof SEARCH_PARAM_NAMES)["SEARCH"][keyof (typeof SEARCH_PARAM_NAMES)["SEARCH"]];
 
 type Options = {
-  preserveExtraSearchParams: boolean
-}
+  preserveExtraSearchParams: boolean;
+};
 
 export function useMasterSearch({
   preserveExtraSearchParams,
@@ -16,49 +17,53 @@ export function useMasterSearch({
 }: Options & { masterId: MasterId }) {
   const { push } = useRouter();
 
-  return useCallback((params: {
-    [key in SearchParamNames]?: string | undefined
-  }) => {
-    const currentSearchParams = new URLSearchParams(window.location.search);
-    const searchParams = new URLSearchParams();
+  return useCallback(
+    (params: {
+      [key in SearchParamNames]?: string | undefined;
+    }) => {
+      const currentSearchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams();
 
-    const searchParamNames =  Object.values(SEARCH_PARAM_NAMES.SEARCH);
-    currentSearchParams.forEach((value, key) => {
-      if (preserveExtraSearchParams || searchParamNames.includes(key as SearchParamNames)) {
-        searchParams.set(key, value);
-      }
-    });
+      const searchParamNames = Object.values(SEARCH_PARAM_NAMES.SEARCH);
+      currentSearchParams.forEach((value, key) => {
+        if (preserveExtraSearchParams || searchParamNames.includes(key as SearchParamNames)) {
+          searchParams.set(key, value);
+        }
+      });
 
-    Object.entries(params).forEach(([key, value]) => {
-      if (value) {
-        searchParams.set(key, value);
+      Object.entries(params).forEach(([key, value]) => {
+        if (value) {
+          searchParams.set(key, value);
+        } else {
+          searchParams.delete(key);
+        }
+      });
+
+      const path = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
+      if (masterId === MASTER_IDS.IYAKUHIN) {
+        searchParams.delete(SEARCH_PARAM_NAMES.SEARCH.MASTER);
       } else {
-        searchParams.delete(key);
+        searchParams.set(SEARCH_PARAM_NAMES.SEARCH.MASTER, masterId);
       }
-    });
-
-    const path = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
-    if (masterId === MASTER_IDS.IYAKUHIN) {
-      searchParams.delete(SEARCH_PARAM_NAMES.SEARCH.MASTER);
-    } else {
-      searchParams.set(SEARCH_PARAM_NAMES.SEARCH.MASTER, masterId);
-    }
-    push(`${path}?${searchParams.toString()}`);
-  }, [masterId, preserveExtraSearchParams, push]);
+      push(`${path}?${searchParams.toString()}`);
+    },
+    [masterId, preserveExtraSearchParams, push],
+  );
 }
 
 export function useMasterSearchByQuery(masterId: MasterId) {
   const search = useMasterSearch({ preserveExtraSearchParams: false, masterId });
-  return useCallback((q: string) => {
-    search({
-      q,
-    });
-  }, [search]);
+  return useCallback(
+    (q: string) => {
+      search({
+        q,
+      });
+    },
+    [search],
+  );
 }
 
-export function useShinryoukouiSearch({
-  preserveExtraSearchParams,
-}: Options) {
+export function useShinryoukouiSearch({ preserveExtraSearchParams }: Options) {
   return useMasterSearch({ preserveExtraSearchParams, masterId: DEFAULT_MASTER_ID });
 }
 

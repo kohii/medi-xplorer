@@ -13,9 +13,7 @@ import { CodeValueOptions } from "./code-value-options";
 import { DisplayFieldConfig } from "./types";
 
 function DeleteButton({ onClick }: { onClick?: () => void }) {
-  return (
-    <IconButton className="p-2" icon={<DeleteIcon />} label="列を削除" onClick={onClick} />
-  );
+  return <IconButton className="p-2" icon={<DeleteIcon />} label="列を削除" onClick={onClick} />;
 }
 
 function Container({
@@ -27,13 +25,15 @@ function Container({
 }: {
   label: ReactNode;
   options?: ReactNode;
-  className?: string
+  className?: string;
   onDelete?: () => void;
   style?: React.CSSProperties;
 }) {
   return (
-    <div className={twMerge("flex gap-2 items-center text-sm font-medium py-1 bg-white", className)}>
-      <div className="cursor-grab"  {...props}>
+    <div
+      className={twMerge("flex gap-2 items-center text-sm font-medium py-1 bg-white", className)}
+    >
+      <div className="cursor-grab" {...props}>
         <DragHandleIcon className="text-gray-400" />
       </div>
       <div className="font-semibold flex-auto">{label}</div>
@@ -54,58 +54,60 @@ export type DisplayFieldItemProps = {
   style?: React.CSSProperties;
 };
 
-export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps>(function DisplayFieldItem({
-  masterId,
-  value,
-  onChange,
-  onDelete,
-  className,
-  style,
-  ...props
-}, ref) {
-  switch (value.kind) {
-    case "normal": {
-      const field = getMasterFieldBySeq(masterId, value.seq)!;
-      return (
-        <div style={style} ref={ref}>
-          <Container
-            {...props}
-            label={`${field.seq}: ${field.name}`}
-            options={field.codes && (<CodeValueOptions
-              value={value.options}
-              onChange={(option) => onChange?.({ ...value, options: option })}
-            />)}
-            onDelete={onDelete}
-            className={className} />
-        </div>
-      );
-    }
-    case "virtual": {
-      const field = getMasterVirtualField(masterId, value.key)!;
-      return (
-        <div style={style} ref={ref}>
-          <Container
-            {...props}
-            label={(
-              <div className="flex items-center gap-1.5">
-                <div title="MediXplorerが独自に定義した項目です。複数の項目を組み合わせて解釈して表示します。">
-                  <SparklesIcon className="text-purple-500" />
+export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps>(
+  function DisplayFieldItem(
+    { masterId, value, onChange, onDelete, className, style, ...props },
+    ref,
+  ) {
+    switch (value.kind) {
+      case "normal": {
+        const field = getMasterFieldBySeq(masterId, value.seq)!;
+        return (
+          <div style={style} ref={ref}>
+            <Container
+              {...props}
+              label={`${field.seq}: ${field.name}`}
+              options={
+                field.codes && (
+                  <CodeValueOptions
+                    value={value.options}
+                    onChange={(option) => onChange?.({ ...value, options: option })}
+                  />
+                )
+              }
+              onDelete={onDelete}
+              className={className}
+            />
+          </div>
+        );
+      }
+      case "virtual": {
+        const field = getMasterVirtualField(masterId, value.key)!;
+        return (
+          <div style={style} ref={ref}>
+            <Container
+              {...props}
+              label={
+                <div className="flex items-center gap-1.5">
+                  <div title="MediXplorerが独自に定義した項目です。複数の項目を組み合わせて解釈して表示します。">
+                    <SparklesIcon className="text-purple-500" />
+                  </div>
+                  {field.name}
                 </div>
-                {field.name}
-              </div>
-            )}
-            onDelete={onDelete}
-            className={className}
-          />
-        </div>
-      );
+              }
+              onDelete={onDelete}
+              className={className}
+            />
+          </div>
+        );
+      }
+      case "unknown": {
+        return (
+          <div style={style} ref={ref}>
+            <Container {...props} label="(不明)" onDelete={onDelete} className={className} />
+          </div>
+        );
+      }
     }
-    case "unknown": {
-      return (
-        <div style={style} ref={ref}>
-          <Container {...props} label="(不明)" onDelete={onDelete} className={className} />
-        </div>
-      );
-    }
-  }
-});
+  },
+);

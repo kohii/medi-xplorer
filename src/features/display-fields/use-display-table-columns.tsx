@@ -67,11 +67,7 @@ export function useDisplayTableColumns(
                       displayValue = value;
                       break;
                   }
-                  return (
-                    <ColorChip color={getNthColorChipColor(+value)}>
-                      {displayValue}
-                    </ColorChip>
-                  );
+                  return <ColorChip color={getNthColorChipColor(+value)}>{displayValue}</ColorChip>;
                 }
               : undefined,
             width: field.columnWidth === "auto" ? undefined : (field.columnWidth ?? 128),

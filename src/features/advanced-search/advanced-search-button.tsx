@@ -13,7 +13,11 @@ type AdvancedSearchButtonProps = {
   layoutVersion: string;
 };
 
-export function AdvancedSearchButton({ initialQuery, masterId, layoutVersion }: AdvancedSearchButtonProps) {
+export function AdvancedSearchButton({
+  initialQuery,
+  masterId,
+  layoutVersion,
+}: AdvancedSearchButtonProps) {
   const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
 
   const open = () => {

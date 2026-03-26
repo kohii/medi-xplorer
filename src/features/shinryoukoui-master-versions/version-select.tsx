@@ -1,7 +1,10 @@
 import React from "react";
 
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
-import { LATEST_SHINRYOUKOUI_MASTER_VERSION, SHINRYOUKOUI_MASTER_VERSION_LIST } from "@/features/shinryoukoui-master-versions/constants";
+import {
+  LATEST_SHINRYOUKOUI_MASTER_VERSION,
+  SHINRYOUKOUI_MASTER_VERSION_LIST,
+} from "@/features/shinryoukoui-master-versions/constants";
 
 export const VersionSelect = React.memo(function VersionSelect() {
   const { version, setVersion } = useShinryoukouiMasterData();

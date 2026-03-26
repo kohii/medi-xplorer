@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 type MenuItemProps = {
   children?: React.ReactNode;
   onClick?: () => void;
-}
+};
 
 export function MenuItem({ children, onClick }: MenuItemProps) {
   return (
@@ -25,13 +25,7 @@ type MenuProps = {
   anchorOrigin?: "left" | "right";
 };
 
-export function Menu({
-  anchorEl,
-  open,
-  onClose,
-  children,
-  anchorOrigin = "left"
-}: MenuProps) {
+export function Menu({ anchorEl, open, onClose, children, anchorOrigin = "left" }: MenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (open) {
@@ -78,6 +72,6 @@ export function Menu({
       >
         {children}
       </div>
-    </div >
+    </div>
   );
 }

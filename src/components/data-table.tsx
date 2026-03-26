@@ -12,7 +12,6 @@ import { twMerge } from "tailwind-merge";
 
 import { BreakLine } from "@/components/break-line";
 
-
 export type DataTableColumn = {
   id: string;
   name: string;
@@ -36,18 +35,15 @@ export const DataTable = React.memo(function DataTable({
   onRowClick,
   isSelected,
 }: DataTableProps) {
-  const columnDefs = React.useMemo<ColumnDef<string[]>[]>(
-    () => {
-      return columns.map((col) => ({
-        id: col.id,
-        accessorFn: row => col.value(row),
-        cell: (info) => col.styledValue?.(info.row.original) ?? col.value(info.row.original),
-        header: () => <BreakLine value={col.name.replace("/", "/\n")} />,
-        size: col.width,
-      }));
-    },
-    [columns]
-  );
+  const columnDefs = React.useMemo<ColumnDef<string[]>[]>(() => {
+    return columns.map((col) => ({
+      id: col.id,
+      accessorFn: (row) => col.value(row),
+      cell: (info) => col.styledValue?.(info.row.original) ?? col.value(info.row.original),
+      header: () => <BreakLine value={col.name.replace("/", "/\n")} />,
+      size: col.width,
+    }));
+  }, [columns]);
 
   const table = useReactTable({
     data,
@@ -72,26 +68,30 @@ export const DataTable = React.memo(function DataTable({
   const totalSize = rowVirtualizer.getTotalSize();
   const virtualRows = rowVirtualizer.getVirtualItems();
 
-  const paddingTop = virtualRows.length > 0 ? virtualRows[0]?.start ?? 0 : 0;
+  const paddingTop = virtualRows.length > 0 ? (virtualRows[0]?.start ?? 0) : 0;
   const paddingBottom =
-    virtualRows.length > 0 ?
-      totalSize - (virtualRows[virtualRows.length - 1]?.end ?? 0) :
-      0;
+    virtualRows.length > 0 ? totalSize - (virtualRows[virtualRows.length - 1]?.end ?? 0) : 0;
 
-  const minTableWidth = useMemo(() => columnDefs.reduce((acc, col) => acc + (col.size ?? 128), 0), [columnDefs]);
+  const minTableWidth = useMemo(
+    () => columnDefs.reduce((acc, col) => acc + (col.size ?? 128), 0),
+    [columnDefs],
+  );
 
   return (
-    <div ref={tableContainerRef}
+    <div
+      ref={tableContainerRef}
       className="overflow-auto"
       style={{
         height,
-      }}>
+      }}
+    >
       <table
         className="border-collapse border-spacing-0 table-fixed w-full text-sm leading-[1.1rem]"
         style={{
           minWidth: minTableWidth,
-        }}>
-        <thead className='sticky top-0 m-0 bg-white'>
+        }}
+      >
+        <thead className="sticky top-0 m-0 bg-white">
           {table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header, headerIndex) => {
@@ -106,16 +106,11 @@ export const DataTable = React.memo(function DataTable({
                     {header.isPlaceholder ? null : (
                       <div
                         {...{
-                          className: header.column.getCanSort()
-                            ? "cursor-pointer select-none"
-                            : "",
+                          className: header.column.getCanSort() ? "cursor-pointer select-none" : "",
                           onClick: header.column.getToggleSortingHandler(),
                         }}
                       >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        {flexRender(header.column.columnDef.header, header.getContext())}
                         {{
                           asc: " 🔼",
                           desc: " 🔽",
@@ -134,26 +129,29 @@ export const DataTable = React.memo(function DataTable({
               <td style={{ height: `${paddingTop}px` }} />
             </tr>
           )}
-          {virtualRows.map(virtualRow => {
+          {virtualRows.map((virtualRow) => {
             const row = rows[virtualRow.index] as Row<string[]>;
             return (
               <tr
                 key={row.id}
                 onClick={() => onRowClick?.(rows[virtualRow.index].original)}
-                className={twMerge("cursor-pointer hover:bg-slate-50", isSelected?.(rows[virtualRow.index].original) ? "bg-blue-100 hover:bg-slate-200" : "")}
+                className={twMerge(
+                  "cursor-pointer hover:bg-slate-50",
+                  isSelected?.(rows[virtualRow.index].original)
+                    ? "bg-blue-100 hover:bg-slate-200"
+                    : "",
+                )}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => {
                   return (
-                    <td key={cell.id}
+                    <td
+                      key={cell.id}
                       className={twMerge(
                         "p-1 px-1.5 h-10 text-ellipsis overflow-hidden text-nowrap hover:overflow-visible hover:text-clip hover:break-all",
-                        cellIndex === 0 ? "pl-2 rounded-l" : ""
+                        cellIndex === 0 ? "pl-2 rounded-l" : "",
                       )}
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   );
                 })}

@@ -11,7 +11,7 @@ export type CheckboxProps = {
 export function Checkbox({ value, label, onChange, className }: CheckboxProps) {
   const id = useId();
   return (
-    <div className={twMerge("block flex items-center gap-1.5 py-1", className)} >
+    <div className={twMerge("block flex items-center gap-1.5 py-1", className)}>
       <input
         className="inline-block"
         type="checkbox"
@@ -19,13 +19,11 @@ export function Checkbox({ value, label, onChange, className }: CheckboxProps) {
         onChange={(e) => onChange(e.target.checked)}
         id={id}
       />
-      {!!label && (<label
-        className="inline-block pl-[0.15rem] hover:cursor-pointer text-sm"
-        htmlFor={id}
-      >
-        {label}
-      </label>)}
-    </ div >
-
+      {!!label && (
+        <label className="inline-block pl-[0.15rem] hover:cursor-pointer text-sm" htmlFor={id}>
+          {label}
+        </label>
+      )}
+    </div>
   );
 }

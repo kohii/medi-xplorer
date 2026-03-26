@@ -5,9 +5,9 @@ import { getValue } from "./get-values";
 import { Field } from "./types";
 
 type FieldValueProps = {
-	field: Field;
-	row: string[];
-	raw?: boolean;
+  field: Field;
+  row: string[];
+  raw?: boolean;
 };
 
 export function FieldValue({ field, row, raw }: FieldValueProps) {
@@ -21,10 +21,7 @@ export function FieldValue({ field, row, raw }: FieldValueProps) {
     if (label) {
       return (
         <>
-          {value}{" "}
-          <span className="text-gray-400">
-						: {label}
-          </span>
+          {value} <span className="text-gray-400">: {label}</span>
         </>
       );
     }

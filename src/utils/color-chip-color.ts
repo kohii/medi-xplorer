@@ -15,7 +15,7 @@ const COLOR_CHIP_COLORS = [
   "amber",
 ] as const;
 
-export type ColorChipColor = typeof COLOR_CHIP_COLORS[number];
+export type ColorChipColor = (typeof COLOR_CHIP_COLORS)[number];
 
 export function getNthColorChipColor(n: number) {
   return COLOR_CHIP_COLORS[n % COLOR_CHIP_COLORS.length];

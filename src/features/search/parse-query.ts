@@ -1,8 +1,14 @@
 import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 import { splitByWhitespace } from "@/utils/text";
 
-import { getFieldBySeq as getIyakuhinFieldBySeq, getFieldOrUndefined as getIyakuhinFieldOrUndefined } from "../iyakuhin-master-fields/iyakuhin-master-fields";
-import { getFieldBySeq as getShinryoukouiFieldBySeq, getFieldOrUndefined as getShinryoukouiFieldOrUndefined } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import {
+  getFieldBySeq as getIyakuhinFieldBySeq,
+  getFieldOrUndefined as getIyakuhinFieldOrUndefined,
+} from "../iyakuhin-master-fields/iyakuhin-master-fields";
+import {
+  getFieldBySeq as getShinryoukouiFieldBySeq,
+  getFieldOrUndefined as getShinryoukouiFieldOrUndefined,
+} from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { FilterExpression, FilterExpressionText, Operator, ParseResult } from "./types";
 

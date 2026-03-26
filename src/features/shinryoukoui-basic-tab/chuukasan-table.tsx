@@ -10,7 +10,6 @@ import { shinryoukouiMasterVirtualFields } from "../shinryoukoui-master-fields/s
 import { KokujiShikibetsu1Chip } from "./kokuji-shikibetsu1-chip";
 import { useSelectShinryoukoui } from "./use-select-shinryoukoui";
 
-
 export type ChuukasanTableProps = {
   rows: string[][];
   chuukasanCode: string;
@@ -21,40 +20,46 @@ const chuukasanCodeField = getField("注加算/注加算コード");
 const chuukasanSeqField = getField("注加算/注加算通番");
 const kokujiShikibetsuField = getField("告示等識別区分（１）");
 
-const columns: SimpleTableColumn<string[]>[] = [{
-  name: "診療行為コード",
-  render: (row) => {
-    const code = getValue(row, getField("診療行為コード"));
-    return (
-      <Link href={`/s?code=${code}`} >
-        {code}
-      </Link>
-    );
+const columns: SimpleTableColumn<string[]>[] = [
+  {
+    name: "診療行為コード",
+    render: (row) => {
+      const code = getValue(row, getField("診療行為コード"));
+      return <Link href={`/s?code=${code}`}>{code}</Link>;
+    },
   },
-}, {
-  name: "名称",
-  render: (row) => {
-    const code = getValue(row, getField("診療行為コード"));
-    return (
-      <Link href={`/s?code=${code}`} >
-        {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
-      </Link>
-    );
+  {
+    name: "名称",
+    render: (row) => {
+      const code = getValue(row, getField("診療行為コード"));
+      return (
+        <Link href={`/s?code=${code}`}>
+          {getValue(row, getField("診療行為省略名称/省略漢字名称"))}
+        </Link>
+      );
+    },
   },
-}, {
-  name: "注加算通番",
-  render: (row) => getValue(row, chuukasanSeqField),
-}, {
-  name: "告示等識別区分",
-  render: (row) => <KokujiShikibetsu1Chip row={row} />
-}, {
-  name: "点数",
-  render: (row) => shinryoukouiMasterVirtualFields.point.value(row),
-}];
+  {
+    name: "注加算通番",
+    render: (row) => getValue(row, chuukasanSeqField),
+  },
+  {
+    name: "告示等識別区分",
+    render: (row) => <KokujiShikibetsu1Chip row={row} />,
+  },
+  {
+    name: "点数",
+    render: (row) => shinryoukouiMasterVirtualFields.point.value(row),
+  },
+];
 
-export function ChuukasanTable({ rows, chuukasanCode, shinryoukouiCodeToHighlight }: ChuukasanTableProps) {
+export function ChuukasanTable({
+  rows,
+  chuukasanCode,
+  shinryoukouiCodeToHighlight,
+}: ChuukasanTableProps) {
   const matchedRows = useMemo(() => {
-    const filtered = rows.filter(row => {
+    const filtered = rows.filter((row) => {
       return getValue(row, chuukasanCodeField) === chuukasanCode;
     });
     filtered.sort((a, b) => {

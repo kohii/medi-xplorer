@@ -20,7 +20,12 @@ export type AdvancedSearchFormProps = {
   layoutVersion: string;
 };
 
-export function AdvancedSearchForm({ value, onChange, masterId, layoutVersion }: AdvancedSearchFormProps) {
+export function AdvancedSearchForm({
+  value,
+  onChange,
+  masterId,
+  layoutVersion,
+}: AdvancedSearchFormProps) {
   const onSelect = (field: string | null) => {
     if (!field) return;
     onChange({

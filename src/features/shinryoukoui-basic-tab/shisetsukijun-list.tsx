@@ -15,7 +15,7 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
     return <div className="p-4">Loading...</div>;
   }
 
-  const hasOr = codeGroups.some(codes => codes.length > 1);
+  const hasOr = codeGroups.some((codes) => codes.length > 1);
   const hasAnd = codeGroups.length > 1;
   const codeLength = codeGroups.reduce((acc, codes) => acc + codes.length, 0);
 
@@ -25,18 +25,10 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
       <table className="text-sm border border-slate-200 w-auto min-w-[50%]">
         <thead>
           <tr className="bg-slate-100">
-            <th className="text-left font-medium px-2 py-1 w-32" >
-              施設基準コード
-            </th>
-            <th className="text-left font-medium px-2 py-1" >
-              施設基準
-            </th>
-            {hasOr && (
-              <th className="w-11" />
-            )}
-            {hasAnd && (
-              <th className="w-11" />
-            )}
+            <th className="text-left font-medium px-2 py-1 w-32">施設基準コード</th>
+            <th className="text-left font-medium px-2 py-1">施設基準</th>
+            {hasOr && <th className="w-11" />}
+            {hasAnd && <th className="w-11" />}
           </tr>
         </thead>
         <tbody>
@@ -44,17 +36,18 @@ export function ShisetsukijunList({ row }: { row: string[] }) {
             return codesInGroup.map((code, index) => {
               return (
                 <tr key={code} className="[&>td]:border-t">
-                  <td className="px-2 py-1" >
-                    {code}
-                  </td>
-                  <td className="px-2 py-1">
-                    {getLabelByCode(code)}
-                  </td>
-                  {hasOr && index === 0 && (
-                    codesInGroup.length > 1 ?
-                      <td className="px-1 py-1 border-l text-center" rowSpan={codesInGroup.length}> OR </td> :
+                  <td className="px-2 py-1">{code}</td>
+                  <td className="px-2 py-1">{getLabelByCode(code)}</td>
+                  {hasOr &&
+                    index === 0 &&
+                    (codesInGroup.length > 1 ? (
+                      <td className="px-1 py-1 border-l text-center" rowSpan={codesInGroup.length}>
+                        {" "}
+                        OR{" "}
+                      </td>
+                    ) : (
                       <td className="px-1 py-1" />
-                  )}
+                    ))}
                   {hasAnd && groupIndex === 0 && index === 0 && (
                     <td className="px-1 py-1 border-l text-center" rowSpan={codeLength}>
                       AND

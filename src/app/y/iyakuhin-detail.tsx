@@ -59,9 +59,7 @@ export function IyakuhinDetail({ row, layoutVersion }: IyakuhinDetailProps) {
         <VSplitItem pos={2} overflow="auto">
           <div className="p-4">
             {selectedTab === "basic" && <IyakuhinBasicTab row={row} />}
-            {selectedTab === "raw" && (
-              <IyakuhinRawTab row={row} layoutVersion={layoutVersion} />
-            )}
+            {selectedTab === "raw" && <IyakuhinRawTab row={row} layoutVersion={layoutVersion} />}
           </div>
         </VSplitItem>
       </VSplit>

@@ -9,7 +9,10 @@ import {
   IYAKUHIN_MASTER_VERSION_KEYS,
   LATEST_IYAKUHIN_MASTER_VERSION,
 } from "@/features/iyakuhin-master-versions/constants";
-import { getIyakuhinLayoutVersion, IyakuhinMasterLayoutVersion } from "@/features/iyakuhin-master-versions/layouts";
+import {
+  getIyakuhinLayoutVersion,
+  IyakuhinMasterLayoutVersion,
+} from "@/features/iyakuhin-master-versions/layouts";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 

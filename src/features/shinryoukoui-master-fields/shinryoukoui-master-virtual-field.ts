@@ -4,11 +4,14 @@ import { VirtualField } from "@/features/fields/virtual-field";
 import { getField } from "./shinryoukoui-master-fields";
 import { formatPoint, getAgeRangeLabel, getKubunBangouColor } from "./shinryoukoui-master-utils";
 
-
 const fields = {
   "コード表用番号（アルファベット部）": getField("コード表用番号（アルファベット部）"),
-  "コード表用番号（アルファベット部を除く）/区分番号": getField("コード表用番号（アルファベット部を除く）/区分番号"),
-  "コード表用番号（アルファベット部を除く）/枝番": getField("コード表用番号（アルファベット部を除く）/枝番"),
+  "コード表用番号（アルファベット部を除く）/区分番号": getField(
+    "コード表用番号（アルファベット部を除く）/区分番号",
+  ),
+  "コード表用番号（アルファベット部を除く）/枝番": getField(
+    "コード表用番号（アルファベット部を除く）/枝番",
+  ),
 } as const;
 
 export const shinryoukouiMasterVirtualFields = {
@@ -70,11 +73,13 @@ export const shinryoukouiMasterVirtualFields = {
 
       return `${count} (超えた場合、${error})`;
     },
-  }
+  },
 } satisfies Record<string, VirtualField>;
 
 export type ShinryoukouiMasterVirtualFieldId = keyof typeof shinryoukouiMasterVirtualFields;
 
-export function getShinryoukouiMasterVirtualField(id: ShinryoukouiMasterVirtualFieldId): VirtualField {
+export function getShinryoukouiMasterVirtualField(
+  id: ShinryoukouiMasterVirtualFieldId,
+): VirtualField {
   return shinryoukouiMasterVirtualFields[id];
 }

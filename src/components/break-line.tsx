@@ -1,7 +1,7 @@
 import React from "react";
 
 type BreakLineProps = {
-	value: string;
+  value: string;
 };
 
 export function BreakLine({ value }: BreakLineProps) {

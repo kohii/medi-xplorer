@@ -22,12 +22,7 @@ type ExportDataModalProps = {
   onClose: () => void;
 };
 
-export function ExportDataModal({
-  masterId,
-  rows,
-  displayFields,
-  onClose,
-}: ExportDataModalProps) {
+export function ExportDataModal({ masterId, rows, displayFields, onClose }: ExportDataModalProps) {
   const [exportOptions, setExportOptions] = useState<ExportOptions>({
     delimiter: "\t",
     includeHeader: true,
@@ -56,7 +51,7 @@ export function ExportDataModal({
       onClose={onClose}
       onKeyDown={handleKeyDown}
       size="md"
-      footer={(
+      footer={
         <div className="flex gap-4">
           <Button onClick={download}>ダウンロード</Button>
           <Button
@@ -75,7 +70,7 @@ export function ExportDataModal({
             )}
           </Button>
         </div>
-      )}
+      }
     >
       <div
         className="grid gap-3"

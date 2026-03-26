@@ -18,12 +18,15 @@ export function useDebouncedCallback(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
-  return useCallback((...args: unknown[]) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(() => {
-      callbackRef.current(...args);
-    }, wait);
-  }, [wait]);
+  return useCallback(
+    (...args: unknown[]) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => {
+        callbackRef.current(...args);
+      }, wait);
+    },
+    [wait],
+  );
 }

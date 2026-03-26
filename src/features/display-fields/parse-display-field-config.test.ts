@@ -13,48 +13,58 @@ describe("parseDisplayFieldConfigs", () => {
 
   test("normal column", () => {
     const result = parseDisplayFieldConfigs("1", MASTER_IDS.SHINRYOUKOUI);
-    assert.deepEqual(result, [{
-      kind: "normal",
-      seq: 1
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "normal",
+        seq: 1,
+      },
+    ]);
   });
 
   test("normal column with label", () => {
     const result = parseDisplayFieldConfigs("1-l", MASTER_IDS.SHINRYOUKOUI);
-    assert.deepEqual(result, [{
-      kind: "normal",
-      seq: 1,
-      options: {
-        variant: "label"
-      }
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "normal",
+        seq: 1,
+        options: {
+          variant: "label",
+        },
+      },
+    ]);
   });
 
   test("normal column with code", () => {
     const result = parseDisplayFieldConfigs("1-c", MASTER_IDS.SHINRYOUKOUI);
-    assert.deepEqual(result, [{
-      kind: "normal",
-      seq: 1,
-      options: {
-        variant: "code"
-      }
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "normal",
+        seq: 1,
+        options: {
+          variant: "code",
+        },
+      },
+    ]);
   });
 
   test("virtual column", () => {
     const result = parseDisplayFieldConfigs("kubunNo", MASTER_IDS.SHINRYOUKOUI);
-    assert.deepEqual(result, [{
-      kind: "virtual",
-      key: "kubunNo"
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "virtual",
+        key: "kubunNo",
+      },
+    ]);
   });
 
   test("unknown column", () => {
     const result = parseDisplayFieldConfigs("foo", MASTER_IDS.SHINRYOUKOUI);
-    assert.deepEqual(result, [{
-      kind: "unknown",
-      key: "foo"
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "unknown",
+        key: "foo",
+      },
+    ]);
   });
 
   test("multiple fields", () => {
@@ -62,24 +72,26 @@ describe("parseDisplayFieldConfigs", () => {
     assert.deepEqual(result, [
       {
         kind: "normal",
-        seq: 1
+        seq: 1,
       },
       {
         kind: "normal",
-        seq: 2
+        seq: 2,
       },
       {
         kind: "virtual",
-        key: "kubunNo"
-      }
+        key: "kubunNo",
+      },
     ]);
   });
 
   test("iyakuhin virtual column", () => {
     const result = parseDisplayFieldConfigs("yakka", MASTER_IDS.IYAKUHIN);
-    assert.deepEqual(result, [{
-      kind: "virtual",
-      key: "yakka",
-    }]);
+    assert.deepEqual(result, [
+      {
+        kind: "virtual",
+        key: "yakka",
+      },
+    ]);
   });
 });

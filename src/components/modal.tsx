@@ -12,14 +12,7 @@ type ModalProps = {
   onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
-export function Modal({
-  title,
-  children,
-  footer,
-  size = "md",
-  onClose,
-  onKeyDown,
-}: ModalProps) {
+export function Modal({ title, children, footer, size = "md", onClose, onKeyDown }: ModalProps) {
   return (
     <div
       tabIndex={-1}
@@ -28,26 +21,22 @@ export function Modal({
       onKeyDown={onKeyDown}
     >
       <div className="fixed inset-0 bg-gray-950 opacity-40" onClick={onClose} />
-      <div className={twMerge(
-        "relative p-4 w-full max-h-full mx-auto",
-        size === "sm" && "max-w-[640px]",
-        size === "md" && "max-w-[768px]",
-        size === "lg" && "max-w-[832px]",
-        size === "xl" && "max-w-[1080px]",
-      )}>
+      <div
+        className={twMerge(
+          "relative p-4 w-full max-h-full mx-auto",
+          size === "sm" && "max-w-[640px]",
+          size === "md" && "max-w-[768px]",
+          size === "lg" && "max-w-[832px]",
+          size === "xl" && "max-w-[1080px]",
+        )}
+      >
         <div className="relative bg-white rounded-lg shadow-sm">
           <div className="flex items-center justify-between px-4 py-3 border-b rounded-t">
-            <h3 className="text-xl font-medium text-gray-900">
-              {title}
-            </h3>
+            <h3 className="text-xl font-medium text-gray-900">{title}</h3>
             <IconButton onClick={onClose} icon={<CloseIcon className="h-6 w-6" />} label="Close" />
           </div>
-          <div className="p-4 space-y-4">
-            {children}
-          </div>
-          <div className="flex items-center p-4 border-t border-gray-200 rounded-b">
-            {footer}
-          </div>
+          <div className="p-4 space-y-4">{children}</div>
+          <div className="flex items-center p-4 border-t border-gray-200 rounded-b">{footer}</div>
         </div>
       </div>
     </div>

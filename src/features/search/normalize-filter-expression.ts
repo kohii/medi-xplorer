@@ -1,9 +1,22 @@
 import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
-import { isNumeric, toHalfWidthKatakana, toKatakana, toHalfWidth, toFullWidth, isHalfWidth } from "@/utils/text";
+import {
+  isNumeric,
+  toHalfWidthKatakana,
+  toKatakana,
+  toHalfWidth,
+  toFullWidth,
+  isHalfWidth,
+} from "@/utils/text";
 
 import { Field } from "../fields/types";
-import { getFieldBySeq as getIyakuhinFieldBySeq, getField as getIyakuhinField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
-import { getFieldBySeq as getShinryoukouiFieldBySeq, getField as getShinryoukouiField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import {
+  getFieldBySeq as getIyakuhinFieldBySeq,
+  getField as getIyakuhinField,
+} from "../iyakuhin-master-fields/iyakuhin-master-fields";
+import {
+  getFieldBySeq as getShinryoukouiFieldBySeq,
+  getField as getShinryoukouiField,
+} from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { FieldFilterItem, KeywordFilterItem, FilterExpression, ParseResult } from "./types";
 
@@ -11,13 +24,13 @@ type NormalizedFieldFilterItem = FieldFilterItem & {
   field: Field;
   listValue: string[];
   numValue: number | null;
-}
+};
 
 export type NormalizedKeywordFilterItem = KeywordFilterItem & {
   fullWidthValue: string;
   kanaValue: string | null;
   codeValue: string | null;
-}
+};
 
 export type NormalizedFilterItem = NormalizedFieldFilterItem | NormalizedKeywordFilterItem;
 
@@ -46,7 +59,8 @@ export function normalizeFilterExpression(
     } else {
       const halfWidthValue = toHalfWidth(item.value);
       const kanaValue = toHalfWidthKatakana(toKatakana(halfWidthValue)).toUpperCase();
-      const codeValue = halfWidthValue.length === 9 && isNumeric(halfWidthValue) ? halfWidthValue : null;
+      const codeValue =
+        halfWidthValue.length === 9 && isNumeric(halfWidthValue) ? halfWidthValue : null;
       result.push({
         // text to search in 省略漢字名称
         fullWidthValue: toFullWidth(item.value),

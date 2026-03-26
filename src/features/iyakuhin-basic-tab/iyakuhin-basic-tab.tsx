@@ -81,26 +81,18 @@ export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
           <span className="text-lg">{kanjiMeisho}</span>
         </div>
         {kihonKanjiMeisho !== kanjiMeisho && (
-          <div className="text-sm my-1 text-slate-500">
-            基本名称: {kihonKanjiMeisho}
-          </div>
+          <div className="text-sm my-1 text-slate-500">基本名称: {kihonKanjiMeisho}</div>
         )}
         {ippanmeiKisai && (
-          <div className="text-sm my-1 text-slate-500">
-            一般名: {ippanmeiKisai}
-          </div>
+          <div className="text-sm my-1 text-slate-500">一般名: {ippanmeiKisai}</div>
         )}
       </section>
 
       <section>
         <SectionHeading>基本情報</SectionHeading>
         <HStack>
-          <LabeledChip label="剤形">
-            {getCodeLabel(row, getField("剤形"), true)}
-          </LabeledChip>
-          <LabeledChip label="単位">
-            {getValue(row, getField("単位漢字名称"))}
-          </LabeledChip>
+          <LabeledChip label="剤形">{getCodeLabel(row, getField("剤形"), true)}</LabeledChip>
+          <LabeledChip label="単位">{getValue(row, getField("単位漢字名称"))}</LabeledChip>
           <LabeledChip label="収載方式等識別">
             {getShortListingLabel(getValue(row, getField("収載方式等識別")))}
           </LabeledChip>
@@ -147,15 +139,11 @@ export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
       <section>
         <SectionHeading>一般名・後発品</SectionHeading>
         <HStack>
-          <LabeledChip label="後発品">
-            {getCodeLabel(row, getField("後発品"), true)}
-          </LabeledChip>
+          <LabeledChip label="後発品">{getCodeLabel(row, getField("後発品"), true)}</LabeledChip>
           <LabeledChip label="一般名処方加算対象区分">
             {getCodeLabel(row, getField("一般名処方加算対象区分"), true)}
           </LabeledChip>
-          <LabeledChip label="一般名コード">
-            {getValue(row, getField("一般名コード"))}
-          </LabeledChip>
+          <LabeledChip label="一般名コード">{getValue(row, getField("一般名コード"))}</LabeledChip>
         </HStack>
       </section>
 
@@ -184,9 +172,11 @@ export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
         <section>
           <SectionHeading>関連医薬品</SectionHeading>
           <SubHeading>対応する統一名収載医薬品</SubHeading>
-          {relatedUnifiedNameRow
-            ? <RelatedIyakuhinTable rows={[relatedUnifiedNameRow]} />
-            : <div className="text-sm text-slate-500">{shouhinmeiTouKanren}</div>}
+          {relatedUnifiedNameRow ? (
+            <RelatedIyakuhinTable rows={[relatedUnifiedNameRow]} />
+          ) : (
+            <div className="text-sm text-slate-500">{shouhinmeiTouKanren}</div>
+          )}
         </section>
       )}
 

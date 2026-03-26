@@ -5,25 +5,24 @@ import { getValue } from "../fields/get-values";
 import { getField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { normalizeUnit } from "../shinryoukoui-master-fields/shinryoukoui-master-utils";
 
-
 type Row = {
   amount: string;
   point: React.ReactNode;
-}
+};
 
 const columns: SimpleTableColumn<Row>[] = [
   {
     name: "数量",
     render(row) {
       return row.amount;
-    }
+    },
   },
   {
     name: "点数",
     render(row) {
       return row.point;
-    }
-  }
+    },
+  },
 ];
 
 export function KizamichiFormula({ row }: { row: string[] }) {
@@ -52,7 +51,10 @@ export function KizamichiFormula({ row }: { row: string[] }) {
     if (基本点数 === きざみ点数 && きざみ値 === 1 && 下限値 === 1) {
       return (
         <>
-          <span>{基本点数}{点数単位}</span>
+          <span>
+            {基本点数}
+            {点数単位}
+          </span>
           <span> × </span>
           <span>数量</span>
         </>
@@ -60,11 +62,19 @@ export function KizamichiFormula({ row }: { row: string[] }) {
     }
     return (
       <>
-        {基本点数 > 0 && <span>{基本点数}{点数単位} + </span>}
+        {基本点数 > 0 && (
+          <span>
+            {基本点数}
+            {点数単位} +{" "}
+          </span>
+        )}
         <span>{下限値 === 0 ? "数量" : `(数量 - ${下限値})`}</span>
         {きざみ値 !== 1 && <span> ÷ {きざみ値} </span>}
         <span> × </span>
-        <span>{きざみ点数}{点数単位}</span>
+        <span>
+          {きざみ点数}
+          {点数単位}
+        </span>
       </>
     );
   };
@@ -84,7 +94,6 @@ export function KizamichiFormula({ row }: { row: string[] }) {
       return `${lower}${数量単位}〜`;
     }
     return `${lower}${数量単位}〜${upper}${数量単位}`;
-
   };
 
   const data: Row[] = [];
@@ -118,21 +127,19 @@ export function KizamichiFormula({ row }: { row: string[] }) {
     if (上下限エラー処理 === "0" || 上下限エラー処理 === "2") {
       data.push({
         amount: createAmountExpression(上限値 + 1, undefined),
-        point: <>{createFormula1()} <span className="text-slate-400">(警告)</span></>,
+        point: (
+          <>
+            {createFormula1()} <span className="text-slate-400">(警告)</span>
+          </>
+        ),
       });
     } else {
       data.push({
         amount: createAmountExpression(上限値 + 1, undefined),
-        point: `${Math.round(基本点数 + Math.ceil(上限値 - 下限値) / きざみ値 * きざみ点数)}${点数単位}`,
+        point: `${Math.round(基本点数 + (Math.ceil(上限値 - 下限値) / きざみ値) * きざみ点数)}${点数単位}`,
       });
     }
   }
 
-  return (
-    <SimpleTable
-      className="w-auto min-w-[50%]"
-      columns={columns}
-      data={data}
-    />
-  );
+  return <SimpleTable className="w-auto min-w-[50%]" columns={columns} data={data} />;
 }

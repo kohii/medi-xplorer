@@ -9,7 +9,7 @@ export default function TermsPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8">利用規約</h1>
-      
+
       <div className="prose max-w-none space-y-6">
         <section>
           <h2 className="text-xl font-semibold mb-4">第1条（適用）</h2>
@@ -32,7 +32,8 @@ export default function TermsPage() {
             1. 本サービスで提供される情報の正確性、完全性、最新性について一切保証いたしません。
           </p>
           <p className="mb-4">
-            2. 本サービスの利用によって生じたいかなる損害についても、開発者は一切の責任を負いません。
+            2.
+            本サービスの利用によって生じたいかなる損害についても、開発者は一切の責任を負いません。
           </p>
           <p className="mb-4">
             3. 本サービスは「現状のまま」で提供され、明示的または黙示的な保証は一切行いません。
@@ -41,14 +42,13 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-xl font-semibold mb-4">第4条（利用者の責任）</h2>
-          <p className="mb-4">
-            1. 本サービスの利用は、利用者自身の責任において行ってください。
-          </p>
+          <p className="mb-4">1. 本サービスの利用は、利用者自身の責任において行ってください。</p>
           <p className="mb-4">
             2. 実際の診療報酬請求等の業務で使用される場合は、必ず公式の資料をご確認ください。
           </p>
           <p className="mb-4">
-            3. 本サービスから得られた情報を元に行った判断・行動については、利用者が全ての責任を負うものとします。
+            3.
+            本サービスから得られた情報を元に行った判断・行動については、利用者が全ての責任を負うものとします。
           </p>
         </section>
 

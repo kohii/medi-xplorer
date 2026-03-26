@@ -1,28 +1,28 @@
 export type FieldKey = string; // name or seq
 
 export type Operator =
-	/** contains (values separated by comma) */
-	":" |
-	/** greater than */
-	":>" |
-	/** less than */
-	":<" |
-	/** greater than or equal */
-	":>=" |
-	/** less than or equal */
-	":<=";
+  /** contains (values separated by comma) */
+  | ":"
+  /** greater than */
+  | ":>"
+  /** less than */
+  | ":<"
+  /** greater than or equal */
+  | ":>="
+  /** less than or equal */
+  | ":<=";
 
 export type FieldFilterItem = {
-	operator: Operator;
-	fieldKey: FieldKey;
-	value: string;
-	negative: boolean;
+  operator: Operator;
+  fieldKey: FieldKey;
+  value: string;
+  negative: boolean;
 };
 
 export type KeywordFilterItem = {
-	operator?: undefined;
-	value: string;
-	negative: boolean;
+  operator?: undefined;
+  value: string;
+  negative: boolean;
 };
 
 export type FilterItem = FieldFilterItem | KeywordFilterItem;
@@ -38,10 +38,12 @@ export type FilterExpression = FilterItem[];
  */
 export type FilterExpressionText = string;
 
-export type ParseResult<T> = {
-	kind: "SUCCESS";
-	value: T;
-} | {
-	kind: "ERROR";
-	message: string;
-};
+export type ParseResult<T> =
+  | {
+      kind: "SUCCESS";
+      value: T;
+    }
+  | {
+      kind: "ERROR";
+      message: string;
+    };

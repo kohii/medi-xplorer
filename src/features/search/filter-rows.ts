@@ -26,7 +26,7 @@ export function filterShinryoukouiRows(
   masterId: MasterId = DEFAULT_MASTER_ID,
 ): string[][] {
   const searchFields = masterId === "y" ? iyakuhinSearchFields : shinryoukouiSearchFields;
-  return rows.filter(row => {
+  return rows.filter((row) => {
     for (const item of expression) {
       const r = filterShinryoukouiRow(row, item, searchFields);
       if (item.negative ? r : !r) {

@@ -42,7 +42,7 @@ export function DisplayFieldsForm({
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   function handleDragStart(event: DragStartEvent) {
@@ -77,17 +77,14 @@ export function DisplayFieldsForm({
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext
-          items={fields}
-          strategy={verticalListSortingStrategy}
-        >
+        <SortableContext items={fields} strategy={verticalListSortingStrategy}>
           {fields.map((field, index) => (
             <SortableDisplayFieldItem
               key={index}
               masterId={masterId}
               id={field.id}
               value={field}
-              onChange={value => {
+              onChange={(value) => {
                 const newFields = [...fields];
                 newFields[index] = { ...value, id: field.id };
                 onChange(newFields);
@@ -103,11 +100,7 @@ export function DisplayFieldsForm({
         </SortableContext>
         <DragOverlay>
           {activeField ? (
-            <DisplayFieldItem
-              masterId={masterId}
-              value={activeField}
-              className="shadow-md"
-            />
+            <DisplayFieldItem masterId={masterId} value={activeField} className="shadow-md" />
           ) : null}
         </DragOverlay>
       </DndContext>
