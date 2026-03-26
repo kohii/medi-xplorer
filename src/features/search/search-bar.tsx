@@ -32,7 +32,7 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
   const action = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
 
   return (
-    <form onSubmit={handleSubmit} action={action}>
+    <form onSubmit={handleSubmit} action={action} autoComplete="off">
       <div className="relative h-10">
         {masterId !== MASTER_IDS.IYAKUHIN && (
           <input type="hidden" name={SEARCH_PARAM_NAMES.SEARCH.MASTER} value={masterId} />
@@ -55,6 +55,6 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
           検索
         </Button>
       </div>
-    </form >
+    </form>
   );
 });

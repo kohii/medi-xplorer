@@ -65,7 +65,7 @@ export function HomeSearchPanel() {
           <SearchBar masterId={masterId} />
         </div>
         <div className="mt-2 text-left text-xs text-gray-400 select-none">
-          Alt + ↑ / ↓ でマスター切り替え、Tab で移動、Enter で選択・検索
+          Alt + ↑ / ↓ でマスター切り替え、Enter で検索
         </div>
       </div>
       <AdvancedSearchButton

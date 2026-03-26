@@ -47,6 +47,10 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
         ref={ref}
         name={SEARCH_PARAM_NAMES.SEARCH.QUERY}
         autoFocus
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         placeholder={masterId === "y" ? "医薬品を検索" : "診療行為を検索"}
         style={{
           width: "100%",
