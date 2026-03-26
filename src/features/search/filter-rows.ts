@@ -1,18 +1,34 @@
-import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 
 import { getValue } from "../fields/get-values";
+import { getField as getIyakuhinField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
+import { getField as getShinryoukouiField } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { NormalizedFilterExpression, NormalizedFilterItem } from "./normalize-filter-expression";
 
-const codeField = getField("診療行為コード");
-const nameField = getField("診療行為省略名称/省略漢字名称");
-const kanaField = getField("診療行為省略名称/省略カナ名称");
-const fullnameField = getField("基本漢字名称");
+const shinryoukouiSearchFields = {
+  codeField: getShinryoukouiField("診療行為コード"),
+  nameField: getShinryoukouiField("診療行為省略名称/省略漢字名称"),
+  kanaField: getShinryoukouiField("診療行為省略名称/省略カナ名称"),
+  fullnameField: getShinryoukouiField("基本漢字名称"),
+};
 
-export function filterShinryoukouiRows(rows: string[][], expression: NormalizedFilterExpression): string[][] {
+const iyakuhinSearchFields = {
+  codeField: getIyakuhinField("医薬品コード"),
+  nameField: getIyakuhinField("医薬品名・規格名/漢字名称"),
+  kanaField: getIyakuhinField("医薬品名・規格名/カナ名称"),
+  fullnameField: getIyakuhinField("医薬品名・規格名/漢字名称"),
+};
+
+export function filterShinryoukouiRows(
+  rows: string[][],
+  expression: NormalizedFilterExpression,
+  masterId: MasterId = DEFAULT_MASTER_ID,
+): string[][] {
+  const searchFields = masterId === "y" ? iyakuhinSearchFields : shinryoukouiSearchFields;
   return rows.filter(row => {
     for (const item of expression) {
-      const r = filterShinryoukouiRow(row, item);
+      const r = filterShinryoukouiRow(row, item, searchFields);
       if (item.negative ? r : !r) {
         return false;
       }
@@ -21,7 +37,11 @@ export function filterShinryoukouiRows(rows: string[][], expression: NormalizedF
   });
 }
 
-export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem): boolean {
+export function filterShinryoukouiRow(
+  row: string[],
+  item: NormalizedFilterItem,
+  fields = shinryoukouiSearchFields,
+): boolean {
   if ("field" in item) {
     const value = getValue(row, item.field);
     if (value == null) return false;
@@ -52,12 +72,15 @@ export function filterShinryoukouiRow(row: string[], item: NormalizedFilterItem)
       }
     }
   } else {
-    if (item.codeValue && getValue(row, codeField) === item.codeValue) {
+    if (item.codeValue && getValue(row, fields.codeField!) === item.codeValue) {
       return true;
     }
-    if (item.kanaValue && getValue(row, kanaField).includes(item.kanaValue)) {
+    if (item.kanaValue && getValue(row, fields.kanaField!).includes(item.kanaValue)) {
       return true;
     }
-    return getValue(row, nameField).includes(item.fullWidthValue) || getValue(row, fullnameField).includes(item.fullWidthValue);
+    return (
+      getValue(row, fields.nameField!).includes(item.fullWidthValue) ||
+      getValue(row, fields.fullnameField!).includes(item.fullWidthValue)
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import React, { createContext, useContext, useMemo } from "react";
 
@@ -40,6 +40,14 @@ export function useShinryoukouiMasterData() {
   return useContext(ShinryoukouiMasterDataContext);
 }
 
+export function getShinryoukouiMasterDataQueryOptions(version: string) {
+  return queryOptions({
+    queryKey: ["s", version],
+    queryFn: () => fetchMasterData(version),
+    refetchOnMount: false,
+  });
+}
+
 export function ShinryoukouiMasterDataProvider({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
@@ -49,11 +57,7 @@ export function ShinryoukouiMasterDataProvider({ children }: { children: React.R
       ? paramVersion
       : LATEST_SHINRYOUKOUI_MASTER_VERSION;
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["s", version],
-    queryFn: () => fetchMasterData(version),
-    refetchOnMount: false,
-  });
+  const { data, error, isLoading } = useQuery(getShinryoukouiMasterDataQueryOptions(version));
 
   if (error) {
     throw error;

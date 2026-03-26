@@ -9,18 +9,25 @@ import { Modal } from "@/components/modal";
 import { Select } from "@/components/select";
 import { DisplayFieldConfig } from "@/features/display-fields/types";
 import { useAutoResetState } from "@/hooks/use-auto-reset-state";
+import { MasterId } from "@/master-types";
 
 import { FieldChooser } from "./field-chooser";
 import { ExportOptions } from "./types";
 import { useExportData } from "./use-export-data";
 
 type ExportDataModalProps = {
+  masterId: MasterId;
   rows: string[][];
   displayFields: DisplayFieldConfig[];
   onClose: () => void;
 };
 
-export function ExportDataModal({ rows, displayFields, onClose }: ExportDataModalProps) {
+export function ExportDataModal({
+  masterId,
+  rows,
+  displayFields,
+  onClose,
+}: ExportDataModalProps) {
   const [exportOptions, setExportOptions] = useState<ExportOptions>({
     delimiter: "\t",
     includeHeader: true,
@@ -41,7 +48,7 @@ export function ExportDataModal({ rows, displayFields, onClose }: ExportDataModa
   };
 
   const [copied, setCopied] = useAutoResetState(false, 2000);
-  const { download, copy } = useExportData(rows, selectedFields, exportOptions);
+  const { download, copy } = useExportData(masterId, rows, selectedFields, exportOptions);
 
   return (
     <Modal
@@ -125,6 +132,7 @@ export function ExportDataModal({ rows, displayFields, onClose }: ExportDataModa
         </div>
         <div>
           <FieldChooser
+            masterId={masterId}
             fields={displayFields}
             selectedFieldIndices={selectedFieldIndices}
             onChange={setSelectedFieldIndices}

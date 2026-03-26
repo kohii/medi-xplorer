@@ -13,7 +13,7 @@ export function ColorChip({ children, className, color }: ColorChipProps) {
     <div className={twMerge(
       "px-1.5 py-0 rounded-md bg-gray-100 text-sm inline-block",
       className,
-      color ? `bg-${color}-100 text-${color}-700` : "",
+      color ? `bg-${color}-100` : "",
     )}>
       {children}
     </div>

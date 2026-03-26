@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
+import { DEFAULT_MASTER_ID, MASTER_IDS, MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 export type SearchParamNames = typeof SEARCH_PARAM_NAMES["SEARCH"][keyof typeof SEARCH_PARAM_NAMES["SEARCH"]];
@@ -9,9 +10,10 @@ type Options = {
   preserveExtraSearchParams: boolean
 }
 
-export function useShinryoukouiSearch({
+export function useMasterSearch({
   preserveExtraSearchParams,
-}: Options) {
+  masterId,
+}: Options & { masterId: MasterId }) {
   const { push } = useRouter();
 
   return useCallback((params: {
@@ -34,15 +36,32 @@ export function useShinryoukouiSearch({
         searchParams.delete(key);
       }
     });
-    push(`/s?${searchParams.toString()}`);
-  }, [preserveExtraSearchParams, push]);
+
+    const path = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
+    if (masterId === MASTER_IDS.IYAKUHIN) {
+      searchParams.delete(SEARCH_PARAM_NAMES.SEARCH.MASTER);
+    } else {
+      searchParams.set(SEARCH_PARAM_NAMES.SEARCH.MASTER, masterId);
+    }
+    push(`${path}?${searchParams.toString()}`);
+  }, [masterId, preserveExtraSearchParams, push]);
 }
 
-export function useShinryoukouiSearchByQuery() {
-  const search = useShinryoukouiSearch({preserveExtraSearchParams: false});
+export function useMasterSearchByQuery(masterId: MasterId) {
+  const search = useMasterSearch({ preserveExtraSearchParams: false, masterId });
   return useCallback((q: string) => {
     search({
       q,
     });
   }, [search]);
+}
+
+export function useShinryoukouiSearch({
+  preserveExtraSearchParams,
+}: Options) {
+  return useMasterSearch({ preserveExtraSearchParams, masterId: DEFAULT_MASTER_ID });
+}
+
+export function useShinryoukouiSearchByQuery() {
+  return useMasterSearchByQuery(DEFAULT_MASTER_ID);
 }

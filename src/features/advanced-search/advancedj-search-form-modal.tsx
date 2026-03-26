@@ -2,17 +2,13 @@ import { useState } from "react";
 
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
-import {
-  ShinryoukouiMasterFieldName,
-  getField,
-  getFieldBySeq,
-} from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getMasterFieldByName, getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { MasterId } from "@/master-types";
 import { splitByWhitespace } from "@/utils/text";
 
 import { parseQuery } from "../search/parse-query";
 import { stringifyQuery } from "../search/stringify-query";
 import { FieldFilterItem, FilterItem } from "../search/types";
-import { ShinryoukouiMasterLayoutVersion } from "../shinryoukoui-master-versions/layouts";
 
 import { AdvancedSearchForm, AdvancedSearchParams } from "./advanced-search-form";
 import {
@@ -25,17 +21,19 @@ type AdvancedSearchFormModalProps = {
   query: string;
   onChange: (query: string) => void;
   onClose: () => void;
-  layoutVersion: ShinryoukouiMasterLayoutVersion;
+  masterId: MasterId;
+  layoutVersion: string;
 };
 
 export function AdvancedSearchFormModal({
   query,
   onChange,
   onClose,
+  masterId,
   layoutVersion,
 }: AdvancedSearchFormModalProps) {
   const [params, setParams] = useState<AdvancedSearchParams>(() => {
-    const parsed = parseQuery(query);
+    const parsed = parseQuery(query, masterId);
     if (parsed.kind === "ERROR") {
       return {
         keyword: "",
@@ -54,7 +52,7 @@ export function AdvancedSearchFormModal({
         .join(" "),
       items: parsed.value
         .filter((item): item is FieldFilterItem => item.operator !== undefined)
-        .map(convertFilterItemToAdvancedSearchItem)
+        .map((item) => convertFilterItemToAdvancedSearchItem(item, masterId))
         .filter((item): item is AdvancedSearchItem => item !== undefined),
     };
   });
@@ -97,13 +95,19 @@ export function AdvancedSearchFormModal({
       footer={<Button onClick={handleOk}>検索</Button>}
       size="xl"
     >
-      <AdvancedSearchForm value={params} onChange={setParams} layoutVersion={layoutVersion} />
+      <AdvancedSearchForm
+        value={params}
+        onChange={setParams}
+        masterId={masterId}
+        layoutVersion={layoutVersion}
+      />
     </Modal>
   );
 }
 
 function convertFilterItemToAdvancedSearchItem(
   filterItem: FieldFilterItem,
+  masterId: MasterId,
 ): AdvancedSearchItem | undefined {
   const [value, ...restValues] =
     filterItem.operator === ":" ? filterItem.value.split(",").filter(Boolean) : [filterItem.value];
@@ -137,12 +141,12 @@ function convertFilterItemToAdvancedSearchItem(
   })();
 
   const field =
-    getField(filterItem.fieldKey as ShinryoukouiMasterFieldName) ??
-    getFieldBySeq(+filterItem.fieldKey);
+    getMasterFieldByName(masterId, filterItem.fieldKey) ??
+    getMasterFieldBySeq(masterId, +filterItem.fieldKey);
   if (!field) return undefined;
 
   return {
-    field: field.name as ShinryoukouiMasterFieldName,
+    field: field.name,
     operatorKind,
     value,
     restValues,

@@ -17,17 +17,26 @@ import {
 } from "@dnd-kit/sortable";
 import { useState } from "react";
 
+import { MasterId } from "@/master-types";
+
 import { DisplayFieldItem } from "./display-field-item";
 import { DisplayFieldSelect } from "./display-field-select";
 import { SortableDisplayFieldItem } from "./sortable-display-field-item";
 import { DisplayFieldConfig, IdentifiedDisplayFieldConfig } from "./types";
 
 type DisplayFieldsFormProps = {
+  masterId: MasterId;
+  layoutVersion: string;
   fields: IdentifiedDisplayFieldConfig[];
   onChange: (fields: IdentifiedDisplayFieldConfig[]) => void;
 };
 
-export function DisplayFieldsForm({ fields, onChange }: DisplayFieldsFormProps) {
+export function DisplayFieldsForm({
+  masterId,
+  layoutVersion,
+  fields,
+  onChange,
+}: DisplayFieldsFormProps) {
   const [activeField, setActiveField] = useState<IdentifiedDisplayFieldConfig | null>(null);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -75,6 +84,7 @@ export function DisplayFieldsForm({ fields, onChange }: DisplayFieldsFormProps) 
           {fields.map((field, index) => (
             <SortableDisplayFieldItem
               key={index}
+              masterId={masterId}
               id={field.id}
               value={field}
               onChange={value => {
@@ -92,10 +102,21 @@ export function DisplayFieldsForm({ fields, onChange }: DisplayFieldsFormProps) 
           ))}
         </SortableContext>
         <DragOverlay>
-          {activeField ? <DisplayFieldItem value={activeField} className="shadow-md" /> : null}
+          {activeField ? (
+            <DisplayFieldItem
+              masterId={masterId}
+              value={activeField}
+              className="shadow-md"
+            />
+          ) : null}
         </DragOverlay>
       </DndContext>
-      <DisplayFieldSelect onChange={handleAddField} className="mt-2" />
+      <DisplayFieldSelect
+        masterId={masterId}
+        layoutVersion={layoutVersion}
+        onChange={handleAddField}
+        className="mt-2"
+      />
     </div>
   );
 }

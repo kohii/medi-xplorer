@@ -4,11 +4,14 @@ import { forwardRef } from "react";
 
 import { Button } from "@/components/button";
 import { SearchIcon } from "@/components/icons/search-icon";
-import {  useShinryoukouiSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { useMasterSearchByQuery } from "@/hooks/use-shinryoukoui-search";
+import { MASTER_IDS, MasterId } from "@/master-types";
+import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { SearchInput } from "./search-input";
 
 type SearchBarProps = {
+  masterId: MasterId;
   value?: string;
   onChange?: (value: string) => void;
 };
@@ -18,21 +21,27 @@ export type SearchBarHandle = {
 };
 
 export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function SearchBar(
-  { value, onChange }, ref
+  { masterId, value, onChange }, ref
 ) {
-  const search = useShinryoukouiSearchByQuery();
+  const search = useMasterSearchByQuery(masterId);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     search(event.currentTarget.q.value);
   };
 
+  const action = masterId === MASTER_IDS.IYAKUHIN ? "/y" : "/s";
+
   return (
-    <form onSubmit={handleSubmit} action="/s">
+    <form onSubmit={handleSubmit} action={action} autoComplete="off">
       <div className="relative h-10">
+        {masterId !== MASTER_IDS.IYAKUHIN && (
+          <input type="hidden" name={SEARCH_PARAM_NAMES.SEARCH.MASTER} value={masterId} />
+        )}
         <div className="absolute flex items-center text-gray-400 inset-y-0 start-0 ps-3 pointer-events-none h-10">
           <SearchIcon />
         </div>
         <SearchInput
+          masterId={masterId}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ref={ref as any}
           value={value}
@@ -46,6 +55,6 @@ export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function Se
           検索
         </Button>
       </div>
-    </form >
+    </form>
   );
 });

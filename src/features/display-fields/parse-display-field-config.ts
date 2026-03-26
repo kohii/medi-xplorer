@@ -1,16 +1,16 @@
+import { getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { getMasterVirtualField } from "@/features/fields/master-virtual-field-resolver";
+import { MasterId } from "@/master-types";
 import { isNumeric } from "@/utils/text";
-
-import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { ShinryoukouiMasterVirtualFieldId, getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { DisplayFieldConfig } from "./types";
 
 
-function parseDisplayFieldConfig(config: string): DisplayFieldConfig {
+function parseDisplayFieldConfig(config: string, masterId: MasterId): DisplayFieldConfig {
   const [key, variant] = config.split("-");
   if (isNumeric(key)) {
     const seq = parseInt(key);
-    if (!getFieldBySeq(seq)) return { kind: "unknown", key };
+    if (!getMasterFieldBySeq(masterId, seq)) return { kind: "unknown", key };
     if (variant === "l") {
       return { kind: "normal", seq, options: { variant: "label" } };
     }
@@ -19,12 +19,14 @@ function parseDisplayFieldConfig(config: string): DisplayFieldConfig {
     }
     return { kind: "normal", seq };
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (!getShinryoukouiMasterVirtualField(key as any)) return { kind: "unknown", key };
-  return { kind: "virtual", key: key as ShinryoukouiMasterVirtualFieldId };
+  if (!getMasterVirtualField(masterId, key)) return { kind: "unknown", key };
+  return { kind: "virtual", key };
 }
 
-export function parseDisplayFieldConfigs(configs: string): DisplayFieldConfig[] {
+export function parseDisplayFieldConfigs(
+  configs: string,
+  masterId: MasterId,
+): DisplayFieldConfig[] {
   if (!configs) return [];
-  return configs.split("_").map(parseDisplayFieldConfig);
+  return configs.split("_").map((config) => parseDisplayFieldConfig(config, masterId));
 }

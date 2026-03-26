@@ -1,14 +1,23 @@
+import { DEFAULT_MASTER_ID, MasterId } from "@/master-types";
 import { splitByWhitespace } from "@/utils/text";
 
-import { getFieldBySeq, getFieldOrUndefined } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getFieldBySeq as getIyakuhinFieldBySeq, getFieldOrUndefined as getIyakuhinFieldOrUndefined } from "../iyakuhin-master-fields/iyakuhin-master-fields";
+import { getFieldBySeq as getShinryoukouiFieldBySeq, getFieldOrUndefined as getShinryoukouiFieldOrUndefined } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { FilterExpression, FilterExpressionText, Operator, ParseResult } from "./types";
 
-export function parseQuery(text: FilterExpressionText): ParseResult<FilterExpression> {
+export function parseQuery(
+  text: FilterExpressionText,
+  masterId: MasterId = DEFAULT_MASTER_ID,
+): ParseResult<FilterExpression> {
   text = text.trim();
   if (!text) {
     return { kind: "SUCCESS", value: [] };
   }
+
+  const getFieldOrUndefined =
+    masterId === "y" ? getIyakuhinFieldOrUndefined : getShinryoukouiFieldOrUndefined;
+  const getFieldBySeq = masterId === "y" ? getIyakuhinFieldBySeq : getShinryoukouiFieldBySeq;
 
   const items = splitByWhitespace(text);
   const expression: FilterExpression = [];

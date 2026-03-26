@@ -13,26 +13,11 @@ const shinryokouiMasterFields = [
     mode: "numeric",
     // description: "レコードの異動状況を表す。\n\n０：前マスターの内容と同じであることを表す。\n１：抹消\n３：新規\n５：変更\n９：廃止\n\n「９：廃止」は、当該コードが使用できなくなったことを表す。\n次回のマスター更新時に、当該コードを削除する",
     codes: [
-      {
-        code: "0",
-        name: "変更なし",
-      },
-      {
-        code: "1",
-        name: "抹消",
-      },
-      {
-        code: "3",
-        name: "新規",
-      },
-      {
-        code: "5",
-        name: "変更",
-      },
-      {
-        code: "9",
-        name: "廃止",
-      },
+      { code: "0", name: "変更なし" },
+      { code: "1", name: "抹消" },
+      { code: "3", name: "新規" },
+      { code: "5", name: "変更" },
+      { code: "9", name: "廃止" },
     ],
     columnWidth: 112,
   },
@@ -77,7 +62,7 @@ const shinryokouiMasterFields = [
     shortName: "省略カナ名称",
     mode: "text",
     // description: "半角英数カナ：２０文字\n項番５「省略漢字名称」のカナ名称を表す。",
-    columnWidth: 160,
+    columnWidth: "auto",
   },
   {
     seq: 8,

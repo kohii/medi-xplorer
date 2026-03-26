@@ -3,18 +3,20 @@ import { FormLabel } from "@/components/form-label";
 import { LinkLikeButton } from "@/components/link-like-button";
 import { VSplit, VSplitItem } from "@/components/v-split";
 import { DisplayFieldConfig } from "@/features/display-fields/types";
-import { getFieldBySeq } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
+import { getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { getMasterVirtualField } from "@/features/fields/master-virtual-field-resolver";
+import { MasterId } from "@/master-types";
 import { assertUnreachable } from "@/utils/assert-unreachable";
 
-import { getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
-
 type FieldChooserProps = {
+  masterId: MasterId;
   fields: DisplayFieldConfig[];
   selectedFieldIndices: Set<number>;
   onChange: (selectedFieldIndices: Set<number>) => void;
 }
 
 export function FieldChooser({
+  masterId,
   fields,
   selectedFieldIndices,
   onChange,
@@ -50,9 +52,9 @@ export function FieldChooser({
                   <div>{(() => {
                     switch (field.kind) {
                       case "normal":
-                        return getFieldBySeq(field.seq)?.name;
+                        return getMasterFieldBySeq(masterId, field.seq)?.name;
                       case "virtual":
-                        return getShinryoukouiMasterVirtualField(field.key)?.name;
+                        return getMasterVirtualField(masterId, field.key)?.name;
                       case "unknown":
                         return (
                           <div>

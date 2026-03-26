@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import {
   experimental_RichInput as RichInput,
   RichInputHandle,
@@ -8,36 +8,50 @@ import {
 } from "rich-textarea";
 import { twMerge } from "tailwind-merge";
 
+import { MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
+import { getAllIyakuhinMasterFields } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 import { getAllShinryoukouiMasterFields } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
-const FIELD_NAMES = getAllShinryoukouiMasterFields().map((f) => f.name);
-const FIELD_HIGHLIGHT_REG = new RegExp(
-  `(?<=(^|\\s)|-)(${FIELD_NAMES.map((f) => `${f}`).join("|")}):`,
-  "g",
-);
-const renderer = createRegexRenderer([
-  [FIELD_HIGHLIGHT_REG, { background: "#EAF5F9", color: "#698199", borderRadius: "2px" }],
-]);
-
 type SearchInputProps = {
+  masterId: MasterId;
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
 };
 
 export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(function SearchInput(
-  { value, onChange, className },
+  { masterId, value, onChange, className },
   ref,
 ) {
+  const fieldNames = useMemo(() => {
+    const fields = masterId === "y" ? getAllIyakuhinMasterFields() : getAllShinryoukouiMasterFields();
+    return fields.map((f) => f.name);
+  }, [masterId]);
+
+  const renderer = useMemo(() => {
+    if (!fieldNames.length) return undefined;
+    const fieldHighlightReg = new RegExp(
+      `(?<=(^|\\s)|-)(${fieldNames.map((f) => `${f}`).join("|")}):`,
+      "g",
+    );
+    return createRegexRenderer([
+      [fieldHighlightReg, { background: "#EAF5F9", color: "#698199", borderRadius: "2px" }],
+    ]);
+  }, [fieldNames]);
+
   return (
     <>
       <RichInput
         ref={ref}
         name={SEARCH_PARAM_NAMES.SEARCH.QUERY}
         autoFocus
-        placeholder="診療行為を検索"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        placeholder={masterId === "y" ? "医薬品を検索" : "診療行為を検索"}
         style={{
           width: "100%",
         }}

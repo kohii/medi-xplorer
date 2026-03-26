@@ -5,9 +5,9 @@ import { IconButton } from "@/components/icon-button";
 import { DeleteIcon } from "@/components/icons/delete-icon";
 import { DragHandleIcon } from "@/components/icons/drag-handle-icon";
 import { SparklesIcon } from "@/components/icons/sparkles-icon";
-
-import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
+import { getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { getMasterVirtualField } from "@/features/fields/master-virtual-field-resolver";
+import { MasterId } from "@/master-types";
 
 import { CodeValueOptions } from "./code-value-options";
 import { DisplayFieldConfig } from "./types";
@@ -46,6 +46,7 @@ function Container({
 }
 
 export type DisplayFieldItemProps = {
+  masterId: MasterId;
   value: DisplayFieldConfig;
   onChange?: (value: DisplayFieldConfig) => void;
   onDelete?: () => void;
@@ -54,6 +55,7 @@ export type DisplayFieldItemProps = {
 };
 
 export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps>(function DisplayFieldItem({
+  masterId,
   value,
   onChange,
   onDelete,
@@ -63,7 +65,7 @@ export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps
 }, ref) {
   switch (value.kind) {
     case "normal": {
-      const field = getFieldBySeq(value.seq)!;
+      const field = getMasterFieldBySeq(masterId, value.seq)!;
       return (
         <div style={style} ref={ref}>
           <Container
@@ -79,7 +81,7 @@ export const DisplayFieldItem = forwardRef<HTMLDivElement, DisplayFieldItemProps
       );
     }
     case "virtual": {
-      const field = getShinryoukouiMasterVirtualField(value.key);
+      const field = getMasterVirtualField(masterId, value.key)!;
       return (
         <div style={style} ref={ref}>
           <Container

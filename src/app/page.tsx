@@ -3,10 +3,8 @@ import { Suspense } from "react";
 
 import { AppIcon } from "@/components/app-icon";
 import { GitHubIcon } from "@/components/icons/github-icon";
-import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
-import { SearchBar } from "@/features/search/search-bar";
-import { getLayoutVersion } from "@/features/shinryoukoui-master-versions/layouts";
 
+import { HomeSearchPanel } from "./home-search-panel";
 import { PrefetchSearchResultPage } from "./prefetch-search-result";
 
 export default function Home() {
@@ -18,11 +16,8 @@ export default function Home() {
             <AppIcon />
             MediXplorer
           </h1>
-          <p className="text-center text-gray-500 mt-4">医科診療行為マスタービューアー</p>
-          <div className="my-8 w-full">
-            <SearchBar />
-          </div>
-          <AdvancedSearchButton layoutVersion={getLayoutVersion("")} />
+          <p className="text-center text-gray-500 mt-4">診療行為・医薬品マスタービューアー</p>
+          <HomeSearchPanel />
         </main>
       </div>
       <footer>
