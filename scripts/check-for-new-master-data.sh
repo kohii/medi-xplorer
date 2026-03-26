@@ -12,7 +12,7 @@ create_pr() {
   local content
   content=$(curl -s "${page_url}")
   local date
-  date=$(echo "${content}" | grep -oE "${page_file_prefix}\\.${files_prefix}[0-9]{8}\\.zip" | grep -oE '[0-9]{8}' | head -n 1)
+  date=$(echo "${content}" | grep -oE "${page_file_prefix}/${files_prefix}[0-9]{8}\\.zip" | grep -oE '[0-9]{8}' | head -n 1)
 
   if [ -z "${date}" ]; then
     echo "Failed to get latest update date from website for ${master_id}."
