@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { SimpleTable, SimpleTableColumn } from "@/components/simple-table";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
@@ -20,18 +18,12 @@ const amountTypeField = getField("新又は現金額/金額種別");
 const columns: SimpleTableColumn<string[]>[] = [
   {
     name: "医薬品コード",
-    render: (row) => {
-      const code = getValue(row, codeField);
-      return <Link href={`/y?code=${code}`}>{code}</Link>;
-    },
+    render: (row) => getValue(row, codeField),
     width: 140,
   },
   {
     name: "名称",
-    render: (row) => {
-      const code = getValue(row, codeField);
-      return <Link href={`/y?code=${code}`}>{getValue(row, nameField)}</Link>;
-    },
+    render: (row) => getValue(row, nameField),
   },
   {
     name: "剤形",

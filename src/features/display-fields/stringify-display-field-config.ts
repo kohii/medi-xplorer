@@ -1,14 +1,17 @@
+import { getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { MasterId } from "@/master-types";
 import { assertUnreachable } from "@/utils/assert-unreachable";
-
-import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
 
 import { DisplayFieldConfig } from "./types";
 
-function stringifyDisplayFieldConfig(config: DisplayFieldConfig): string {
+function stringifyDisplayFieldConfig(
+  masterId: MasterId,
+  config: DisplayFieldConfig,
+): string {
   switch (config.kind) {
     case "normal": {
       const { seq, options: option } = config;
-      const field = getFieldBySeq(seq);
+      const field = getMasterFieldBySeq(masterId, seq);
 
       if (field?.codes) {
         const variant = option?.variant ?? "label-with-code";
@@ -34,6 +37,9 @@ function stringifyDisplayFieldConfig(config: DisplayFieldConfig): string {
   }
 }
 
-export function stringifyDisplayFieldConfigs(displayFields: DisplayFieldConfig[]): string {
-  return displayFields.map(stringifyDisplayFieldConfig).join("_");
+export function stringifyDisplayFieldConfigs(
+  masterId: MasterId,
+  displayFields: DisplayFieldConfig[],
+): string {
+  return displayFields.map((field) => stringifyDisplayFieldConfig(masterId, field)).join("_");
 }

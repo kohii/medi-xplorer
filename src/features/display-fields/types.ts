@@ -1,5 +1,3 @@
-import { ShinryoukouiMasterVirtualFieldId } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
-
 export type CodeValueVariant = "label-with-code" | "label" | "code";
 
 export type DisplayFieldConfig = {
@@ -10,7 +8,7 @@ export type DisplayFieldConfig = {
   }
 } | {
   kind: "virtual";
-  key: ShinryoukouiMasterVirtualFieldId;
+  key: string;
 } | {
   kind: "unknown";
   key: string;

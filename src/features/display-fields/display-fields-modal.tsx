@@ -3,21 +3,24 @@ import { useCallback, useState } from "react";
 import { Button } from "@/components/button";
 import { Modal } from "@/components/modal";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
+import { MasterId } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
-import { DEFAULT_DISPLAY_FIELDS } from "./constants";
+import { getDefaultDisplayFields } from "./constants";
 import { DisplayFieldsForm } from "./display-fields-form";
 import { stringifyDisplayFieldConfigs } from "./stringify-display-field-config";
 import { DisplayFieldConfig, IdentifiedDisplayFieldConfig } from "./types";
 
 type DisplayFieldsModalProps = {
+  masterId: MasterId;
+  layoutVersion: string;
   fields: DisplayFieldConfig[];
   onClose: () => void;
 }
 
-const DEFAULT_DISPLAY_FIELDS_STRING = stringifyDisplayFieldConfigs(DEFAULT_DISPLAY_FIELDS);
-
 export function DisplayFieldsModal({
+  masterId,
+  layoutVersion,
   fields: initialFields,
   onClose,
 }: DisplayFieldsModalProps) {
@@ -28,16 +31,20 @@ export function DisplayFieldsModal({
 
   const updateSearchParams = useUpdateSearchParams();
   const handleOk = useCallback(() => {
-    const s = stringifyDisplayFieldConfigs(fields);
+    const s = stringifyDisplayFieldConfigs(masterId, fields);
+    const defaultFieldsString = stringifyDisplayFieldConfigs(
+      masterId,
+      getDefaultDisplayFields(masterId),
+    );
     updateSearchParams({
-      [SEARCH_PARAM_NAMES.SEARCH.FIELDS]: (!s || s === DEFAULT_DISPLAY_FIELDS_STRING) ? undefined : s,
+      [SEARCH_PARAM_NAMES.SEARCH.FIELDS]: (!s || s === defaultFieldsString) ? undefined : s,
     });
 
     onClose();
-  }, [fields, onClose, updateSearchParams]);
+  }, [fields, masterId, onClose, updateSearchParams]);
 
   const handleReset = () => {
-    setFields(DEFAULT_DISPLAY_FIELDS.map((field) => ({
+    setFields(getDefaultDisplayFields(masterId).map((field) => ({
       ...field,
       id: crypto.randomUUID(),
     })));
@@ -70,7 +77,12 @@ export function DisplayFieldsModal({
         </div>
       )}
     >
-      <DisplayFieldsForm fields={fields} onChange={setFields} />
+      <DisplayFieldsForm
+        masterId={masterId}
+        layoutVersion={layoutVersion}
+        fields={fields}
+        onChange={setFields}
+      />
     </Modal>
   );
 }

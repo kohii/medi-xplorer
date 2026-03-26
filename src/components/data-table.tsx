@@ -58,7 +58,6 @@ export const DataTable = React.memo(function DataTable({
     // onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: true,
   });
 
   const tableContainerRef = React.useRef<HTMLDivElement>(null);

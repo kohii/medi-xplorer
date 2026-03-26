@@ -6,108 +6,55 @@ import { LabeledChip } from "@/components/labeled-chip";
 import { useIyakuhinMasterData } from "@/contexts/iyakuhin-master-data-context";
 import { getCodeLabel } from "@/features/fields/get-code-label";
 import { getValue } from "@/features/fields/get-values";
-import { Field } from "@/features/fields/types";
 import { SectionHeading } from "@/features/shinryoukoui-basic-tab/section-heading";
 import { SubHeading } from "@/features/shinryoukoui-basic-tab/sub-heading";
-import { formatDate } from "@/utils/format-data";
 
 import { getField } from "../iyakuhin-master-fields/iyakuhin-master-fields";
 
+import {
+  formatCodeValue,
+  formatOptionalDate,
+  formatYakka,
+  getIyakuhinBasicTabSummary,
+  getRelatedSelectionRows,
+  getRelatedUnifiedNameRow,
+  getSelectionCategoryLabel,
+  getShortListingLabel,
+  hasBunruiKisei,
+  hasOptionalDateValue,
+} from "./iyakuhin-basic-tab-utils";
 import { RelatedIyakuhinTable } from "./related-iyakuhin-table";
 
 export type IyakuhinBasicTabProps = {
   row: string[];
 };
 
-function formatCodeValue(row: string[], field: Field): string {
-  const value = getValue(row, field);
-  const label = getCodeLabel(row, field, true);
-  return value + ": " + (label ?? "-");
-}
-
-function formatYakka(rawValue: string): string {
-  if (!rawValue || rawValue === "0") return "-";
-  return `${rawValue}円`;
-}
-
-function formatOptionalDate(rawValue: string): string {
-  if (!rawValue || rawValue === "0" || rawValue === "99999999") return "-";
-  return formatDate(rawValue);
-}
-
-function hasOptionalDateValue(rawValue: string): boolean {
-  return rawValue !== "" && rawValue !== "0" && rawValue !== "99999999";
-}
-
-function getShortListingLabel(code: string): string {
-  switch (code) {
-    case "1": return "局方品";
-    case "2": return "局方品・生物学的製剤基準";
-    case "3": return "局方品・生薬";
-    case "6": return "生物学的製剤基準";
-    case "7": return "生薬";
-    case "8": return "統一名収載品";
-    default: return "-";
-  }
-}
-
-function getSelectionCategoryLabel(code: string): string {
-  switch (code) {
-    case "1": return "医療上必要があると認める場合等";
-    case "2": return "患者希望";
-    default: return "-";
-  }
-}
-
 export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
   const { data, getRowByCode } = useIyakuhinMasterData();
-  const code = getValue(row, getField("医薬品コード"));
-  const kanjiMeisho = getValue(row, getField("医薬品名・規格名/漢字名称"));
-  const kihonKanjiMeisho = getValue(row, getField("基本漢字名称"));
-  const kinyuShubetsu = getValue(row, getField("新又は現金額/金額種別"));
-  const kyuKinyuShubetsu = getValue(row, getField("旧金額/金額種別"));
-  const chushaYoryo = getValue(row, getField("注射容量"));
-  const ippanmeiKisai = getValue(row, getField("一般名処方の標準的な記載")).trim();
-  const senryouyouKubun = getValue(row, getField("選定療養区分"));
-  const shouhinmeiTouKanren = getValue(row, getField("商品名等関連"));
-  const choukiShuusaihinKanren = getValue(row, getField("長期収載品関連"));
-  const yakkaKijunShuusaiDate = getValue(row, getField("薬価基準収載年月日"));
-  const keikaSochiDate = getValue(
-    row,
-    getField("経過措置年月日又は商品名医薬品コード使用期限"),
-  );
+  const {
+    code,
+    kanjiMeisho,
+    kihonKanjiMeisho,
+    kinyuShubetsu,
+    kyuKinyuShubetsu,
+    chushaYoryo,
+    ippanmeiKisai,
+    senryouyouKubun,
+    shouhinmeiTouKanren,
+    yakkaKijunShuusaiDate,
+    keikaSochiDate,
+  } = getIyakuhinBasicTabSummary(row);
 
   const relatedUnifiedNameRow = useMemo(
-    () => (shouhinmeiTouKanren !== "0" ? getRowByCode(shouhinmeiTouKanren) : undefined),
-    [getRowByCode, shouhinmeiTouKanren],
+    () => getRelatedUnifiedNameRow(row, getRowByCode),
+    [getRowByCode, row],
   );
 
   const relatedSelectionRows = useMemo(() => {
-    const allRows = data ?? [];
+    return getRelatedSelectionRows(row, data ?? [], getRowByCode);
+  }, [data, getRowByCode, row]);
 
-    if (senryouyouKubun === "2") {
-      const relatedRow = choukiShuusaihinKanren !== "0"
-        ? getRowByCode(choukiShuusaihinKanren)
-        : undefined;
-      return relatedRow ? [relatedRow] : [];
-    }
-
-    if (senryouyouKubun === "1") {
-      return allRows.filter((candidateRow) => {
-        return getValue(candidateRow, getField("長期収載品関連")) === code;
-      });
-    }
-
-    return [];
-  }, [choukiShuusaihinKanren, code, data, getRowByCode, senryouyouKubun]);
-
-  const hasBunruiKisei =
-    getValue(row, getField("麻薬・毒薬・覚醒剤原料・向精神薬")) !== "0" ||
-    getValue(row, getField("神経破壊剤")) !== "0" ||
-    getValue(row, getField("生物学的製剤")) !== "0" ||
-    getValue(row, getField("歯科特定薬剤")) !== "0" ||
-    getValue(row, getField("造影（補助）剤")) !== "0" ||
-    getValue(row, getField("抗ＨＩＶ薬区分")) !== "0";
+  const hasBunruiKiseiValue = hasBunruiKisei(row);
 
   return (
     <>
@@ -243,7 +190,7 @@ export function IyakuhinBasicTab({ row }: IyakuhinBasicTabProps) {
         </section>
       )}
 
-      {hasBunruiKisei && (
+      {hasBunruiKiseiValue && (
         <section>
           <SectionHeading>分類・規制</SectionHeading>
           <HStack>

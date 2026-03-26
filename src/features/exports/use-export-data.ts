@@ -1,5 +1,8 @@
 import { useCallback, useMemo } from "react";
 
+import { getMasterFieldBySeq } from "@/features/fields/master-field-resolver";
+import { getMasterVirtualField } from "@/features/fields/master-virtual-field-resolver";
+import { MasterId } from "@/master-types";
 import { assertUnreachable } from "@/utils/assert-unreachable";
 import { copyToClipboard } from "@/utils/clipboard";
 import { createCsv } from "@/utils/csv";
@@ -7,12 +10,11 @@ import { createCsv } from "@/utils/csv";
 import { DisplayFieldConfig } from "../display-fields/types";
 import { getCodeLabel } from "../fields/get-code-label";
 import { getValue } from "../fields/get-values";
-import { getFieldBySeq } from "../shinryoukoui-master-fields/shinryoukoui-master-fields";
-import { getShinryoukouiMasterVirtualField } from "../shinryoukoui-master-fields/shinryoukoui-master-virtual-field";
 
 import { ExportOptions } from "./types";
 
 export function useExportData(
+  masterId: MasterId,
   rows: string[][],
   fields: DisplayFieldConfig[],
   options: ExportOptions,
@@ -23,7 +25,7 @@ export function useExportData(
         switch (f.kind) {
           case "normal": {
             const { seq, options: option } = f;
-            const field = getFieldBySeq(seq)!;
+            const field = getMasterFieldBySeq(masterId, seq)!;
 
             if (field.codes) {
               const variant = option?.variant ?? "label-with-code";
@@ -39,7 +41,7 @@ export function useExportData(
           }
           case "virtual": {
             const { key } = f;
-            const field = getShinryoukouiMasterVirtualField(key);
+            const field = getMasterVirtualField(masterId, key)!;
             return field.value(row);
           }
           case "unknown": {
@@ -54,12 +56,12 @@ export function useExportData(
       const headerData: string[] = fields.map(f => {
         switch (f.kind) {
           case "normal": {
-            const field = getFieldBySeq(f.seq);
+            const field = getMasterFieldBySeq(masterId, f.seq);
             return field?.name ?? "";
           }
           case "virtual": {
             const { key } = f;
-            const field = getShinryoukouiMasterVirtualField(key);
+            const field = getMasterVirtualField(masterId, key)!;
             return field.name;
           }
           case "unknown": {
@@ -83,7 +85,7 @@ export function useExportData(
         return data[r][c];
       },
     }, options);
-  }, [rows, options, fields]);
+  }, [fields, masterId, options, rows]);
 
   return useMemo(() => {
     return {

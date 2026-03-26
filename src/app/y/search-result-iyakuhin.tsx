@@ -10,6 +10,8 @@ import { Link } from "@/components/link";
 import { Loading } from "@/components/loading";
 import { useIyakuhinMasterData } from "@/contexts/iyakuhin-master-data-context";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
+import { useDisplayFieldConfigs } from "@/features/display-fields/use-display-fields";
+import { useDisplayTableColumns } from "@/features/display-fields/use-display-table-columns";
 import { getValue } from "@/features/fields/get-values";
 import { getField } from "@/features/iyakuhin-master-fields/iyakuhin-master-fields";
 import { IyakuhinVersionSelect } from "@/features/iyakuhin-master-versions/version-select";
@@ -17,13 +19,13 @@ import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
+import { SearchResultMenuAnchor } from "@/features/search-result/search-result-menu-anchor";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
 import { useUpdateSearchParams } from "@/hooks/use-update-search-params";
 import { MASTER_IDS } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { IyakuhinDetail } from "./iyakuhin-detail";
-import { useIyakuhinTableColumns } from "./use-iyakuhin-table-columns";
 
 const codeField = getField("医薬品コード");
 const nameField = getField("医薬品名・規格名/漢字名称");
@@ -102,7 +104,8 @@ export default function SearchResultIyakuhin() {
     return filterShinryoukouiRows(data, filterExpression.value, MASTER_IDS.IYAKUHIN);
   }, [data, filterExpression]);
 
-  const columns = useIyakuhinTableColumns();
+  const displayFields = useDisplayFieldConfigs(MASTER_IDS.IYAKUHIN);
+  const columns = useDisplayTableColumns(MASTER_IDS.IYAKUHIN, displayFields);
 
   return (
     <div className="relative h-full">
@@ -152,6 +155,14 @@ export default function SearchResultIyakuhin() {
                   Found {filteredData.length} {filteredData.length === 1 ? "item" : "items"}
                 </div>
               )}
+            </div>
+            <div className="pr-4">
+              <SearchResultMenuAnchor
+                masterId={MASTER_IDS.IYAKUHIN}
+                layoutVersion={layoutVersion}
+                displayFields={displayFields}
+                rows={filteredData ?? []}
+              />
             </div>
           </div>
         </div>

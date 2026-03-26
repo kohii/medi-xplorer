@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { SearchResultMenuAnchor } from "@/app/s/search-result-menu-anchor";
 import { AppIcon } from "@/components/app-icon";
 import { DataTable } from "@/components/data-table";
 import { Drawer } from "@/components/drawer";
@@ -12,11 +11,13 @@ import { Loading } from "@/components/loading";
 import { useShinryoukouiMasterData } from "@/contexts/shinryoukoui-master-data-context";
 import { AdvancedSearchButton } from "@/features/advanced-search/advanced-search-button";
 import { useDisplayFieldConfigs as useDisplayFields } from "@/features/display-fields/use-display-fields";
+import { useDisplayTableColumns } from "@/features/display-fields/use-display-table-columns";
 import { getValue } from "@/features/fields/get-values";
 import { filterShinryoukouiRows } from "@/features/search/filter-rows";
 import { normalizeFilterExpression } from "@/features/search/normalize-filter-expression";
 import { parseQuery } from "@/features/search/parse-query";
 import { SearchBar, SearchBarHandle } from "@/features/search/search-bar";
+import { SearchResultMenuAnchor } from "@/features/search-result/search-result-menu-anchor";
 import { getField } from "@/features/shinryoukoui-master-fields/shinryoukoui-master-fields";
 import { VersionSelect } from "@/features/shinryoukoui-master-versions/version-select";
 import { useStateFromProp } from "@/hooks/use-state-from-props";
@@ -25,7 +26,6 @@ import { MASTER_IDS } from "@/master-types";
 import { SEARCH_PARAM_NAMES } from "@/search-param-names";
 
 import { Detail } from "./detail";
-import { useTableColumns } from "./use-table-columns";
 
 const codeField = getField("診療行為コード");
 const nameField = getField("診療行為省略名称/省略漢字名称");
@@ -104,8 +104,8 @@ export default function SearchResultShinryoukoui() {
     return filterShinryoukouiRows(data, filterExpression.value, MASTER_IDS.SHINRYOUKOUI);
   }, [data, filterExpression]);
 
-  const displayFields = useDisplayFields();
-  const columns = useTableColumns(displayFields);
+  const displayFields = useDisplayFields(MASTER_IDS.SHINRYOUKOUI);
+  const columns = useDisplayTableColumns(MASTER_IDS.SHINRYOUKOUI, displayFields);
 
   return (
     <div className="relative h-full">
@@ -157,7 +157,12 @@ export default function SearchResultShinryoukoui() {
               )}
             </div>
             <div className="pr-4">
-              <SearchResultMenuAnchor displayFields={displayFields} rows={filteredData ?? []} />
+              <SearchResultMenuAnchor
+                masterId={MASTER_IDS.SHINRYOUKOUI}
+                layoutVersion={layoutVersion}
+                displayFields={displayFields}
+                rows={filteredData ?? []}
+              />
             </div>
           </div>
         </div>

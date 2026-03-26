@@ -4,15 +4,22 @@ import { useState } from "react";
 import { Backdrop } from "@/components/backdrop";
 import { CaretDownIcon } from "@/components/icons/caret-down-icon";
 import { Menu, MenuItem } from "@/components/menu";
-
-import { DisplayFieldConfig } from "../../features/display-fields/types";
+import { DisplayFieldConfig } from "@/features/display-fields/types";
+import { MasterId } from "@/master-types";
 
 type SearchResultMenuAnchorProps = {
+  masterId: MasterId;
+  layoutVersion: string;
   displayFields: DisplayFieldConfig[];
   rows: string[][];
 };
 
-export function SearchResultMenuAnchor({ displayFields, rows }: SearchResultMenuAnchorProps) {
+export function SearchResultMenuAnchor({
+  masterId,
+  layoutVersion,
+  displayFields,
+  rows,
+}: SearchResultMenuAnchorProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,7 +44,8 @@ export function SearchResultMenuAnchor({ displayFields, rows }: SearchResultMenu
     <>
       <button
         onClick={handleClick}
-        className="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-0.5">
+        className="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-0.5"
+      >
         表示オプション
         <CaretDownIcon className="h-3 w-3" />
       </button>
@@ -52,26 +60,30 @@ export function SearchResultMenuAnchor({ displayFields, rows }: SearchResultMenu
       </Menu>
       {displayFieldsFormModalOpen && (
         <DynamicDisplayFieldsFormModal
+          masterId={masterId}
+          layoutVersion={layoutVersion}
           fields={displayFields}
           onClose={() => setDisplayFieldsFormModalOpen(false)}
-        />)}
+        />
+      )}
       {exportModalOpen && (
         <DynamicExportDataModal
+          masterId={masterId}
           rows={rows}
           displayFields={displayFields}
           onClose={() => setExportModalOpen(false)}
-        />)}
+        />
+      )}
     </>
   );
 }
 
-
 const DynamicDisplayFieldsFormModal = dynamic(
-  () => import("@/features/display-fields/display-fields-modal").then(m => m.DisplayFieldsModal),
+  () => import("@/features/display-fields/display-fields-modal").then((m) => m.DisplayFieldsModal),
   { ssr: false, loading: () => <Backdrop /> },
 );
 
 const DynamicExportDataModal = dynamic(
-  () => import("@/features/exports/export-data-modal").then(m => m.ExportDataModal),
+  () => import("@/features/exports/export-data-modal").then((m) => m.ExportDataModal),
   { ssr: false, loading: () => <Backdrop /> },
 );
