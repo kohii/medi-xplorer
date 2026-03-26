@@ -16,17 +16,24 @@ function nextMasterId(current: MasterId): MasterId {
   return MASTER_OPTIONS[(currentIndex + 1) % MASTER_OPTIONS.length];
 }
 
+function previousMasterId(current: MasterId): MasterId {
+  const currentIndex = MASTER_OPTIONS.indexOf(current);
+  return MASTER_OPTIONS[(currentIndex - 1 + MASTER_OPTIONS.length) % MASTER_OPTIONS.length];
+}
+
 export function HomeSearchPanel() {
   const [masterId, setMasterId] = useState(DEFAULT_MASTER_ID);
   const handleSearchBarKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    const isToggleShortcut = (event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === "m";
+    if (!event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+      return;
+    }
 
-    if (!isToggleShortcut) {
+    if (event.key !== "ArrowUp" && event.key !== "ArrowDown") {
       return;
     }
 
     event.preventDefault();
-    setMasterId((prev) => nextMasterId(prev));
+    setMasterId((prev) => (event.key === "ArrowUp" ? previousMasterId(prev) : nextMasterId(prev)));
   }, []);
 
   return (
@@ -58,7 +65,7 @@ export function HomeSearchPanel() {
           <SearchBar masterId={masterId} />
         </div>
         <div className="mt-2 text-left text-xs text-gray-400 select-none">
-          Cmd/Ctrl + Shift + M でマスター切り替え、Tab で移動、Enter で選択・検索
+          Alt + ↑ / ↓ でマスター切り替え、Tab で移動、Enter で選択・検索
         </div>
       </div>
       <AdvancedSearchButton
