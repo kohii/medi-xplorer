@@ -16,6 +16,7 @@ const iyakuhinMasterFields = [
       { code: "5", name: "変更" },
       { code: "9", name: "廃止" },
     ],
+    columnWidth: 112,
   },
   {
     seq: 2,
@@ -27,6 +28,7 @@ const iyakuhinMasterFields = [
     seq: 3,
     name: "医薬品コード",
     mode: "numeric",
+    columnWidth: 120,
   },
   {
     seq: 4,
@@ -52,7 +54,7 @@ const iyakuhinMasterFields = [
     name: "医薬品名・規格名/カナ名称",
     shortName: "カナ名称",
     mode: "text",
-    columnWidth: 160,
+    columnWidth: "auto",
   },
   {
     seq: 8,
@@ -181,6 +183,7 @@ const iyakuhinMasterFields = [
       { code: "159", name: "初診時" },
       { code: "160", name: "1分娩当り" },
     ],
+    columnWidth: 112,
   },
   {
     seq: 9,
@@ -346,6 +349,7 @@ const iyakuhinMasterFields = [
       { code: "6", name: "外用薬" },
       { code: "8", name: "歯科用薬剤" },
     ],
+    columnWidth: 120,
   },
   {
     seq: 29,
