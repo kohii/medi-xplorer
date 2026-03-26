@@ -5,7 +5,6 @@ import { isNumeric } from "@/utils/text";
 
 import { DisplayFieldConfig } from "./types";
 
-
 function parseDisplayFieldConfig(config: string, masterId: MasterId): DisplayFieldConfig {
   const [key, variant] = config.split("-");
   if (isNumeric(key)) {

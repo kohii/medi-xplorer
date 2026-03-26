@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "医薬品検索結果 | MediXplorer",
   robots: {
     index: false,
-  }
+  },
 };
 
 export default function Page() {

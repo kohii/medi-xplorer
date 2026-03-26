@@ -45,12 +45,5 @@ const columns: SimpleTableColumn<string[]>[] = [
 export function RelatedIyakuhinTable({ rows }: RelatedIyakuhinTableProps) {
   const { selectByRow } = useSelectIyakuhin();
 
-  return (
-    <SimpleTable
-      columns={columns}
-      data={rows}
-      density="compact"
-      onRowClick={selectByRow}
-    />
-  );
+  return <SimpleTable columns={columns} data={rows} density="compact" onRowClick={selectByRow} />;
 }

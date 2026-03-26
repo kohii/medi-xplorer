@@ -4,10 +4,7 @@ import { assertUnreachable } from "@/utils/assert-unreachable";
 
 import { DisplayFieldConfig } from "./types";
 
-function stringifyDisplayFieldConfig(
-  masterId: MasterId,
-  config: DisplayFieldConfig,
-): string {
+function stringifyDisplayFieldConfig(masterId: MasterId, config: DisplayFieldConfig): string {
   switch (config.kind) {
     case "normal": {
       const { seq, options: option } = config;

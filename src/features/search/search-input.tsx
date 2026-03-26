@@ -26,7 +26,8 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
   ref,
 ) {
   const fieldNames = useMemo(() => {
-    const fields = masterId === "y" ? getAllIyakuhinMasterFields() : getAllShinryoukouiMasterFields();
+    const fields =
+      masterId === "y" ? getAllIyakuhinMasterFields() : getAllShinryoukouiMasterFields();
     return fields.map((f) => f.name);
   }, [masterId]);
 
@@ -59,7 +60,11 @@ export const SearchInput = forwardRef<RichInputHandle, SearchInputProps>(functio
           "bg-gray-50 border border-gray-300 text-gray-900 rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2",
           className,
         )}
-        onChange={onChange ? (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value) : undefined}
+        onChange={
+          onChange
+            ? (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)
+            : undefined
+        }
         value={value}
       >
         {renderer}

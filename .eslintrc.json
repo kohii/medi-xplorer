@@ -1,19 +1,11 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "next", "plugin:@typescript-eslint/recommended"],
   "plugins": [],
   "ignorePatterns": ["next-env.d.ts"],
   "rules": {
-    "semi": [
-      "error",
-      "always"
-    ],
+    "semi": ["error", "always"],
     // Disabled indent rule due to conflict with TypeScript ESLint v8+
-    // Prettier handles indentation formatting
+    // oxfmt handles indentation formatting
     // "indent": [
     //   "error",
     //   2,
@@ -33,7 +25,7 @@
     "react/jsx-wrap-multilines": [
       "error",
       {
-        "prop": "parens-new-line",
+        "prop": "ignore",
         "declaration": "ignore",
         "assignment": "parens-new-line",
         "return": "parens-new-line",
@@ -52,15 +44,7 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-          "object"
-        ],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",

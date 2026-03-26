@@ -21,7 +21,8 @@ export type SearchBarHandle = {
 };
 
 export const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>(function SearchBar(
-  { masterId, value, onChange }, ref
+  { masterId, value, onChange },
+  ref,
 ) {
   const search = useMasterSearchByQuery(masterId);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

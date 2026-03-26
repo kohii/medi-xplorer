@@ -9,9 +9,7 @@ import { ShisetsukijunDataProvider } from "../../contexts/shisetsukijun-data-con
 export function SearchResultDataProviders({ children }: { children: React.ReactNode }) {
   return (
     <ShinryoukouiMasterDataProvider>
-      <ShisetsukijunDataProvider>
-        {children}
-      </ShisetsukijunDataProvider>
+      <ShisetsukijunDataProvider>{children}</ShisetsukijunDataProvider>
     </ShinryoukouiMasterDataProvider>
   );
 }

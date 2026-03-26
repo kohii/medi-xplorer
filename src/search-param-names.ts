@@ -4,5 +4,5 @@ export const SEARCH_PARAM_NAMES = {
     MASTER_VERSION: "v",
     FIELDS: "fields",
     MASTER: "m",
-  }
+  },
 } as const;

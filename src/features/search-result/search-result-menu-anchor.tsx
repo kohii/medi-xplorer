@@ -49,12 +49,7 @@ export function SearchResultMenuAnchor({
         表示オプション
         <CaretDownIcon className="h-3 w-3" />
       </button>
-      <Menu
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        anchorEl={anchorEl}
-        anchorOrigin="right"
-      >
+      <Menu open={Boolean(anchorEl)} onClose={handleClose} anchorEl={anchorEl} anchorOrigin="right">
         <MenuItem onClick={handleCustomizeDisplayFields}>表示する列を変更</MenuItem>
         <MenuItem onClick={handleExport}>エクスポート</MenuItem>
       </Menu>

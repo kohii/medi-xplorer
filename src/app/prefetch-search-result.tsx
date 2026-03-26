@@ -24,7 +24,9 @@ export function PrefetchSearchResultPage() {
   // prefetch data for the default search flow
   useEffect(() => {
     const layoutVersion = getLayoutVersion(LATEST_SHINRYOUKOUI_MASTER_VERSION);
-    void queryClient.prefetchQuery(getShinryoukouiMasterDataQueryOptions(LATEST_SHINRYOUKOUI_MASTER_VERSION));
+    void queryClient.prefetchQuery(
+      getShinryoukouiMasterDataQueryOptions(LATEST_SHINRYOUKOUI_MASTER_VERSION),
+    );
     void queryClient.prefetchQuery(getShisetsukijunDataQueryOptions(layoutVersion));
   }, [queryClient]);
 
@@ -34,7 +36,9 @@ export function PrefetchSearchResultPage() {
       if (!LATEST_IYAKUHIN_MASTER_VERSION) {
         return;
       }
-      void queryClient.prefetchQuery(getIyakuhinMasterDataQueryOptions(LATEST_IYAKUHIN_MASTER_VERSION));
+      void queryClient.prefetchQuery(
+        getIyakuhinMasterDataQueryOptions(LATEST_IYAKUHIN_MASTER_VERSION),
+      );
     };
 
     if ("requestIdleCallback" in window) {

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "診療行為検索結果 | MediXplorer",
   robots: {
     index: false,
-  }
+  },
 };
 
 export default function Page() {

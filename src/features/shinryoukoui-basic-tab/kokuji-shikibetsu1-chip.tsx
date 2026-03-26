@@ -13,9 +13,5 @@ type KokujiShikibetsu1ChipProps = {
 
 export function KokujiShikibetsu1Chip({ row }: KokujiShikibetsu1ChipProps) {
   const value = getValue(row, FIELD);
-  return (
-    <ColorChip color={getNthColorChipColor(+value)} >
-      {formatCodeValue(row, FIELD)}
-    </ColorChip>
-  );
+  return <ColorChip color={getNthColorChipColor(+value)}>{formatCodeValue(row, FIELD)}</ColorChip>;
 }

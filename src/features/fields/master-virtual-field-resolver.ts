@@ -17,14 +17,9 @@ export function getMasterVirtualFields(masterId: MasterId): Record<string, Virtu
   return shinryoukouiMasterVirtualFields;
 }
 
-export function getMasterVirtualField(
-  masterId: MasterId,
-  key: string,
-): VirtualField | undefined {
+export function getMasterVirtualField(masterId: MasterId, key: string): VirtualField | undefined {
   if (masterId === MASTER_IDS.IYAKUHIN) {
     return getIyakuhinMasterVirtualField(key as keyof typeof iyakuhinMasterVirtualFields);
   }
-  return getShinryoukouiMasterVirtualField(
-    key as keyof typeof shinryoukouiMasterVirtualFields,
-  );
+  return getShinryoukouiMasterVirtualField(key as keyof typeof shinryoukouiMasterVirtualFields);
 }

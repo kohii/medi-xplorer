@@ -71,9 +71,7 @@ export function HomeSearchPanel() {
       <AdvancedSearchButton
         masterId={masterId}
         layoutVersion={
-          masterId === MASTER_IDS.IYAKUHIN
-            ? getIyakuhinLayoutVersion("")
-            : getLayoutVersion("")
+          masterId === MASTER_IDS.IYAKUHIN ? getIyakuhinLayoutVersion("") : getLayoutVersion("")
         }
       />
     </>

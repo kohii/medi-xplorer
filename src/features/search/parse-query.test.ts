@@ -8,34 +8,38 @@ describe("parseQuery", () => {
     const result = parseQuery("");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: []
+      value: [],
     });
   });
   test("空白文字列", () => {
     const result = parseQuery(" 　");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: []
+      value: [],
     });
   });
   test("単語", () => {
     const result = parseQuery("foo");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        value: "foo",
-        negative: false
-      }]
+      value: [
+        {
+          value: "foo",
+          negative: false,
+        },
+      ],
     });
   });
   test("単語（空白あり）", () => {
     const result = parseQuery(" foo ");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        value: "foo",
-        negative: false
-      }]
+      value: [
+        {
+          value: "foo",
+          negative: false,
+        },
+      ],
     });
   });
   test("単語（複数）", () => {
@@ -45,17 +49,17 @@ describe("parseQuery", () => {
       value: [
         {
           value: "foo",
-          negative: false
+          negative: false,
         },
         {
           value: "bar",
-          negative: false
+          negative: false,
         },
         {
           value: "baz",
-          negative: false
-        }
-      ]
+          negative: false,
+        },
+      ],
     });
   });
   test("単語（複数、マイナスあり）", () => {
@@ -65,17 +69,17 @@ describe("parseQuery", () => {
       value: [
         {
           value: "foo",
-          negative: false
+          negative: false,
         },
         {
           value: "bar",
-          negative: true
+          negative: true,
         },
         {
           value: "baz",
-          negative: false
-        }
-      ]
+          negative: false,
+        },
+      ],
     });
   });
   test("マイナスのみ", () => {
@@ -85,21 +89,23 @@ describe("parseQuery", () => {
       value: [
         {
           value: "-",
-          negative: false
-        }
-      ]
+          negative: false,
+        },
+      ],
     });
   });
   test("key:value", () => {
     const result = parseQuery("診療行為コード:bar");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":",
-        value: "bar",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":",
+          value: "bar",
+          negative: false,
+        },
+      ],
     });
   });
   test("key:value（複数、マイナスあり）", () => {
@@ -111,87 +117,99 @@ describe("parseQuery", () => {
           fieldKey: "診療行為コード",
           operator: ":",
           value: "bar",
-          negative: false
+          negative: false,
         },
         {
           fieldKey: "基本漢字名称",
           operator: ":",
           value: "qux",
-          negative: true
-        }
-      ]
+          negative: true,
+        },
+      ],
     });
   });
   test("key:value（値が空文字列）", () => {
     const result = parseQuery("診療行為コード:");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":",
-        value: "",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":",
+          value: "",
+          negative: false,
+        },
+      ],
     });
   });
   test("key:>value", () => {
     const result = parseQuery("診療行為コード:>bar");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":>",
-        value: "bar",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":>",
+          value: "bar",
+          negative: false,
+        },
+      ],
     });
   });
   test("key:<value", () => {
     const result = parseQuery("診療行為コード:<bar");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":<",
-        value: "bar",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":<",
+          value: "bar",
+          negative: false,
+        },
+      ],
     });
   });
   test("key:>=value", () => {
     const result = parseQuery("診療行為コード:>=bar");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":>=",
-        value: "bar",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":>=",
+          value: "bar",
+          negative: false,
+        },
+      ],
     });
   });
   test("key:<=value", () => {
     const result = parseQuery("診療行為コード:<=bar");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "診療行為コード",
-        operator: ":<=",
-        value: "bar",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "診療行為コード",
+          operator: ":<=",
+          value: "bar",
+          negative: false,
+        },
+      ],
     });
   });
   test("医薬品マスターのキー指定", () => {
     const result = parseQuery("医薬品コード:123456789", "y");
     assert.deepEqual(result, {
       kind: "SUCCESS",
-      value: [{
-        fieldKey: "医薬品コード",
-        operator: ":",
-        value: "123456789",
-        negative: false
-      }]
+      value: [
+        {
+          fieldKey: "医薬品コード",
+          operator: ":",
+          value: "123456789",
+          negative: false,
+        },
+      ],
     });
   });
 });

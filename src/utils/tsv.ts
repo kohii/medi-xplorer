@@ -1,3 +1,3 @@
 export function parseTsv(text: string): string[][] {
-  return text.split("\n").map(line => line.split("\t"));
+  return text.split("\n").map((line) => line.split("\t"));
 }

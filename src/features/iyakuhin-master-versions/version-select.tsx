@@ -1,7 +1,10 @@
 import React from "react";
 
 import { useIyakuhinMasterData } from "@/contexts/iyakuhin-master-data-context";
-import { IYAKUHIN_MASTER_VERSION_LIST, LATEST_IYAKUHIN_MASTER_VERSION } from "@/features/iyakuhin-master-versions/constants";
+import {
+  IYAKUHIN_MASTER_VERSION_LIST,
+  LATEST_IYAKUHIN_MASTER_VERSION,
+} from "@/features/iyakuhin-master-versions/constants";
 
 export const IyakuhinVersionSelect = React.memo(function IyakuhinVersionSelect() {
   const { version, setVersion } = useIyakuhinMasterData();

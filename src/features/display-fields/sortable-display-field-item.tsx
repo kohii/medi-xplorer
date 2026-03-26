@@ -8,14 +8,9 @@ type SortableDisplayFieldItemProps = DisplayFieldItemProps & {
 };
 
 export function SortableDisplayFieldItem({ id, ...props }: SortableDisplayFieldItemProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),

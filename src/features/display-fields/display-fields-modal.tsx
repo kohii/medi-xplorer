@@ -16,7 +16,7 @@ type DisplayFieldsModalProps = {
   layoutVersion: string;
   fields: DisplayFieldConfig[];
   onClose: () => void;
-}
+};
 
 export function DisplayFieldsModal({
   masterId,
@@ -24,10 +24,12 @@ export function DisplayFieldsModal({
   fields: initialFields,
   onClose,
 }: DisplayFieldsModalProps) {
-  const [fields, setFields] = useState<IdentifiedDisplayFieldConfig[]>(() => initialFields.map((field) => ({
-    ...field,
-    id: crypto.randomUUID(),
-  })));
+  const [fields, setFields] = useState<IdentifiedDisplayFieldConfig[]>(() =>
+    initialFields.map((field) => ({
+      ...field,
+      id: crypto.randomUUID(),
+    })),
+  );
 
   const updateSearchParams = useUpdateSearchParams();
   const handleOk = useCallback(() => {
@@ -37,17 +39,19 @@ export function DisplayFieldsModal({
       getDefaultDisplayFields(masterId),
     );
     updateSearchParams({
-      [SEARCH_PARAM_NAMES.SEARCH.FIELDS]: (!s || s === defaultFieldsString) ? undefined : s,
+      [SEARCH_PARAM_NAMES.SEARCH.FIELDS]: !s || s === defaultFieldsString ? undefined : s,
     });
 
     onClose();
   }, [fields, masterId, onClose, updateSearchParams]);
 
   const handleReset = () => {
-    setFields(getDefaultDisplayFields(masterId).map((field) => ({
-      ...field,
-      id: crypto.randomUUID(),
-    })));
+    setFields(
+      getDefaultDisplayFields(masterId).map((field) => ({
+        ...field,
+        id: crypto.randomUUID(),
+      })),
+    );
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -70,12 +74,14 @@ export function DisplayFieldsModal({
       onClose={onClose}
       onKeyDown={handleKeyDown}
       size="lg"
-      footer={(
+      footer={
         <div className="flex gap-3">
           <Button onClick={handleOk}>確定</Button>
-          <Button variant="secondary" onClick={handleReset}>リセット</Button>
+          <Button variant="secondary" onClick={handleReset}>
+            リセット
+          </Button>
         </div>
-      )}
+      }
     >
       <DisplayFieldsForm
         masterId={masterId}

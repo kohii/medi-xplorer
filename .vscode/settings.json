@@ -1,12 +1,10 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
   "tailwindCSS.validate": false,
-  "prettier.configPath": ".prettierrc",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "editor.insertSpaces": true,
+  "editor.insertSpaces": true
 }

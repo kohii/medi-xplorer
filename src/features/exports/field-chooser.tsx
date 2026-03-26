@@ -13,7 +13,7 @@ type FieldChooserProps = {
   fields: DisplayFieldConfig[];
   selectedFieldIndices: Set<number>;
   onChange: (selectedFieldIndices: Set<number>) => void;
-}
+};
 
 export function FieldChooser({
   masterId,
@@ -22,14 +22,13 @@ export function FieldChooser({
   onChange,
 }: FieldChooserProps) {
   return (
-    <VSplit
-      gridTemplateRows="min-content 1fr"
-      className="h-full"
-    >
+    <VSplit gridTemplateRows="min-content 1fr" className="h-full">
       <VSplitItem pos={1} className="flex justify-between items-center pb-0.5">
         <FormLabel>エクスポートする列</FormLabel>
         <div className="flex gap-3">
-          <LinkLikeButton onClick={() => onChange(new Set(fields.map((_, i) => i)))}>すべて選択</LinkLikeButton>
+          <LinkLikeButton onClick={() => onChange(new Set(fields.map((_, i) => i)))}>
+            すべて選択
+          </LinkLikeButton>
           <LinkLikeButton onClick={() => onChange(new Set())}>すべてクリア</LinkLikeButton>
         </div>
       </VSplitItem>
@@ -39,7 +38,7 @@ export function FieldChooser({
             <div key={i} className="py-1 px-2">
               <Checkbox
                 value={selectedFieldIndices.has(i)}
-                onChange={checked => {
+                onChange={(checked) => {
                   const newSelectedFieldIndices = new Set(selectedFieldIndices);
                   if (checked) {
                     newSelectedFieldIndices.add(i);
@@ -48,24 +47,22 @@ export function FieldChooser({
                   }
                   onChange(newSelectedFieldIndices);
                 }}
-                label={(
-                  <div>{(() => {
-                    switch (field.kind) {
-                      case "normal":
-                        return getMasterFieldBySeq(masterId, field.seq)?.name;
-                      case "virtual":
-                        return getMasterVirtualField(masterId, field.key)?.name;
-                      case "unknown":
-                        return (
-                          <div>
-                          (unknown)
-                          </div>
-                        );
-                      default:
-                        assertUnreachable(field);
-                    }
-                  })()}</div>
-                )}
+                label={
+                  <div>
+                    {(() => {
+                      switch (field.kind) {
+                        case "normal":
+                          return getMasterFieldBySeq(masterId, field.seq)?.name;
+                        case "virtual":
+                          return getMasterVirtualField(masterId, field.key)?.name;
+                        case "unknown":
+                          return <div>(unknown)</div>;
+                        default:
+                          assertUnreachable(field);
+                      }
+                    })()}
+                  </div>
+                }
               />
             </div>
           ))}

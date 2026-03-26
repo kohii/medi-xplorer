@@ -101,12 +101,14 @@ export function getRelatedSelectionRows(
 }
 
 export function hasBunruiKisei(row: string[]): boolean {
-  return getValue(row, plainDrugField) !== "0" ||
+  return (
+    getValue(row, plainDrugField) !== "0" ||
     getValue(row, neuroDestructiveField) !== "0" ||
     getValue(row, biologicalField) !== "0" ||
     getValue(row, dentalField) !== "0" ||
     getValue(row, contrastField) !== "0" ||
-    getValue(row, antihivField) !== "0";
+    getValue(row, antihivField) !== "0"
+  );
 }
 
 export function getIyakuhinBasicTabSummary(row: string[]) {

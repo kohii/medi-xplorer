@@ -21,7 +21,7 @@ export function useExportData(
 ) {
   const stringifyRows = useCallback(() => {
     let data: string[][] = rows.map((row) => {
-      return fields.map(f => {
+      return fields.map((f) => {
         switch (f.kind) {
           case "normal": {
             const { seq, options: option } = f;
@@ -53,7 +53,7 @@ export function useExportData(
       });
     });
     if (options.includeHeader) {
-      const headerData: string[] = fields.map(f => {
+      const headerData: string[] = fields.map((f) => {
         switch (f.kind) {
           case "normal": {
             const field = getMasterFieldBySeq(masterId, f.seq);
@@ -74,17 +74,20 @@ export function useExportData(
       data = [headerData, ...data];
     }
 
-    return createCsv({
-      rowCount() {
-        return data.length;
+    return createCsv(
+      {
+        rowCount() {
+          return data.length;
+        },
+        columnCount() {
+          return fields.length;
+        },
+        getValue(r, c) {
+          return data[r][c];
+        },
       },
-      columnCount() {
-        return fields.length;
-      },
-      getValue(r, c) {
-        return data[r][c];
-      },
-    }, options);
+      options,
+    );
   }, [fields, masterId, options, rows]);
 
   return useMemo(() => {
@@ -101,7 +104,7 @@ export function useExportData(
       async copy() {
         const csv = stringifyRows();
         await copyToClipboard(csv);
-      }
+      },
     };
   }, [stringifyRows]);
 }

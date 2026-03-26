@@ -5,5 +5,6 @@
   "printWidth": 100,
   "tabWidth": 2,
   "useTabs": false,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "ignorePatterns": [".next/", ".vscode/", "node_modules/", "dist/", "build/", "out/", "public/"]
 }
