@@ -67,8 +67,8 @@ devDependencies:
     specifier: ^4.2.2
     version: 4.2.2
   '@types/node':
-    specifier: ^24
-    version: 24.10.1
+    specifier: ^24.12.0
+    version: 24.12.0
   '@types/react':
     specifier: 19.1.11
     version: 19.1.11
@@ -3704,7 +3704,7 @@ packages:
   /@types/node-fetch@2.6.13:
     resolution: {integrity: sha512-QGpRVpzSaUs30JBSGPjOg4Uveu384erbHBoT1zeONvyCfwQxIkUshLAOqN/k9EjGviPRmWTTe6aH2qySWKTVSw==}
     dependencies:
-      '@types/node': 24.10.1
+      '@types/node': 24.12.0
       form-data: 4.0.5
     dev: true
 
@@ -3718,8 +3718,8 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/node@24.10.1:
-    resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
+  /@types/node@24.12.0:
+    resolution: {integrity: sha512-GYDxsZi3ChgmckRT9HPU0WEhKLP08ev/Yfcq2AstjrDASOYCSXeyjDsHg4v5t4jOj7cyDX3vmprafKlWIG9MXQ==}
     dependencies:
       undici-types: 7.16.0
     dev: true
