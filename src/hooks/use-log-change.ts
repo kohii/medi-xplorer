@@ -1,12 +1,14 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const useOnChange = <T>(value: T, onChange: (value: T, oldValue: T) => void) => {
   const valueRef = useRef<T>(value);
 
-  if (valueRef.current !== value) {
-    onChange(value, valueRef.current);
-    valueRef.current = value;
-  }
+  useEffect(() => {
+    if (valueRef.current !== value) {
+      onChange(value, valueRef.current);
+      valueRef.current = value;
+    }
+  });
 };
 
 // for debugging
