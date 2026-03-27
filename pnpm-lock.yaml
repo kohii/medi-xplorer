@@ -36,8 +36,8 @@ dependencies:
     specifier: ^5.10.2
     version: 5.10.2(@types/react@19.2.14)(react-dom@19.2.4)(react@19.2.4)
   rich-textarea:
-    specifier: ^0.26.5
-    version: 0.26.5(react@19.2.4)
+    specifier: ^0.27.0
+    version: 0.27.0(react@19.2.4)
   tailwind-merge:
     specifier: ^3.5.0
     version: 3.5.0
@@ -8005,8 +8005,8 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
-  /rich-textarea@0.26.5(react@19.2.4):
-    resolution: {integrity: sha512-bZMODm+sxzwfzTWWfbXc/B03FyRcvDSYIan8kKrRq/semxS0nqv1929zAbso7wxlVKbak6Q6khfGhJuzGPhD/w==}
+  /rich-textarea@0.27.0(react@19.2.4):
+    resolution: {integrity: sha512-u3vTbomrZtItGVLiOWJ4wbQq5IeY2jtykN543shn7NuIzjUqxucZHhG3HksMZKgaexRAYh0XZ6fmtUvfl0sHEA==}
     peerDependencies:
       react: '>=16.14.0'
     dependencies:
