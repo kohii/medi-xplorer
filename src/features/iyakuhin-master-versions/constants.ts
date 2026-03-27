@@ -1,5 +1,5 @@
 // sorted by date desc
-import versions from "./iyakuhin-master-versions.json" assert { type: "json" };
+import versions from "./iyakuhin-master-versions.json" with { type: "json" };
 
 export const IYAKUHIN_MASTER_VERSION_KEYS: string[] = versions;
 
