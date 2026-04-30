@@ -124,6 +124,27 @@ export function OthersSection({ row }: OthersSectionProps) {
     labels.push("切開創局所陰圧閉鎖処置機器加算を算定可能");
   }
 
+  if (row.length >= 132) {
+    if (is基本項目 && getValue(row, getField("臓器移植実施体制確保加算")) === "1") {
+      labels.push("臓器移植実施体制確保加算を算定可能");
+    }
+
+    if (is基本項目 && getValue(row, getField("内視鏡手術用支援機器加算")) === "1") {
+      labels.push("内視鏡手術用支援機器加算を算定可能");
+    }
+
+    const 遠隔電子処方箋活用加算等 = getValue(row, getField("遠隔電子処方箋活用加算等"));
+    if (is基本項目 && 遠隔電子処方箋活用加算等 !== "0") {
+      labels.push(
+        getCodeLabel(row, getField("遠隔電子処方箋活用加算等"))?.replace("な診療行為", ""),
+      );
+    }
+
+    if (is基本項目 && getValue(row, getField("外科医療確保特別加算")) === "1") {
+      labels.push("外科医療確保特別加算を算定可能");
+    }
+  }
+
   if (labels.length === 0) {
     return null;
   }

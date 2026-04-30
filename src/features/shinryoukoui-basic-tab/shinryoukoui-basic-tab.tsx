@@ -268,6 +268,22 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
           )}
         </section>
       )}
+      {row.length >= 132 && getValue(row, getField("物価対応料区分")) !== "0" && (
+        <section>
+          <SectionHeading>物価対応料</SectionHeading>
+          <HStack>
+            <LabeledChip label="物価対応料区分">
+              {formatCodeValue(row, getField("物価対応料区分"))}
+            </LabeledChip>
+            {getValue(row, getField("物価対応料グループ区分")) && (
+              <LabeledChip label="物価対応料グループ区分">
+                {getValue(row, getField("物価対応料グループ区分"))}
+              </LabeledChip>
+            )}
+          </HStack>
+        </section>
+      )}
+
       <OthersSection row={row} />
     </>
   );
