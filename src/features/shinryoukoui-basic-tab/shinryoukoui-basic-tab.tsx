@@ -282,7 +282,31 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
             )}
           </HStack>
           {getValue(row, getField("物価対応料区分")) === "2" && (
-            <UncontrolledToggle label="同グループの物価対応料本体..." className="my-2">
+            <>
+              <SubHeading>物価対応料本体</SubHeading>
+              <div className="pb-2">
+                <ShinryoukouiTable
+                  rows={rows}
+                  filter={[
+                    {
+                      fieldKey: "物価対応料区分",
+                      operator: ":",
+                      value: "1",
+                      negative: false,
+                    },
+                    {
+                      fieldKey: "物価対応料グループ区分",
+                      operator: ":",
+                      value: getValue(row, getField("物価対応料グループ区分")),
+                      negative: false,
+                    },
+                  ]}
+                />
+              </div>
+            </>
+          )}
+          {getValue(row, getField("物価対応料区分")) === "1" && (
+            <UncontrolledToggle label="物価対応料に関する診療行為..." className="my-2">
               {(open) =>
                 open && (
                   <ShinryoukouiTable
@@ -291,7 +315,7 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
                       {
                         fieldKey: "物価対応料区分",
                         operator: ":",
-                        value: "1",
+                        value: "2",
                         negative: false,
                       },
                       {
@@ -305,30 +329,6 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
                 )
               }
             </UncontrolledToggle>
-          )}
-          {getValue(row, getField("物価対応料区分")) === "1" && (
-            <>
-              <SubHeading>物価対応料に関する診療行為</SubHeading>
-              <div className="pb-2">
-                <ShinryoukouiTable
-                  rows={rows}
-                  filter={[
-                    {
-                      fieldKey: "物価対応料区分",
-                      operator: ":",
-                      value: "2",
-                      negative: false,
-                    },
-                    {
-                      fieldKey: "物価対応料グループ区分",
-                      operator: ":",
-                      value: getValue(row, getField("物価対応料グループ区分")),
-                      negative: false,
-                    },
-                  ]}
-                />
-              </div>
-            </>
           )}
         </section>
       )}
