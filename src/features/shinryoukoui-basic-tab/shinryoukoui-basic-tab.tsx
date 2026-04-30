@@ -268,6 +268,71 @@ export function ShinryoukouiBasicTab({ row, rows }: DetailBasicTabProps) {
           )}
         </section>
       )}
+      {row.length >= 132 && getValue(row, getField("物価対応料区分")) !== "0" && (
+        <section>
+          <SectionHeading>物価対応料</SectionHeading>
+          <HStack>
+            <LabeledChip label="物価対応料区分">
+              {formatCodeValue(row, getField("物価対応料区分"))}
+            </LabeledChip>
+            {getValue(row, getField("物価対応料グループ区分")) && (
+              <LabeledChip label="物価対応料グループ区分">
+                {getValue(row, getField("物価対応料グループ区分"))}
+              </LabeledChip>
+            )}
+          </HStack>
+          {getValue(row, getField("物価対応料区分")) === "2" && (
+            <>
+              <SubHeading>物価対応料本体</SubHeading>
+              <div className="pb-2">
+                <ShinryoukouiTable
+                  rows={rows}
+                  filter={[
+                    {
+                      fieldKey: "物価対応料区分",
+                      operator: ":",
+                      value: "1",
+                      negative: false,
+                    },
+                    {
+                      fieldKey: "物価対応料グループ区分",
+                      operator: ":",
+                      value: getValue(row, getField("物価対応料グループ区分")),
+                      negative: false,
+                    },
+                  ]}
+                />
+              </div>
+            </>
+          )}
+          {getValue(row, getField("物価対応料区分")) === "1" && (
+            <UncontrolledToggle label="物価対応料に関する診療行為..." className="my-2">
+              {(open) =>
+                open && (
+                  <ShinryoukouiTable
+                    rows={rows}
+                    filter={[
+                      {
+                        fieldKey: "物価対応料区分",
+                        operator: ":",
+                        value: "2",
+                        negative: false,
+                      },
+                      {
+                        fieldKey: "物価対応料グループ区分",
+                        operator: ":",
+                        value: getValue(row, getField("物価対応料グループ区分")),
+                        negative: false,
+                      },
+                    ]}
+                  />
+                )
+              }
+            </UncontrolledToggle>
+          )}
+        </section>
+      )}
+
       <OthersSection row={row} />
     </>
   );

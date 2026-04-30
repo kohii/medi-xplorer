@@ -1,4 +1,4 @@
-export type ShinryoukouiMasterLayoutVersion = "2022" | "2024";
+export type ShinryoukouiMasterLayoutVersion = "2022" | "2024" | "2026";
 
 export type ShinryoukouiMasterLayout = {
   version: ShinryoukouiMasterLayoutVersion;
@@ -16,6 +16,11 @@ export const SHINRYOUKOUI_MASTER_LAYOUTS: ShinryoukouiMasterLayout[] = [
     version: "2024",
     from: "20240329",
     shisetsuKijunFileName: "shisetsukijun_20240329.tsv",
+  },
+  {
+    version: "2026",
+    from: "20260401",
+    shisetsuKijunFileName: "shisetsukijun_20260401.tsv",
   },
 ];
 

@@ -3705,6 +3705,147 @@ const shinryokouiMasterFields = [
       },
     ],
   },
+  {
+    seq: 132,
+    validFrom: "2026",
+    name: "物価対応料区分",
+    mode: "alphanumeric",
+    // description: "物価対応料に関する診療行為であるか否かを表す。\n０：「１」及び「２」以外の診療行為\n１：物価対応料自体\n２：物価対応料に関する診療行為"
+    codes: [
+      { code: "0", name: "「１」及び「２」以外の診療行為" },
+      { code: "1", name: "物価対応料自体" },
+      { code: "2", name: "物価対応料に関する診療行為" },
+    ],
+  },
+  {
+    seq: 133,
+    validFrom: "2026",
+    name: "物価対応料グループ区分",
+    mode: "alphanumeric",
+    // description: "物価対応料を算定できる診療行為のグループ区分を表す。物価対応料グループ区分コードは「別紙７－１４」のとおりである。"
+    allowFreeValue: true,
+  },
+  {
+    seq: 134,
+    validFrom: "2026",
+    name: "臓器移植実施体制確保加算",
+    mode: "alphanumeric",
+    // description: "臓器移植実施体制確保加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：臓器移植実施体制確保加算を算定できない診療行為\n１：臓器移植実施体制確保加算を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：臓器移植実施体制確保加算以外の診療行為\n１：臓器移植実施体制確保加算自体"
+    codes: [
+      {
+        code: "0",
+        name: "臓器移植実施体制確保加算を算定できない診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "1",
+        name: "臓器移植実施体制確保加算を算定可能な診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "0",
+        name: "臓器移植実施体制確保加算以外の診療行為",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+      {
+        code: "1",
+        name: "臓器移植実施体制確保加算自体",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+    ],
+  },
+  {
+    seq: 135,
+    validFrom: "2026",
+    name: "内視鏡手術用支援機器加算",
+    mode: "alphanumeric",
+    // description: "内視鏡手術用支援機器加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：内視鏡手術用支援機器加算を算定できない診療行為\n１：内視鏡手術用支援機器加算を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：内視鏡手術用支援機器加算以外の診療行為\n１：内視鏡手術用支援機器加算自体"
+    codes: [
+      {
+        code: "0",
+        name: "内視鏡手術用支援機器加算を算定できない診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "1",
+        name: "内視鏡手術用支援機器加算を算定可能な診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "0",
+        name: "内視鏡手術用支援機器加算以外の診療行為",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+      {
+        code: "1",
+        name: "内視鏡手術用支援機器加算自体",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+    ],
+  },
+  {
+    seq: 136,
+    validFrom: "2026",
+    name: "遠隔電子処方箋活用加算等",
+    mode: "alphanumeric",
+    // description: "遠隔電子処方箋活用加算等加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：遠隔電子処方箋活用加算等を算定できない診療行為\n１：遠隔電子処方箋活用加算等を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：遠隔電子処方箋活用加算等以外の診療行為\n１：遠隔電子処方箋活用加算自体\n２：医療提供機能連携確保加算自体"
+    codes: [
+      {
+        code: "0",
+        name: "遠隔電子処方箋活用加算等を算定できない診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "1",
+        name: "遠隔電子処方箋活用加算等を算定可能な診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "0",
+        name: "遠隔電子処方箋活用加算等以外の診療行為",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+      {
+        code: "1",
+        name: "遠隔電子処方箋活用加算自体",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+      {
+        code: "2",
+        name: "医療提供機能連携確保加算自体",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+    ],
+  },
+  {
+    seq: 137,
+    validFrom: "2026",
+    name: "外科医療確保特別加算",
+    mode: "alphanumeric",
+    // description: "外科医療確保特別加算を算定可能な診療行為であるか否かを表す。\n＜基本項目、合成項目、準用項目＞\n０：外科医療確保特別加算を算定できない診療行為\n１：外科医療確保特別加算を算定可能な診療行為\n＜加算項目、通則加算項目＞\n０：外科医療確保特別加算以外の診療行為\n１：外科医療確保特別加算自体"
+    codes: [
+      {
+        code: "0",
+        name: "外科医療確保特別加算を算定できない診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "1",
+        name: "外科医療確保特別加算を算定可能な診療行為",
+        condition: { seq: 68, value: ["1", "3", "5"] },
+      },
+      {
+        code: "0",
+        name: "外科医療確保特別加算以外の診療行為",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+      {
+        code: "1",
+        name: "外科医療確保特別加算自体",
+        condition: { seq: 68, value: ["7", "9"] },
+      },
+    ],
+  },
 ] as const satisfies readonly Field[];
 
 export type ShinryoukouiMasterFieldName = (typeof shinryokouiMasterFields)[number]["name"];
