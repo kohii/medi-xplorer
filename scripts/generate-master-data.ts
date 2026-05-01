@@ -79,6 +79,12 @@ function generateTsvVersionMap() {
 
   scanDir(masterDataDir, "");
 
+  if (Object.keys(map).length === 0) {
+    throw new Error(
+      `No TSV files found in ${masterDataDir}/ — run pnpm generate-master-data first`,
+    );
+  }
+
   const lines = Object.entries(map)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`);
@@ -91,6 +97,7 @@ function generateTsvVersionMap() {
     "",
   ].join("\n");
 
+  mkdirSync("src/generated", { recursive: true });
   writeFileSync("src/generated/tsv-version-map.ts", output);
   console.log(`Generated src/generated/tsv-version-map.ts (${Object.keys(map).length} entries)`);
 }
