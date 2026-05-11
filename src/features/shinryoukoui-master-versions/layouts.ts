@@ -19,8 +19,8 @@ export const SHINRYOUKOUI_MASTER_LAYOUTS: ShinryoukouiMasterLayout[] = [
   },
   {
     version: "2026",
-    from: "20260401",
-    shisetsuKijunFileName: "shisetsukijun_20260401.tsv",
+    from: "20260325",
+    shisetsuKijunFileName: "shisetsukijun_20260501.tsv",
   },
 ];
 
