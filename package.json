@@ -47,7 +47,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "16.2.6",
     "lightningcss": "^1.32.0",
-    "oxfmt": "^0.42.0",
+    "oxfmt": "^0.50.0",
     "postcss": "^8.5.14",
     "tailwindcss": "^4.3.0",
     "tsconfig-paths": "^4.2.0",
@@ -57,8 +57,8 @@
     "wrangler": "^4.92.0"
   },
   "optionalDependencies": {
-    "@oxfmt/binding-darwin-arm64": "0.42.0",
-    "@oxfmt/binding-linux-x64-gnu": "0.42.0",
+    "@oxfmt/binding-darwin-arm64": "0.50.0",
+    "@oxfmt/binding-linux-x64-gnu": "0.50.0",
     "lightningcss-linux-x64-gnu": "^1.32.0"
   },
   "overrides": {

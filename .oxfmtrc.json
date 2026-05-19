@@ -6,5 +6,15 @@
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf",
-  "ignorePatterns": [".next/", ".vscode/", "node_modules/", "dist/", "build/", "out/", "public/"]
+  "ignorePatterns": [
+    ".next/",
+    ".vscode/",
+    "node_modules/",
+    "dist/",
+    "build/",
+    "out/",
+    "public/",
+    "src/features/iyakuhin-master-versions/iyakuhin-master-versions.json",
+    "src/features/shinryoukoui-master-versions/shinryoukoui-master-versions.json"
+  ]
 }
