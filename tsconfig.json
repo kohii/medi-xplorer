@@ -12,7 +12,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "allowArbitraryExtensions": true,
     "plugins": [
@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "scripts/tsconfig.scripts.json"
+    "scripts/tsconfig.scripts.json",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
