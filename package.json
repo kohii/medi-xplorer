@@ -26,44 +26,44 @@
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
-    "@tanstack/react-query": "^5.95.2",
+    "@tanstack/react-query": "^5.100.10",
     "@tanstack/react-table": "^8.21.3",
-    "@tanstack/react-virtual": "^3.13.23",
-    "next": "16.2.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "@tanstack/react-virtual": "^3.13.24",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-select": "^5.10.2",
     "rich-textarea": "^0.27.0",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "16.2.1",
-    "@opennextjs/cloudflare": "^1.18.0",
-    "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "^25",
+    "@next/bundle-analyzer": "16.2.6",
+    "@opennextjs/cloudflare": "^1.19.10",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^25.8.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "csv-string": "^4.1.1",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.2.6",
     "lightningcss": "^1.32.0",
-    "oxfmt": "^0.42.0",
-    "postcss": "^8.5.8",
-    "tailwindcss": "^4.2.2",
+    "oxfmt": "^0.50.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.3.0",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0",
-    "vercel": "^50.37.1",
-    "wrangler": "^4.77.0"
+    "tsx": "^4.22.1",
+    "typescript": "^6.0.3",
+    "vercel": "^54.1.0",
+    "wrangler": "^4.92.0"
   },
   "optionalDependencies": {
-    "@oxfmt/binding-darwin-arm64": "0.42.0",
-    "@oxfmt/binding-linux-x64-gnu": "0.42.0",
+    "@oxfmt/binding-darwin-arm64": "0.50.0",
+    "@oxfmt/binding-linux-x64-gnu": "0.50.0",
     "lightningcss-linux-x64-gnu": "^1.32.0"
   },
   "overrides": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3"
   },
-  "packageManager": "pnpm@8.15.3"
+  "packageManager": "pnpm@11.1.3"
 }
