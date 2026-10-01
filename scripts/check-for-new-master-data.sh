@@ -21,9 +21,13 @@ collect_master_update() {
   local page_file_prefix="$5"
 
   local content
-  content=$(curl -s "${page_url}")
+  if ! content=$(curl -fsSL "${page_url}"); then
+    echo "Failed to fetch master data page for ${master_id}: ${page_url}"
+    return 1
+  fi
+
   local date
-  date=$(echo "${content}" | grep -oE "${page_file_prefix}/${files_prefix}[0-9]{8}\\.zip" | grep -oE '[0-9]{8}' | head -n 1)
+  date=$(echo "${content}" | grep -oE "${page_file_prefix}/${files_prefix}[0-9]{8}\\.zip" | grep -oE '[0-9]{8}' | head -n 1 || true)
 
   if [ -z "${date}" ]; then
     echo "Failed to get latest update date from website for ${master_id}."
@@ -41,7 +45,12 @@ collect_master_update() {
 
   if [ ! -f "${files_dir}/${file_name}" ]; then
     local zip_name="${files_prefix}${date}.zip"
-    curl -s -o "${zip_name}" "${page_url%.html}.files/${zip_name}"
+    local zip_url="${page_url%.html}.files/${zip_name}"
+    if ! curl -fsSL -o "${zip_name}" "${zip_url}"; then
+      echo "Failed to download ${master_id} master data from ${zip_url}"
+      rm -f "${zip_name}"
+      return 1
+    fi
     unzip -o "${zip_name}" -d "${files_dir}/"
     rm "${zip_name}"
     UPDATED_MASTER_IDS+=("${master_id}")
@@ -87,13 +96,13 @@ Updated master data:"
 }
 
 collect_master_update "shinryoukoui" \
-  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.html" \
+  "https://www.hpdx.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_01.html" \
   "s_ALL" \
   "raw-master-data/s" \
   "kihonmasta_01\\.files"
 
 collect_master_update "iyakuhin" \
-  "https://www.ssk.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_04.html" \
+  "https://www.hpdx.or.jp/seikyushiharai/tensuhyo/kihonmasta/kihonmasta_04.html" \
   "y_ALL" \
   "raw-master-data/y" \
   "kihonmasta_04\\.files"
