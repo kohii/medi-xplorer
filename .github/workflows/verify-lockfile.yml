@@ -12,6 +12,9 @@ on:
       - main
     paths:
       - ".github/**"
+  # Catches upstream tags re-pointed or commits removed after locking.
+  schedule:
+    - cron: "0 0 * * 1"
 
 permissions:
   contents: read
