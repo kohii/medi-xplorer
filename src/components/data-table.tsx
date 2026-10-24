@@ -16,8 +16,8 @@ import { twMerge } from "tailwind-merge";
 
 import { BreakLine } from "@/components/break-line";
 
-// columnSizingFeature は columnDef.size を持たせるため。
-// sortFns は v8 の既定 "auto" ソートが文字列列に選んでいた alphanumeric / text。
+// columnSizingFeature は columnDef.size を使うため。
+// sortFns: 既定の sortFn "auto" は文字列の列に alphanumeric / text を選ぶ。登録しないと単純比較になる。
 const features = tableFeatures({
   columnSizingFeature,
   rowSortingFeature,
