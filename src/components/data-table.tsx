@@ -1,16 +1,29 @@
 import {
   ColumnDef,
+  columnSizingFeature,
+  createSortedRowModel,
   flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
   Row,
-  useReactTable,
+  rowSortingFeature,
+  sortFn_alphanumeric,
+  sortFn_text,
+  tableFeatures,
+  useTable,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React, { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { BreakLine } from "@/components/break-line";
+
+// columnSizingFeature は columnDef.size を使うため。
+// sortFns: 既定の sortFn "auto" は文字列の列に alphanumeric / text を選ぶ。登録しないと単純比較になる。
+const features = tableFeatures({
+  columnSizingFeature,
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(),
+  sortFns: { alphanumeric: sortFn_alphanumeric, text: sortFn_text },
+});
 
 export type DataTableColumn = {
   id: string;
@@ -35,7 +48,7 @@ export const DataTable = React.memo(function DataTable({
   onRowClick,
   isSelected,
 }: DataTableProps) {
-  const columnDefs = React.useMemo<ColumnDef<string[]>[]>(() => {
+  const columnDefs = React.useMemo<ColumnDef<typeof features, string[]>[]>(() => {
     return columns.map((col) => ({
       id: col.id,
       accessorFn: (row) => col.value(row),
@@ -45,15 +58,10 @@ export const DataTable = React.memo(function DataTable({
     }));
   }, [columns]);
 
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data,
     columns: columnDefs,
-    // state: {
-    // 	sorting,
-    // },
-    // onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   });
 
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
@@ -130,7 +138,7 @@ export const DataTable = React.memo(function DataTable({
             </tr>
           )}
           {virtualRows.map((virtualRow) => {
-            const row = rows[virtualRow.index] as Row<string[]>;
+            const row = rows[virtualRow.index] as Row<typeof features, string[]>;
             return (
               <tr
                 key={row.id}
@@ -142,7 +150,7 @@ export const DataTable = React.memo(function DataTable({
                     : "",
                 )}
               >
-                {row.getVisibleCells().map((cell, cellIndex) => {
+                {row.getAllCells().map((cell, cellIndex) => {
                   return (
                     <td
                       key={cell.id}
