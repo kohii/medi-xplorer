@@ -29,7 +29,7 @@
     "@tanstack/react-query": "^5.104.5",
     "@tanstack/react-table": "^9.3.1",
     "@tanstack/react-virtual": "^3.14.22",
-    "next": "16.4.2",
+    "next": "16.4.5",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-select": "^5.10.2",
